@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+ME="$(basename "$0")"
+PUBLIC="$HOME/code/tammersaleh/dotfiles/public"
+PRIVATE="$HOME/code/tammersaleh/dotfiles/private"
+
+function usage {
+  echo "Error: $1"
+  echo
+  echo "Usage:"
+  echo "  $ME private FILE"
+  exit 3
+}
+
+if [[ "$#" -eq 0 ]]; then
+  usage "Need at least one command"
+fi
+
+command=$1
+shift
+
+function private {
+  file=$1
+  public_source="$PUBLIC/$file"
+  private_dest="$PRIVATE/$file"
+  mkdir -p "$(dirname "$private_dest")"
+  echo "Moving $file to private repo"
+  mv "$public_source" "$private_dest"
+}
+
+function ignore {
+  file=$1
+  echo "Adding /$file to .gitignore"
+  echo "/$file" >> $PUBLIC/.gitignore
+}
+
+case $command in
+  "private")
+    private "$@"
+    ;;
+  "ignore")
+    ignore "$@"
+    ;;
+  *)
+    usage "don't recognize $command"
+esac

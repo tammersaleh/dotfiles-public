@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -z $1 ]]; then
+  echo "Usage:"
+  echo "  git b banch-name"
+  echo "Creates local and remote branches"
+  exit 2
+fi
+
+case $PWD in
+  */tammersaleh/*)  branch="$1";;
+  */superorbital/*) branch="$1";;
+  *)                branch="tammersaleh/$1";;
+esac
+
+set -x
+git checkout -b $branch
+git push --set-upstream origin $branch

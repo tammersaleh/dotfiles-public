@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+[ -z $DEBUG ] || set -x
+
+if [ $# != 2 ]; then
+  echo "Usage: git-rename old-branch new-branch"
+  exit 2
+fi
+
+git branch -m $1 $2
+git push origin :$1
+git push --set-upstream origin $2
+

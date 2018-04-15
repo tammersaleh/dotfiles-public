@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+OLD=$(git ls-remote --get-url origin)
+NEW=${OLD/git@github.com:/https:\/\/github.com\/}
+echo "Changing from $OLD to $NEW"
+git config --local remote.origin.url $NEW

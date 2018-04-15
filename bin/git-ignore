@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+function usage {
+  echo "Appends git ignore templates from https://gitignore.io"
+  echo
+  echo "Usage: git ignore [-w] [languages]"
+  echo "       git ignore list [keys]"
+  echo "Examples:"
+  echo "       git ignore python java"
+  echo "       git ignore list python java"
+}
+
+if [[ $# == 0 ]]; then
+  usage
+  exit 2
+fi
+
+function join_by { local IFS="$1"; shift; echo "$*"; }
+function get {
+  curl -L -s "https://www.gitignore.io/api/$1"
+}
+
+if [[ $1 == 'list' ]]; then
+  shift
+  if [[ $# -gt 0 ]]; then
+    keys=$(join_by '|' "$@")
+    echo "Listing for $keys"
+    get "list" | tr ',' '\n' | grep -E "$keys"
+  else
+    echo "Listing all"
+    get "list" | tr ',' '\n'
+  fi
+
+else
+  if [[ $1 == '-w' ]]; then
+    write=1
+    shift
+  fi
+
+  languages=$(join_by ',' "$@")
+  echo "Retrieving $languages"
+  if [[ $write ]]; then
+    echo "Appending to .gitignore"
+    get "$languages" >> .gitignore
+  else
+    get "$languages"
+  fi
+fi

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+export TERM=xterm-256color-italic
+/usr/local/bin/vi "$@"

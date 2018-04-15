@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -eo pipefail
+
+DIR="$(git rev-parse --show-toplevel 2> /dev/null || pwd)"
+NAME="$(basename "$DIR")"
+
+if [ $# == 0 ]; then
+  mvim --servername "$NAME"
+else
+  first_file=$1
+  mvim --servername "$NAME" --remote-tab-silent +"cd $DIR" "$first_file"
+  shift
+  until mvim --serverlist | grep -Fixq "$NAME"; do sleep 1; done
+  for file in "$@"; do
+    mvim --servername "$NAME" --remote-send ":split $(pwd)/$file<CR>"
+  done
+fi
