@@ -1,0 +1,2 @@
+#export PATH=/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH
+# vim ft=sh

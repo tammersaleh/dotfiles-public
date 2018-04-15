@@ -1,0 +1,6 @@
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s no_empty_cmd_completion
+shopt -s globstar
+
+# vim ft=sh

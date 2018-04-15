@@ -1,0 +1,3 @@
+# vim: ft=sh
+
+alias slack="slack-term -config ~/.config/slack-term.json"

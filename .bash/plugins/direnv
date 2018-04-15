@@ -1,0 +1,4 @@
+alias da="direnv allow"
+alias de="vi .envrc && direnv allow"
+
+# vim ft=sh

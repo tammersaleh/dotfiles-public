@@ -1,0 +1,7 @@
+if [ -f /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
+fi
+
+complete -C ~/.bash/mycompletions/rake.rb -o default rake
+
+# vim ft=sh
