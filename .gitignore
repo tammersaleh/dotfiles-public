@@ -1,0 +1,9 @@
+/.config/gcloud
+/.config/gh-update
+/.config/keybase/
+/.envrc
+/.git
+/.ptpython/history
+/.vim/plugged/
+/.vim/backups/
+/.vim/info/
