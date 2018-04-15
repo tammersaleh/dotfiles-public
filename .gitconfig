@@ -1,0 +1,65 @@
+[include]
+  path = ~/.gitconfig-private
+[user]
+  name = Tammer Saleh
+  email = me@tammersaleh.com
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+[alias]
+  aliases    = config --get-regexp "alias.*"
+  push-first = push --set-upstream origin master
+  delete     = !sh -c 'git branch -d $0 && git push origin --delete $0'
+  track      = !sh -c 'git fetch origin && git branch --set-upstream $0 origin/$0 && git checkout $0'
+  publish    = push -u origin
+  ql         = log --abbrev-commit --decorate --pretty=format:'%Cred%cn%Creset: %Cred%h%Creset %s %Cblue%ar%Creset' --graph
+  latest     = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
+  c          = commit -m
+  a          = add -A
+  wwgd       = add -A --dry-run
+  st         = status -sb
+  ci         = commit -v
+  co         = checkout
+  br         = branch -av
+  conflicts  = !git st | grep unmerged: | cut -c 15-
+  modified   = ls-files -m
+  update     = !git fetch && git rebase origin/master
+  append     = !git add -A && git commit --amend -C HEAD
+  wip        = !git add -A && git commit -m "wip"
+  master     = checkout master
+  recent     = log @{1}.. --decorate --reverse --stat -C --no-merges
+  nuke       = !git clean -df && git reset --hard
+  bl         = blame -wMC
+  suir       = submodule update --init --recursive
+  pr         = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  pr-clean   = "!git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+  files-in-commit = diff-tree --no-commit-id --name-only -r
+[merge]
+  tool = opendiff
+  summary = true
+[diff]
+  wordRegex = [^[:space:]]
+  submodule = log
+[core]
+  excludesfile = /Users/tsaleh/.gitglobalignore
+  whitespace = trailing-space,space-before-tab,tab-in-indent
+[status]
+  relativePaths = false
+  submodulesummary = 1
+[apply]
+  whitespace = nowarn
+[rerere]
+  enabled = 1
+[gh]
+  autoUpdate = always
+[filter "lfs"]
+  required = true
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+[color "show"]
+  old = red strike
+  new = green italic
+[hub]
+	protocol = https

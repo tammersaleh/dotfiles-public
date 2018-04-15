@@ -1,0 +1,35 @@
+set editing-mode vi
+set keymap vi 
+set show-all-if-ambiguous on
+set visible-stats on
+set match-hidden-files off
+set mark-symlinked-directories on
+
+# https://stackoverflow.com/questions/45136948/how-to-correctly-link-patched-gnu-readline-library-to-all-existing-programs
+set show-mode-in-prompt on
+set vi-cmd-mode-string "\1\e[2 q\2"
+set vi-ins-mode-string "\1\e[6 q\2"
+
+# https://github.com/jessfraz/dotfiles/blob/master/.inputrc
+set page-completions off
+set completion-query-items 200
+set skip-completed-text on
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Remove ESC delay
+set keyseq-timeout 10
+
+#set mark-modified-lines on
+#set show-all-if-ambiguous on
+#"f":vi-search
+#"/":vi-char-search
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+
+$if mode=vi
+      set keymap vi-command
+      "gg": beginning-of-history
+      "G": end-of-history

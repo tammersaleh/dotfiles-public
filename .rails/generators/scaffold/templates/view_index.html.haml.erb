@@ -1,0 +1,14 @@
+%h2 Listing <%= plural_name %>
+
+= link_to 'New <%= singular_name %>', new_<%= singular_name %>_path
+
+%ul.<%= plural_name %>
+  - @<%= plural_name %>.each do |<%= singular_name %>|
+    %li[<%= singular_name %>]
+      = link_to <%= singular_name %>, <%= singular_name %>
+      %ul.<%= singular_name %>_attributes
+<% for attribute in attributes -%>
+        %li.<%= attribute.name %>
+          = h <%= singular_name %>.<%= attribute.name %> 
+<% end -%>
+

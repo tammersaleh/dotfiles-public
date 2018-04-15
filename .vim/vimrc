@@ -1,0 +1,384 @@
+set nocompatible
+
+call plug#begin('~/.vim/plugged')
+command! PU source $MYVIMRC | PlugUpdate | PlugUpgrade
+
+Plug 'https://github.com/Matt-Deacalion/vim-systemd-syntax'
+Plug 'https://github.com/kana/vim-smartword'
+Plug 'https://github.com/haya14busa/incsearch.vim'
+Plug 'https://github.com/AndrewRadev/splitjoin.vim'
+Plug 'https://github.com/wincent/terminus'
+Plug 'https://github.com/terryma/vim-multiple-cursors'
+Plug 'https://github.com/Yggdroot/indentLine'
+Plug 'https://github.com/KabbAmine/vCoolor.vim'
+Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
+Plug 'https://github.com/airblade/vim-gitgutter'
+Plug 'https://github.com/cakebaker/scss-syntax.vim'
+Plug 'https://github.com/cespare/vim-toml'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+Plug 'https://github.com/digitaltoad/vim-pug'
+Plug 'https://github.com/ekalinin/Dockerfile.vim'
+Plug 'https://github.com/elzr/vim-json'
+Plug 'https://github.com/ervandew/supertab'
+Plug 'https://github.com/farmergreg/vim-lastplace'
+Plug 'https://github.com/fatih/vim-go'
+Plug 'https://github.com/flowtype/vim-flow'
+Plug 'https://github.com/hail2u/vim-css3-syntax'
+Plug 'https://github.com/hashivim/vim-terraform'
+Plug 'https://github.com/ludovicchabant/vim-gutentags'
+Plug 'https://github.com/jiangmiao/auto-pairs'
+Plug 'https://github.com/jistr/vim-nerdtree-tabs'
+Plug 'https://github.com/junegunn/vim-easy-align'
+Plug 'https://github.com/godlygeek/tabular' " Only used for Splitjoin
+Plug 'https://github.com/kana/vim-textobj-entire'
+Plug 'https://github.com/kana/vim-textobj-indent'
+Plug 'https://github.com/kana/vim-textobj-line'
+Plug 'https://github.com/kana/vim-textobj-user'
+Plug 'https://github.com/machakann/vim-highlightedyank'
+Plug 'https://github.com/majutsushi/tagbar'
+Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'https://github.com/panozzaj/vim-autocorrect'
+Plug 'https://github.com/plasticboy/vim-markdown'
+Plug 'https://github.com/python-mode/python-mode'
+Plug 'https://github.com/rafi/awesome-vim-colorschemes'
+Plug 'https://github.com/rizzatti/dash.vim'
+Plug 'https://github.com/rizzatti/funcoo.vim' " Required by Grepper
+Plug 'https://github.com/rizzatti/greper.vim' 
+Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'https://github.com/sickill/vim-pasta' 
+Plug 'https://github.com/tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'https://github.com/tomtom/tcomment_vim'
+Plug 'https://github.com/tpope/vim-endwise'
+Plug 'https://github.com/tpope/vim-eunuch'
+Plug 'https://github.com/tpope/vim-fugitive' " :Gblame is amazingballz
+Plug 'https://github.com/tpope/vim-git'
+Plug 'https://github.com/tpope/vim-rails'
+Plug 'https://github.com/tpope/vim-rake'
+Plug 'https://github.com/tpope/vim-rbenv'
+Plug 'https://github.com/tpope/vim-repeat'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/vim-ruby/vim-ruby'
+Plug 'https://github.com/vim-scripts/jQuery'
+Plug 'https://github.com/w0rp/ale'
+Plug 'https://github.com/wannesm/wmgraphviz.vim'
+Plug 'https://github.com/yosssi/vim-ace'
+Plug 'https://github.com/ryanoasis/vim-devicons' " Has to be last 
+call plug#end()
+
+filetype plugin indent on
+syntax on
+
+command! PU so $MYVIMRC | PlugUpdate | PlugUpgrade | so $MYVIMRC
+
+" Space leader
+let mapleader = " "
+
+""""""""""""""""""""""""
+""" Lets
+
+" Init ALE fixers, so they can be configured in syntax files
+let g:ale_fixers = {}
+
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save = 1
+
+" Airline
+" Can't set in after: https://github.com/vim-airline/vim-airline/issues/1565
+let g:airline_powerline_fonts = 1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+
+let g:gitgutter_max_signs = 1000
+let g:gitgutter_highlight_lines = 0
+let g:gitgutter_sign_added              = '+'
+let g:gitgutter_sign_modified           = '~'
+let g:gitgutter_sign_removed            = '_'
+let g:gitgutter_sign_removed_first_line = '‾'
+let g:gitgutter_sign_modified_removed   = '~_'
+
+" Splitjoin
+
+let g:splitjoin_align = 1
+let g:splitjoin_trailing_comma = 1
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping = ''
+nmap <Leader>j :SplitjoinJoin<cr>
+nmap <Leader>s :SplitjoinSplit<cr>
+
+" Current Highlight Group Under Cursor
+function! SyntaxItem()
+  return synIDattr(synID(line("."),col("."),1),"name")
+endfunction
+let g:airline_section_y = '%{SyntaxItem()}'
+set laststatus=2
+
+""""""""""""""""""""""""
+""" Sets
+
+set fillchars=vert:\│
+set listchars=tab:».,nbsp:_,conceal:×
+set list
+set ttimeoutlen=10
+if !has('nvim')
+  set viminfo+=n~/.vim/info
+endif
+set iskeyword+=-      " This makes foo-bar a single "word" - affects "*" and others
+set mouse=a           " Allow mouse positioning and scrolling in terminal.
+set clipboard=unnamed " Use the system clipboard
+set autoread
+set backspace=indent,eol,start
+set backup            " keep a backup file
+set backupdir=~/.vim/backups
+set history=1000      " keep 50 lines of command line history
+set ruler             " show the cursor position all the time
+" set incsearch         " do incremental searching
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set helpheight=1000
+set spellfile=~/.vim/en.utf-8.add
+set nospell " Disable by default
+set completeopt=menu,menuone,preview
+set wildmode=longest,list:longest
+set signcolumn=yes
+setlocal numberwidth=3
+
+set virtualedit=block
+
+" https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+set nrformats-=octal
+set scrolloff=1
+set sidescrolloff=5
+set formatoptions+=j
+
+" Nicer splitting
+set splitbelow
+set splitright
+
+set number
+
+set breakindent
+set showbreak=…
+
+" set conceallevel=2
+
+if has("gui_running")
+  set lines=80
+  set columns=120
+  set tabpagemax=100
+  set guifont=FiraCode-Retina:h14 " https://nerdfonts.com/
+
+  set guioptions=egmrLt
+
+  macmenu File.Print key=<nop>
+  macmenu Tools.List\ Errors key=<nop>
+  macmenu File.New\ Tab key=<nop>
+  macmenu Window.Minimize key=<nop>
+  set macligatures
+  set macmeta
+else
+  " https://www.iterm2.com/documentation-escape-codes.html
+  let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
+endif
+
+if has("gui_macvim")
+  set macmeta
+  set macthinstrokes
+endif
+
+""""""""""""""""""""""""
+""" Keyboard Mappings.
+
+" Use \d on top of a word to look it up in Dictionary.app
+noremap <silent> <Leader>d :!open dict://<cword><CR><CR>
+let g:ctrlp_map = '<Leader>f'
+let g:ctrlp_cmd = 'CtrlPMixed'
+
+" search will center on the line it's found in and expand folds
+" Disabled. Not sure how this works with incsearch plugin
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
+
+" Do not show stupid q: window
+map q: :q
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
+" Splits
+" ⌘-shift-hjkl move split
+nnoremap <D-J> <C-W>J
+nnoremap <D-K> <C-W>K
+nnoremap <D-L> <C-W>L
+nnoremap <D-H> <C-W>H
+" ⌘-hjkl navigates to next split
+nnoremap <D-j> <C-W><C-J>
+nnoremap <D-k> <C-W><C-K>
+nnoremap <D-l> <C-W><C-L>
+nnoremap <D-h> <C-W><C-H>
+" ⌘-| and ⌘-- create splits
+nnoremap <D-\> :vsplit<CR>
+nnoremap <D--> :split<CR>
+nnoremap <D-t> :tabnew<CR>
+" nnoremap <D-]> >>
+" nnoremap <D-[> <<
+" vnoremap <Tab> >gv
+" vnoremap <S-Tab> <gv
+nnoremap <D-]> >>_
+nnoremap <D-[> <<_
+inoremap <D-]> <C-T>
+inoremap <D-[> <C-D>
+vnoremap <D-]> >gv
+vnoremap <D-[> <gv
+
+map gb <C-^>
+vmap # :TComment<CR>
+map <C-l> :nohl
+" Fuck tpope
+xmap s <Plug>VSurround
+" Make j/k move to next visual line instead of physical line
+" http://yubinkim.com/?p=6
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
+nnoremap vA ggVG
+
+nmap zf 1z=
+
+""""""""""""""""""""""""
+""" Autocommands
+
+" https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
+autocmd! GUIEnter * set vb t_vb=
+
+" Resize splits when the window is resized
+autocmd VimResized * wincmd =
+
+au BufRead,BufNewFile {Gemfile,Vagrantfile,Berksfile} set ft=ruby
+au BufRead,BufNewFile .envrc                          set ft=sh
+
+set termguicolors
+set background=dark
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'allow_italic': 1
+  \     }
+  \   }
+  \ }
+colorscheme PaperColor
+hi Comment cterm=italic
+hi HighlightedyankRegion cterm=underline gui=underline
+hi Pmenu      guifg=#c6c6c6 guibg=Black
+hi PmenuSel   guifg=Yellow  guibg=Black gui=None
+hi PmenuSbar  guibg=Grey
+hi PmenuThumb guibg=White
+
+" IndentGuides
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_auto_colors = 0
+" let g:indent_guides_start_level = 2
+" let g:indent_guides_guide_size = 1
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#252525
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#303030
+
+" IndentLine
+let g:indentLine_enabled = 1
+let g:indentLine_char = '⎸'
+" let g:indentLine_color_term = 'Yellow'
+" let g:indentLine_color_gui = 'Yellow'
+
+
+""""""""""""""""""""""""
+""" Misc
+
+" Make required directories when writing a file..
+" http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
+function! s:MkNonExDir(file, buf)
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+endfunction
+augroup BWCCreateDir
+  autocmd!
+  autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
+" http://gregsexton.org/2011/03/27/improving-the-text-displayed-in-a-vim-Fold.html
+fu! CustomFoldText()
+  "get first non-blank line
+  let fs = v:foldstart
+  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+  endwhile
+  if fs > v:foldend
+    let line = getline(v:foldstart)
+  else
+    let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  endif
+
+  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  let foldSize = 1 + v:foldend - v:foldstart
+  let foldSizeStr = " " . foldSize . " lines "
+  let lineCount = line("$")
+  let foldPercentage = printf("(%.1f", (foldSize*1.0)/lineCount*100) . "%) "
+  let expansionString = repeat(" ", w - strwidth(foldSizeStr.line.foldPercentage))
+  return line . expansionString . foldSizeStr . foldPercentage
+endf
+set foldtext=CustomFoldText()
+
+set foldmethod=syntax
+
+" Ways to highlight the current window...
+" https://superuser.com/questions/385553/making-the-active-window-in-vim-more-obvious
+" augroup BgHighlight
+"   autocmd!
+"   autocmd WinEnter * set cul
+"   autocmd WinLeave * set nocul
+" augroup END
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+" https://github.com/machakann/vim-highlightedyank
+map y <Plug>(highlightedyank)
+let g:highlightedyank_highlight_duration = 500
+
+" Incsearch
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#) " I use tcomment
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+let g:incsearch#separate_highlight = 1
+
+" Smartword
+" Warning: This overrides w/b/e/ge defaults
+nmap cw c<Plug>(smartword-basic-w)
+nmap dw d<Plug>(smartword-basic-w)
+map w  <Plug>(smartword-w)
+map b  <Plug>(smartword-b)
+map e  <Plug>(smartword-e)
+map ge <Plug>(smartword-ge)
+" No idea why I need this, honestly.
+noremap <nowait> dd dd
+
+" Allow running "save" commands from the $PWD/.vimrc file.
+" https://andrew.stwrt.ca/posts/project-specific-vimrc/
+set exrc
+set secure

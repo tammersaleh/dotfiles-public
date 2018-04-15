@@ -1,0 +1,14 @@
+%h2 Editing <%= singular_name %>
+
+- semantic_form_for(@<%= singular_name %>) do |form|
+  = form.errors_on(:base)
+
+<% for attribute in attributes -%>
+  = form.input :<%= attribute.name %> 
+<% end -%>
+  - form.buttons do
+    = form.commit_button
+    or
+    = link_to 'Back', @<%= singular_name %> 
+
+= link_to 'Destroy', @<%= singular_name %>, :confirm => "Are you sure you want to remove #{@<%= singular_name %>}?", :method => :delete 

@@ -1,0 +1,12 @@
+%h2 New <%= singular_name %>
+
+- semantic_form_for(@<%= singular_name %>) do |form|
+  = form.errors_on(:base)
+
+<% for attribute in attributes -%>
+  = form.input :<%= attribute.name %>
+<% end -%>
+  - form.buttons do
+    = form.commit_button
+    or
+    = link_to 'Back', <%= plural_name %>_path 
