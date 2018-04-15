@@ -7,3 +7,4 @@
 /.vim/plugged/
 /.vim/backups/
 /.vim/info/
+/.config/direnv/allow
