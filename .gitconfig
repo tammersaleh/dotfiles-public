@@ -44,7 +44,7 @@
   wordRegex = [^[:space:]]
   submodule = log
 [core]
-  excludesfile = /Users/tsaleh/.gitglobalignore
+  excludesfile = ~/.gitglobalignore
   whitespace = trailing-space,space-before-tab,tab-in-indent
 [status]
   relativePaths = false
