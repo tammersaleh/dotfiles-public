@@ -11,7 +11,7 @@ Plug 'https://github.com/wincent/terminus'
 Plug 'https://github.com/terryma/vim-multiple-cursors'
 Plug 'https://github.com/Yggdroot/indentLine'
 Plug 'https://github.com/KabbAmine/vCoolor.vim'
-Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --java-completer' }
 Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/cakebaker/scss-syntax.vim'
