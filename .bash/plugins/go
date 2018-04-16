@@ -1,6 +1,5 @@
 export GOPATH=~/go
-export GOROOT=/usr/local/opt/go/libexec
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
 
-# vim ft=sh
+# vim: ft=sh

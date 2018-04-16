@@ -1,5 +1,5 @@
 function __git_dirty {
-  git diff --quiet HEAD &>/dev/null 
+  git diff --quiet HEAD &>/dev/null
   [ $? == 1 ] && echo "!"
 }
 
@@ -51,10 +51,15 @@ bash_prompt() {
   local UC=$W                 # user's color
   [ $UID -eq "0" ] && UC=$R   # root's color
 
-  PS1="$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
+  local H=""
+  if [[ $(hostname) != "tardis" ]]; then
+    H="$(hostname):"
+  fi
+
+  PS1="$EMW$H$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
 }
 
 bash_prompt
 unset bash_prompt
 
-# vim ft=sh
+# vim: ft=sh
