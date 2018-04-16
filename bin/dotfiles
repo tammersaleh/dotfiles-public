@@ -3,8 +3,12 @@
 set -eou pipefail
 
 ME="$(basename "$0")"
-PUBLIC="$HOME/code/tammersaleh/dotfiles/public"
-PRIVATE="$HOME/code/tammersaleh/dotfiles/private"
+ROOT="$HOME/code/tammersaleh/dotfiles/"
+PUBLIC="$ROOT/public"
+PRIVATE="$ROOT/private"
+TARGET="$HOME"
+
+cd "$PUBLIC"
 
 function usage {
   echo "Error: $1"
@@ -36,12 +40,22 @@ function ignore {
   echo "/$file" >> $PUBLIC/.gitignore
 }
 
+function install {
+  if ! which stow > /dev/null 2>&1; then
+    usage "can't find GNU stow"
+  fi
+  stow -d "$ROOT" -t "$TARGET" -R public -R private
+}
+
 case $command in
   "private")
     private "$@"
     ;;
   "ignore")
     ignore "$@"
+    ;;
+  "install")
+    install
     ;;
   *)
     usage "don't recognize $command"

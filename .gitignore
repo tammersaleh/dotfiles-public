@@ -6,5 +6,5 @@
 /.ptpython/history
 /.vim/plugged/
 /.vim/backups/
-/.vim/info/
+/.vim/info
 /.config/direnv/allow
