@@ -1,5 +1,7 @@
 [include]
   path = ~/.gitconfig-private
+[include]
+  path = ~/.gitconfig-local
 [user]
   name = Tammer Saleh
   email = me@tammersaleh.com
