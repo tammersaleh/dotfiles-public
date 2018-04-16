@@ -13,8 +13,10 @@ export VIM_APP_DIR=/Applications
 
 export LESS="-X -M -E -R"
 
-export PATH=~/bin/$(uname):~/bin:$PATH
+export PATH="~/bin/$(uname):~/bin:$PATH"
 
 export PS4='$ '
+
+export TERM=xterm-256color
 
 # vim: ft=sh
