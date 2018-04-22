@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+pbpaste | html2haml -s --ruby19-attributes | pbcopy
