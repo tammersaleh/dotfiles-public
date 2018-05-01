@@ -13,7 +13,7 @@ export VIM_APP_DIR=/Applications
 
 export LESS="-X -M -E -R"
 
-export PATH="~/bin/$(uname):~/bin:$PATH"
+export PATH="$HOME/bin/$(uname):$HOME/bin:$PATH"
 
 export PS4='$ '
 
