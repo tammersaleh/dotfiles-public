@@ -251,17 +251,22 @@ nnoremap vA ggVG
 
 nmap zf 1z=
 
+" EasyAlign
+" nnoremap <Leader>l vip:EasyAlign<CR>
+
 """"""""""""""""""""""""
 """ Autocommands
 
 " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
-autocmd! GUIEnter * set vb t_vb=
+au! GUIEnter * set vb t_vb=
 
 " Resize splits when the window is resized
-autocmd VimResized * wincmd =
+au VimResized * wincmd =
 
 au BufRead,BufNewFile {Gemfile,Vagrantfile,Berksfile} set ft=ruby
 au BufRead,BufNewFile .envrc                          set ft=sh
+" Open fold under cursor on read/write
+au BufWrite,BufEnter  *                               :silent! normal zO
 
 set termguicolors
 set background=dark
