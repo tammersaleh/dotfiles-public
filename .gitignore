@@ -4,8 +4,10 @@
 /.envrc
 /.git
 /.ptpython/history
-/.vim/plugged/
-/.vim/backups/
+/.vim/plugged/*
+/.vim/backups/*
 /.vim/info
 /.config/direnv/allow
 tags
+
+!.gitkeep
