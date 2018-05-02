@@ -1,7 +1,0 @@
-if [ -x /usr/local/bin/brew ]; then
-  if [ -f `/usr/local/bin/brew --prefix`/etc/bash_completion ]; then
-    . `/usr/local/bin/brew --prefix`/etc/bash_completion
-  fi
-fi
-
-# vim ft=sh

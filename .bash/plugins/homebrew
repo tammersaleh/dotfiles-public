@@ -1,5 +1,5 @@
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-export MANPATH=/usr/local/man:$MANPATH
+export PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/bin:$PATH
+export PATH=/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:$PATH
+export MANPATH=/home/linuxbrew/.linuxbrew/man:/usr/local/man:$MANPATH
 
-# vim ft=sh
+# vim: ft=sh
