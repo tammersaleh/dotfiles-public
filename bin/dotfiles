@@ -14,7 +14,9 @@ function usage {
   echo "Error: $1"
   echo
   echo "Usage:"
-  echo "  $ME private FILE"
+  echo "  $ME private FILE      # Make a file private"
+  echo "  $ME ignore FILE       # Ignore a file path (use full path)"
+  echo "  $ME install           # Install dotfiles.  Idempotent."
   exit 3
 }
 
