@@ -2,7 +2,7 @@ alias chmod='chmod -v'
 alias cp='cp -i'
 alias mv='mv -i'
 alias c="cd .."
-alias ls="ls -ohF"
+alias ls="ls -ohF --color=auto"
 alias t="tree -C"
 alias cidr=sipcalc
 alias lk="/Volumes/keys/load"
