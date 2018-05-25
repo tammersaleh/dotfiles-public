@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+if [[ $# != 1 ]]; then
+  echo "USAGE: $(basename ${BASH_SOURCE}) [url or org/repo pair]"
+  echo "clones the repo into ~/code"
+  exit 2
+fi
+
+url_or_pair=$1
+
+
+nth_item_from_end() {
+    echo "$1" | rev | cut -d / -f "$2" | rev
+}
+
+org=$( nth_item_from_end "$url_or_pair" 2)
+repo=$(nth_item_from_end "$url_or_pair" 1)
+
+if [[ -d "$HOME/code/$org/$repo" ]]; then
+  echo "$HOME/code/$org/$repo is already cloned."
+  exit
+else
+  mkdir -p "$HOME/code/$org"
+  cd "$HOME/code/$org"
+  git clone "https://github.com/${org}/${repo}.git"
+fi

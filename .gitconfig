@@ -26,7 +26,6 @@
   br         = branch -av
   conflicts  = !git st | grep unmerged: | cut -c 15-
   modified   = ls-files -m
-  update     = !git fetch && git rebase origin/master
   append     = !git add -A && git commit --amend -C HEAD
   wip        = !git add -A && git commit -m "wip"
   master     = checkout master
@@ -37,6 +36,8 @@
   pr         = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
   pr-clean   = "!git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
   files-in-commit = diff-tree --no-commit-id --name-only -r
+  current-branch = rev-parse --abbrev-ref HEAD
+  update = "!git fetch upstream && git rebase \"upstream/$(git current-branch)\""
 [merge]
   tool = opendiff
   summary = true
