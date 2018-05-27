@@ -8,42 +8,58 @@ function usage {
   local message=$1
   echo "ERROR: $message"
   echo
-  echo "USAGE: $(basename $BASH_SOURCE) [create|delete|recreate|become] N"
+  echo "USAGE: $(basename $BASH_SOURCE) [create|delete|recreate|become] STUDENT_NUMBER"
+  echo
+  echo "Creates the student user, and populates their home directory with a copy of the"
+  echo "workshop repository.  Must be run from within a checked out workshop repository."
   echo
   exit 1
 }
 
+function username {
+  local n=$1
+  echo "$STUDENT_PREFIX$n"
+}
+
 function create {
   local number=$1
-  local username="student$number"
+  local username="$(username "$number")"
   local password="${password_base}$number"
 
-  [[ -d "/home/$username" ]] && usage "Student already exists.  Maybe you meant to recreate?"
+  [[ -d "/home/$username" ]] && usage "$username already exists.  Maybe you meant to recreate?"
   [[ ! -d ".git" ]] && usage "Doesn't look like we're in a git repo.  Aborting."
 
-  sudo useradd -c "Student $number" -k . -m -s /home/linuxbrew/.linuxbrew/bin/bash "$username"
+  sudo useradd -c "Student $number" -k . -G students -m -s /home/linuxbrew/.linuxbrew/bin/bash "$username"
   echo "${username}:${password}" | sudo chpasswd
 
   sudo rm -rf $(sudo find "/home/$username" -iname ".git*")
+
+  direnv="$(which direnv)"
+  for envrc in $(sudo find "/home/$username" -name .envrc); do
+    sudo -u "$username" -- bash -c "HOME=/home/$username $direnv allow $envrc"
+  done
 
   echo "Created student $username with password $password"
 }
 
 function delete {
   local number=$1
-  local username="student$number"
+  local username="$(username $number)"
   sudo userdel -fr $username > /dev/null 2>&1 || true
   echo "Deleted student $username"
 }
 
 function become {
   local number=$1
-  local username="student$number"
+  local username="$(username $number)"
   sudo su - $username
 }
 
-[[ $HOSTNAME != "bastion" ]] && usage "Refusing to run on host other than bastion"
-[[ $# -lt 2  ]] && usage "Expected more arguments"
+[[ $# -lt 2  ]]              && usage "Expected more arguments"
+[[ $HOSTNAME != "bastion" ]] && usage "Refusing to run on host other than bastion."
+[[ -f .student.conf ]]       || usage "Cannot find the .student.conf file."
+
+source .student.conf
 
 cmd=$1
 N=$2
