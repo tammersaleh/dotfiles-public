@@ -50,15 +50,19 @@ function install {
 function pull {
   (
     cd $PUBLIC
-    git stash
+    touch .force-stash
+    git stash -u
     git pull --rebase
     git stash apply
+    rm .force-stash
   )
   (
     cd $PRIVATE
-    git stash
+    touch .force-stash
+    git stash -u
     git pull --rebase
     git stash apply
+    rm .force-stash
   )
   install
 }
