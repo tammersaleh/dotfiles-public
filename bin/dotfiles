@@ -8,8 +8,6 @@ PUBLIC="$ROOT/public"
 PRIVATE="$ROOT/private"
 TARGET="$HOME"
 
-cd "$PUBLIC"
-
 function usage {
   echo "Error: $1"
   echo
@@ -49,6 +47,21 @@ function install {
   stow -d "$ROOT" -t "$TARGET" -R public -R private
 }
 
+function pull {
+  (
+    cd $PUBLIC
+    git stash
+    git pull --rebase
+    git stash apply
+  )
+  (
+    cd $PRIVATE
+    git stash
+    git pull --rebase
+    git stash apply
+  )
+}
+
 case $command in
   "private")
     private "$@"
@@ -58,6 +71,9 @@ case $command in
     ;;
   "install")
     install
+    ;;
+  "pull")
+    pull
     ;;
   *)
     usage "don't recognize $command"
