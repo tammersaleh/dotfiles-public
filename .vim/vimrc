@@ -3,6 +3,7 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 command! PU source $MYVIMRC | PlugUpdate | PlugUpgrade
 
+Plug 'https://github.com/hashicorp/sentinel.vim'
 Plug 'https://github.com/Matt-Deacalion/vim-systemd-syntax'
 Plug 'https://github.com/kana/vim-smartword'
 Plug 'https://github.com/haya14busa/incsearch.vim'
