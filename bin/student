@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+password_base="sekrit"
+
+function usage {
+  local message=$1
+  echo "ERROR: $message"
+  echo
+  echo "USAGE: $(basename $BASH_SOURCE) [create|delete|recreate|become] N"
+  echo
+  exit 1
+}
+
+function create {
+  local number=$1
+  local username="student$number"
+  local password="${password_base}$number"
+
+  [[ -d "/home/$username" ]] && usage "Student already exists.  Maybe you meant to recreate?"
+  [[ ! -d ".git" ]] && usage "Doesn't look like we're in a git repo.  Aborting."
+
+  sudo useradd -c "Student $number" -k . -m -s /home/linuxbrew/.linuxbrew/bin/bash "$username"
+  echo "${username}:${password}" | sudo chpasswd
+
+  sudo rm -rf $(sudo find "/home/$username" -iname ".git*")
+
+  echo "Created student $username with password $password"
+}
+
+function delete {
+  local number=$1
+  local username="student$number"
+  sudo userdel -fr $username > /dev/null 2>&1 || true
+  echo "Deleted student $username"
+}
+
+function become {
+  local number=$1
+  local username="student$number"
+  sudo su - $username
+}
+
+[[ $HOSTNAME != "bastion" ]] && usage "Refusing to run on host other than bastion"
+[[ $# -lt 2  ]] && usage "Expected more arguments"
+
+cmd=$1
+N=$2
+shift 2
+
+case $cmd in
+  "create")
+     create $N
+     ;;
+  "recreate")
+     delete $N
+     create $N
+     ;;
+  "delete")
+     delete $N
+     ;;
+  "become")
+     become $N
+     ;;
+  *)
+    usage "Unrecognised command"
+    ;;
+esac
