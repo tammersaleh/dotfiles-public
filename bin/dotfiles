@@ -60,6 +60,7 @@ function pull {
     git pull --rebase
     git stash apply
   )
+  install
 }
 
 case $command in
