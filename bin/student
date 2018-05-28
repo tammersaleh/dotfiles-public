@@ -27,9 +27,12 @@ function create {
   local password="${password_base}$number"
 
   [[ -d "/home/$username" ]] && usage "$username already exists.  Maybe you meant to recreate?"
-  [[ ! -d ".git" ]] && usage "Doesn't look like we're in a git repo.  Aborting."
 
-  sudo useradd -c "Student $number" -k . -G students -m -s /home/linuxbrew/.linuxbrew/bin/bash "$username"
+  sudo useradd -c "Student $number" \
+               -k "$STUDENT_HOME" \
+               -G students \
+               -m \
+               -s /home/linuxbrew/.linuxbrew/bin/bash "$username"
   echo "${username}:${password}" | sudo chpasswd
 
   sudo rm -rf $(sudo find "/home/$username" -iname ".git*")
@@ -38,6 +41,8 @@ function create {
   for envrc in $(sudo find "/home/$username" -name .envrc); do
     sudo -u "$username" -- bash -c "HOME=/home/$username $direnv allow $envrc"
   done
+
+  $STUDENT_POST_CREATE_SCRIPT "$number" "/home/$username"
 
   echo "Created student $username with password $password"
 }
@@ -60,6 +65,7 @@ function become {
 [[ -f .student.conf ]]       || usage "Cannot find the .student.conf file."
 
 source .student.conf
+STUDENT_POST_CREATE_SCRIPT=${STUDENT_POST_CREATE_SCRIPT:-true}
 
 cmd=$1
 N=$2
