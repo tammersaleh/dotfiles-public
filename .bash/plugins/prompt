@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034,SC1117
+
 function __git_dirty {
   git diff --quiet HEAD &>/dev/null
   [ $? == 1 ] && echo "!"
@@ -51,7 +54,14 @@ bash_prompt() {
   local UC=$W                 # user's color
   [ $UID -eq "0" ] && UC=$R   # root's color
 
-  PS1="$EMW\h:$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
+  SHORT_HOST="$(hostname -s)"
+  if [[ $SHORT_HOST == "tardis" ]]; then
+    local H=""
+  else
+    local H="$SHORT_HOST:"
+  fi
+
+  PS1="$EMW$H$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
 }
 
 bash_prompt
