@@ -37,11 +37,6 @@ function create {
 
   sudo rm -rf $(sudo find "/home/$username" -iname ".git*")
 
-  direnv="$(which direnv)"
-  for envrc in $(sudo find "/home/$username" -name .envrc); do
-    sudo -u "$username" -- bash -c "HOME=/home/$username $direnv allow $envrc"
-  done
-
   $STUDENT_POST_CREATE_SCRIPT "$number" "/home/$username"
 
   echo "Created student $username with password $password"
