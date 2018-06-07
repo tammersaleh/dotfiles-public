@@ -37,7 +37,7 @@ function create {
 
   sudo rm -rf $(sudo find "/home/$username" -iname ".git*")
 
-  $STUDENT_POST_CREATE_SCRIPT "$number" "/home/$username"
+  $STUDENT_POST_CREATE_SCRIPT "$number" "$username"
 
   echo "Created student $username with password $password"
 }
