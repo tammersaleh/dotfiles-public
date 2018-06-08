@@ -2,8 +2,6 @@
 
 set -eou pipefail
 
-password_base="sekrit"
-
 function usage {
   local message=$1
   echo "ERROR: $message"
@@ -24,7 +22,7 @@ function username {
 function create {
   local number=$1
   local username="$(username "$number")"
-  local password="${password_base}$number"
+  local password="$username"
 
   [[ -d "/home/$username" ]] && usage "$username already exists.  Maybe you meant to recreate?"
 
