@@ -11,7 +11,6 @@ Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/wincent/terminus'
 Plug 'https://github.com/terryma/vim-multiple-cursors'
 Plug 'https://github.com/nathanaelkane/vim-indent-guides'
-Plug 'https://github.com/KabbAmine/vCoolor.vim'
 Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --java-completer' }
 Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
 Plug 'https://github.com/airblade/vim-gitgutter'
@@ -225,10 +224,7 @@ nnoremap <D-h> <C-W><C-H>
 nnoremap <D-\> :vsplit<CR>
 nnoremap <D--> :split<CR>
 nnoremap <D-t> :tabnew<CR>
-" nnoremap <D-]> >>
-" nnoremap <D-[> <<
-" vnoremap <Tab> >gv
-" vnoremap <S-Tab> <gv
+" ⌘-[ and ⌘-] change indent
 nnoremap <D-]> >>_
 nnoremap <D-[> <<_
 inoremap <D-]> <C-T>
@@ -238,8 +234,8 @@ vnoremap <D-[> <gv
 
 map gb <C-^>
 vmap # :TComment<CR>
-map <C-l> :nohl
-" Fuck tpope
+map <C-l> :nohl<CR>
+" Fix surround
 xmap s <Plug>VSurround
 " Make j/k move to next visual line instead of physical line
 " http://yubinkim.com/?p=6
@@ -272,27 +268,31 @@ au BufWrite,BufEnter  *                               :silent! normal zO
 set termguicolors
 set background=dark
 let g:PaperColor_Theme_Options = {
-  \   'theme': {
+  \   'theme.dark': {
   \     'default': {
-  \       'allow_italic': 1
+  \       'allow_italic': 1,
+  \       'override' : {
+  \         'color00' : ['#FFFFFF', '']
+  \       }
   \     }
   \   }
   \ }
 colorscheme PaperColor
+hi Normal guibg=black guifg=white
 hi Comment cterm=italic
 hi HighlightedyankRegion cterm=underline gui=underline
-hi Pmenu      guifg=#c6c6c6 guibg=Black
-hi PmenuSel   guifg=Yellow  guibg=Black gui=None
+hi Pmenu      guifg=#c6c6c6 guibg=Blue
+hi PmenuSel   guifg=Yellow  guibg=Blue gui=bold
 hi PmenuSbar  guibg=Grey
 hi PmenuThumb guibg=White
 
 " IndentGuides
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_auto_colors = 0
-" let g:indent_guides_start_level = 2
-" let g:indent_guides_guide_size = 1
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#252525
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#303030
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#252525
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#303030
 
 " IndentLine
 " let g:indentLine_enabled = 1
