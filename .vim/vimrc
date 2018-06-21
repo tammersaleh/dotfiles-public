@@ -197,6 +197,7 @@ endif
 noremap <silent> <Leader>d :!open dict://<cword><CR><CR>
 let g:ctrlp_map = '<Leader>f'
 let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_use_caching = 0
 
 " search will center on the line it's found in and expand folds
 " Disabled. Not sure how this works with incsearch plugin
@@ -289,10 +290,10 @@ hi PmenuThumb guibg=White
 " IndentGuides
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+" let g:indent_guides_start_level = 2
+" let g:indent_guides_guide_size = 2
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#252525
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#303030
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#000000
 
 " IndentLine
 " let g:indentLine_enabled = 1
