@@ -3,9 +3,9 @@
 ## Install
 
 ``` console
-$ brew install git git-lfs git-crypt
+$ brew install stow git git-lfs git-crypt
 $ mkdir -p ~/code/tammersaleh/dotfiles
-$ cd ~/code/tammersaleh/dotfiles
+$ cd .dotfiles
 $ git clone https://tsaleh:${TOKEN}@github.com/tammersaleh/dotfiles-public.git public
 $ git clone https://tsaleh:${TOKEN}@github.com/tammersaleh/dotfiles-private.git private
 $ (cd private && git crypt unlock /path/to/key)

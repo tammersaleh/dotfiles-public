@@ -3,7 +3,7 @@
 set -eou pipefail
 
 ME="$(basename "$0")"
-ROOT="$HOME/code/tammersaleh/dotfiles/"
+ROOT="$HOME/.dotfiles/"
 PUBLIC="$ROOT/public"
 PRIVATE="$ROOT/private"
 TARGET="$HOME"
