@@ -385,7 +385,7 @@ map ge <Plug>(smartword-ge)
 " No idea why I need this, honestly.
 noremap <nowait> dd dd
 
-" Allow running "save" commands from the $PWD/.vimrc file.
+" Allow running safe commands from the $PWD/.vimrc file.
 " https://andrew.stwrt.ca/posts/project-specific-vimrc/
 set exrc
 set secure
