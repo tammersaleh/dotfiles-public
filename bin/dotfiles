@@ -12,8 +12,9 @@ function usage {
   echo "Error: $1"
   echo
   echo "Usage:"
-  echo "  $ME private FILE      # Make a file private"
-  echo "  $ME ignore FILE       # Ignore a file path (use full path)"
+  echo "  $ME public FILE       # Track a file publicly"
+  echo "  $ME private FILE      # Track a file privately"
+  echo "  $ME ignore FILE       # Ignore a file path (use full path with \$HOME as root)"
   echo "  $ME install           # Install dotfiles.  Idempotent."
   exit 3
 }
@@ -27,11 +28,20 @@ shift
 
 function private {
   file=$1
-  public_source="$PUBLIC/$file"
-  private_dest="$PRIVATE/$file"
-  mkdir -p "$(dirname "$private_dest")"
+  dest="$PRIVATE/$file"
+  mkdir -p "$(dirname "$dest")"
   echo "Moving $file to private repo"
-  mv "$public_source" "$private_dest"
+  mv "$file" "$dest"
+  install
+}
+
+function public {
+  file=$1
+  dest="$PUBLIC/$file"
+  mkdir -p "$(dirname "$dest")"
+  echo "Moving $file to public repo"
+  mv "$file" "$dest"
+  install
 }
 
 function ignore {
