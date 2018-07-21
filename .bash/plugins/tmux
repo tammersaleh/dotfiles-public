@@ -1,5 +1,5 @@
-if [ ! -z "$PS1" ]; then
-  tmux list-sessions 2>/dev/null
-fi
+#if [ ! -z "$PS1" ]; then
+#   tmux list-sessions 2>/dev/null
+#fi
 
 # vim: ft=sh
