@@ -1,5 +1,4 @@
-export GOPATH=~/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOPATH/bin
+export GOPATH=$HOME
+export GOBIN="$GOPATH/$(uname -s)"
 
 # vim: ft=sh

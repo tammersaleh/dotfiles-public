@@ -3,26 +3,30 @@
 set -eou pipefail
 
 if [[ $# != 1 ]]; then
-  echo "USAGE: $(basename ${BASH_SOURCE}) [url or org/repo pair]"
-  echo "clones the repo into ~/code"
+  me=$(basename ${BASH_SOURCE})
+  echo "USAGE: $me REPO"
+  echo
+  echo "Clones the github repo into ~/src/github.com/org/repo"
+  echo "Where REPO is either a full URL (without the .git) or an ORG/REPO tuple."
+  echo "Example: $me superorbital/git-grab"
+  echo "         $me https://github.com/superorbital/git-grab"
   exit 2
 fi
 
 url_or_pair=$1
 
-
 nth_item_from_end() {
-    echo "$1" | rev | cut -d / -f "$2" | rev
+  echo "$1" | rev | cut -d / -f "$2" | rev
 }
 
 org=$( nth_item_from_end "$url_or_pair" 2)
 repo=$(nth_item_from_end "$url_or_pair" 1)
 
-if [[ -d "$HOME/code/$org/$repo" ]]; then
-  echo "$HOME/code/$org/$repo is already cloned."
+if [[ -d "$HOME/src/github.com/$org/$repo" ]]; then
+  echo "$HOME/src/github.com/$org/$repo is already cloned."
   exit
 else
-  mkdir -p "$HOME/code/$org"
-  cd "$HOME/code/$org"
+  mkdir -p "$HOME/src/github.com/$org"
+  cd "$HOME/src/github.com/$org"
   git clone "https://github.com/${org}/${repo}.git"
 fi
