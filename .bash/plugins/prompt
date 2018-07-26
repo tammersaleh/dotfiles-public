@@ -10,14 +10,6 @@ function __git_branch {
   __git_ps1 " %s"
 }
 
-function __my_ruby_version {
-  if ! which rbenv &>/dev/null; then
-    echo ""
-  else
-    rbenv version | cut -f 1 -d " " | cut -f 1 -d "-"
-  fi
-}
-
 bash_prompt() {
   local NONE="\[\033[0m\]"    # unsets color to term's fg color
 
