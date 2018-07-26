@@ -216,15 +216,26 @@ nnoremap <D-J> <C-W>J
 nnoremap <D-K> <C-W>K
 nnoremap <D-L> <C-W>L
 nnoremap <D-H> <C-W>H
+tnoremap <D-J> <C-W>J
+tnoremap <D-K> <C-W>K
+tnoremap <D-L> <C-W>L
+tnoremap <D-H> <C-W>H
 " ⌘-hjkl navigates to next split
 nnoremap <D-j> <C-W><C-J>
 nnoremap <D-k> <C-W><C-K>
 nnoremap <D-l> <C-W><C-L>
 nnoremap <D-h> <C-W><C-H>
+tnoremap <D-j> <C-W><C-J>
+tnoremap <D-k> <C-W><C-K>
+tnoremap <D-l> <C-W><C-L>
+tnoremap <D-h> <C-W><C-H>
 " ⌘-| and ⌘-- create splits
 nnoremap <D-\> :vsplit<CR>
 nnoremap <D--> :split<CR>
 nnoremap <D-t> :tabnew<CR>
+tnoremap <D-\> <C-w>:vert term<CR>
+tnoremap <D--> <C-w>:below term<CR>
+tnoremap <D-t> <C-w>:tabnew<CR>
 " ⌘-[ and ⌘-] change indent
 nnoremap <D-]> >>_
 nnoremap <D-[> <<_
@@ -232,6 +243,22 @@ inoremap <D-]> <C-T>
 inoremap <D-[> <C-D>
 vnoremap <D-]> >gv
 vnoremap <D-[> <gv
+
+" Term scrolling
+function! ExitNormalMode()
+    unmap <buffer> <silent> <RightMouse>
+    call feedkeys("a")
+endfunction
+
+function! EnterNormalMode()
+    if &buftype == 'terminal' && mode('') == 't'
+        call feedkeys("\<c-w>N")
+        call feedkeys("\<c-y>")
+        map <buffer> <silent> <LeftMouse> :call ExitNormalMode()<CR>
+    endif
+endfunction
+
+tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
 
 map gb <C-^>
 vmap # :TComment<CR>

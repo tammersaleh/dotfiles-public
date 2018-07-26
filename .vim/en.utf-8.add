@@ -53,3 +53,5 @@ Kuberenetes
 YAML
 k8s
 DaemonSets
+Redis
+MySQL
