@@ -1,9 +1,0 @@
-DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
-
-if [[ -d $DOCKER_ETC ]]; then
-  . "$DOCKER_ETC/docker.bash-completion"
-  . "$DOCKER_ETC/docker-machine.bash-completion"
-  . "$DOCKER_ETC/docker-compose.bash-completion"
-fi
-
-# vim: ft=sh

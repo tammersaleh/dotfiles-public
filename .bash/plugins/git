@@ -1,5 +1,0 @@
-alias git=hub
-alias g=git
-complete -o default -o nospace -F _git g
-
-# vim ft=sh

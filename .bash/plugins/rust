@@ -1,3 +1,0 @@
-PATH=$PATH:$HOME/.cargo/bin
-
-# vim ft=sh

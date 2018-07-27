@@ -1,3 +1,0 @@
-eval "$(rbenv init -)"
-
-# vim ft=sh

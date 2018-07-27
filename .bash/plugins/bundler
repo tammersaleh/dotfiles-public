@@ -1,3 +1,0 @@
-alias bi="bundle install --binstubs .bundle/bin"
-
-# vim ft=sh

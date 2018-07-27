@@ -1,6 +1,0 @@
-export PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/bin:$PATH
-export PATH=/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:$PATH
-export MANPATH=/home/linuxbrew/.linuxbrew/man:/usr/local/man:$MANPATH
-export HOMEBREW_NO_AUTO_UPDATE=1
-
-# vim: ft=sh

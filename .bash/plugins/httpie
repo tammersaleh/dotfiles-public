@@ -1,3 +1,0 @@
-alias https='http --default-scheme=https'
-
-# vim ft=sh

@@ -1,6 +1,0 @@
-export VAGRANT_VMWARE_CLONE_DIRECTORY=/tmp/vagrant_machines/
-export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
-alias vssh="vagrant ssh"
-alias va=vagrant
-
-# vim ft=sh

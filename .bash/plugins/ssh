@@ -1,3 +1,0 @@
-alias ssh="TERM=xterm-color ssh"
-
-# vim ft=sh

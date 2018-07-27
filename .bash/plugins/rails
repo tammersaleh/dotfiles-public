@@ -1,3 +1,0 @@
-export RACK_ENV=development
-
-# vim ft=sh

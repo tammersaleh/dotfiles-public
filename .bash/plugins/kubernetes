@@ -1,5 +1,0 @@
-which kubectl >/dev/null && source <(kubectl completion bash)
-which helm >/dev/null    && source <(helm completion bash)
-which stern >/dev/null   && source <(stern --completion bash)
-
-# vim: ft=sh
