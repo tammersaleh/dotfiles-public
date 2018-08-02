@@ -11,7 +11,7 @@ Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/wincent/terminus'
 Plug 'https://github.com/terryma/vim-multiple-cursors'
 Plug 'https://github.com/nathanaelkane/vim-indent-guides'
-Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --java-completer' }
+" Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --java-completer' }
 Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/cakebaker/scss-syntax.vim'
@@ -27,7 +27,7 @@ Plug 'https://github.com/flowtype/vim-flow'
 Plug 'https://github.com/hail2u/vim-css3-syntax'
 Plug 'https://github.com/hashivim/vim-terraform'
 " bad idea in big directories
-" Plug 'https://github.com/ludovicchabant/vim-gutentags' 
+" Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'https://github.com/jistr/vim-nerdtree-tabs'
 Plug 'https://github.com/junegunn/vim-easy-align'
@@ -45,9 +45,9 @@ Plug 'https://github.com/python-mode/python-mode'
 Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 Plug 'https://github.com/rizzatti/dash.vim'
 Plug 'https://github.com/rizzatti/funcoo.vim' " Required by Grepper
-Plug 'https://github.com/rizzatti/greper.vim' 
+Plug 'https://github.com/rizzatti/greper.vim'
 Plug 'https://github.com/scrooloose/nerdtree'
-Plug 'https://github.com/sickill/vim-pasta' 
+Plug 'https://github.com/sickill/vim-pasta'
 Plug 'https://github.com/tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'https://github.com/tomtom/tcomment_vim'
 Plug 'https://github.com/tpope/vim-endwise'
@@ -65,7 +65,9 @@ Plug 'https://github.com/vim-scripts/jQuery'
 Plug 'https://github.com/w0rp/ale'
 Plug 'https://github.com/wannesm/wmgraphviz.vim'
 Plug 'https://github.com/yosssi/vim-ace'
-Plug 'https://github.com/ryanoasis/vim-devicons' " Has to be last 
+Plug 'https://github.com/ryanoasis/vim-devicons' " Has to be last
+" Plug 'https://github.com/lifepillar/vim-gruvbox8'
+Plug 'https://github.com/morhetz/gruvbox'
 call plug#end()
 
 filetype plugin indent on
@@ -161,13 +163,14 @@ set splitright
 set number
 
 set breakindent
-set showbreak=…
+set breakindentopt=shift:0
+let &showbreak='↳  '
 
 " set conceallevel=2
 
 if has("gui_running")
-  set lines=80
-  set columns=120
+  " set lines=80
+  " set columns=120
   set tabpagemax=100
   set guifont=FiraCode-Retina:h14 " https://nerdfonts.com/
 
@@ -177,17 +180,13 @@ if has("gui_running")
   macmenu Tools.List\ Errors key=<nop>
   macmenu File.New\ Tab key=<nop>
   macmenu Window.Minimize key=<nop>
-  set macligatures
+  " Slows to a crawl :(
+  " set macligatures
   set macmeta
 else
   " https://www.iterm2.com/documentation-escape-codes.html
   let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
   let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
-endif
-
-if has("gui_macvim")
-  set macmeta
-  set macthinstrokes
 endif
 
 """"""""""""""""""""""""
@@ -211,7 +210,7 @@ map q: :q
 cmap w!! w !sudo tee > /dev/null %
 
 " Splits
-" ⌘-shift-hjkl move split
+" Apple-shift-hjkl move split
 nnoremap <D-J> <C-W>J
 nnoremap <D-K> <C-W>K
 nnoremap <D-L> <C-W>L
@@ -220,7 +219,7 @@ tnoremap <D-J> <C-W>J
 tnoremap <D-K> <C-W>K
 tnoremap <D-L> <C-W>L
 tnoremap <D-H> <C-W>H
-" ⌘-hjkl navigates to next split
+" Apple-hjkl navigates to next split
 nnoremap <D-j> <C-W><C-J>
 nnoremap <D-k> <C-W><C-K>
 nnoremap <D-l> <C-W><C-L>
@@ -229,16 +228,18 @@ tnoremap <D-j> <C-W><C-J>
 tnoremap <D-k> <C-W><C-K>
 tnoremap <D-l> <C-W><C-L>
 tnoremap <D-h> <C-W><C-H>
-" ⌘-| and ⌘-- create splits
+" Apple-| and Apple-- create splits
 nnoremap <D-\> :vsplit<CR>
 nnoremap <D--> :split<CR>
 nnoremap <D-t> :tabnew<CR>
 tnoremap <D-\> <C-w>:vert term<CR>
 tnoremap <D--> <C-w>:below term<CR>
 tnoremap <D-t> <C-w>:tabnew<CR>
-" ⌘-[ and ⌘-] change indent
+" Can't use C- here, since one of these results in ESC.  BAD NEWS.
 nnoremap <D-]> >>_
 nnoremap <D-[> <<_
+tnoremap <D-}> <C-w>:tabnext<CR>
+tnoremap <D-{> <C-w>:tabprev<CR>
 inoremap <D-]> <C-T>
 inoremap <D-[> <C-D>
 vnoremap <D-]> >gv
@@ -246,8 +247,9 @@ vnoremap <D-[> <gv
 
 " Term scrolling
 function! ExitNormalMode()
-    unmap <buffer> <silent> <RightMouse>
-    call feedkeys("a")
+  unmap <buffer> <silent> <LeftMouse>
+  unmap <buffer> <silent> <ESC>
+  call feedkeys("a")
 endfunction
 
 function! EnterNormalMode()
@@ -255,10 +257,13 @@ function! EnterNormalMode()
         call feedkeys("\<c-w>N")
         call feedkeys("\<c-y>")
         map <buffer> <silent> <LeftMouse> :call ExitNormalMode()<CR>
+        map <buffer> <silent> <ESC> :call ExitNormalMode()<CR>
     endif
 endfunction
 
-tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
+tnoremap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
+tnoremap <C-u> <c-w>:call EnterNormalMode()<CR>
+tnoremap <C-v> <C-w>"*
 
 map gb <C-^>
 vmap # :TComment<CR>
@@ -292,6 +297,7 @@ au BufRead,BufNewFile {Gemfile,Vagrantfile,Berksfile} set ft=ruby
 au BufRead,BufNewFile .envrc                          set ft=sh
 " Open fold under cursor on read/write
 au BufWrite,BufEnter  *                               :silent! normal zO
+autocmd! BufWritePost {.vimrc,vimrc} source %
 
 set termguicolors
 set background=dark
@@ -305,7 +311,11 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
-colorscheme PaperColor
+" colorscheme PaperColor
+
+let g:gruvbox_contrast_dark = "hard"
+colorscheme gruvbox
+
 hi Normal guibg=black guifg=white
 hi Comment cterm=italic
 hi HighlightedyankRegion cterm=underline gui=underline

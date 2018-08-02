@@ -8,6 +8,7 @@
 /.vim/backups/*
 /.vim/info
 /.config/direnv/allow
+/.aws/cli/cache/*
 tags
 
 !.gitkeep

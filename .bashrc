@@ -22,10 +22,29 @@ source_if_exists() {
 ############# }}}
 ### Variables {{{
 
+prepend_path "$HOME/bin/$(uname)"
+prepend_path "$HOME/bin"
+
+prepend_path /home/linuxbrew/.linuxbrew/bin
+prepend_path /usr/local/bin
+prepend_path /home/linuxbrew/.linuxbrew/sbin
+prepend_path /usr/local/sbin
+prepend_manpath /home/linuxbrew/.linuxbrew/man
+prepend_manpath /usr/local/man
+
+prepend_path /usr/local/opt/coreutils/libexec/gnubin
+prepend_manpath /usr/local/opt/coreutils/libexec/gnuman
+
+prepend_path /usr/local/share/npm/bin
+prepend_path /Applications/Postgres.app/Contents/Versions/9.4/bin
+
+prepend_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
+
 export CLICOLOR=1
 export HISTCONTROL="ignoredups"
 export HISTSIZE="2000"
-export LSCOLORS=dxFxCxDxBxegedabagacad
+export LS_COLORS
+eval $(dircolors)
 
 export EDITOR="vim"
 export VISUAL="vim"
@@ -68,24 +87,6 @@ if [ "$ITERM_SESSION_ID" ]; then
   export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007" '"$PROMPT_COMMAND"
 fi
 
-prepend_path "$HOME/bin/$(uname)"
-prepend_path "$HOME/bin"
-
-prepend_path /home/linuxbrew/.linuxbrew/bin
-prepend_path /usr/local/bin
-prepend_path /home/linuxbrew/.linuxbrew/sbin
-prepend_path /usr/local/sbin
-prepend_manpath /home/linuxbrew/.linuxbrew/man
-prepend_manpath /usr/local/man
-
-prepend_path /usr/local/opt/coreutils/libexec/gnubin
-prepend_manpath /usr/local/opt/coreutils/libexec/gnuman
-
-prepend_path /usr/local/share/npm/bin
-prepend_path /Applications/Postgres.app/Contents/Versions/9.4/bin
-
-prepend_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
-
 ####################### }}}
 ### Aliases & Functions {{{
 
@@ -94,7 +95,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias c="cd .."
 alias ls="gls -ohF --color=auto"
-alias t="tree -C"
 alias cidr=sipcalc
 alias lk="/Volumes/keys/load"
 alias grep="grep --color=auto"
