@@ -44,7 +44,7 @@ export CLICOLOR=1
 export HISTCONTROL="ignoredups"
 export HISTSIZE="2000"
 export LS_COLORS
-eval $(dircolors)
+eval $(dircolors ~/.dircolors)
 
 export EDITOR="vim"
 export VISUAL="vim"
@@ -123,7 +123,7 @@ gpip(){
 v() {
   # https://github.com/vim/vim/blob/master/runtime/doc/terminal.txt
   # <Esc>]51;["drop", "filename"]<07>
-  echo -ne "\033]51;[\"drop\", \"$1\"]\007"
+  echo -ne "\033]51;[\"drop\", \"$PWD/$1\"]\007"
 }
 
 ############### }}}
