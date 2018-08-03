@@ -1,5 +1,5 @@
-# Safeguards.  Disable this shit by SCPing a .disable_tmux file into ~/, don't
-# run locally, and don't run if we don't have tmux.
+# Safeguards.  Disable by SCPing a `.disable_tmux` file into `$HOME`, don't run
+# locally, and don't run if we don't have tmux.
 if [[ "$(hostname -s)" == "tardis" ]] || [[ -f .disable_tmux ]] || ! command -v tmux 2>&1 > /dev/null; then
   . ~/.bashrc
 else
