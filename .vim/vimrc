@@ -1,125 +1,92 @@
+" vim: foldmethod=marker
 set nocompatible
 
+" Plugins {{{
 call plug#begin('~/.vim/plugged')
 command! PU source $MYVIMRC | PlugUpdate | PlugUpgrade
 
+" Languages & syntax {{{
 Plug 'https://github.com/hashicorp/sentinel.vim'
+Plug 'https://github.com/wannesm/wmgraphviz.vim'
 Plug 'https://github.com/Matt-Deacalion/vim-systemd-syntax'
-Plug 'https://github.com/kana/vim-smartword'
-Plug 'https://github.com/haya14busa/incsearch.vim'
-Plug 'https://github.com/AndrewRadev/splitjoin.vim'
-Plug 'https://github.com/wincent/terminus'
-Plug 'https://github.com/terryma/vim-multiple-cursors'
-Plug 'https://github.com/nathanaelkane/vim-indent-guides'
-" Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --java-completer' }
-Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
-Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/cakebaker/scss-syntax.vim'
 Plug 'https://github.com/cespare/vim-toml'
-Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-Plug 'https://github.com/digitaltoad/vim-pug'
-Plug 'https://github.com/ekalinin/Dockerfile.vim'
+Plug 'https://github.com/digitaltoad/vim-pug' " Jade
+Plug 'https://github.com/ekalinin/Dockerfile.vim' 
 Plug 'https://github.com/elzr/vim-json'
-Plug 'https://github.com/ervandew/supertab'
-Plug 'https://github.com/farmergreg/vim-lastplace'
 Plug 'https://github.com/fatih/vim-go'
-Plug 'https://github.com/flowtype/vim-flow'
 Plug 'https://github.com/hail2u/vim-css3-syntax'
 Plug 'https://github.com/hashivim/vim-terraform'
-" bad idea in big directories
-" Plug 'https://github.com/ludovicchabant/vim-gutentags'
-Plug 'https://github.com/jiangmiao/auto-pairs'
-Plug 'https://github.com/jistr/vim-nerdtree-tabs'
-Plug 'https://github.com/junegunn/vim-easy-align'
-Plug 'https://github.com/godlygeek/tabular' " Only used for Splitjoin
-Plug 'https://github.com/kana/vim-textobj-entire'
-Plug 'https://github.com/kana/vim-textobj-indent'
-Plug 'https://github.com/kana/vim-textobj-line'
-Plug 'https://github.com/kana/vim-textobj-user'
-Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/pangloss/vim-javascript'
-Plug 'https://github.com/panozzaj/vim-autocorrect'
 Plug 'https://github.com/plasticboy/vim-markdown'
 Plug 'https://github.com/python-mode/python-mode'
-Plug 'https://github.com/rafi/awesome-vim-colorschemes'
+Plug 'https://github.com/vim-ruby/vim-ruby'
+Plug 'https://github.com/vim-scripts/jQuery'
+Plug 'https://github.com/tpope/vim-rails'
+Plug 'https://github.com/yosssi/vim-ace' 
+" }}}
+
+" General {{{
+Plug 'https://github.com/kana/vim-smartword' " make `w` better.
+Plug 'https://github.com/haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches
+Plug 'https://github.com/wincent/terminus' " Make terminal vim slightly nicer
+Plug 'https://github.com/nathanaelkane/vim-indent-guides' " Nice indent coloring
+Plug 'https://github.com/airblade/vim-gitgutter' " Show git signs in gutter
+Plug 'https://github.com/ctrlpvim/ctrlp.vim' 
+Plug 'https://github.com/farmergreg/vim-lastplace' " Open files at last cursor position
+" Plug 'https://github.com/ludovicchabant/vim-gutentags' bad idea in big directories
+Plug 'https://github.com/jiangmiao/auto-pairs' " Auto-close parens, etc
+Plug 'https://github.com/junegunn/vim-easy-align' " <leader>a=
+Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
+Plug 'https://github.com/panozzaj/vim-autocorrect'
 Plug 'https://github.com/rizzatti/dash.vim'
 Plug 'https://github.com/rizzatti/funcoo.vim' " Required by Grepper
 Plug 'https://github.com/rizzatti/greper.vim'
-Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/sickill/vim-pasta'
-Plug 'https://github.com/tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'https://github.com/tomtom/tcomment_vim'
 Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive' " :Gblame is amazingballz
 Plug 'https://github.com/tpope/vim-git'
-Plug 'https://github.com/tpope/vim-rails'
-Plug 'https://github.com/tpope/vim-rake'
-Plug 'https://github.com/tpope/vim-rbenv'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/vim-airline/vim-airline'
-Plug 'https://github.com/vim-ruby/vim-ruby'
-Plug 'https://github.com/vim-scripts/jQuery'
-Plug 'https://github.com/w0rp/ale'
-Plug 'https://github.com/wannesm/wmgraphviz.vim'
-Plug 'https://github.com/yosssi/vim-ace'
 Plug 'https://github.com/ryanoasis/vim-devicons' " Has to be last
-" Plug 'https://github.com/lifepillar/vim-gruvbox8'
+" }}}
+
+" Autocompletion & Linting {{{
+" Need to find an alternative to YCM.  Just too heavy.
+" Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --java-completer' }
+Plug 'https://github.com/ervandew/supertab'
+Plug 'https://github.com/w0rp/ale'
+" }}}
+
+" Nerdtree {{{
+Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
+Plug 'https://github.com/jistr/vim-nerdtree-tabs'
+Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'https://github.com/tiagofumo/vim-nerdtree-syntax-highlight'
+" }}}
+
+" Color theme {{{
 Plug 'https://github.com/morhetz/gruvbox'
-call plug#end()
+Plug 'https://github.com/rafi/awesome-vim-colorschemes'
+" set tmux status line colors to same as airline.  Will this solve my inactive window issues?
+Plug 'https://github.com/edkolev/tmuxline.vim'
+" }}}
+
+call plug#end() 
 
 filetype plugin indent on
 syntax on
 
-command! PU so $MYVIMRC | PlugUpdate | PlugUpgrade | so $MYVIMRC
+command! PU so $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | so $MYVIMRC
+" }}}
 
 " Space leader
 let mapleader = " "
 
-""""""""""""""""""""""""
-""" Lets
-
-" Init ALE fixers, so they can be configured in syntax files
-let g:ale_fixers = {}
-
-" Terraform
-let g:terraform_align=1
-let g:terraform_fmt_on_save = 1
-
-" Airline
-" Can't set in after: https://github.com/vim-airline/vim-airline/issues/1565
-let g:airline_powerline_fonts = 1
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-
-let g:gitgutter_max_signs = 1000
-let g:gitgutter_highlight_lines = 0
-let g:gitgutter_sign_added              = '+'
-let g:gitgutter_sign_modified           = '~'
-let g:gitgutter_sign_removed            = '_'
-let g:gitgutter_sign_removed_first_line = '‾'
-let g:gitgutter_sign_modified_removed   = '~_'
-
-" Splitjoin
-
-let g:splitjoin_align = 1
-let g:splitjoin_trailing_comma = 1
-let g:splitjoin_split_mapping = ''
-let g:splitjoin_join_mapping = ''
-nmap <Leader>j :SplitjoinJoin<cr>
-nmap <Leader>s :SplitjoinSplit<cr>
-
-" Current Highlight Group Under Cursor
-function! SyntaxItem()
-  return synIDattr(synID(line("."),col("."),1),"name")
-endfunction
-let g:airline_section_y = '%{SyntaxItem()}'
-set laststatus=2
-
-""""""""""""""""""""""""
-""" Sets
-
+" Sets {{{
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
 set list
@@ -172,7 +139,7 @@ if has("gui_running")
   " set lines=80
   " set columns=120
   set tabpagemax=100
-  set guifont=FiraCode-Retina:h14 " https://nerdfonts.com/
+  set guifont=FiraCode-Retina:h20 " https://nerdfonts.com/
 
   set guioptions=egmrLt
 
@@ -188,10 +155,9 @@ else
   let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
   let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
 endif
+" }}}
 
-""""""""""""""""""""""""
-""" Keyboard Mappings.
-
+" Maps {{{
 " Use \d on top of a word to look it up in Dictionary.app
 noremap <silent> <Leader>d :!open dict://<cword><CR><CR>
 let g:ctrlp_map = '<Leader>f'
@@ -284,11 +250,12 @@ nmap zf 1z=
 " EasyAlign
 " nnoremap <Leader>l vip:EasyAlign<CR>
 
-""""""""""""""""""""""""
-""" Autocommands
+" No idea why I need this, honestly.
+noremap <nowait> dd dd
+" }}}
 
-" https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
-au! GUIEnter * set vb t_vb=
+" Autocommands {{{
+au! GUIEnter * set vb t_vb= " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
 
 " Resize splits when the window is resized
 au VimResized * wincmd =
@@ -297,8 +264,11 @@ au BufRead,BufNewFile {Gemfile,Vagrantfile,Berksfile} set ft=ruby
 au BufRead,BufNewFile .envrc                          set ft=sh
 " Open fold under cursor on read/write
 au BufWrite,BufEnter  *                               :silent! normal zO
+" Auto-read vimrc on write
 autocmd! BufWritePost {.vimrc,vimrc} source %
+"}}}
 
+" Colors {{{
 set termguicolors
 set background=dark
 let g:PaperColor_Theme_Options = {
@@ -323,8 +293,9 @@ hi Pmenu      guifg=#c6c6c6 guibg=Blue
 hi PmenuSel   guifg=Yellow  guibg=Blue gui=bold
 hi PmenuSbar  guibg=Grey
 hi PmenuThumb guibg=White
+"}}}
 
-" IndentGuides
+" IndentGuides {{{
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 2
@@ -336,10 +307,9 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#000000
 " let g:indentLine_enabled = 1
 " let g:indentLine_char = '⎸'
 " let g:indentLine_concealcursor = 'nc'
+" }}}
 
-
-""""""""""""""""""""""""
-""" Misc
+" Misc {{{
 
 " Make required directories when writing a file..
 " http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
@@ -355,7 +325,9 @@ augroup BWCCreateDir
   autocmd!
   autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+" }}}
 
+" Folding {{{
 " http://gregsexton.org/2011/03/27/improving-the-text-displayed-in-a-vim-Fold.html
 fu! CustomFoldText()
   "get first non-blank line
@@ -379,15 +351,9 @@ endf
 set foldtext=CustomFoldText()
 
 set foldmethod=syntax
+" }}}
 
-" Ways to highlight the current window...
-" https://superuser.com/questions/385553/making-the-active-window-in-vim-more-obvious
-" augroup BgHighlight
-"   autocmd!
-"   autocmd WinEnter * set cul
-"   autocmd WinLeave * set nocul
-" augroup END
-
+" Plugin Config {{{
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -419,8 +385,36 @@ map w  <Plug>(smartword-w)
 map b  <Plug>(smartword-b)
 map e  <Plug>(smartword-e)
 map ge <Plug>(smartword-ge)
-" No idea why I need this, honestly.
-noremap <nowait> dd dd
+
+" Init ALE fixers, so they can be configured in syntax files
+let g:ale_fixers = {}
+
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save = 1
+
+" Airline {{{
+let g:airline_powerline_fonts = 1 " Can't set in after: https://github.com/vim-airline/vim-airline/issues/1565
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+" Airline shows mode for me
+set noshowmode
+" Current Highlight Group Under Cursor
+function! SyntaxItem()
+  return synIDattr(synID(line("."),col("."),1),"name")
+endfunction
+let g:airline_section_y = '%{SyntaxItem()}'
+set laststatus=2
+" }}}
+
+" Gitgutter
+let g:gitgutter_max_signs = 1000
+let g:gitgutter_highlight_lines = 0
+let g:gitgutter_sign_added              = '+'
+let g:gitgutter_sign_modified           = '~'
+let g:gitgutter_sign_removed            = '_'
+let g:gitgutter_sign_removed_first_line = '‾'
+let g:gitgutter_sign_modified_removed   = '~_'
+"}}}
 
 " Allow running safe commands from the $PWD/.vimrc file.
 " https://andrew.stwrt.ca/posts/project-specific-vimrc/
