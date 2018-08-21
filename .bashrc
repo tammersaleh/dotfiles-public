@@ -74,7 +74,7 @@ export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 export GOPATH=$HOME
-export GOBIN="$GOPATH/$(uname -s)"
+export GOBIN="$GOPATH/bin/$(uname -s)"
 
 export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
