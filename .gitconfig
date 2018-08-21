@@ -11,9 +11,9 @@
   branch = auto
 [alias]
   aliases    = config --get-regexp "alias.*"
-  push-first = push --set-upstream origin master
-  delete     = !sh -c 'git branch -d $0 && git push origin --delete $0'
-  track      = !sh -c 'git fetch origin && git branch --set-upstream $0 origin/$0 && git checkout $0'
+  push-branch = !bash -c 'git push --set-upstream origin "$(git current-branch)"'
+  delete     = !bash -c 'git branch -d $0 && git push origin --delete $0'
+  track      = !bash -c 'git fetch origin && git branch --set-upstream $0 origin/$0 && git checkout $0'
   publish    = push -u origin
   ql         = log --abbrev-commit --decorate --pretty=format:'%Cred%cn%Creset: %Cred%h%Creset %s %Cblue%ar%Creset' --graph
   latest     = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
@@ -26,10 +26,8 @@
   br         = branch -av
   conflicts  = !git st | grep unmerged: | cut -c 15-
   modified   = ls-files -m
-  append     = !git add -A && git commit --amend -C HEAD
-  wip        = !git add -A && git commit -m "wip"
-  master     = checkout master
-  recent     = log @{1}.. --decorate --reverse --stat -C --no-merges
+  append     = commit --amend
+  last       = log @{1}.. --decorate --reverse --stat -C --no-merges
   nuke       = !git clean -df && git reset --hard
   bl         = blame -wMC
   suir       = submodule update --init --recursive
