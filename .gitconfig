@@ -26,7 +26,7 @@
   br         = branch -av
   conflicts  = !git st | grep unmerged: | cut -c 15-
   modified   = ls-files -m
-  append     = commit --amend
+  append     = commit --amend --no-edit
   last       = log @{1}.. --decorate --reverse --stat -C --no-merges
   nuke       = !git clean -df && git reset --hard
   bl         = blame -wMC

@@ -13,6 +13,7 @@ tmp/email-*.txt
 .sass-cache
 .env
 .dat*
+.netrwhist
 
 !.keep
 !.keepme

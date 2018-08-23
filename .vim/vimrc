@@ -55,6 +55,7 @@ Plug 'https://github.com/tomtom/tcomment_vim'
 Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive' " :Gblame is amazingballz
+Plug 'https://github.com/tpope/vim-rhubarb' " github for fugative
 Plug 'https://github.com/tpope/vim-git'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
@@ -72,6 +73,7 @@ Plug 'https://github.com/w0rp/ale'
 " }}}
 
 " NERDTree {{{
+Plug 'https://github.com/tpope/vim-vinegar' " Maybe replace NERDTree?
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/jistr/vim-nerdtree-tabs'
 Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
@@ -170,9 +172,6 @@ endif
 " Maps {{{
 " Use \d on top of a word to look it up in Dictionary.app
 noremap <silent> <Leader>d :!open dict://<cword><CR><CR>
-let g:ctrlp_map = '<Leader>f'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_use_caching = 0
 
 " search will center on the line it's found in and expand folds
 " Disabled. Not sure how this works with incsearch plugin
@@ -205,12 +204,13 @@ tnoremap <D-k> <C-W><C-K>
 tnoremap <D-l> <C-W><C-L>
 tnoremap <D-h> <C-W><C-H>
 " Apple-| and Apple-- create splits
-nnoremap <D-\> :vsplit<CR>
-nnoremap <D--> :split<CR>
-nnoremap <D-t> :tabnew<CR>
-tnoremap <D-\> <C-w>:vert term<CR>
-tnoremap <D--> <C-w>:below term<CR>
-tnoremap <D-t> <C-w>:tabnew<CR>
+nnoremap <D-\> :vnew +Explore<CR>
+nnoremap <D--> :new +Explore<CR>
+nnoremap <D-t> :tabnew +Explore<CR>
+tnoremap <D-\> <C-w>:vnew +Explore<CR>
+tnoremap <D--> <C-w>:new +Explore<CR> 
+tnoremap <D-t> <C-w>:tabnew +Explore<CR>
+nnoremap <Leader>t :terminal ++curwin<CR>
 " Can't use C- here, since one of these results in ESC.  BAD NEWS.
 nnoremap <D-]> >>_
 nnoremap <D-[> <<_
@@ -242,8 +242,6 @@ tnoremap <C-u> <c-w>:call EnterNormalMode()<CR>
 tnoremap <C-v> <C-w>"*
 
 map gb <C-^>
-vmap # :TComment<CR>
-map <C-l> :nohl<CR>
 " Fix surround
 xmap s <Plug>VSurround
 " Make j/k move to next visual line instead of physical line
@@ -294,9 +292,8 @@ let g:PaperColor_Theme_Options = {
 let g:gruvbox_contrast_dark = "hard"
 colorscheme gruvbox
 
-hi Normal guibg=black guifg=white
+hi Normal guibg=#141617
 hi Comment cterm=italic
-hi HighlightedyankRegion cterm=underline gui=underline
 hi Pmenu      guifg=#c6c6c6 guibg=Blue
 hi PmenuSel   guifg=Yellow  guibg=Blue gui=bold
 hi PmenuSbar  guibg=Grey
@@ -306,6 +303,7 @@ hi IndentGuidesOdd  guibg=#000000
 hi MatchParen guifg=NONE guibg=NONE gui=underline cterm=underline
 hi Cursor guibg=black guifg=yellow
 hi Folded guifg=lightblue gui=bold
+hi HighlightedyankRegion cterm=underline gui=underline
 "}}}
 
 " Misc {{{
@@ -386,9 +384,20 @@ let g:highlightedyank_highlight_duration = 500
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:NERDTreeLimitedSyntax = 1
 let g:NERDTreeShowHidden=1
-let NERDTreeIgnore=['\~$', '^.DS_Store$', '\.swp$', '^Icon?']
+let g:NERDTreeIgnore=['\~$', '^.DS_Store$', '\.swp$', '^Icon?']
 let g:NERDTreeMinimalUI=1
+let g:NERDTreeHijackNetrw=0
+nnoremap <Leader>n <plug>NERDTreeMirrorToggle<CR>
+" }}}
 
+" TComment {{{
+vmap # :TComment<CR>
+" }}}
+
+" ctrlp {{{
+let g:ctrlp_map = '<Leader>f'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_use_caching = 0 " ag is fast.
 " }}}
 
 " Incsearch {{{
