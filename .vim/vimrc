@@ -31,6 +31,7 @@ Plug 'https://github.com/tpope/vim-rails'
 Plug 'https://github.com/yosssi/vim-ace'
 Plug 'https://github.com/chrisbra/csv.vim'
 Plug 'https://github.com/tmhedberg/SimpylFold' " Better python folding
+Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 " }}}
 
 " General {{{
@@ -186,27 +187,34 @@ cmap w!! w !sudo tee > /dev/null %
 
 " Splits
 " Apple-shift-hjkl move split
-nnoremap <D-J> <C-W>J
-nnoremap <D-K> <C-W>K
-nnoremap <D-L> <C-W>L
-nnoremap <D-H> <C-W>H
+noremap <D-J> <C-W>J
+noremap <D-K> <C-W>K
+noremap <D-L> <C-W>L
+noremap <D-H> <C-W>H
 tnoremap <D-J> <C-W>J
 tnoremap <D-K> <C-W>K
 tnoremap <D-L> <C-W>L
 tnoremap <D-H> <C-W>H
 " Apple-hjkl navigates to next split
-nnoremap <D-j> <C-W><C-J>
-nnoremap <D-k> <C-W><C-K>
-nnoremap <D-l> <C-W><C-L>
-nnoremap <D-h> <C-W><C-H>
+noremap <D-j> <C-W><C-J>
+noremap <D-k> <C-W><C-K>
+noremap <D-l> <C-W><C-L>
+noremap <D-h> <C-W><C-H>
+inoremap <D-j> <C-W><C-J>
+inoremap <D-k> <C-W><C-K>
+inoremap <D-l> <C-W><C-L>
+inoremap <D-h> <C-W><C-H>
 tnoremap <D-j> <C-W><C-J>
 tnoremap <D-k> <C-W><C-K>
 tnoremap <D-l> <C-W><C-L>
 tnoremap <D-h> <C-W><C-H>
 " Apple-| and Apple-- create splits
-nnoremap <D-\> :vnew +Explore<CR>
-nnoremap <D--> :new +Explore<CR>
-nnoremap <D-t> :tabnew +Explore<CR>
+noremap <D-\> :vnew +Explore<CR>
+noremap <D--> :new +Explore<CR>
+noremap <D-t> :tabnew +Explore<CR>
+inoremap <D-\> :vnew +Explore<CR>
+inoremap <D--> :new +Explore<CR>
+inoremap <D-t> :tabnew +Explore<CR>
 tnoremap <D-\> <C-w>:vnew +Explore<CR>
 tnoremap <D--> <C-w>:new +Explore<CR> 
 tnoremap <D-t> <C-w>:tabnew +Explore<CR>
@@ -378,7 +386,7 @@ endif
 
 " https://github.com/machakann/vim-highlightedyank
 map y <Plug>(highlightedyank)
-let g:highlightedyank_highlight_duration = 500
+let g:highlightedyank_highlight_duration = 1000
 
 " NERDTree {{{
 let g:nerdtree_tabs_open_on_gui_startup = 0
@@ -388,6 +396,10 @@ let g:NERDTreeIgnore=['\~$', '^.DS_Store$', '\.swp$', '^Icon?']
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeHijackNetrw=0
 nnoremap <Leader>n <plug>NERDTreeMirrorToggle<CR>
+augroup ProjectDrawer
+    autocmd!
+    autocmd VimEnter * if argc() == 0 | Explore! | endif
+augroup END
 " }}}
 
 " TComment {{{
