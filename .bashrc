@@ -2,19 +2,23 @@
 
 ### Helpers {{{
 
-prepend_manpath() {
+__has() {
+  command -v "$1" > /dev/null
+}
+
+__prependmanpath() {
   [[ -d $1 ]] || return
   echo "$MANPATH" | grep -Eq "(^|:)$1($|:)" && return
   export MANPATH="$1:$MANPATH"
 }
 
-prepend_path() {
+__prependpath() {
   [[ -d $1 ]] || return
   echo "$PATH" | grep -Eq "(^|:)$1($|:)" && return
   export PATH="$1:$PATH"
 }
 
-source_if_exists() {
+__source_if_exists() {
   [[ -f $1 ]] || return
   source $1
 }
@@ -22,23 +26,23 @@ source_if_exists() {
 ############# }}}
 ### Variables {{{
 
-prepend_path "$HOME/bin/$(uname)"
-prepend_path "$HOME/bin"
+__prependpath "$HOME/bin/$(uname)"
+__prependpath "$HOME/bin"
 
-prepend_path /home/linuxbrew/.linuxbrew/bin
-prepend_path /usr/local/bin
-prepend_path /home/linuxbrew/.linuxbrew/sbin
-prepend_path /usr/local/sbin
-prepend_manpath /home/linuxbrew/.linuxbrew/man
-prepend_manpath /usr/local/man
+__prependpath /home/linuxbrew/.linuxbrew/bin
+__prependpath /usr/local/bin
+__prependpath /home/linuxbrew/.linuxbrew/sbin
+__prependpath /usr/local/sbin
+__prependmanpath /home/linuxbrew/.linuxbrew/man
+__prependmanpath /usr/local/man
 
-prepend_path /usr/local/opt/coreutils/libexec/gnubin
-prepend_manpath /usr/local/opt/coreutils/libexec/gnuman
+__prependpath /usr/local/opt/coreutils/libexec/gnubin
+__prependmanpath /usr/local/opt/coreutils/libexec/gnuman
 
-prepend_path /usr/local/share/npm/bin
-prepend_path /Applications/Postgres.app/Contents/Versions/9.4/bin
+__prependpath /usr/local/share/npm/bin
+__prependpath /Applications/Postgres.app/Contents/Versions/9.4/bin
 
-prepend_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
+__prependpath /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
 
 export CLICOLOR=1
 export HISTCONTROL="ignoredups"
@@ -80,7 +84,7 @@ export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
 
-source_if_exists "$HOME/.bash/secret_variables"
+__source_if_exists "$HOME/.bash/secret_variables"
 
 # https://gist.github.com/phette23/5270658
 if [ "$ITERM_SESSION_ID" ]; then
@@ -117,7 +121,7 @@ alias tf=terraform
 
 gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
-   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
+  PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
 
 v() {
@@ -129,23 +133,23 @@ v() {
 ############### }}}
 ### Completions {{{
 
-source_if_exists /usr/local/etc/bash_completion
-source_if_exists /home/linuxbrew/.linuxbrew/etc/bash_completion
+__source_if_exists /usr/local/etc/bash_completion
+__source_if_exists /home/linuxbrew/.linuxbrew/etc/bash_completion
 
 complete -o default -o nospace -F _git g
 complete -C aws_completer aws
 
 docker_etc=/Applications/Docker.app/Contents/Resources/etc
-source_if_exists "$docker_etc/docker.bash-completion"
-source_if_exists "$docker_etc/docker-machine.bash-completion"
-source_if_exists "$docker_etc/docker-compose.bash-completion"
+__source_if_exists "$docker_etc/docker.bash-completion"
+__source_if_exists "$docker_etc/docker-machine.bash-completion"
+__source_if_exists "$docker_etc/docker-compose.bash-completion"
 
-source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-source_if_exists "$HOME/.bash/terraform-completion"
+__source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+__source_if_exists "$HOME/.bash/terraform-completion"
 
-command -v kubectl >/dev/null && source <(kubectl completion bash)
-command -v helm >/dev/null    && source <(helm completion bash)
-command -v stern >/dev/null   && source <(stern --completion bash)
+__has kubectl && source <(kubectl completion bash)
+__has helm    && source <(helm completion bash)
+__has stern   && source <(stern --completion bash)
 
 ################# }}}
 ### Shell Options {{{
@@ -158,12 +162,12 @@ shopt -s globstar
 ########## }}}
 ### Prompt {{{
 
-source_if_exists "$HOME/.bash/prompt"
+__source_if_exists "$HOME/.bash/prompt"
 
 ################# }}}
 ### Special Hooks {{{
-
-eval "$(rbenv init -)"
-eval "$(direnv hook bash)"
-
+__has rbenv  && eval "$(rbenv init -)"
+__has direnv && eval "$(direnv hook bash)"
+__source_if_exists ~/.asdf/asdf.sh
+__source_if_exists ~/.asdf/completion/asdf.bash
 # }}}
