@@ -100,6 +100,7 @@ command! PU so $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | so $MYVIMRC
 let mapleader = " "
 
 " Sets {{{
+set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
 set list
@@ -246,12 +247,10 @@ function! EnterNormalMode()
 endfunction
 
 tnoremap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
-tnoremap <C-u> <c-w>:call EnterNormalMode()<CR>
+tnoremap <silent> <C-u> <c-w>:call EnterNormalMode()<CR>
 tnoremap <C-v> <C-w>"*
 
 map gb <C-^>
-" Fix surround
-xmap s <Plug>VSurround
 " Make j/k move to next visual line instead of physical line
 " http://yubinkim.com/?p=6
 nnoremap k gk
@@ -274,10 +273,9 @@ au! GUIEnter * set vb t_vb= " https://stackoverflow.com/questions/16047146/disab
 " Resize splits when the window is resized
 au VimResized * wincmd =
 
-au BufRead,BufNewFile {Gemfile,Vagrantfile,Berksfile} set ft=ruby
-au BufRead,BufNewFile .envrc                          set ft=sh
 " Open fold under cursor on read/write
-au BufWrite,BufEnter  *                               :silent! normal zO
+au BufWrite,BufEnter  * :silent! normal zO
+
 " Auto-read vimrc on write
 autocmd! BufWritePost {.vimrc,vimrc} source %
 "}}}
@@ -388,6 +386,56 @@ endif
 map y <Plug>(highlightedyank)
 let g:highlightedyank_highlight_duration = 1000
 
+" Surround {{{
+xmap s <Plug>VSurround
+let g:surround_40 = "(\r)"
+let g:surround_40 = "(\r)"
+let g:surround_91 = "[\r]"
+let g:surround_60 = "<\r>"
+" }}}
+
+" ALE {{{
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_linters_explicit = 1
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_open_list = 1
+" let g:ale_set_balloons = 1
+let g:ale_sign_error = '🔥'
+let g:ale_sign_warning = '❓'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+let g:ale_sign_column_always = 1
+set signcolumn="yes"
+augroup LanguageClient_config
+  autocmd!
+  autocmd User LanguageClientStarted setlocal signcolumn=yes
+  autocmd User LanguageClientStopped setlocal signcolumn=yes
+augroup END
+" }}}
+
+" EasyAlign {{{
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap <Leader>a <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap <Leader>a <Plug>(EasyAlign)
+" }}}
+
+" SuperTab & YCM {{{
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" }}}
+
 " NERDTree {{{
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:NERDTreeLimitedSyntax = 1
@@ -410,6 +458,13 @@ vmap # :TComment<CR>
 let g:ctrlp_map = '<Leader>f'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_use_caching = 0 " ag is fast.
+let g:ctrlp_open_new_file = 'e'
+let g:ctrlp_open_multiple_files = 'e'
+let g:ctrlp_working_path_mode = 'a'
+if executable('ag')
+  let g:ctrlp_user_command = 'gtimeout 2s ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
 " }}}
 
 " Incsearch {{{
@@ -503,12 +558,6 @@ let g:airline_mode_map = {
 
 " Airline shows mode for me
 set noshowmode
-
-" Current Highlight Group Under Cursor
-" function! SyntaxItem()
-"   return synIDattr(synID(line("."),col("."),1),"name")
-" endfunction
-" let g:airline_section_y = '%{SyntaxItem()}'
 set laststatus=2
 " }}}
 
@@ -525,7 +574,3 @@ let g:gitgutter_sign_modified_removed   = '~_'
 "}}}
 
 
-" Allow running safe commands from the $PWD/.vimrc file.
-" https://andrew.stwrt.ca/posts/project-specific-vimrc/
-" set exrc
-" set secure

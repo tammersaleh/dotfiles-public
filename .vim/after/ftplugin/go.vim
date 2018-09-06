@@ -1,7 +1,7 @@
-nmap <Leader>i <Plug>(go-info)
-nmap <Leader>r <Plug>(go-rename)
-set noexpandtab
-set nolist
+nmap <buffer> <Leader>i <Plug>(go-info)
+nmap <buffer> <Leader>r <Plug>(go-rename)
+setlocal noexpandtab
+setlocal nolist
 
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
