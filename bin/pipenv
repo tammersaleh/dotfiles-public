@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec ~/.asdf/bin/private/asdf-exec python bin/pipenv "$@"
