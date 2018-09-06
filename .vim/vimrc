@@ -3,11 +3,14 @@ set nocompatible
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-command! PU source $MYVIMRC | PlugUpdate | PlugUpgrade
 
-" Force python3 support
-" https://robertbasic.com/blog/force-python-version-in-vim/
 if has('python3')
+  " Force python3 support before loading other plugins
+  " https://robertbasic.com/blog/force-python-version-in-vim/
+  "
+  " Then, silently load python3 to get around imp deprecation warning:
+  " https://github.com/vim/vim/issues/3117
+  silent! python3 1
 endif
 
 " Languages & syntax {{{
@@ -35,14 +38,12 @@ Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 " }}}
 
 " General {{{
+Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/kana/vim-smartword' " make `w` better.
 Plug 'https://github.com/haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches
 Plug 'https://github.com/wincent/terminus' " Make terminal vim slightly nicer
-" Plug 'https://github.com/nathanaelkane/vim-indent-guides' " Nice indent coloring
 Plug 'https://github.com/airblade/vim-gitgutter' " Show git signs in gutter
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-" Plug 'https://github.com/farmergreg/vim-lastplace' " Open files at last
-" cursor position.  Replaced by vim-stay
 " Plug 'https://github.com/ludovicchabant/vim-gutentags' bad idea in big directories
 Plug 'https://github.com/jiangmiao/auto-pairs' " Auto-close parens, etc
 Plug 'https://github.com/junegunn/vim-easy-align' " <leader>a=
@@ -64,21 +65,12 @@ Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
 Plug 'https://github.com/zhimsel/vim-stay' " Keep cursor pos, etc between sessions
 Plug 'https://github.com/blueyed/vim-diminactive'
+Plug 'https://github.com/embear/vim-localvimrc' " Open .lvimrc files securely
 " }}}
 
 " Autocompletion & Linting {{{
-" Need to find an alternative to YCM.  Just too heavy.
-" Plug 'https://github.com/Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --java-completer' }
 Plug 'https://github.com/ervandew/supertab'
 Plug 'https://github.com/w0rp/ale'
-" }}}
-
-" NERDTree {{{
-Plug 'https://github.com/tpope/vim-vinegar' " Maybe replace NERDTree?
-Plug 'https://github.com/scrooloose/nerdtree'
-Plug 'https://github.com/jistr/vim-nerdtree-tabs'
-Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
-Plug 'https://github.com/tiagofumo/vim-nerdtree-syntax-highlight'
 " }}}
 
 " Color theme {{{
@@ -386,6 +378,11 @@ endif
 map y <Plug>(highlightedyank)
 let g:highlightedyank_highlight_duration = 1000
 
+" localvimrc {{{
+let g:localvimrc_persistent = 2
+let g:localvimrc_persistence_file = expand('$HOME') . "/.vim/localvimrc_persistent"
+" }}}
+
 " Surround {{{
 xmap s <Plug>VSurround
 let g:surround_40 = "(\r)"
@@ -404,7 +401,7 @@ let g:surround_60 = "<\r>"
 " let g:ale_open_list = 1
 " let g:ale_set_balloons = 1
 let g:ale_sign_error = '🔥'
-let g:ale_sign_warning = '❓'
+let g:ale_sign_warning = '🤔'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 let g:ale_sign_column_always = 1
@@ -423,31 +420,9 @@ xmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
-" SuperTab & YCM {{{
+" SuperTab {{{
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-" }}}
-
-" NERDTree {{{
-let g:nerdtree_tabs_open_on_gui_startup = 0
-let g:NERDTreeLimitedSyntax = 1
-let g:NERDTreeShowHidden=1
-let g:NERDTreeIgnore=['\~$', '^.DS_Store$', '\.swp$', '^Icon?']
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeHijackNetrw=0
-nnoremap <Leader>n <plug>NERDTreeMirrorToggle<CR>
-augroup ProjectDrawer
-    autocmd!
-    autocmd VimEnter * if argc() == 0 | Explore! | endif
-augroup END
 " }}}
 
 " TComment {{{
