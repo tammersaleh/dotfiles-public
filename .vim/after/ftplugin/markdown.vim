@@ -15,6 +15,10 @@ nmap <buffer> <leader>l viWs[%a(<C-R>*)<ESC>
 " https://www.statusok.com/align-markdown-tables-vim
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
+" Use K on top of a word to look it up in Dictionary.app
+noremap <buffer> <silent> K :silent !open dict://<cword><CR><CR>
+noremap <buffer> <silent> <leader>m :silent !mark %<CR><CR>
+
 let g:vim_markdown_folding_disabled = 0
 let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_yaml_frontmatter = 1
