@@ -119,9 +119,10 @@ set nospell " Disable by default
 set completeopt=menu,menuone,preview
 set wildmode=longest,list:longest
 set signcolumn=yes
-setlocal numberwidth=3
-
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
 set virtualedit=block
+setlocal numberwidth=3
 
 " https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
 set nrformats-=octal
@@ -164,14 +165,6 @@ endif
 " }}}
 
 " Maps {{{
-" Use \d on top of a word to look it up in Dictionary.app
-noremap <silent> <Leader>d :!open dict://<cword><CR><CR>
-
-" search will center on the line it's found in and expand folds
-" Disabled. Not sure how this works with incsearch plugin
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
-
 " Do not show stupid q: window
 map q: :q
 
@@ -230,19 +223,21 @@ function! ExitNormalMode()
 endfunction
 
 function! EnterNormalMode()
-    if &buftype == 'terminal' && mode('') == 't'
-        call feedkeys("\<c-w>N")
-        call feedkeys("\<c-y>")
-        map <buffer> <silent> <LeftMouse> :call ExitNormalMode()<CR>
-        map <buffer> <silent> <ESC> :call ExitNormalMode()<CR>
-    endif
+  if &buftype == 'terminal' && mode('') == 't'
+    call feedkeys("\<c-w>N")
+    call feedkeys("\<c-y>")
+    map <buffer> <silent> <LeftMouse> :call ExitNormalMode()<CR>
+    map <buffer> <silent> <ESC> :call ExitNormalMode()<CR>
+    setlocal nonumber
+  endif
 endfunction
 
 tnoremap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
 tnoremap <silent> <C-u> <c-w>:call EnterNormalMode()<CR>
-tnoremap <C-v> <C-w>"*
+tnoremap <D-v> <C-w>"*
 
 map gb <C-^>
+
 " Make j/k move to next visual line instead of physical line
 " http://yubinkim.com/?p=6
 nnoremap k gk
@@ -300,7 +295,7 @@ hi IndentGuidesEven guibg=#101010
 hi IndentGuidesOdd  guibg=#000000
 hi MatchParen guifg=NONE guibg=NONE gui=underline cterm=underline
 hi Cursor guibg=black guifg=yellow
-hi Folded guifg=lightblue gui=bold
+hi Folded guifg=lightblue gui=bold guibg=NONE
 hi HighlightedyankRegion cterm=underline gui=underline
 "}}}
 
@@ -348,21 +343,6 @@ fu! CustomFoldText()
   return line . expansionString . foldSizeStr . foldPercentage
 endf
 set foldtext=CustomFoldText()
-
-let g:markdown_folding = 1
-let g:tex_fold_enabled = 1
-let g:vimsyn_folding = 'af'
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
-let g:ruby_fold = 1
-let g:perl_fold = 1
-let g:perl_fold_blocks = 1
-let g:r_syntax_folding = 1
-let g:rust_fold = 1
-let g:php_folding = 1
-let g:pymode_folding = 1
-
 " }}}
 
 " Plugin Config {{{
@@ -392,20 +372,21 @@ let g:surround_60 = "<\r>"
 " }}}
 
 " ALE {{{
-" let g:airline#extensions#ale#enabled = 1
-" let g:ale_echo_msg_error_str = 'E'
-" let g:ale_echo_msg_warning_str = 'W'
-" let g:ale_linters_explicit = 1
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" let g:ale_open_list = 1
-" let g:ale_set_balloons = 1
+let g:ale_echo_msg_error_str = '🔥'
+let g:ale_echo_msg_warning_str = '🤔'
+let g:ale_echo_msg_info_str = '👋'
+let g:ale_echo_msg_format = '%severity% %s [%code %%linter%]'
+let g:ale_open_list = 0
+let g:ale_loclist = 0
 let g:ale_sign_error = '🔥'
 let g:ale_sign_warning = '🤔'
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
+let g:ale_sign_info = '👋'
 let g:ale_sign_column_always = 1
 set signcolumn="yes"
+" let g:ale_fixers = {} " Each fixer is set explicitly
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+highlight clear ALEInfoSign
 augroup LanguageClient_config
   autocmd!
   autocmd User LanguageClientStarted setlocal signcolumn=yes
@@ -465,14 +446,6 @@ map w  <Plug>(smartword-w)
 map b  <Plug>(smartword-b)
 map e  <Plug>(smartword-e)
 map ge <Plug>(smartword-ge)
-" }}}
-
-" ALE {{{
-" Init ALE fixers, so they can be configured in syntax files
-let g:ale_fixers = {}
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " }}}
 
 " Terraform {{{
