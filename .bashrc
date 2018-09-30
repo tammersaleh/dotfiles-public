@@ -20,7 +20,7 @@ __prependpath() {
 
 __source_if_exists() {
   [[ -f $1 ]] || return
-  source $1
+  source "$1"
 }
 
 ############# }}}
@@ -58,7 +58,9 @@ export PARINIT='w72jrT4bgqR B=.,?_A_a Q=_s>|'
 export LC_CTYPE=en_US.UTF-8
 export VIM_APP_DIR=/Applications
 
-export LESS="-X -M -E -R"
+export LESS="-FRMX --tabs 4"
+export LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
+export LESS_ADVANCED_PREPROCESSOR=1
 
 export PS4='$ '
 
@@ -83,7 +85,7 @@ export GOBIN="$GOPATH/bin/$(uname -s)"
 export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
-
+export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
 __source_if_exists "$HOME/.bash/secret_variables"
 
 # https://gist.github.com/phette23/5270658
@@ -107,7 +109,7 @@ alias html="pup"
 alias pyconsole="pipenv run ptpython"
 alias grammarly="open -a Grammarly"
 alias vi="TERM=xterm-256color-italic vi"
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 alias da="direnv allow"
 alias de="vi .envrc && direnv allow"
 alias git=hub
@@ -118,6 +120,8 @@ alias pip=pip3
 alias slack="slack-term -config ~/.config/slack-term.json"
 alias ssh="TERM=xterm-color ssh"
 alias tf=terraform
+
+__has bat && alias less="bat --style=changes"
 
 gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
@@ -158,6 +162,7 @@ shopt -s checkwinsize
 shopt -s histappend
 shopt -s no_empty_cmd_completion
 shopt -s globstar
+shopt -s checkjobs
 
 ########## }}}
 ### Prompt {{{
