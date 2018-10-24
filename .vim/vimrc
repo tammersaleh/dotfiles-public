@@ -38,20 +38,19 @@ Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 " }}}
 
 " General {{{
-Plug 'https://github.com/tpope/vim-vinegar'
+Plug 'https://github.com/tpope/vim-vinegar' " better netrw
 Plug 'https://github.com/kana/vim-smartword' " make `w` better.
 Plug 'https://github.com/haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches
 Plug 'https://github.com/wincent/terminus' " Make terminal vim slightly nicer
 Plug 'https://github.com/airblade/vim-gitgutter' " Show git signs in gutter
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-" Plug 'https://github.com/ludovicchabant/vim-gutentags' bad idea in big directories
 Plug 'https://github.com/jiangmiao/auto-pairs' " Auto-close parens, etc
 Plug 'https://github.com/junegunn/vim-easy-align' " <leader>a=
-Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
+" This screws with :terminal
+" Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
 Plug 'https://github.com/panozzaj/vim-autocorrect'
 Plug 'https://github.com/rizzatti/dash.vim'
 Plug 'https://github.com/rizzatti/funcoo.vim' " Required by Grepper
-Plug 'https://github.com/rizzatti/greper.vim'
 Plug 'https://github.com/sickill/vim-pasta'
 Plug 'https://github.com/tomtom/tcomment_vim'
 Plug 'https://github.com/tpope/vim-endwise'
@@ -119,8 +118,6 @@ set nospell " Disable by default
 set completeopt=menu,menuone,preview
 set wildmode=longest,list:longest
 set signcolumn=yes
-set grepprg=ag\ --vimgrep\ $*
-set grepformat=%f:%l:%c:%m
 set virtualedit=block
 setlocal numberwidth=3
 
@@ -351,7 +348,8 @@ set viewoptions=cursor,folds,slash,unix
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
 endif
 
 " https://github.com/machakann/vim-highlightedyank
