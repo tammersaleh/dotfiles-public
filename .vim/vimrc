@@ -1,4 +1,3 @@
-" vim: foldmethod=marker
 set nocompatible
 
 " Plugins {{{
@@ -168,49 +167,56 @@ map q: :q
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
-" Splits
-" Apple-shift-hjkl move split
-noremap <D-J> <C-W>J
-noremap <D-K> <C-W>K
-noremap <D-L> <C-W>L
-noremap <D-H> <C-W>H
-tnoremap <D-J> <C-W>J
-tnoremap <D-K> <C-W>K
-tnoremap <D-L> <C-W>L
-tnoremap <D-H> <C-W>H
-" Apple-hjkl navigates to next split
-noremap <D-j> <C-W><C-J>
-noremap <D-k> <C-W><C-K>
-noremap <D-l> <C-W><C-L>
-noremap <D-h> <C-W><C-H>
-inoremap <D-j> <C-W><C-J>
-inoremap <D-k> <C-W><C-K>
-inoremap <D-l> <C-W><C-L>
-inoremap <D-h> <C-W><C-H>
-tnoremap <D-j> <C-W><C-J>
-tnoremap <D-k> <C-W><C-K>
-tnoremap <D-l> <C-W><C-L>
-tnoremap <D-h> <C-W><C-H>
-" Apple-| and Apple-- create splits
-noremap <D-\> :vnew +Explore<CR>
-noremap <D--> :new +Explore<CR>
-noremap <D-t> :tabnew +Explore<CR>
-inoremap <D-\> :vnew +Explore<CR>
-inoremap <D--> :new +Explore<CR>
-inoremap <D-t> :tabnew +Explore<CR>
-tnoremap <D-\> <C-w>:vnew +Explore<CR>
-tnoremap <D--> <C-w>:new +Explore<CR> 
-tnoremap <D-t> <C-w>:tabnew +Explore<CR>
-nnoremap <Leader>t :terminal ++curwin<CR>
-" Can't use C- here, since one of these results in ESC.  BAD NEWS.
-nnoremap <D-]> >>_
-nnoremap <D-[> <<_
-tnoremap <D-}> <C-w>:tabnext<CR>
-tnoremap <D-{> <C-w>:tabprev<CR>
-inoremap <D-]> <C-T>
-inoremap <D-[> <C-D>
-vnoremap <D-]> >gv
-vnoremap <D-[> <gv
+if has("gui_macvim")
+  " Splits
+  " Apple-shift-hjkl move split
+  noremap  <D-H> <C-W>H
+  tnoremap <D-H> <C-W>H
+  noremap  <D-K> <C-W>K
+  tnoremap <D-K> <C-W>K
+  noremap  <D-J> <C-W>J
+  tnoremap <D-J> <C-W>J
+  noremap  <D-L> <C-W>L
+  tnoremap <D-L> <C-W>L
+
+  " Apple-hjkl navigates to next split
+  noremap  <D-h> <C-W><C-H>
+  inoremap <D-h> <C-W><C-H>
+  tnoremap <D-h> <C-W><C-H>
+  noremap  <D-j> <C-W><C-J>
+  inoremap <D-j> <C-W><C-J>
+  tnoremap <D-j> <C-W><C-J>
+  noremap  <D-k> <C-W><C-K>
+  inoremap <D-k> <C-W><C-K>
+  tnoremap <D-k> <C-W><C-K>
+  noremap  <D-l> <C-W><C-L>
+  inoremap <D-l> <C-W><C-L>
+  tnoremap <D-l> <C-W><C-L>
+
+  " Apple-| and Apple-- create splits
+  " Can't use C- here, since one of these results in ESC.  BAD NEWS.
+  noremap  <D-\> :vnew +Explore<CR>
+  inoremap <D-\> :vnew +Explore<CR>
+  tnoremap <D-\> <C-w>:vnew +Explore<CR>
+  noremap  <D--> :new +Explore<CR>
+  inoremap <D--> :new +Explore<CR>
+  tnoremap <D--> <C-w>:new +Explore<CR> 
+  noremap  <D-t> :tabnew +Explore<CR>
+  inoremap <D-t> :tabnew +Explore<CR>
+  tnoremap <D-t> <C-w>:tabnew +Explore<CR>
+  nnoremap <Leader>t :terminal ++curwin<CR>
+
+  " Indent/deindent
+  nnoremap <D-]> >>_
+  nnoremap <D-[> <<_
+  " tab movement
+  tnoremap <D-}> <C-w>:tabnext<CR>
+  tnoremap <D-{> <C-w>:tabprev<CR>
+  inoremap <D-]> <C-T>
+  inoremap <D-[> <C-D>
+  vnoremap <D-]> >gv
+  vnoremap <D-[> <gv
+endif
 
 " Term scrolling
 function! ExitNormalMode()
@@ -265,35 +271,24 @@ autocmd! BufWritePost {.vimrc,vimrc} source %
 "}}}
 
 " Colors {{{
-set termguicolors
 set background=dark
-let g:PaperColor_Theme_Options = {
-  \   'theme.dark': {
-  \     'default': {
-  \       'allow_italic': 1,
-  \       'override' : {
-  \         'color00' : ['#FFFFFF', '']
-  \       }
-  \     }
-  \   }
-  \ }
-" colorscheme PaperColor
+
+" This may be causing issues
+set termguicolors
 
 let g:gruvbox_contrast_dark = "hard"
 colorscheme gruvbox
 
-hi Normal guibg=#141617
-hi Comment cterm=italic
-hi Pmenu      guifg=#c6c6c6 guibg=Blue
-hi PmenuSel   guifg=Yellow  guibg=Blue gui=bold
-hi PmenuSbar  guibg=Grey
-hi PmenuThumb guibg=White
-hi IndentGuidesEven guibg=#101010
-hi IndentGuidesOdd  guibg=#000000
-hi MatchParen guifg=NONE guibg=NONE gui=underline cterm=underline
-hi Cursor guibg=black guifg=yellow
-hi Folded guifg=lightblue gui=bold guibg=NONE
-hi HighlightedyankRegion cterm=underline gui=underline
+hi Normal                     guibg=#141617
+hi Comment                                              cterm=italic
+hi Pmenu      guifg=#c6c6c6   guibg=Blue
+hi PmenuSel   guifg=Yellow    guibg=Blue  gui=bold
+hi PmenuSbar                  guibg=Grey
+hi PmenuThumb                 guibg=White
+hi MatchParen guifg=NONE      guibg=NONE  gui=underline cterm=underline
+hi Cursor     guifg=yellow    guibg=black     
+hi Folded     guifg=lightblue guibg=NONE  gui=bold   
+
 "}}}
 
 " Misc {{{
@@ -352,10 +347,6 @@ if executable('ag')
   set grepformat=%f:%l:%c:%m
 endif
 
-" " https://github.com/machakann/vim-highlightedyank
-" map y <Plug>(highlightedyank)
-" let g:highlightedyank_highlight_duration = 1000
-
 " localvimrc {{{
 let g:localvimrc_persistent = 2
 let g:localvimrc_persistence_file = expand('$HOME') . "/.vim/localvimrc_persistent"
@@ -393,9 +384,9 @@ augroup END
 " }}}
 
 " EasyAlign {{{
-" Start interactive EasyAlign in visual mode (e.g. vipga)
+" Start interactive EasyAlign in visual mode (e.g. vip<leader>a)
 xmap <Leader>a <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip<leader>a)
 nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
@@ -519,4 +510,4 @@ let g:gitgutter_sign_modified_removed   = '~_'
 
 "}}}
 
-
+" vim: foldmethod=marker
