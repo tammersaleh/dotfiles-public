@@ -352,9 +352,9 @@ if executable('ag')
   set grepformat=%f:%l:%c:%m
 endif
 
-" https://github.com/machakann/vim-highlightedyank
-map y <Plug>(highlightedyank)
-let g:highlightedyank_highlight_duration = 1000
+" " https://github.com/machakann/vim-highlightedyank
+" map y <Plug>(highlightedyank)
+" let g:highlightedyank_highlight_duration = 1000
 
 " localvimrc {{{
 let g:localvimrc_persistent = 2
