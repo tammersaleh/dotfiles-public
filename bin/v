@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+die() {
+  echo "$1"
+  exit 1
+}
+
+if [[ -v VIM_TERMINAL ]]; then
+  # We're inside a vim terminal.  Use the drop command.
+  [[ $# -eq 0 ]] && die "You're already in vim."
+
+  for file in "$@"; do
+    file=${file/^\/$PWD}
+    echo "Opening $file in enclosing vim."
+    # shellcheck disable=SC1117
+    echo -ne "\033]51;[\"drop\", \"$file\"]\007"
+  done
+else
+  # Not inside vim
+  dir="$(git rev-parse --show-toplevel 2> /dev/null || pwd)"
+  name="$(basename "$dir")"
+
+  if [[ $# -eq 0 ]]; then
+    echo "Launching vim [$name]."
+    mvim --servername "$name"
+  else
+    first_file=$1; shift
+    echo "Opening $first_file in new tab in vim [$name]."
+    mvim --servername "$name" --remote-tab-silent +"cd $dir" "$first_file"
+    until mvim --serverlist | grep -Fixq "$name"; do sleep 1; done
+    for file in "$@"; do
+      echo "Opening $file in split in vim [$name]."
+      mvim --servername "$name" --remote-send ":split $(pwd)/$file<CR>"
+      sleep 1
+    done
+  fi
+fi
