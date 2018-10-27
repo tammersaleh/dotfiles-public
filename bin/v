@@ -12,6 +12,7 @@ has() {
 }
 
 if ! has mvim; then
+  echo "Delegating to vi $@"
   vi "$@"
   exit 0
 fi
