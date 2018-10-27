@@ -11,6 +11,9 @@ function usage {
   echo "Creates the student user, and populates their home directory with a copy of the"
   echo "workshop repository.  Must be run from within a checked out workshop repository."
   echo
+  echo "You may want to run something like:"
+  echo '$ for n in {1..20}; do student recreate $n; done'
+  echo
   exit 1
 }
 
