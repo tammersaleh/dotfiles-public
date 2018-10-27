@@ -29,6 +29,8 @@ __source_if_exists() {
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
 
+__prependpath "$HOME/.local/bin"
+
 __prependpath /home/linuxbrew/.linuxbrew/bin
 __prependpath /usr/local/bin
 __prependpath /home/linuxbrew/.linuxbrew/sbin
