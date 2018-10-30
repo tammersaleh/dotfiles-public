@@ -26,6 +26,10 @@ function! OpenTerraformDocs()
   let l:provider = l:provider_and_resource_pieces[0]
   let l:resource = join(l:provider_and_resource_pieces[1:-1], '_')
 
+  if (l:provider == 'google')
+    let l:resource = 'google_' . l:resource
+  endif
+
   let l:url_pieces = ['https://www.terraform.io/docs/providers', l:provider, l:type_first_letter, l:resource]
   let l:url = join(l:url_pieces, "/") . '.html'
 
