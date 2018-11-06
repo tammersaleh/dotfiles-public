@@ -1,6 +1,5 @@
-#!/bin/sh
-if [ $1 ]; then
-    open -a "Marked 2" $@;
-else
-    open -a "Marked 2";
-fi
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+open -a "Marked 2" "$@"
