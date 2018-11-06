@@ -39,7 +39,6 @@ Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 " General {{{
 Plug 'https://github.com/tpope/vim-vinegar' " better netrw
 Plug 'https://github.com/kana/vim-smartword' " make `w` better.
-Plug 'https://github.com/haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches
 Plug 'https://github.com/wincent/terminus' " Make terminal vim slightly nicer
 Plug 'https://github.com/airblade/vim-gitgutter' " Show git signs in gutter
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
@@ -107,7 +106,8 @@ set backup            " keep a backup file
 set backupdir=~/.vim/backups
 set history=1000      " keep 50 lines of command line history
 set ruler             " show the cursor position all the time
-" set incsearch         " do incremental searching
+set incsearch
+set hlsearch
 set expandtab
 set shiftwidth=2
 set tabstop=2
@@ -268,6 +268,13 @@ au BufWrite,BufEnter  * :silent! normal zO
 
 " Auto-read vimrc on write
 autocmd! BufWritePost {.vimrc,vimrc} source %
+
+" Only highlight searches while searching
+augroup vimrc-incsearch-highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch
+  autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
 "}}}
 
 " Colors {{{
@@ -410,21 +417,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'gtimeout 2s ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
-" }}}
-
-" Incsearch {{{
-set hlsearch
-let g:incsearch#auto_nohlsearch = 1
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-" map #  <Plug>(incsearch-nohl-#) " I use tcomment
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-let g:incsearch#separate_highlight = 1
 " }}}
 
 " Smartword {{{
