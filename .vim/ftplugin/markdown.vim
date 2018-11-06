@@ -2,7 +2,7 @@
 " https://github.com/plasticboy/vim-markdown/issues/145
 nnoremap <buffer> <expr><enter> &ft=="qf" ? "<cr>:lcl<cr>" : (getpos(".")[2]==1 ? "i<cr><esc>": "i<cr><esc>l")
 nnoremap <buffer> <leader>t :Toc<enter>
-nnoremap <buffer> <leader>o :!mark %<enter><enter>
+nnoremap <buffer> <leader>o :!mark "%"<enter><enter>
 
 vmap <buffer> * :s/^/* /<enter>:noh<enter>
 vmap <buffer> # :s/^/1. /<enter>:noh<enter>
