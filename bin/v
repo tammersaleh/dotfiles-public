@@ -22,7 +22,7 @@ if [[ -v VIM_TERMINAL ]]; then
   [[ $# -eq 0 ]] && die "You're already in vim."
 
   for file in "$@"; do
-    file=${file/^\/$PWD}
+    file=$(realpath -Ls $file)
     echo "Opening $file in enclosing vim."
     # shellcheck disable=SC1117
     echo -ne "\033]51;[\"drop\", \"$file\"]\007"
