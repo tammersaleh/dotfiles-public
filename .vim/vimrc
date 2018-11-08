@@ -18,7 +18,7 @@ Plug 'https://github.com/wannesm/wmgraphviz.vim'
 Plug 'https://github.com/Matt-Deacalion/vim-systemd-syntax'
 Plug 'https://github.com/cakebaker/scss-syntax.vim'
 Plug 'https://github.com/cespare/vim-toml'
-Plug 'https://github.com/digitaltoad/vim-pug' " Jade
+Plug 'https://github.com/digitaltoad/vim-pug'   " Jade
 Plug 'https://github.com/ekalinin/Dockerfile.vim'
 Plug 'https://github.com/elzr/vim-json'
 Plug 'https://github.com/fatih/vim-go'
@@ -26,43 +26,42 @@ Plug 'https://github.com/hail2u/vim-css3-syntax'
 Plug 'https://github.com/hashivim/vim-terraform'
 Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'https://github.com/plasticboy/vim-markdown'
-Plug 'https://github.com/python-mode/python-mode'
+Plug 'https://github.com/python-mode/python-mode', { 'branch': 'develop' }
 Plug 'https://github.com/vim-ruby/vim-ruby'
 Plug 'https://github.com/vim-scripts/jQuery'
 Plug 'https://github.com/tpope/vim-rails'
 Plug 'https://github.com/yosssi/vim-ace'
 Plug 'https://github.com/chrisbra/csv.vim'
-Plug 'https://github.com/tmhedberg/SimpylFold' " Better python folding
+Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
 Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 " }}}
 
 " General {{{
-Plug 'https://github.com/tpope/vim-vinegar' " better netrw
-Plug 'https://github.com/kana/vim-smartword' " make `w` better.
-Plug 'https://github.com/wincent/terminus' " Make terminal vim slightly nicer
-Plug 'https://github.com/airblade/vim-gitgutter' " Show git signs in gutter
+Plug 'https://github.com/tpope/vim-vinegar'             " better netrw
+Plug 'https://github.com/kana/vim-smartword'            " make `w` better.
+Plug 'https://github.com/wincent/terminus'              " Make terminal vim slightly nicer
+Plug 'https://github.com/airblade/vim-gitgutter'        " Show git signs in gutter
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-Plug 'https://github.com/jiangmiao/auto-pairs' " Auto-close parens, etc
-Plug 'https://github.com/junegunn/vim-easy-align' " <leader>a=
-" This screws with :terminal
-" Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
+Plug 'https://github.com/jiangmiao/auto-pairs'          " Auto-close parens, etc
+Plug 'https://github.com/junegunn/vim-easy-align'       " <leader>a=
+Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
 Plug 'https://github.com/panozzaj/vim-autocorrect'
 Plug 'https://github.com/rizzatti/dash.vim'
-Plug 'https://github.com/rizzatti/funcoo.vim' " Required by Grepper
+Plug 'https://github.com/rizzatti/funcoo.vim'           " Required by Grepper
 Plug 'https://github.com/sickill/vim-pasta'
 Plug 'https://github.com/tomtom/tcomment_vim'
 Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
-Plug 'https://github.com/tpope/vim-fugitive' " :Gblame is amazingballz
-Plug 'https://github.com/tpope/vim-rhubarb' " github for fugative
+Plug 'https://github.com/tpope/vim-fugitive'            " :Gblame is amazingballz
+Plug 'https://github.com/tpope/vim-rhubarb'             " github for fugative
 Plug 'https://github.com/tpope/vim-git'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
-Plug 'https://github.com/zhimsel/vim-stay' " Keep cursor pos, etc between sessions
+Plug 'https://github.com/zhimsel/vim-stay'              " Keep cursor pos, etc between sessions
 Plug 'https://github.com/blueyed/vim-diminactive'
-Plug 'https://github.com/embear/vim-localvimrc' " Open .lvimrc files securely
+Plug 'https://github.com/embear/vim-localvimrc'         " Open .lvimrc files securely
 " }}}
 
 " Autocompletion & Linting {{{
