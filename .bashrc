@@ -26,13 +26,6 @@ __source_if_exists() {
 ############# }}}
 ### Variables {{{
 
-__prependpath "$HOME/bin/$(uname)"
-__prependpath "$HOME/bin"
-
-__prependpath "$HOME/.local/bin"
-
-__prependpath /usr/local/opt/macvim/MacVim.app/Contents/MacOS/
-
 __prependpath /home/linuxbrew/.linuxbrew/bin
 __prependpath /usr/local/bin
 __prependpath /home/linuxbrew/.linuxbrew/sbin
@@ -45,8 +38,13 @@ __prependmanpath /usr/local/opt/coreutils/libexec/gnuman
 
 __prependpath /usr/local/share/npm/bin
 __prependpath /Applications/Postgres.app/Contents/Versions/9.4/bin
-
 __prependpath /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
+__prependpath /usr/local/opt/macvim/MacVim.app/Contents/MacOS/
+
+__prependpath "$HOME/.local/bin"
+
+__prependpath "$HOME/bin/$(uname)"
+__prependpath "$HOME/bin"
 
 export CLICOLOR=1
 export HISTCONTROL="ignoredups"
@@ -122,7 +120,7 @@ alias https='http --default-scheme=https'
 alias pip=pip3
 
 alias slack="slack-term -config ~/.config/slack-term.json"
-# alias ssh="TERM=xterm-color ssh"
+alias ssh="TERM=xterm-color ssh"
 alias tf=terraform
 
 __has bat && alias less="bat --style=changes"

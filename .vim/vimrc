@@ -158,6 +158,7 @@ endif
 " Do not show stupid q: window
 nnoremap q: :q
 
+" ; instead of :
 nnoremap ; :
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
@@ -165,21 +166,28 @@ cmap w!! w !sudo tee > /dev/null %
 
 xnoremap gs y:%s/<C-r>"//g<Left><Left>
 
+if has("gui_macvim")
+  set macmeta
+endif
+
 " From https://github.com/vim-utils/vim-alt-mappings/blob/master/plugin/alt_mappings.vim {{
 function! TSEnableAltMap(char)
   exe "set <M-".a:char.">=\<Esc>".a:char
 endfunction
 
-for s:item in split('HKJLhkjl\-t', '\zs')
+for s:item in split('HKJLhkjl\-', '\zs')
   call TSEnableAltMap(s:item)
 endfor
-" }}
 
+" }}
 " Splits
-" Alt-shift-hjkl move split
-if has("gui_macvim")
-  set macmeta
-endif
+" Alt-| and Alt-- create splits
+" Alt-HJKL moves splits
+" Alt-hjkl changes splits
+noremap  <M-\> :vnew +Explore<CR>
+tnoremap <M-\> <C-w>:vnew +Explore<CR>
+noremap  <M--> :new +Explore<CR>
+tnoremap <M--> <C-w>:new +Explore<CR> 
 noremap  <M-H> <C-W>H
 tnoremap <M-H> <C-W>H
 noremap  <M-K> <C-W>K
@@ -188,45 +196,21 @@ noremap  <M-J> <C-W>J
 tnoremap <M-J> <C-W>J
 noremap  <M-L> <C-W>L
 tnoremap <M-L> <C-W>L
-
-" Alt-hjkl navigates to next split
 noremap  <M-h> <C-W><C-H>
-inoremap <M-h> <C-W><C-H>
 tnoremap <M-h> <C-W><C-H>
 noremap  <M-j> <C-W><C-J>
-inoremap <M-j> <C-W><C-J>
 tnoremap <M-j> <C-W><C-J>
 noremap  <M-k> <C-W><C-K>
-inoremap <M-k> <C-W><C-K>
 tnoremap <M-k> <C-W><C-K>
 noremap  <M-l> <C-W><C-L>
-inoremap <M-l> <C-W><C-L>
 tnoremap <M-l> <C-W><C-L>
 
-" Alt-| and Alt-- create splits
-" Can't use C- here, since one of these results in ESC.  BAD NEWS.
-noremap  <M-\> :vnew +Explore<CR>
-inoremap <M-\> :vnew +Explore<CR>
-tnoremap <M-\> <C-w>:vnew +Explore<CR>
-noremap  <M--> :new +Explore<CR>
-inoremap <M--> :new +Explore<CR>
-tnoremap <M--> <C-w>:new +Explore<CR> 
-noremap  <M-t> :tabnew +Explore<CR>
-inoremap <M-t> :tabnew +Explore<CR>
-tnoremap <M-t> <C-w>:tabnew +Explore<CR>
+" Space-t spawns a terminal
 nnoremap <Leader>t :terminal ++curwin<CR>
 
 " Indent/deindent
 nnoremap <Leader>] >>_
 nnoremap <Leader>[ <<_
-
-" tab movement
-" tnoremap <M-}> <C-w>:tabnext<CR>
-" tnoremap <M-{> <C-w>:tabprev<CR>
-" inoremap <M-]> <C-T>
-" inoremap <M-[> <C-D>
-" vnoremap <M-]> >gv
-" vnoremap <M-[> <gv
 
 " Term scrolling
 function! TSExitNormalMode()
