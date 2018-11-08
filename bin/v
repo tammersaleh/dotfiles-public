@@ -24,29 +24,28 @@ if [[ -v VIM_TERMINAL ]]; then
   exit 0
 fi
 
-# Not inside 
-
-if has mvim; then
-  dir="$(git rev-parse --show-toplevel 2> /dev/null || pwd)"
-  name="$(basename "$dir")"
-
-  if [[ $# -eq 0 ]]; then
-    echo "Launching vim [$name]."
-    mvim --servername "$name"
-  else
-    first_file=$1; shift
-    echo "Opening $first_file in new tab in vim [$name]."
-    mvim --servername "$name" --remote-tab-silent +"cd $dir" "$first_file"
-    until mvim --serverlist | grep -Fixq "$name"; do sleep 1; done
-    for file in "$@"; do
-      echo "Opening $file in split in vim [$name]."
-      mvim --servername "$name" --remote-send ":split $(pwd)/$file<CR>"
-      sleep 1
-    done
-  fi
-  exit 0
-fi
-
-echo "Delegating to vi $*"
+# Not inside a running vim..
+echo "Spawning new vim $*"
 vi "$@"
 
+# Old macvim gui stuff
+# if has mvim; then
+#   dir="$(git rev-parse --show-toplevel 2> /dev/null || pwd)"
+#   name="$(basename "$dir")"
+#
+#   if [[ $# -eq 0 ]]; then
+#     echo "Launching vim [$name]."
+#     mvim --servername "$name"
+#   else
+#     first_file=$1; shift
+#     echo "Opening $first_file in new tab in vim [$name]."
+#     mvim --servername "$name" --remote-tab-silent +"cd $dir" "$first_file"
+#     until mvim --serverlist | grep -Fixq "$name"; do sleep 1; done
+#     for file in "$@"; do
+#       echo "Opening $file in split in vim [$name]."
+#       mvim --servername "$name" --remote-send ":split $(pwd)/$file<CR>"
+#       sleep 1
+#     done
+#   fi
+#   exit 0
+# fi

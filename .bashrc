@@ -31,6 +31,8 @@ __prependpath "$HOME/bin"
 
 __prependpath "$HOME/.local/bin"
 
+__prependpath /usr/local/opt/macvim/MacVim.app/Contents/MacOS/
+
 __prependpath /home/linuxbrew/.linuxbrew/bin
 __prependpath /usr/local/bin
 __prependpath /home/linuxbrew/.linuxbrew/sbin
@@ -66,7 +68,8 @@ export LESS_ADVANCED_PREPROCESSOR=1
 
 export PS4='$ '
 
-export TERM=xterm-256color
+# export TERM=xterm-256color
+export TERM=xterm-256color-italic
 
 export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
@@ -110,7 +113,6 @@ alias cg='cd "$(git rev-parse --show-toplevel)"'
 alias html="pup"
 alias pyconsole="pipenv run ptpython"
 alias grammarly="open -a Grammarly"
-alias vi="TERM=xterm-256color-italic vi"
 alias chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 alias da="direnv allow"
 alias de="vi .envrc && direnv allow"
@@ -120,7 +122,7 @@ alias https='http --default-scheme=https'
 alias pip=pip3
 
 alias slack="slack-term -config ~/.config/slack-term.json"
-alias ssh="TERM=xterm-color ssh"
+# alias ssh="TERM=xterm-color ssh"
 alias tf=terraform
 
 __has bat && alias less="bat --style=changes"
