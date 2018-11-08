@@ -1,0 +1,232 @@
+tap "cloudfoundry/tap"
+tap "garethr/kubeval"
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-versions"
+tap "homebrew/core"
+tap "keith/formulae"
+tap "netlify/netlifyctl"
+tap "sachaos/todoist"
+tap "tylerbrock/saw"
+tap "universal-ctags/universal-ctags"
+tap "wallix/awless"
+tap "wata727/tflint"
+# Spell checker with better logic than ispell
+brew "aspell"
+# Automatic configure script builder
+brew "autoconf"
+# Tool for generating GNU Standards-compliant Makefiles
+brew "automake"
+# SSL/TLS cryptography library
+brew "openssl"
+# Library for command-line editing
+brew "readline"
+# Command-line interface for SQLite
+brew "sqlite"
+# General-purpose data compression with high compression ratio
+brew "xz"
+# Interpreted, interactive, object-oriented programming language
+brew "python"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Programmable completion for Bash 3.2
+brew "bash-completion"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Freely available high-quality data compressor
+brew "bzip2"
+# GNU internationalization (i18n) and localization (l10n) library
+brew "gettext", link: true
+# Generic library support script
+brew "libtool"
+# CloudFlare's PKI toolkit
+brew "cfssl"
+# Cross-platform make
+brew "cmake"
+# Tool for service discovery, monitoring and configuration
+brew "consul"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Reimplementation of ctags(1)
+brew "ctags"
+# POSIX-compliant descendant of NetBSD's ash (the Almquist SHell)
+brew "dash"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Go dependency management tool
+brew "dep"
+# Good-lookin' diffs with diff-highlight and more
+brew "diff-so-fancy"
+# Load/unload environment variables based on $PWD
+brew "direnv"
+# Docker Machine driver for xhyve
+brew "docker-machine-driver-xhyve"
+# Text mode web browser
+brew "elinks"
+# Run arbitrary commands when files change
+brew "entr"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Fast, simple fuzzy text selector with an advanced scoring algorithm
+brew "fzy"
+# GNU debugger
+brew "gdb"
+# Distributed revision control system
+brew "git"
+# Enable transparent encryption/decryption of files in a git repo
+brew "git-crypt"
+# Git extension for versioning large files
+brew "git-lfs"
+# GNU version of the tar archiving utility
+brew "gnu-tar"
+# Make JSON greppable
+brew "gron"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Add GitHub support to git on the command-line
+brew "hub"
+# Configurable static site generator
+brew "hugo"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Library to communicate with iOS devices natively
+brew "libimobiledevice", args: ["HEAD"]
+# DevTools proxy for iOS devices
+brew "ios-webkit-debug-proxy", args: ["HEAD"]
+# Json incremental digger
+brew "jid"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Publish-subscribe messaging rethought as a distributed commit log
+brew "kafka"
+# The Apache Kafka C/C++ library
+brew "librdkafka"
+# Generic command-line non-JVM Apache Kafka producer and consumer
+brew "kafkacat"
+# Analytics and search dashboard for Elasticsearch
+brew "kibana@6.2.3"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Production Grade K8s Installation, Upgrades, and Management
+brew "kops"
+# Kubernetes prompt info for bash and zsh
+brew "kube-ps1"
+# Tool that can switch between kubectl contexts easily and create aliases
+brew "kubectx", args: ["with-short-names"]
+# The Kubernetes package manager
+brew "kubernetes-helm"
+# Input filter for the pager less
+brew "lesspipe"
+# Convert pixel information into colored ASCII art
+brew "libcaca"
+# Library that sends desktop notifications to a notification daemon
+brew "libnotify"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# C XSLT library for GNOME
+brew "libxslt"
+# YAML Parser
+brew "libyaml"
+# Lynx-like WWW browser that supports tables, menus, etc.
+brew "links"
+# Package manager for the Lua programming language
+brew "luarocks"
+# Text-based web browser
+brew "lynx"
+# GUI for vim, made for macOS
+brew "macvim"
+# Remote terminal application
+brew "mosh"
+# NCurses Disk Usage
+brew "ncdu"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Platform built on V8 to build network applications
+brew "node"
+# Trigger notifications when a process completes
+brew "noti"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@1.1"
+# Tool for creating identical machine images for multiple platforms
+brew "packer"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
+# Simplistic interactive filtering tool
+brew "peco"
+# Show ps output as a tree
+brew "pstree"
+# Install various Ruby versions and implementations
+brew "ruby-build", args: ["HEAD"]
+# Ruby version manager
+brew "rbenv"
+# Reattach process (e.g., tmux) to background
+brew "reattach-to-user-namespace"
+# Command-line tool for the Amazon S3 service
+brew "s3cmd"
+# Wrapper around libsass that helps to create command-line apps
+brew "sassc"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Advanced console-based IP subnet calculator
+brew "sipcalc"
+# netcat on steroids
+brew "socat"
+# Command-line interface for https://speedtest.net bandwidth tests
+brew "speedtest-cli"
+# Tail multiple Kubernetes pods & their containers
+brew "stern"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Tool to build, change, and version infrastructure
+brew "terraform"
+# Improve Terraform's plan output
+brew "terraform_landscape"
+# Code-search similar to ack
+brew "the_silver_searcher"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# ODBC 3 connectivity for UNIX
+brew "unixodbc"
+# Compress/expand executable files
+brew "upx"
+# Secures, stores, and tightly controls access to secrets
+brew "vault"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Watch files and take action when they change
+brew "watchman"
+# Extensible IRC client
+brew "weechat", args: ["with-aspell", "with-curl", "with-lua", "with-python@2", "with-ruby"]
+# Internet file retriever
+brew "wget"
+# Modular BSD reimplementation of NASM
+brew "yasm"
+# General-purpose lossless data-compression library
+brew "zlib"
+brew "cloudfoundry/tap/cf-cli"
+# Everything you need to get started with Heroku
+brew "heroku/brew/heroku"
+brew "keith/formulae/reminders-cli"
+# CLI to interact with netlify.com
+brew "netlify/netlifyctl/netlifyctl"
+# Todoist CLI client
+brew "sachaos/todoist/todoist"
+# Fast, multipurpose tool for AWS CloudWatch Logs
+brew "tylerbrock/saw/saw"
+# The Mighty CLI for AWS
+brew "wallix/awless/awless"
+# Terraform linter
+brew "wata727/tflint/tflint"
+cask "aws-vault"
+cask "google-cloud-sdk"
+cask "java8"
+cask "pdfinfo"
