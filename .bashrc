@@ -52,7 +52,7 @@ export CLICOLOR=1
 export HISTCONTROL="ignoredups"
 export HISTSIZE="2000"
 export LS_COLORS
-eval $(dircolors ~/.dircolors)
+eval $(TERM=xterm dircolors ~/.dircolors)
 
 export EDITOR="vim"
 export VISUAL="vim"
