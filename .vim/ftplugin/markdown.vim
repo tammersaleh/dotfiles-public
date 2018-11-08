@@ -28,14 +28,15 @@ let g:vim_markdown_fenced_languages = ['yaml=yaml', 'bash=sh']
 
 let b:surround_42 = "**\r**"
 
-setlocal conceallevel=0
+setlocal conceallevel=2
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal linebreak
 setlocal nofoldenable
 setlocal spell
-
+let b:AutoPairs = {'(':')', '{':'}',"'":"'",'"':'"', '`':'`'} " [] screws with GFM checkboxes
 ALEDisableBuffer
 
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
+
