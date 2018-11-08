@@ -1,0 +1,103 @@
+tap "cloudfoundry/tap"
+tap "homebrew/boneyard"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "linuxbrew/extra"
+tap "netlify/netlifyctl"
+tap "wata727/tflint"
+# General-purpose lossless data-compression library
+brew "zlib"
+# Tool for generating GNU Standards-compliant Makefiles
+brew "automake"
+# General-purpose data compression with high compression ratio
+brew "xz"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Programmable completion for Bash 3.2
+brew "bash-completion"
+# Tool to obtain certs from Let's Encrypt and autoenable HTTPS
+brew "certbot"
+# CloudFlare's PKI toolkit
+brew "cfssl"
+# Cross-platform make
+brew "cmake"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Reimplementation of ctags(1)
+brew "ctags"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Good-lookin' diffs with diff-highlight and more
+brew "diff-so-fancy"
+# Load/unload environment variables based on $PWD
+brew "direnv"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# GNU Emacs text editor
+brew "emacs"
+# The GNU Compiler Collection
+brew "gcc@5"
+# Distributed revision control system
+brew "git"
+# Enable transparent encryption/decryption of files in a git repo
+brew "git-crypt"
+# Git extension for versioning large files
+brew "git-lfs"
+# Make JSON greppable
+brew "gron"
+# Add GitHub support to git on the command-line
+brew "hub"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Kubernetes prompt info for bash and zsh
+brew "kube-ps1"
+# The Kubernetes package manager
+brew "kubernetes-helm"
+# C XSLT library for GNOME
+brew "libxslt"
+# Modern and intuitive terminal-based text editor
+brew "micro"
+# Remote terminal application
+brew "mosh"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Platform built on V8 to build network applications
+brew "node"
+# Highly capable, feature-rich programming language
+brew "perl"
+# Show ps output as a tree
+brew "pstree"
+# Ruby version manager
+brew "rbenv"
+# Wrapper around libsass that helps to create command-line apps
+brew "sassc"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# netcat on steroids
+brew "socat"
+# Tail multiple Kubernetes pods & their containers
+brew "stern"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Tool to build, change, and version infrastructure
+brew "terraform"
+# Code-search similar to ack
+brew "the_silver_searcher"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Vi 'workalike' with many additional features
+brew "vim", args: ["with-override-system-vi"]
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Internet file retriever
+brew "wget"
+brew "cloudfoundry/tap/cf-cli"
+# CLI to interact with netlify.com
+brew "netlify/netlifyctl/netlifyctl"
+# Terraform linter
+brew "wata727/tflint/tflint"
