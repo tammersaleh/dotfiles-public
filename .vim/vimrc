@@ -92,7 +92,8 @@ set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
 set list
-set ttimeoutlen=10
+set ttimeout
+set ttimeoutlen=50
 if !has('nvim')
   set viminfo+=n~/.vim/info
 endif
@@ -135,8 +136,6 @@ set breakindent
 set breakindentopt=shift:0
 let &showbreak='↳  '
 
-" set conceallevel=2
-
 if has("gui_running")
   " set lines=80
   " set columns=120
@@ -151,7 +150,6 @@ if has("gui_running")
   macmenu Window.Minimize key=<nop>
   " Slows to a crawl :(
   " set macligatures
-  set macmeta
 else
   " https://www.iterm2.com/documentation-escape-codes.html
   let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
@@ -161,82 +159,96 @@ endif
 
 " Maps {{{
 " Do not show stupid q: window
-map q: :q
+nnoremap q: :q
+
+nnoremap ; :
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
-if has("gui_macvim")
-  " Splits
-  " Apple-shift-hjkl move split
-  noremap  <D-H> <C-W>H
-  tnoremap <D-H> <C-W>H
-  noremap  <D-K> <C-W>K
-  tnoremap <D-K> <C-W>K
-  noremap  <D-J> <C-W>J
-  tnoremap <D-J> <C-W>J
-  noremap  <D-L> <C-W>L
-  tnoremap <D-L> <C-W>L
+xnoremap gs y:%s/<C-r>"//g<Left><Left>
 
-  " Apple-hjkl navigates to next split
-  noremap  <D-h> <C-W><C-H>
-  inoremap <D-h> <C-W><C-H>
-  tnoremap <D-h> <C-W><C-H>
-  noremap  <D-j> <C-W><C-J>
-  inoremap <D-j> <C-W><C-J>
-  tnoremap <D-j> <C-W><C-J>
-  noremap  <D-k> <C-W><C-K>
-  inoremap <D-k> <C-W><C-K>
-  tnoremap <D-k> <C-W><C-K>
-  noremap  <D-l> <C-W><C-L>
-  inoremap <D-l> <C-W><C-L>
-  tnoremap <D-l> <C-W><C-L>
+" From https://github.com/vim-utils/vim-alt-mappings/blob/master/plugin/alt_mappings.vim {{
+function! TSEnableAltMap(char)
+  exe "set <M-".a:char.">=\<Esc>".a:char
+endfunction
 
-  " Apple-| and Apple-- create splits
-  " Can't use C- here, since one of these results in ESC.  BAD NEWS.
-  noremap  <D-\> :vnew +Explore<CR>
-  inoremap <D-\> :vnew +Explore<CR>
-  tnoremap <D-\> <C-w>:vnew +Explore<CR>
-  noremap  <D--> :new +Explore<CR>
-  inoremap <D--> :new +Explore<CR>
-  tnoremap <D--> <C-w>:new +Explore<CR> 
-  noremap  <D-t> :tabnew +Explore<CR>
-  inoremap <D-t> :tabnew +Explore<CR>
-  tnoremap <D-t> <C-w>:tabnew +Explore<CR>
-  nnoremap <Leader>t :terminal ++curwin<CR>
+for s:item in split('HKJLhkjl\-t', '\zs')
+  call TSEnableAltMap(s:item)
+endfor
+" }}
 
-  " Indent/deindent
-  nnoremap <D-]> >>_
-  nnoremap <D-[> <<_
-  " tab movement
-  tnoremap <D-}> <C-w>:tabnext<CR>
-  tnoremap <D-{> <C-w>:tabprev<CR>
-  inoremap <D-]> <C-T>
-  inoremap <D-[> <C-D>
-  vnoremap <D-]> >gv
-  vnoremap <D-[> <gv
-endif
+" Splits
+" Alt-shift-hjkl move split
+set macmeta
+noremap  <M-H> <C-W>H
+tnoremap <M-H> <C-W>H
+noremap  <M-K> <C-W>K
+tnoremap <M-K> <C-W>K
+noremap  <M-J> <C-W>J
+tnoremap <M-J> <C-W>J
+noremap  <M-L> <C-W>L
+tnoremap <M-L> <C-W>L
+
+" Alt-hjkl navigates to next split
+noremap  <M-h> <C-W><C-H>
+inoremap <M-h> <C-W><C-H>
+tnoremap <M-h> <C-W><C-H>
+noremap  <M-j> <C-W><C-J>
+inoremap <M-j> <C-W><C-J>
+tnoremap <M-j> <C-W><C-J>
+noremap  <M-k> <C-W><C-K>
+inoremap <M-k> <C-W><C-K>
+tnoremap <M-k> <C-W><C-K>
+noremap  <M-l> <C-W><C-L>
+inoremap <M-l> <C-W><C-L>
+tnoremap <M-l> <C-W><C-L>
+
+" Alt-| and Alt-- create splits
+" Can't use C- here, since one of these results in ESC.  BAD NEWS.
+noremap  <M-\> :vnew +Explore<CR>
+inoremap <M-\> :vnew +Explore<CR>
+tnoremap <M-\> <C-w>:vnew +Explore<CR>
+noremap  <M--> :new +Explore<CR>
+inoremap <M--> :new +Explore<CR>
+tnoremap <M--> <C-w>:new +Explore<CR> 
+noremap  <M-t> :tabnew +Explore<CR>
+inoremap <M-t> :tabnew +Explore<CR>
+tnoremap <M-t> <C-w>:tabnew +Explore<CR>
+nnoremap <Leader>t :terminal ++curwin<CR>
+
+" Indent/deindent
+nnoremap <Leader>] >>_
+nnoremap <Leader>[ <<_
+
+" tab movement
+" tnoremap <M-}> <C-w>:tabnext<CR>
+" tnoremap <M-{> <C-w>:tabprev<CR>
+" inoremap <M-]> <C-T>
+" inoremap <M-[> <C-D>
+" vnoremap <M-]> >gv
+" vnoremap <M-[> <gv
 
 " Term scrolling
-function! ExitNormalMode()
+function! TSExitNormalMode()
   unmap <buffer> <silent> <LeftMouse>
   unmap <buffer> <silent> <ESC>
   call feedkeys("a")
 endfunction
 
-function! EnterNormalMode()
+function! TSEnterNormalMode()
   if &buftype == 'terminal' && mode('') == 't'
     call feedkeys("\<c-w>N")
     call feedkeys("\<c-y>")
-    map <buffer> <silent> <LeftMouse> :call ExitNormalMode()<CR>
-    map <buffer> <silent> <ESC> :call ExitNormalMode()<CR>
+    map <buffer> <silent> <LeftMouse> :call TSExitNormalMode()<CR>
+    map <buffer> <silent> <ESC> :call TSExitNormalMode()<CR>
     setlocal nonumber
   endif
 endfunction
 
-tnoremap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
-tnoremap <silent> <C-u> <c-w>:call EnterNormalMode()<CR>
-tnoremap <D-v> <C-w>"*
+tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
+tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
+tnoremap <C-v> <C-w>"*
 
 map gb <C-^>
 
@@ -285,15 +297,17 @@ set termguicolors
 let g:gruvbox_contrast_dark = "hard"
 colorscheme gruvbox
 
-hi Normal                     guibg=#141617
-hi Comment                                              cterm=italic
-hi Pmenu      guifg=#c6c6c6   guibg=Blue
-hi PmenuSel   guifg=Yellow    guibg=Blue  gui=bold
-hi PmenuSbar                  guibg=Grey
-hi PmenuThumb                 guibg=White
-hi MatchParen guifg=NONE      guibg=NONE  gui=underline cterm=underline
-hi Cursor     guifg=yellow    guibg=black     
-hi Folded     guifg=lightblue guibg=NONE  gui=bold   
+highlight Normal                      guibg=#141617
+highlight Comment                                               cterm=italic
+highlight Pmenu       guifg=#c6c6c6   guibg=Blue
+highlight PmenuSel    guifg=Yellow    guibg=Blue  gui=bold
+highlight PmenuSbar                   guibg=Grey
+highlight PmenuThumb                  guibg=White
+highlight MatchParen  guifg=NONE      guibg=NONE  gui=underline cterm=underline
+highlight Cursor      guifg=yellow    guibg=black     
+highlight Folded      guifg=lightblue guibg=NONE  gui=bold   
+highlight ColorColumn                                           ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 
 "}}}
 
@@ -301,7 +315,7 @@ hi Folded     guifg=lightblue guibg=NONE  gui=bold
 
 " Make required directories when writing a file..
 " http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
-function! s:MkNonExDir(file, buf)
+function! TSMkNonExDir(file, buf)
   if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
     let dir=fnamemodify(a:file, ':h')
     if !isdirectory(dir)
@@ -311,7 +325,7 @@ function! s:MkNonExDir(file, buf)
 endfunction
 augroup BWCCreateDir
   autocmd!
-  autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+  autocmd BufWritePre * :call TSMkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 " }}}
 
