@@ -137,8 +137,6 @@ set breakindentopt=shift:0
 let &showbreak='↳  '
 
 if has("gui_running")
-  " set lines=80
-  " set columns=120
   set tabpagemax=100
   set guifont=FiraCode-Retina:h20 " https://nerdfonts.com/
 
@@ -148,8 +146,7 @@ if has("gui_running")
   macmenu Tools.List\ Errors key=<nop>
   macmenu File.New\ Tab key=<nop>
   macmenu Window.Minimize key=<nop>
-  " Slows to a crawl :(
-  " set macligatures
+  " set macligatures Slows to a crawl :(
 else
   " https://www.iterm2.com/documentation-escape-codes.html
   let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
@@ -180,7 +177,9 @@ endfor
 
 " Splits
 " Alt-shift-hjkl move split
-set macmeta
+if has("gui_macvim")
+  set macmeta
+endif
 noremap  <M-H> <C-W>H
 tnoremap <M-H> <C-W>H
 noremap  <M-K> <C-W>K
