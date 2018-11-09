@@ -23,6 +23,16 @@ __source_if_exists() {
   source "$1"
 }
 
+############ }}}
+### Terminfo {{{
+# Enable italics in xterm-256color
+{
+  infocmp -1 xterm-256color
+  echo -e "\tsitm=\\E[3m,\n\tritm=\\E[23m,\tMs@,";
+} > /tmp/xterm-256color.terminfo
+tic -x /tmp/xterm-256color.terminfo
+rm /tmp/xterm-256color.terminfo
+
 ############# }}}
 ### Variables {{{
 
@@ -66,8 +76,7 @@ export LESS_ADVANCED_PREPROCESSOR=1
 
 export PS4='$ '
 
-# export TERM=xterm-256color
-export TERM=xterm-256color-italic
+export TERM=xterm-256color
 
 export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
@@ -166,7 +175,7 @@ shopt -s checkjobs
 __source_if_exists "$HOME/.bash/prompt"
 
 ################# }}}
-### Special Hooks {{{
+### Hooks {{{
 __has rbenv  && eval "$(rbenv init -)"
 __has direnv && eval "$(direnv hook bash)"
 __source_if_exists ~/.asdf/asdf.sh
