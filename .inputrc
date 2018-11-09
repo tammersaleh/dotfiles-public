@@ -20,7 +20,7 @@ set output-meta on
 set convert-meta off
 
 # Remove ESC delay
-set keyseq-timeout 10
+set keyseq-timeout 1
 
 #set mark-modified-lines on
 #set show-all-if-ambiguous on

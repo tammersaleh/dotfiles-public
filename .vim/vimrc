@@ -92,8 +92,7 @@ set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
 set list
-set ttimeout
-set ttimeoutlen=50
+set timeoutlen=1000 ttimeoutlen=10 " Fix esc delay
 if !has('nvim')
   set viminfo+=n~/.vim/info
 endif
@@ -169,15 +168,6 @@ xnoremap gs y:%s/<C-r>"//g<Left><Left>
 if has("gui_macvim")
   set macmeta
 endif
-
-" From https://github.com/vim-utils/vim-alt-mappings/blob/master/plugin/alt_mappings.vim {{
-function! TSEnableAltMap(char)
-  exe "set <M-".a:char.">=\<Esc>".a:char
-endfunction
-
-for s:item in split('HKJLhkjl\-', '\zs')
-  call TSEnableAltMap(s:item)
-endfor
 
 " }}
 " Splits

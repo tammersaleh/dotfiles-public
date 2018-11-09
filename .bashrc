@@ -71,7 +71,7 @@ export LC_CTYPE=en_US.UTF-8
 export VIM_APP_DIR=/Applications
 
 export LESS="-FRMX --tabs 4"
-export LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
+export LESSOPEN="|lesspipe.sh %s"
 export LESS_ADVANCED_PREPROCESSOR=1
 
 export PS4='$ '
