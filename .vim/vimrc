@@ -181,29 +181,20 @@ endfor
 
 " }}
 " Splits
-" Alt-| and Alt-- create splits
-" Alt-HJKL moves splits
-" Alt-hjkl changes splits
-noremap  <M-\> :vnew +Explore<CR>
-tnoremap <M-\> <C-w>:vnew +Explore<CR>
-noremap  <M--> :new +Explore<CR>
-tnoremap <M--> <C-w>:new +Explore<CR> 
-noremap  <M-H> <C-W>H
-tnoremap <M-H> <C-W>H
-noremap  <M-K> <C-W>K
-tnoremap <M-K> <C-W>K
-noremap  <M-J> <C-W>J
-tnoremap <M-J> <C-W>J
-noremap  <M-L> <C-W>L
-tnoremap <M-L> <C-W>L
-noremap  <M-h> <C-W><C-H>
-tnoremap <M-h> <C-W><C-H>
-noremap  <M-j> <C-W><C-J>
-tnoremap <M-j> <C-W><C-J>
-noremap  <M-k> <C-W><C-K>
-tnoremap <M-k> <C-W><C-K>
-noremap  <M-l> <C-W><C-L>
-tnoremap <M-l> <C-W><C-L>
+" Ctrl-n/ creates splits
+" Ctrl-hjkl changes splits
+ noremap <C-Right> :vnew +Explore<CR>
+tnoremap <C-Right> <C-w>:vnew +Explore<CR>
+ noremap <C-Down> :new +Explore<CR>
+tnoremap <C-Down> <C-w>:new +Explore<CR>
+ noremap <C-h> <C-W><C-H>
+tnoremap <C-h> <C-W><C-H>
+ noremap <C-j> <C-W><C-J>
+tnoremap <C-j> <C-W><C-J>
+ noremap <C-k> <C-W><C-K>
+tnoremap <C-k> <C-W><C-K>
+ noremap <C-l> <C-W><C-L>
+tnoremap <C-l> <C-W><C-L>
 
 " Space-t spawns a terminal
 nnoremap <Leader>t :terminal ++curwin<CR>
@@ -211,6 +202,18 @@ nnoremap <Leader>t :terminal ++curwin<CR>
 " Indent/deindent
 nnoremap <Leader>] >>_
 nnoremap <Leader>[ <<_
+
+" Fix for netrw.
+augroup netrw_mapping
+    autocmd!
+    autocmd filetype netrw call NetrwMapping()
+augroup END
+
+function! NetrwMapping()
+  noremap  <buffer> <C-Right> :vnew +Explore<CR>
+  noremap  <buffer> <C-Down> :new +Explore<CR>
+  nnoremap <buffer> <silent> t :exec 'lcd ' . b:netrw_curdir<CR>:terminal ++curwin<CR>
+endfunction
 
 " Term scrolling
 function! TSExitNormalMode()
