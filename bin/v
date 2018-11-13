@@ -17,7 +17,6 @@ if [[ -v VIM_TERMINAL ]]; then
 
   for file in "$@"; do
     file=$(realpath -Ls $file)
-    echo "Opening $file in enclosing vim."
     # shellcheck disable=SC1117
     echo -ne "\033]51;[\"drop\", \"$file\"]\007"
   done
@@ -25,7 +24,6 @@ if [[ -v VIM_TERMINAL ]]; then
 fi
 
 # Not inside a running vim..
-echo "Spawning new vim $*"
 vi "$@"
 
 # Old macvim gui stuff
