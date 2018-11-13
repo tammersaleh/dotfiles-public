@@ -150,6 +150,12 @@ else
   " https://www.iterm2.com/documentation-escape-codes.html
   let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
   let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
+  if &term =~ '256color'
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+    set t_ut=
+  endif
 endif
 " }}}
 
@@ -491,7 +497,6 @@ let g:gitgutter_sign_removed            = '_'
 let g:gitgutter_sign_removed_first_line = '‾'
 let g:gitgutter_sign_modified_removed   = '~_'
 " }}}
-
 "}}}
 
 " vim: foldmethod=marker
