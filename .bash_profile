@@ -10,10 +10,10 @@ else
     unattached_tmux_session=$(tmux ls -F "#{session_attached}:#{session_name}" | grep -E '^0:' | cut -f 2 -d : | head -n 1)
     if [[ -z "$unattached_tmux_session" ]]; then
       # There are no unattached tmux sessions.  Create a new one.
-      tmux
+      tmux -2
     else
       # There are unattached tmux sessions.  Reattach.
-      tmux a -t $unattached_tmux_session
+      tmux -2 a -t $unattached_tmux_session
     fi
     # Exit after tmux session ends.
     exit
