@@ -19,12 +19,11 @@ vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 noremap <buffer> <silent> K :silent !open dict://<cword><CR><CR>
 noremap <buffer> <silent> <leader>m :silent !mark %<CR><CR>
 
-let g:vim_markdown_folding_disabled = 0
-let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_override_foldtext = 0
 let g:vim_markdown_yaml_frontmatter = 1
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_fenced_languages = ['yaml=yaml', 'bash=sh']
+let g:vim_markdown_fenced_languages = ['bash=sh', 'console=sh']
 
 let b:surround_42 = "**\r**"
 
@@ -32,7 +31,7 @@ setlocal conceallevel=2
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal linebreak
-setlocal nofoldenable
+setlocal foldenable
 setlocal spell
 let b:AutoPairs = {'(':')', '{':'}',"'":"'",'"':'"', '`':'`'} " [] screws with GFM checkboxes
 ALEDisableBuffer
