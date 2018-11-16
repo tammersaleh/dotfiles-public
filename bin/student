@@ -50,10 +50,16 @@ function delete {
   echo "Deleted student $username"
 }
 
+function recreate {
+  delete "$@"
+  create "$@"
+}
+
 function become {
   local number=$1
+  shift
   local username="$(username $number)"
-  sudo su - $username
+  sudo -iu $username "$@"
 }
 
 [[ $# -lt 2  ]]              && usage "Expected more arguments"
@@ -67,21 +73,5 @@ cmd=$1
 N=$2
 shift 2
 
-case $cmd in
-  "create")
-     create $N
-     ;;
-  "recreate")
-     delete $N
-     create $N
-     ;;
-  "delete")
-     delete $N
-     ;;
-  "become")
-     become $N
-     ;;
-  *)
-    usage "Unrecognised command"
-    ;;
-esac
+$cmd $N "$@"
+
