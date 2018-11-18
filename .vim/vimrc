@@ -83,9 +83,6 @@ syntax on
 command! PU source $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | source $MYVIMRC
 " }}}
 
-" Space leader
-let mapleader = " "
-
 " Sets {{{
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 set fillchars=vert:\│
@@ -267,12 +264,24 @@ augroup vimrc-incsearch-highlight
   autocmd CmdlineEnter /,\? :set hlsearch
   autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
+
+" Make required directories when writing a file..
+" http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
+function! TSMkNonExDir(file, buf)
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+endfunction
+augroup TSCreateDir
+  autocmd!
+  autocmd BufWritePre * :call TSMkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
 "}}}
 
 " Colors {{{
-" cargo-culted from https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
 set termguicolors
 set background=dark
@@ -300,27 +309,18 @@ colorscheme gruvbox
 
 "}}}
 
-" Misc {{{
-"  http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes 
+" Lets {{{
+" Space leader
+let mapleader = " "
+
+" cargo-culted from https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+
+" http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
-
-
-" Make required directories when writing a file..
-" http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
-function! TSMkNonExDir(file, buf)
-  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-    let dir=fnamemodify(a:file, ':h')
-    if !isdirectory(dir)
-      call mkdir(dir, 'p')
-    endif
-  endif
-endfunction
-augroup BWCCreateDir
-  autocmd!
-  autocmd BufWritePre * :call TSMkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
 " }}}
 
 packadd! matchit " % now works with if/else/fi
