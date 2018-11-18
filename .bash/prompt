@@ -53,6 +53,7 @@ bash_prompt() {
     local H="$SHORT_HOST:"
   fi
 
+  PROMPT_DIRTRIM=2
   PS1="$EMW$H$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
 }
 
