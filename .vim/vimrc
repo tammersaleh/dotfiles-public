@@ -37,10 +37,10 @@ Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 " General {{{
 Plug 'https://github.com/tpope/vim-vinegar'             " better netrw
 Plug 'https://github.com/kana/vim-smartword'            " make `w` better.
-Plug 'https://github.com/wincent/terminus'              " Make terminal vim slightly nicer
 Plug 'https://github.com/airblade/vim-gitgutter'        " Show git signs in gutter
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'https://github.com/jiangmiao/auto-pairs'          " Auto-close parens, etc
+
 Plug 'https://github.com/junegunn/vim-easy-align'       " <leader>a=
 Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
 Plug 'https://github.com/panozzaj/vim-autocorrect'
@@ -301,6 +301,11 @@ colorscheme gruvbox
 "}}}
 
 " Misc {{{
+"  http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes 
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
 
 " Make required directories when writing a file..
 " http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
