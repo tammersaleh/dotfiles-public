@@ -6,13 +6,19 @@ function usage {
   local message=$1
   echo "ERROR: $message"
   echo
-  echo "USAGE: $(basename $BASH_SOURCE) [create|delete|recreate|become] STUDENT_NUMBER"
+  echo "USAGE: $(basename "$0") [create|delete|recreate|as|shell] STUDENT_NUMBER_OR_RANGE"
   echo
   echo "Creates the student user, and populates their home directory with a copy of the"
   echo "workshop repository.  Must be run from within a checked out workshop repository."
   echo
-  echo "You may want to run something like:"
-  echo '$ for n in {1..20}; do student recreate $n; done'
+  echo "STUDENT_NUMBER_OR_RANGE can be a number or a range like 0-19"
+  echo "If given a range, all commands are run in parallel."
+  echo "The 'shell' command does not take a range."
+  echo
+  echo "Examples:"
+  echo "  $(basename "$0") create 0-19"
+  echo "  $(basename "$0") as 0-19 whoami"
+  echo "  $(basename "$0") shell 3"
   echo
   exit 1
 }
@@ -36,6 +42,7 @@ function create {
                -s /home/linuxbrew/.linuxbrew/bin/bash "$username"
   echo "${username}:${password}" | sudo chpasswd
 
+  # shellcheck disable=SC2046
   sudo rm -rf $(sudo find "/home/$username" -iname ".git*")
 
   $STUDENT_POST_CREATE_SCRIPT "$number" "$username"
@@ -45,8 +52,8 @@ function create {
 
 function delete {
   local number=$1
-  local username="$(username $number)"
-  sudo userdel -fr $username > /dev/null 2>&1 || true
+  local username="$(username "$number")"
+  sudo userdel -fr "$username" > /dev/null 2>&1 || true
   echo "Deleted student $username"
 }
 
@@ -55,23 +62,52 @@ function recreate {
   create "$@"
 }
 
-function become {
+function as {
   local number=$1
   shift
-  local username="$(username $number)"
-  sudo -iu $username "$@"
+  local username="$(username "$number")"
+  sudo -iu "$username" "$@"
+}
+
+function shell {
+  local number=$1
+  shift
+  local username="$(username "$number")"
+  sudo -iu "$username"
+}
+
+function pingtest {
+  sleep $(( RANDOM % 3 ))
+  echo "Received" "$@"
 }
 
 [[ $# -lt 2  ]]              && usage "Expected more arguments"
 [[ $HOSTNAME != "bastion" ]] && usage "Refusing to run on host other than bastion."
 [[ -f .student.conf ]]       || usage "Cannot find the .student.conf file."
 
+# shellcheck disable=SC1091
 source .student.conf
 STUDENT_POST_CREATE_SCRIPT=${STUDENT_POST_CREATE_SCRIPT:-true}
 
 cmd=$1
-N=$2
+number_or_range=$2
 shift 2
 
-$cmd $N "$@"
+if [[ $number_or_range =~ ^[0-9]+$ ]]; then
+  range=("$number_or_range" "$number_or_range")
+elif [[ $number_or_range =~ ^[0-9]+-[0-9]+$ ]]; then
+  IFS=- read -ra range <<< "$number_or_range"
+else
+  usage "Expected a number or range."
+fi
 
+# shellcheck disable=SC2068
+for number in $(seq ${range[@]}); do
+  if [[ "$cmd" == "shell" ]]; then
+    shell "$number"
+  else
+    "$cmd" "$number" "$@" &
+  fi
+done
+
+wait
