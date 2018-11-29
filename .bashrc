@@ -170,8 +170,6 @@ shopt -s no_empty_cmd_completion
 shopt -s globstar
 shopt -s checkjobs
 
-stty -ixon
-
 ########## }}}
 ### Prompt {{{
 
