@@ -27,7 +27,7 @@ let g:vim_markdown_fenced_languages = ['bash=sh', 'console=sh']
 
 let b:surround_42 = "**\r**"
 
-setlocal conceallevel=2
+setlocal conceallevel=0
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal linebreak

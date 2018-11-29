@@ -131,6 +131,7 @@ alias pip=pip3
 alias slack="slack-term -config ~/.config/slack-term.json"
 alias ssh="TERM=xterm-color ssh"
 alias tf=terraform
+alias :q=exit
 
 __has bat && alias less="bat --style=changes"
 
@@ -168,6 +169,8 @@ shopt -s histappend
 shopt -s no_empty_cmd_completion
 shopt -s globstar
 shopt -s checkjobs
+
+stty -ixon
 
 ########## }}}
 ### Prompt {{{

@@ -58,15 +58,16 @@ function delete {
 }
 
 function recreate {
-  delete "$@"
-  create "$@"
+  local number=$1; shift
+  delete "$number" "$*"
+  create "$number" "$*"
 }
 
 function as {
   local number=$1
   shift
   local username="$(username "$number")"
-  sudo -iu "$username" "$@"
+  sudo -iu "$username" bash -c "$*"
 }
 
 function shell {
@@ -78,15 +79,27 @@ function shell {
 
 function pingtest {
   sleep $(( RANDOM % 3 ))
-  echo "Received" "$@"
+  echo "Received" "$*"
 }
+
+_find_base () {
+  path=$(pwd)
+  while [[ "$path" != "" && ! -e "$path/.student.conf" ]]; do
+    path=${path%/*}
+  done
+  echo "$path/"
+}
+
+base="$(_find_base)"
 
 [[ $# -lt 2  ]]              && usage "Expected more arguments"
 [[ $HOSTNAME != "bastion" ]] && usage "Refusing to run on host other than bastion."
-[[ -f .student.conf ]]       || usage "Cannot find the .student.conf file."
+[[ -z $base ]]               && usage "Cannot find a .student.conf file."
+
+cd "$base"
 
 # shellcheck disable=SC1091
-source .student.conf
+source ".student.conf"
 STUDENT_POST_CREATE_SCRIPT=${STUDENT_POST_CREATE_SCRIPT:-true}
 
 cmd=$1
@@ -106,7 +119,7 @@ for number in $(seq ${range[@]}); do
   if [[ "$cmd" == "shell" ]]; then
     shell "$number"
   else
-    "$cmd" "$number" "$@" &
+    "$cmd" "$number" "$*" &
   fi
 done
 
