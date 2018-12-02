@@ -7,9 +7,6 @@ else
     # We're already in tmux.  Carry on.
     . ~/.bashrc
   else
-    # Do these things outside of tmux.
-    [[ $- == *i* ]] && stty -ixon
-
     unattached_tmux_session=$(tmux ls -F "#{session_attached}:#{session_name}" | grep -E '^0:' | cut -f 2 -d : | head -n 1)
     if [[ -z "$unattached_tmux_session" ]]; then
       # There are no unattached tmux sessions.  Create a new one.
