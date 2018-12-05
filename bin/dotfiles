@@ -81,6 +81,9 @@ case $command in
   "private")
     private "$@"
     ;;
+  "public")
+    public "$@"
+    ;;
   "ignore")
     ignore "$@"
     ;;
