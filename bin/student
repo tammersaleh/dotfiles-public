@@ -6,19 +6,19 @@ function usage {
   local message=$1
   echo "ERROR: $message"
   echo
-  echo "USAGE: $(basename "$0") [create|delete|recreate|as|shell] STUDENT_NUMBER_OR_RANGE"
+  echo "USAGE: $(basename "$0") [create|delete|recreate|as|become] STUDENT_NUMBER_OR_RANGE"
   echo
   echo "Creates the student user, and populates their home directory with a copy of the"
   echo "workshop repository.  Must be run from within a checked out workshop repository."
   echo
   echo "STUDENT_NUMBER_OR_RANGE can be a number or a range like 0-19"
   echo "If given a range, all commands are run in parallel."
-  echo "The 'shell' command does not take a range."
+  echo "The 'become' command does not take a range."
   echo
   echo "Examples:"
   echo "  $(basename "$0") create 0-19"
   echo "  $(basename "$0") as 0-19 whoami"
-  echo "  $(basename "$0") shell 3"
+  echo "  $(basename "$0") become 3"
   echo
   exit 1
 }
@@ -31,7 +31,7 @@ function username {
 function create {
   local number=$1
   local username="$(username "$number")"
-  local password="$username"
+  local password="sekrit"
 
   [[ -d "/home/$username" ]] && usage "$username already exists.  Maybe you meant to recreate?"
 
@@ -70,7 +70,7 @@ function as {
   sudo -iu "$username" bash -c "$*"
 }
 
-function shell {
+function become {
   local number=$1
   shift
   local username="$(username "$number")"
@@ -116,8 +116,8 @@ fi
 
 # shellcheck disable=SC2068
 for number in $(seq ${range[@]}); do
-  if [[ "$cmd" == "shell" ]]; then
-    shell "$number"
+  if [[ "$cmd" == "become" ]]; then
+    become "$number"
   else
     "$cmd" "$number" "$*" &
   fi

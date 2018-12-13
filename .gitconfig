@@ -27,7 +27,6 @@
 
   co              = checkout
 
-  c               = commit -m
   ci              = commit -v
   append          = commit --amend --no-edit
   fixup           = commit --fixup
