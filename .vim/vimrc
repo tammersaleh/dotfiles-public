@@ -52,15 +52,15 @@ Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive'            " :Gblame is amazingballz
 Plug 'https://github.com/tpope/vim-rhubarb'             " github for fugative
+Plug 'https://github.com/itchyny/vim-gitbranch'
 Plug 'https://github.com/tpope/vim-git'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'https://github.com/vim-airline/vim-airline'
-Plug 'https://github.com/vim-airline/vim-airline-themes'
 Plug 'https://github.com/zhimsel/vim-stay'              " Keep cursor pos, etc between sessions
 Plug 'https://github.com/blueyed/vim-diminactive'
 Plug 'https://github.com/embear/vim-localvimrc'         " Open .lvimrc files securely
 Plug 'https://github.com/romainl/vim-devdocs'           " Add :DD for devdocs.io
+Plug 'https://github.com/itchyny/lightline.vim'
 " }}}
 
 " Autocompletion & Linting {{{
@@ -72,7 +72,7 @@ Plug 'https://github.com/w0rp/ale'
 Plug 'https://github.com/morhetz/gruvbox'
 Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 " set tmux status line colors to same as airline.  Will this solve my inactive window issues?
-Plug 'https://github.com/edkolev/tmuxline.vim'
+"Plug 'https://github.com/edkolev/tmuxline.vim'
 " }}}
 
 call plug#end()
@@ -453,56 +453,6 @@ let g:diminactive_use_syntax = 1
 let g:diminactive_enable_focus = 1
 " }}}
 
-" Airline {{{
-let g:airline_theme='light'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#branch#vcs_priority = ["git"]
-let g:airline#extensions#branch#format = 2
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline#extensions#hunks#enabled = 0
-let g:airline_highlighting_cache = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.maxlinenr = ''
-
-let g:airline_section_c = '%f'
-let g:airline_section_z = '%p%%'
-let g:airline#extensions#ale#enabled = 0
-let g:airline#extensions#ycm#enabled = 0
-" let g:airline_section_c = '%-0.20{getcwd()}'
-let g:airline_theme_patch_func = 'AirlineThemePatch'
-function! AirlineThemePatch(palette)
-  let s:in = [ 'black' , '#512E5F' , 248 , 255 , '' ]
-  let a:palette.inactive = airline#themes#generate_color_map(s:in, s:in, s:in)
-endfunction
-
-" let s:IA1 = [ '#666666' , '#b2b2b2' , 242 , 249 , '' ]
-" let s:IA2 = [ '#8a8a8a' , '#d0d0d0' , 245 , 252 , '' ]
-" let s:IA3 = [ 'black'   , '#512E5F' , 248 , 255 , '' ]
-" let g:airline#themes#light#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
-" let g:airline#themes#light#palette.inactive_modified = { 'airline_c': [ '#df0000' , ''        , 160     , ''      , ''     ] , }
-let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ 't'  : 'T',
-      \ }
-
-" Airline shows mode for me
-set noshowmode
-set laststatus=2
-" }}}
-
 " Gitgutter {{{
 let g:gitgutter_max_signs = 1000
 let g:gitgutter_highlight_lines = 0
@@ -513,5 +463,33 @@ let g:gitgutter_sign_removed_first_line = '‾'
 let g:gitgutter_sign_modified_removed   = '~_'
 " }}}
 "}}}
+
+" Status Line {{{
+set noshowmode
+set laststatus=2
+let g:lightline = {
+\   'active': {
+\     'left': [ [ 'mode', 'paste' ],
+\               [ 'gitbranch', 'filename'], ['readonly', 'modified' ] ],
+\     'right': [ [ 'lineinfo' ],
+\                [ 'percent' ],
+\                [ 'filetype'] ]
+\   },
+\   'inactive': {
+\     'left': [ [ 'filename' ] ],
+\     'right': [ [ 'lineinfo' ],
+\                [ 'percent' ] ]
+\   },
+\   'component_function': {
+\     'gitbranch': 'gitbranch#name'
+\   },
+\   'mode_map': {
+\     'n': 'N', 'i': 'I', 'R': 'R', 'v': 'V', 'V': 'VL', "\<C-v>": 'VB',
+\     'c': 'C', 's': 'S', 'S': 'SL', "\<C-s>": 'SB', 't': 'T'
+\   },
+\   'separator': { 'left': '', 'right': '' },
+\   'subseparator': { 'left': '', 'right': '' },
+\ }
+" }}}
 
 " vim: foldmethod=marker
