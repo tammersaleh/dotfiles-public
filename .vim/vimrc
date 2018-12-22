@@ -1,3 +1,6 @@
+set encoding=utf-8
+scriptencoding utf-8
+
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 
@@ -132,33 +135,33 @@ set breakindent
 set breakindentopt=shift:0
 let &showbreak='↳  '
 
-if has("gui_running")
-  set tabpagemax=100
-  set guifont=FiraCode-Retina:h20 " https://nerdfonts.com/
-
-  set guioptions=egm
-
-  macmenu File.Print key=<nop>
-  macmenu Tools.List\ Errors key=<nop>
-  macmenu File.New\ Tab key=<nop>
-  macmenu Window.Minimize key=<nop>
-  " set macligatures Slows to a crawl :(
-else
+" if has("gui_running")
+"   set tabpagemax=100
+"   set guifont=FiraCode-Retina:h20 " https://nerdfonts.com/
+"
+"   set guioptions=egm
+"
+"   macmenu File.Print key=<nop>
+"   macmenu Tools.List\ Errors key=<nop>
+"   macmenu File.New\ Tab key=<nop>
+"   macmenu Window.Minimize key=<nop>
+"   " set macligatures Slows to a crawl :(
+" else
   " https://www.iterm2.com/documentation-escape-codes.html
   let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
   let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
-  if &term =~ '256color'
+  if &term =~? '256color'
     " disable Background Color Erase (BCE) so that color schemes
     " render properly when inside 256-color tmux and GNU screen.
     " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
   endif
-endif
+" endif
 " }}}
 
 " Lets {{{
 " Space leader
-let mapleader = " "
+let mapleader = ' '
 
 " cargo-culted from https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -182,7 +185,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 xnoremap gs y:%s/<C-r>"//g<Left><Left>
 
-if has("gui_macvim")
+if has('gui_macvim')
   set macmeta
 endif
 
@@ -212,8 +215,8 @@ nnoremap <Leader>[ <<_
 
 " Fix for netrw.
 augroup netrw_mapping
-    autocmd!
-    autocmd filetype netrw call NetrwMapping()
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
 augroup END
 
 function! NetrwMapping()
@@ -226,11 +229,11 @@ endfunction
 function! TSExitNormalMode()
   unmap <buffer> <silent> <LeftMouse>
   unmap <buffer> <silent> <ESC>
-  call feedkeys("a")
+  call feedkeys('a')
 endfunction
 
 function! TSEnterNormalMode()
-  if &buftype == 'terminal' && mode('') == 't'
+  if &buftype ==? 'terminal' && mode('') ==? 't'
     call feedkeys("\<c-w>N")
     call feedkeys("\<c-y>")
     map <buffer> <silent> <LeftMouse> :call TSExitNormalMode()<CR>
@@ -259,26 +262,61 @@ nnoremap zf 1z=
 
 " No idea why I need this, honestly.
 noremap <nowait> dd dd
+
+""" Text objects
+" "in line" (entire line sans white-space; cursor at beginning--ie, ^)
+" https://vimways.org/2018/transactions-pending/
+xnoremap <silent> il :<c-u>normal! g_v^<cr>
+onoremap <silent> il :<c-u>normal! g_v^<cr>
+" "around line" (entire line sans trailing newline; cursor at beginning--ie, 0)
+xnoremap <silent> al :<c-u>normal! $v0<cr>
+onoremap <silent> al :<c-u>normal! $v0<cr>
+" "in document" (from first line to last; cursor at top--ie, gg)
+xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
+onoremap <silent> id :<c-u>normal! GVgg<cr>
+
+" "in indentation" (indentation level sans any surrounding empty lines)
+function! s:inIndentation()
+  let l:magic = &magic
+  set magic
+  normal! ^
+  let l:vCol = virtcol(getline('.') =~# '^\s*$' ? '$' : '.')
+  let l:pat = '^\(\s*\%'.l:vCol.'v\|^$\)\@!'
+  let l:start = search(l:pat, 'bWn') + 1
+  let l:end = search(l:pat, 'Wn')
+  if (l:end !=# 0)
+    let l:end -= 1
+  endif
+  execute 'normal! '.l:start.'G0'
+  call search('^[^\n\r]', 'Wc')
+  execute 'normal! Vo'.l:end.'G'
+  call search('^[^\n\r]', 'bWc')
+  normal! $o
+  let &magic = l:magic
+endfunction
+xnoremap <silent> ii :<c-u>call <sid>inIndentation()<cr>
+onoremap <silent> ii :<c-u>call <sid>inIndentation()<cr>
+
+" "around indentation" (indentation level and any surrounding empty lines)
+function! s:aroundIndentation()
+  let l:magic = &magic
+  set magic
+  normal! ^
+  let l:vCol = virtcol(getline('.') =~# '^\s*$' ? '$' : '.')
+  let l:pat = '^\(\s*\%'.l:vCol.'v\|^$\)\@!'
+  let l:start = search(l:pat, 'bWn') + 1
+  let l:end = search(l:pat, 'Wn')
+  if (l:end !=# 0)
+    let l:end -= 1
+  endif
+  execute 'normal! '.l:start.'G0V'.l:end.'G$o'
+  let &magic = l:magic
+endfunction
+xnoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
+onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 " }}}
 
 " Autocommands {{{
-au! GUIEnter * set vb t_vb= " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
-
-" Resize splits when the window is resized
-au VimResized * wincmd =
-
-" Open fold under cursor on read/write
-au BufWrite,BufEnter  * :silent! normal zO
-
-" Auto-read vimrc on write
-autocmd! BufWritePost {.vimrc,vimrc} nested source %
-
-" Only highlight searches while searching
-augroup vimrc-incsearch-highlight
-  autocmd!
-  autocmd CmdlineEnter /,\? :set hlsearch
-  autocmd CmdlineLeave /,\? :set nohlsearch
-augroup END
 
 " Make required directories when writing a file..
 " http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
@@ -290,9 +328,22 @@ function! TSMkNonExDir(file, buf)
     endif
   endif
 endfunction
-augroup TSCreateDir
+augroup vimrc
   autocmd!
+  " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
+  autocmd GUIEnter * set vb t_vb=                     
+  " Resize splits when the window is resized
+  autocmd VimResized * wincmd =                       
+  " Open fold under cursor on read/write
+  autocmd BufWrite,BufEnter  * :silent! normal zO     
+  " Auto-read vimrc on write
+  autocmd BufWritePost {.vimrc,vimrc} nested source % 
+
   autocmd BufWritePre * :call TSMkNonExDir(expand('<afile>'), +expand('<abuf>'))
+
+  " Only highlight searches while searching
+  autocmd CmdlineEnter /,\? :set hlsearch   
+  autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 "}}}
 
@@ -301,7 +352,7 @@ augroup END
 set termguicolors
 set background=dark
 
-let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_contrast_dark = 'hard'
 function! MyHighlights() abort
   highlight Normal                      guibg=black
   highlight Comment                                               cterm=italic
@@ -335,7 +386,7 @@ nnoremap zz zA
 fu! CustomFoldText()
   "get first non-blank line
   let fs = v:foldstart
-  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+  while getline(fs) =~? '^\s*$' | let fs = nextnonblank(fs + 1)
   endwhile
   if fs > v:foldend
     let line = getline(v:foldstart)
@@ -345,10 +396,10 @@ fu! CustomFoldText()
 
   let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
   let foldSize = 1 + v:foldend - v:foldstart
-  let foldSizeStr = " " . foldSize . " lines "
-  let lineCount = line("$")
-  let foldPercentage = printf("(%.1f", (foldSize*1.0)/lineCount*100) . "%) "
-  let expansionString = repeat("·", w - strwidth(foldSizeStr.line.foldPercentage))
+  let foldSizeStr = ' ' . foldSize . ' lines '
+  let lineCount = line('$')
+  let foldPercentage = printf('(%.1f', (foldSize*1.0)/lineCount*100) . '%) '
+  let expansionString = repeat('·', w - strwidth(foldSizeStr.line.foldPercentage))
   return line . expansionString . foldSizeStr . foldPercentage
 endf
 set foldtext=CustomFoldText()
@@ -370,7 +421,7 @@ endif
 
 " localvimrc {{{
 let g:localvimrc_persistent = 2
-let g:localvimrc_persistence_file = expand('$HOME') . "/.vim/localvimrc_persistent"
+let g:localvimrc_persistence_file = expand('$HOME') . '/.vim/localvimrc_persistent'
 " }}}
 
 " Surround {{{
@@ -467,7 +518,7 @@ let g:gitgutter_sign_modified_removed   = '~_'
 
 " Status Line {{{
 function! TSprojname() abort
-  return fnamemodify(projectroot#get(), ":t")
+  return fnamemodify(projectroot#get(), ':t')
 endfunction
 
 set noshowmode
