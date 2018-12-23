@@ -32,7 +32,7 @@ Plug 'https://github.com/vim-ruby/vim-ruby'
 Plug 'https://github.com/vim-scripts/jQuery'
 Plug 'https://github.com/tpope/vim-rails'
 Plug 'https://github.com/yosssi/vim-ace'
-Plug 'https://github.com/chrisbra/csv.vim'
+" Plug 'https://github.com/chrisbra/csv.vim' " Just tries to do too much
 Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
 Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 " }}}
@@ -114,6 +114,8 @@ set helpheight=1000
 set spellfile=~/.vim/en.utf-8.add
 set nospell " Disable by default
 set completeopt=menu,menuone,preview
+" Hit tab once in : mode, get list.  Hit again to go through list.
+set wildmode=longest:full,full
 set wildmenu
 set signcolumn=yes
 set virtualedit=block
@@ -348,22 +350,18 @@ augroup END
 "}}}
 
 " Colors {{{
-
-set termguicolors
-set background=dark
-
-let g:gruvbox_contrast_dark = 'hard'
 function! MyHighlights() abort
   highlight Normal                      guibg=black
-  highlight Comment                                               cterm=italic
+  highlight Comment                                    cterm=italic
   highlight Pmenu       guifg=#c6c6c6   guibg=Blue
-  highlight PmenuSel    guifg=Yellow    guibg=Blue  gui=bold
+  highlight PmenuSel    guifg=Yellow    guibg=Blue     cterm=bold
   highlight PmenuSbar                   guibg=Grey
   highlight PmenuThumb                  guibg=White
-  highlight MatchParen  guifg=NONE      guibg=NONE  gui=underline cterm=underline
-  highlight Folded      guifg=lightblue guibg=NONE  gui=bold   
-  highlight ColorColumn                                           ctermbg=magenta
-  highlight Cursor      guifg=yellow    guibg=blue  " Only works in GUI.  See kitty.conf for terminal
+  highlight MatchParen  guifg=NONE      guibg=NONE     cterm=underline,bold ctermbg=NONE
+  highlight Folded      guifg=lightblue guibg=NONE     cterm=bold   
+  highlight Cursor      guifg=yellow    guibg=blue     " Only works in GUI.  See kitty.conf for terminal
+  highlight WildMenu    guifg=yellow
+  highlight ColorColumn guifg=yellow    guibg=#444444
   call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
@@ -371,8 +369,11 @@ augroup MyColors
     autocmd!
     autocmd ColorScheme * call MyHighlights()
 augroup END
-colorscheme gruvbox
 
+set termguicolors
+set background=dark
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
 "}}}
 
 packadd! matchit " % now works with if/else/fi
@@ -433,15 +434,15 @@ let g:surround_60 = "<\r>"
 " }}}
 
 " ALE {{{
-let g:ale_echo_msg_error_str = '🔥'
+let g:ale_sign_error           = '🔥'
+let g:ale_echo_msg_error_str   = '🔥'
+let g:ale_sign_warning         = '🤔'
 let g:ale_echo_msg_warning_str = '🤔'
-let g:ale_echo_msg_info_str = '👋'
+let g:ale_sign_info            = '👋'
+let g:ale_echo_msg_info_str    = '👋'
 let g:ale_echo_msg_format = '%severity% %s [%code %%linter%]'
 let g:ale_open_list = 0
 let g:ale_loclist = 0
-let g:ale_sign_error = '🔥'
-let g:ale_sign_warning = '🤔'
-let g:ale_sign_info = '👋'
 let g:ale_sign_column_always = 1
 set signcolumn="yes"
 " let g:ale_fixers = {} " Each fixer is set explicitly
@@ -463,8 +464,8 @@ nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
 " SuperTab {{{
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping                = 0
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabCrMapping             = 0
 " }}}
 
 " TComment {{{
