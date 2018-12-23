@@ -65,6 +65,7 @@ Plug 'https://github.com/embear/vim-localvimrc'         " Open .lvimrc files sec
 Plug 'https://github.com/romainl/vim-devdocs'           " Add :DD for devdocs.io
 Plug 'https://github.com/itchyny/lightline.vim'
 Plug 'https://github.com/dbakker/vim-projectroot'
+Plug 'https://github.com/tammersaleh/dragvisuals.vim'
 " }}}
 
 " Autocompletion & Linting {{{
@@ -257,6 +258,13 @@ nnoremap j gj
 nnoremap gk k
 nnoremap gj j
 
+" dragvisuals
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+
 nnoremap vA ggVG
 
 " quick fix for misspelled word
@@ -266,18 +274,18 @@ nnoremap zf 1z=
 noremap <nowait> dd dd
 
 """ Text objects
-" "in line" (entire line sans white-space; cursor at beginning--ie, ^)
+" 'in line' (entire line sans white-space; cursor at beginning--ie, ^)
 " https://vimways.org/2018/transactions-pending/
 xnoremap <silent> il :<c-u>normal! g_v^<cr>
 onoremap <silent> il :<c-u>normal! g_v^<cr>
-" "around line" (entire line sans trailing newline; cursor at beginning--ie, 0)
+" 'around line' (entire line sans trailing newline; cursor at beginning--ie, 0)
 xnoremap <silent> al :<c-u>normal! $v0<cr>
 onoremap <silent> al :<c-u>normal! $v0<cr>
-" "in document" (from first line to last; cursor at top--ie, gg)
+" 'in document' (from first line to last; cursor at top--ie, gg)
 xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
 onoremap <silent> id :<c-u>normal! GVgg<cr>
 
-" "in indentation" (indentation level sans any surrounding empty lines)
+" 'in indentation' (indentation level sans any surrounding empty lines)
 function! s:inIndentation()
   let l:magic = &magic
   set magic
