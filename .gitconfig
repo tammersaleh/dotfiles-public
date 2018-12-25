@@ -42,6 +42,13 @@
 
   nuke            = !git clean -df && git reset --hard
   suir            = submodule update --init --recursive
+
+  # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
+  uncommit = reset --soft HEAD^
+  unstage = reset
+  staged = diff --cached
+  ctags = "!.git/hooks/ctags"
+
 [merge]
   tool = opendiff
   summary = true
@@ -84,3 +91,5 @@
   whitespace = red reverse
 [rebase]
 	autosquash = true
+[init]
+	templatedir = ~/.gittemplate
