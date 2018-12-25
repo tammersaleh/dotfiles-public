@@ -41,13 +41,12 @@
   update          = "!git fetch upstream && git rebase \"upstream/$(git current-branch)\""
 
   nuke            = !git clean -df && git reset --hard
-  suir            = submodule update --init --recursive
+  suir            = submodule update --init --recursive --jobs=4
 
   # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
   uncommit = reset --soft HEAD^
   unstage = reset
   staged = diff --cached
-  ctags = "!.git/hooks/ctags"
 
 [merge]
   tool = opendiff
@@ -91,5 +90,3 @@
   whitespace = red reverse
 [rebase]
 	autosquash = true
-[init]
-	templatedir = ~/.gittemplate
