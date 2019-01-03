@@ -340,6 +340,9 @@ function! TSMkNonExDir(file, buf)
 endfunction
 augroup vimrc
   autocmd!
+  " Open quickfix window after any :*grep* command
+  " https://github.com/tpope/vim-fugitive
+  autocmd QuickFixCmdPost *grep* cwindow
   " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
   autocmd GUIEnter * set vb t_vb=                     
   " Resize splits when the window is resized
