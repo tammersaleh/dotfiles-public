@@ -56,6 +56,8 @@ __prependpath "$HOME/.local/bin"
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
 
+export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
+
 export CLICOLOR=1
 export HISTCONTROL="ignoredups"
 export HISTSIZE="2000"
@@ -142,7 +144,7 @@ function gpip(){
 
 if __has bat; then
   # Print the top of the README.md file when changing to a directory.
-  function cd() { 
+  function cd() {
     set -e
     builtin cd "$@"
     set +e
