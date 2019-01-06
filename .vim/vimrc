@@ -43,6 +43,7 @@ Plug 'https://github.com/kana/vim-smartword'            " make `w` better.
 Plug 'https://github.com/airblade/vim-gitgutter'        " Show git signs in gutter
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'https://github.com/jiangmiao/auto-pairs'          " Auto-close parens, etc
+Plug 'https://github.com/RRethy/vim-illuminate'         " Highlight word under cursor after delay
 
 Plug 'https://github.com/junegunn/vim-easy-align'       " <leader>a=
 Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
@@ -419,6 +420,8 @@ set foldtext=CustomFoldText()
 
 " Plugin Config {{{
 
+let g:Illuminate_highlightUnderCursor = 0
+
 " https://github.com/romainl/vim-devdocs
 set keywordprg=:DD
 
@@ -456,7 +459,7 @@ let g:ale_open_list = 0
 let g:ale_loclist = 0
 let g:ale_sign_column_always = 1
 set signcolumn="yes"
-" let g:ale_fixers = {} " Each fixer is set explicitly
+
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight clear ALEInfoSign
