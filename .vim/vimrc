@@ -266,8 +266,6 @@ vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
 
-nnoremap vA ggVG
-
 " quick fix for misspelled word
 nnoremap zf 1z=
 
