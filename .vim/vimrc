@@ -365,7 +365,8 @@ function! MyHighlights() abort
   highlight Cursor      guifg=yellow    guibg=blue     " Only works in GUI.  See kitty.conf for terminal
   highlight WildMenu    guifg=yellow
   highlight ColorColumn guifg=yellow    guibg=#444444
-  highlight slideDelim  guifg=yellow    guibg=blue
+  highlight slideDelim  guifg=#555555
+  highlight kramdownIAL guifg=Grey                     cterm=italic
   call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
@@ -550,14 +551,14 @@ set laststatus=2
 let g:lightline = {
 \   'active': {
 \     'left':  [ [ 'mode', 'paste' ],
-\                [ 'gitbranch', 'projectroot', 'filename'], 
+\                [ 'gitbranch', 'projectroot', 'relativepath'], 
 \                ['readonly', 'modified' ] ],
 \     'right': [ [ 'lineinfo' ],
 \                [ 'percent' ],
 \                [ 'filetype'] ]
 \   },
 \   'inactive': {
-\     'left':  [ [ 'filename' ] ],
+\     'left':  [ [ 'relativepath' ] ],
 \     'right': [ [ 'lineinfo' ],
 \                [ 'percent' ] ]
 \   },
