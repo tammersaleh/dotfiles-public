@@ -145,10 +145,7 @@ function gpip(){
 if __has bat; then
   # Print the top of the README.md file when changing to a directory.
   function cd() {
-    set -e
-    builtin cd "$@"
-    set +e
-    [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
+    builtin cd "$@" && [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
   }
 fi
 
