@@ -32,46 +32,38 @@ Plug 'https://github.com/vim-ruby/vim-ruby'
 Plug 'https://github.com/vim-scripts/jQuery'
 Plug 'https://github.com/tpope/vim-rails'
 Plug 'https://github.com/yosssi/vim-ace'
-" Plug 'https://github.com/chrisbra/csv.vim' " Just tries to do too much
 Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
 Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
+Plug 'https://github.com/tpope/vim-git'
 " }}}
 
 " General {{{
 Plug 'https://github.com/tpope/vim-vinegar'             " better netrw
 Plug 'https://github.com/kana/vim-smartword'            " make `w` better.
 Plug 'https://github.com/airblade/vim-gitgutter'        " Show git signs in gutter
-Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'https://github.com/jiangmiao/auto-pairs'          " Auto-close parens, etc
+Plug 'https://github.com/tpope/vim-endwise'             " Auto-close do/end in ruby
 Plug 'https://github.com/RRethy/vim-illuminate'         " Highlight word under cursor after delay
-
 Plug 'https://github.com/junegunn/vim-easy-align'       " <leader>a=
 Plug 'https://github.com/machakann/vim-highlightedyank' " briefly highlights the copied text
-Plug 'https://github.com/panozzaj/vim-autocorrect'
-Plug 'https://github.com/rizzatti/dash.vim'
-Plug 'https://github.com/rizzatti/funcoo.vim'           " Required by Grepper
-Plug 'https://github.com/sickill/vim-pasta'
-Plug 'https://github.com/tomtom/tcomment_vim'
-Plug 'https://github.com/tpope/vim-endwise'
-Plug 'https://github.com/tpope/vim-eunuch'
+Plug 'https://github.com/sickill/vim-pasta'             " Pasting in Vim with indentation adjusted to destination context
+Plug 'https://github.com/tomtom/tcomment_vim'           " comment/uncomment lines (mapped to # in visual)
+Plug 'https://github.com/tpope/vim-eunuch'              " Unix commands :Rename :Delete, etc
 Plug 'https://github.com/tpope/vim-fugitive'            " :Gblame is amazingballz
 Plug 'https://github.com/tpope/vim-rhubarb'             " github for fugative
-Plug 'https://github.com/itchyny/vim-gitbranch'
-Plug 'https://github.com/tpope/vim-git'
-Plug 'https://github.com/tpope/vim-repeat'
-Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/tpope/vim-repeat'              " enable repeating supported plugin maps with .
+Plug 'https://github.com/tpope/vim-surround'            " Should be part of vim core
 Plug 'https://github.com/zhimsel/vim-stay'              " Keep cursor pos, etc between sessions
-Plug 'https://github.com/blueyed/vim-diminactive'
+"Plug 'https://github.com/Konfekt/FastFold'              " Improves folding performance.  Also works with vim-stay to keep folds.
 Plug 'https://github.com/embear/vim-localvimrc'         " Open .lvimrc files securely
 Plug 'https://github.com/romainl/vim-devdocs'           " Add :DD for devdocs.io
-Plug 'https://github.com/itchyny/lightline.vim'
-Plug 'https://github.com/dbakker/vim-projectroot'
-Plug 'https://github.com/tammersaleh/dragvisuals.vim'
-" }}}
-
-" Autocompletion & Linting {{{
-Plug 'https://github.com/ervandew/supertab'
-Plug 'https://github.com/w0rp/ale'
+Plug 'https://github.com/itchyny/lightline.vim'         " Simple status line
+Plug 'https://github.com/itchyny/vim-gitbranch'         " Used for lightline
+Plug 'https://github.com/dbakker/vim-projectroot'       " Used for lightline
+Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
+Plug 'https://github.com/w0rp/ale'                      " Linting and fixing
+Plug 'https://github.com/terryma/vim-expand-region'     " +/_ expand/shrink visual selection
+" Plug 'https://github.com/blueyed/vim-diminactive'
 " }}}
 
 " Color theme {{{
@@ -139,28 +131,18 @@ set breakindent
 set breakindentopt=shift:0
 let &showbreak='↳  '
 
-" if has("gui_running")
-"   set tabpagemax=100
-"   set guifont=FiraCode-Retina:h20 " https://nerdfonts.com/
-"
-"   set guioptions=egm
-"
-"   macmenu File.Print key=<nop>
-"   macmenu Tools.List\ Errors key=<nop>
-"   macmenu File.New\ Tab key=<nop>
-"   macmenu Window.Minimize key=<nop>
-"   " set macligatures Slows to a crawl :(
-" else
-  " https://www.iterm2.com/documentation-escape-codes.html
-  let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
-  if &term =~? '256color'
-    " disable Background Color Erase (BCE) so that color schemes
-    " render properly when inside 256-color tmux and GNU screen.
-    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-    set t_ut=
-  endif
-" endif
+" https://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
+set regexpengine=1
+
+" https://www.iterm2.com/documentation-escape-codes.html
+let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
+let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
+if &term =~? '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
 " }}}
 
 " Lets {{{
@@ -277,12 +259,19 @@ noremap <nowait> dd dd
 " https://vimways.org/2018/transactions-pending/
 xnoremap <silent> il :<c-u>normal! g_v^<cr>
 onoremap <silent> il :<c-u>normal! g_v^<cr>
+
 " 'around line' (entire line sans trailing newline; cursor at beginning--ie, 0)
 xnoremap <silent> al :<c-u>normal! $v0<cr>
 onoremap <silent> al :<c-u>normal! $v0<cr>
+
 " 'in document' (from first line to last; cursor at top--ie, gg)
 xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
 onoremap <silent> id :<c-u>normal! GVgg<cr>
+
+" 'in fold' https://github.com/Konfekt/FastFold#fold-text-object
+xnoremap iz :<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zv[z<cr>
+xnoremap az :<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zV[z<cr>
+
 
 " 'in indentation' (indentation level sans any surrounding empty lines)
 function! s:inIndentation()
@@ -323,6 +312,10 @@ function! s:aroundIndentation()
 endfunction
 xnoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
+
+noremap gs :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " }}}
 
 " Autocommands {{{
@@ -372,6 +365,7 @@ function! MyHighlights() abort
   highlight Cursor      guifg=yellow    guibg=blue     " Only works in GUI.  See kitty.conf for terminal
   highlight WildMenu    guifg=yellow
   highlight ColorColumn guifg=yellow    guibg=#444444
+  highlight slideDelim  guifg=yellow    guibg=blue
   call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
@@ -529,6 +523,23 @@ let g:gitgutter_sign_modified_removed   = '~_'
 " }}}
 "}}}
 
+" Expand Region {{{
+call expand_region#custom_text_objects({
+      \ 'a]' :1,
+      \ 'ab' :1,
+      \ 'aB' :1,
+      \ 'ii' :0,
+      \ 'ai' :0,
+      \ 'id' :0,
+      \ 'ad' :0,
+      \ })
+
+call expand_region#custom_text_objects('ruby', {
+      \ 'im' :0,
+      \ 'am' :0,
+      \ })
+" }}}
+
 " Status Line {{{
 function! TSprojname() abort
   return fnamemodify(projectroot#get(), ':t')
@@ -560,6 +571,7 @@ let g:lightline = {
 \   },
 \   'separator': { 'left': '', 'right': '' },
 \   'subseparator': { 'left': '', 'right': '' },
+\   'colorscheme': 'PaperColor',
 \ }
 " }}}
 
