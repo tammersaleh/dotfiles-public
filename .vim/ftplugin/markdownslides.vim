@@ -9,8 +9,8 @@ set cpoptions&vim
 
 runtime! ftplugin/markdown.vim
 
-set foldmethod=expr 
-set foldexpr=getline(v:lnum)=~#'^==='?'>1':'='
+setlocal foldmethod=expr 
+setlocal foldexpr=getline(v:lnum)=~#'^==='?'>1':'='
 
 " restore Vi compatibility settings
 let &cpoptions = s:cpo_save
