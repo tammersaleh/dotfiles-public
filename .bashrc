@@ -76,7 +76,7 @@ export LESS="-FRMX --tabs 4"
 export LESSOPEN="|lesspipe.sh %s"
 export LESS_ADVANCED_PREPROCESSOR=1
 
-export PS4='$ '
+export PS4="\n$ "
 
 export TERM=xterm-256color
 
