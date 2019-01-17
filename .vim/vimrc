@@ -54,7 +54,6 @@ Plug 'https://github.com/tpope/vim-rhubarb'             " github for fugative
 Plug 'https://github.com/tpope/vim-repeat'              " enable repeating supported plugin maps with .
 Plug 'https://github.com/tpope/vim-surround'            " Should be part of vim core
 Plug 'https://github.com/zhimsel/vim-stay'              " Keep cursor pos, etc between sessions
-"Plug 'https://github.com/Konfekt/FastFold'              " Improves folding performance.  Also works with vim-stay to keep folds.
 Plug 'https://github.com/embear/vim-localvimrc'         " Open .lvimrc files securely
 Plug 'https://github.com/romainl/vim-devdocs'           " Add :DD for devdocs.io
 Plug 'https://github.com/itchyny/lightline.vim'         " Simple status line
