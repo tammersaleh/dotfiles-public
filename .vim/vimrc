@@ -63,7 +63,7 @@ Plug 'https://github.com/dbakker/vim-projectroot'       " Used for lightline
 Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
 Plug 'https://github.com/w0rp/ale'                      " Linting and fixing
 Plug 'https://github.com/terryma/vim-expand-region'     " +/_ expand/shrink visual selection
-" Plug 'https://github.com/blueyed/vim-diminactive'
+Plug 'https://github.com/gfontenot/vim-url-opener'      " Open arbitrary strings as urls
 " }}}
 
 " Color theme {{{
@@ -269,9 +269,8 @@ xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
 onoremap <silent> id :<c-u>normal! GVgg<cr>
 
 " 'in fold' https://github.com/Konfekt/FastFold#fold-text-object
-xnoremap iz :<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zv[z<cr>
-xnoremap az :<c-u>FastFoldUpdate<cr><esc>:<c-u>normal! ]zV[z<cr>
-
+xnoremap iz :<c-u>normal! ]zv[z<cr>
+xnoremap az :<c-u>normal! ]zV[z<cr>
 
 " 'in indentation' (indentation level sans any surrounding empty lines)
 function! s:inIndentation()
@@ -367,6 +366,13 @@ function! MyHighlights() abort
   highlight ColorColumn guifg=yellow    guibg=#444444
   highlight slideDelim  guifg=#555555
   highlight kramdownIAL guifg=Grey                     cterm=italic
+  highlight htmlH1      guifg=#b8bb26                  cterm=bold
+  highlight htmlH2      guifg=#a5a822                  cterm=bold
+  highlight htmlH3      guifg=#93951e                  cterm=bold
+  highlight htmlH4      guifg=#80821a                  cterm=bold
+  highlight htmlH5      guifg=#6e7016                  cterm=bold
+  highlight htmlH6      guifg=#5c5d13                  cterm=bold
+  highlight String      guifg=#999999
   call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
@@ -405,7 +411,7 @@ fu! CustomFoldText()
   let foldSizeStr = ' ' . foldSize . ' lines '
   let lineCount = line('$')
   let foldPercentage = printf('(%.1f', (foldSize*1.0)/lineCount*100) . '%) '
-  let expansionString = repeat('·', w - strwidth(foldSizeStr.line.foldPercentage))
+  let expansionString = repeat('─', w - strwidth(foldSizeStr.line.foldPercentage))
   return line . expansionString . foldSizeStr . foldPercentage
 endf
 set foldtext=CustomFoldText()
@@ -522,7 +528,6 @@ let g:gitgutter_sign_removed            = '_'
 let g:gitgutter_sign_removed_first_line = '‾'
 let g:gitgutter_sign_modified_removed   = '~_'
 " }}}
-"}}}
 
 " Expand Region {{{
 call expand_region#custom_text_objects({
@@ -575,5 +580,16 @@ let g:lightline = {
 \   'colorscheme': 'PaperColor',
 \ }
 " }}}
+
+" URL Opener {{{
+" This isn't working.  #abc123
+function! TScolor_code(word)
+  if a:word =~? '^#[abcd0-9]\{6\}$'
+    return 'https://www.color-hex.com/color/' . a:word[1:]
+  endif
+endfunction
+let g:url_transformers = [ 'TScolor_code' ]
+" }}}
+"}}}
 
 " vim: foldmethod=marker

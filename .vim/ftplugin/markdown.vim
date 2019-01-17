@@ -17,7 +17,7 @@ vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " Use K on top of a word to look it up in Dictionary.app
 noremap <buffer> <silent> K :silent !open dict://<cword><CR><CR>
-noremap <buffer> <silent> <leader>m :silent !mark %<CR><CR>
+noremap <buffer> <silent> <leader>m :silent! !mark %<CR>:redraw!<CR>
 
 let g:vim_markdown_override_foldtext = 0
 let g:vim_markdown_yaml_frontmatter = 1
@@ -33,9 +33,9 @@ setlocal shiftwidth=4
 setlocal linebreak
 setlocal foldenable
 setlocal spell
-let b:AutoPairs = {'(':')', '{':'}',"'":"'",'"':'"', '`':'`'} " [] screws with GFM checkboxes
-ALEDisableBuffer
 
+let b:AutoPairs = {'(':')', '{':'}',"'":"'",'"':'"', '`':'`'} " [] screws with GFM checkboxes
+
+ALEDisableBuffer
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
-
