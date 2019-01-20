@@ -63,6 +63,7 @@ Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
 Plug 'https://github.com/w0rp/ale'                      " Linting and fixing
 Plug 'https://github.com/terryma/vim-expand-region'     " +/_ expand/shrink visual selection
 Plug 'https://github.com/gfontenot/vim-url-opener'      " Open arbitrary strings as urls
+Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 " }}}
 
 " Color theme {{{
