@@ -20,6 +20,8 @@ noremap <buffer> <silent> K :silent !open dict://<cword><CR><CR>
 noremap <buffer> <silent> <leader>m :silent! !mark %<CR>:redraw!<CR>
 
 let g:vim_markdown_override_foldtext = 0
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_level = 6
 let g:vim_markdown_yaml_frontmatter = 1
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_new_list_item_indent = 0
