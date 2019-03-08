@@ -64,7 +64,7 @@ Plug 'https://github.com/w0rp/ale'                      " Linting and fixing
 Plug 'https://github.com/terryma/vim-expand-region'     " +/_ expand/shrink visual selection
 Plug 'https://github.com/gfontenot/vim-url-opener'      " Open arbitrary strings as urls
 " https://github.com/TaDaa/vimade/issues/7
-" Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
+Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 " }}}
 
 " Color theme {{{
@@ -92,7 +92,6 @@ endif
 set iskeyword+=-      " This makes foo-bar a single "word" - affects "*" and others
 set mouse=a           " Allow mouse positioning and scrolling in terminal.
 set clipboard=unnamed " Use the system clipboard
-set autoread
 set backspace=indent,eol,start
 set backup            " keep a backup file
 set backupdir=~/.vim/backups
@@ -126,12 +125,25 @@ set splitright
 
 set number
 
+set display=lastline
+set nojoinspaces
+
 set breakindent
 set breakindentopt=shift:0
 let &showbreak='↳  '
 
 " https://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
 set regexpengine=1
+
+" Make vim save/restore when leaving buffer, etc
+set autoread
+set autowriteall
+set undodir=~/.vim/undo
+if !isdirectory(expand(&undodir))
+  call mkdir(expand(&undodir), "p")
+endif
+set undofile
+set nohidden
 
 " https://www.iterm2.com/documentation-escape-codes.html
 let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
@@ -347,6 +359,9 @@ augroup vimrc
   " Only highlight searches while searching
   autocmd CmdlineEnter /,\? :set hlsearch   
   autocmd CmdlineLeave /,\? :set nohlsearch
+
+  " Sync syntax highlighting when entering a buffer
+  autocmd BufEnter * :syntax sync fromstart
 augroup END
 "}}}
 
@@ -439,10 +454,11 @@ let g:localvimrc_persistence_file = expand('$HOME') . '/.vim/localvimrc_persiste
 
 " Surround {{{
 xmap s <Plug>VSurround
-let g:surround_40 = "(\r)"
-let g:surround_40 = "(\r)"
-let g:surround_91 = "[\r]"
-let g:surround_60 = "<\r>"
+let g:surround_{char2nr("(")} = "(\r)"
+let g:surround_{char2nr("[")} = "[\r]"
+let g:surround_{char2nr("<")} = "<\r>"
+let g:surround_{char2nr("%")} = "%{\r}"
+let g:surround_{char2nr("#")} = "#{\r}"
 " }}}
 
 " ALE {{{

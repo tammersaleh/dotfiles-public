@@ -7,6 +7,7 @@
 /.vim/plugged/*
 /.vim/backups/*
 /.vim/info
+/.vim/undo
 .vim/localvimrc_persistent
 /.vim/view
 /.config/direnv/allow

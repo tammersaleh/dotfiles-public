@@ -22,6 +22,9 @@ set convert-meta off
 # Remove ESC delay
 set keyseq-timeout 1
 
+set colored-stats On
+set completion-prefix-display-length 3
+
 #set mark-modified-lines on
 #set show-all-if-ambiguous on
 #"f":vi-search

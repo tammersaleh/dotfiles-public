@@ -9,11 +9,11 @@ set cpoptions&vim
 
 runtime! ftplugin/markdown.vim
 
+" Fold on any slide with a comment
 setlocal foldmethod=expr 
-setlocal foldexpr=getline(v:lnum)=~#'^===\\ssubsection'?'>1':'='
+setlocal foldexpr=getline(v:lnum)=~#'^===.*\\s#'?'>1':'='
 
 " restore Vi compatibility settings
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
-
 

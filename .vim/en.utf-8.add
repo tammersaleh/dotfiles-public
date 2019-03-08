@@ -57,3 +57,10 @@ Redis
 MySQL
 microservice
 localhost
+ClusterIP
+AppArmor
+Istio
+Grafana
+Burstable
+kubernetes
+Griffindor
