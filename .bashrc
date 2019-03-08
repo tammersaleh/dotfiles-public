@@ -102,11 +102,6 @@ export PYTHONDONTWRITEBYTECODE=1
 export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
 __source_if_exists "$HOME/.bash/secret_variables"
 
-# https://gist.github.com/phette23/5270658
-if [ "$ITERM_SESSION_ID" ]; then
-  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007" '"$PROMPT_COMMAND"
-fi
-
 ####################### }}}
 ### Aliases & Functions {{{
 
