@@ -104,6 +104,9 @@ set shiftwidth=2
 set tabstop=2
 set helpheight=1000
 set spellfile=~/.vim/en.utf-8.add
+" Regenerate the .spl list
+silent exec 'mkspell! ' . fnameescape(&spellfile . '.spl')
+
 set nospell " Disable by default
 set completeopt=menu,menuone,preview
 " Hit tab once in : mode, get list.  Hit again to go through list.

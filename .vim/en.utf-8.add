@@ -20,11 +20,6 @@ runlevels
 refactor
 architecting
 DevOps
-#rontend
-#onit
-#lobstore
-Monit/!
-Frontend/!
 kickstart
 JSON
 VPC
@@ -64,3 +59,4 @@ Grafana
 Burstable
 kubernetes
 Griffindor
+Kubectl
