@@ -58,6 +58,7 @@
   excludesfile = ~/.gitglobalignore
   whitespace = trailing-space,space-before-tab,tab-in-indent
   pager = diff-so-fancy | less --tabs=4 -RFX
+	preloadindex = true
 [pager]
   # diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [status]
@@ -90,3 +91,5 @@
   whitespace = red reverse
 [rebase]
 	autosquash = true
+[gc]
+	auto = 256

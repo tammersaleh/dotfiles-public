@@ -57,6 +57,7 @@ __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
 
 export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
+export BOTO_CONFIG=/dev/null
 
 export CLICOLOR=1
 export HISTCONTROL="ignoredups"

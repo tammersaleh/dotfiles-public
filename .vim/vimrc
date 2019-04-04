@@ -79,7 +79,6 @@ syntax on
 
 command! PU source $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | source $MYVIMRC
 " }}}
-
 " Sets {{{
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 set fillchars=vert:\│
@@ -158,7 +157,6 @@ if &term =~? '256color'
   set t_ut=
 endif
 " }}}
-
 " Lets {{{
 " Space leader
 let mapleader = ' '
@@ -172,13 +170,13 @@ let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 " }}}
-
 " Maps {{{
 " Do not show stupid q: window
 nnoremap q: :q
 
 " ; instead of :
 nnoremap ; :
+" tnoremap <C-W>; <C-W>:
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
@@ -330,7 +328,6 @@ noremap gs :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> tran
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " }}}
-
 " Autocommands {{{
 
 " Make required directories when writing a file..
@@ -367,7 +364,6 @@ augroup vimrc
   autocmd BufEnter * :syntax sync fromstart
 augroup END
 "}}}
-
 " Colors {{{
 function! MyHighlights() abort
   highlight Normal                      guibg=black
@@ -403,9 +399,7 @@ set background=dark
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 "}}}
-
 packadd! matchit " % now works with if/else/fi
-
 " Folding {{{
 " set foldopen=all " Too aggressive.  Can't move through file.
 " Toggle folds under cursor recursively
@@ -433,7 +427,6 @@ fu! CustomFoldText()
 endf
 set foldtext=CustomFoldText()
 " }}}
-
 " Plugin Config {{{
 
 let g:Illuminate_highlightUnderCursor = 0
