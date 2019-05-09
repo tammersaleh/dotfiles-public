@@ -113,6 +113,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias c="cd .."
 alias ls="gls -ohF --color=auto"
+alias sed=gsed
 alias cidr=sipcalc
 alias lk="/Volumes/keys/load"
 alias grep="grep --color=auto"
