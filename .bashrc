@@ -101,6 +101,8 @@ export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
 export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
+export DOCKER_COMPOSE_RUN_AS_USER="$UID:$GID"
+
 __source_if_exists "$HOME/.bash/secret_variables"
 
 ####################### }}}
@@ -150,6 +152,8 @@ fi
 
 __source_if_exists /usr/local/etc/bash_completion
 __source_if_exists /home/linuxbrew/.linuxbrew/etc/bash_completion
+__source_if_exists "$HOME/.asdf/completion/asdf.bash"
+__source_if_exists /etc/bash_completion.d/gcloud
 
 complete -o default -o nospace -F _git g
 complete -C aws_completer aws
@@ -184,6 +188,5 @@ __source_if_exists "$HOME/.bash/prompt"
 ### Hooks {{{
 __has rbenv  && eval "$(rbenv init -)"
 __has direnv && eval "$(direnv hook bash)"
-__source_if_exists ~/.asdf/asdf.sh
-__source_if_exists ~/.asdf/completion/asdf.bash
+__source_if_exists "$HOME/.asdf/asdf.sh"
 # }}}
