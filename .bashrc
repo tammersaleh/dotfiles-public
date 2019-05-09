@@ -1,9 +1,16 @@
 # vim: foldmethod=marker
 
+# Default to -rw------- for files.
+umask 077
+
 ### Helpers {{{
 
 __has() {
   command -v "$1" > /dev/null
+}
+
+__running() {
+  pgrep -x "$1" > /dev/null
 }
 
 __prependmanpath() {
@@ -202,8 +209,13 @@ shopt -s checkjobs
 __source_if_exists "$HOME/.bash/prompt"
 
 ################# }}}
-### Hooks {{{
+### Hooks & Daemons {{{
 __has rbenv  && eval "$(rbenv init -)"
 __has direnv && eval "$(direnv hook bash)"
 __source_if_exists "$HOME/.asdf/asdf.sh"
+
+if [[ -x ~/.dropbox-dist/dropboxd ]] && ! __running dropbox; then
+  echo "Restarting Dropbox..."
+  nohup ~/.dropbox-dist/dropboxd >> ~/.dropbox-dist/dropboxd.log &
+fi
 # }}}
