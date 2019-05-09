@@ -128,7 +128,6 @@ alias git=hub
 alias g=git
 alias https='http --default-scheme=https'
 alias pip=pip3
-
 alias slack="slack-term -config ~/.config/slack-term.json"
 alias ssh="TERM=xterm-color ssh"
 alias tf=terraform
@@ -147,6 +146,23 @@ if __has bat; then
     builtin cd "$@" && [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
   }
 fi
+
+function journal {
+  local day=today
+  if [[ $1 == "yesterday" ]]; then
+    shift
+    day=yesterday
+  fi
+  local file="$HOME/journal/$(date -d $day +%F).md"
+
+  if [[ $# -eq 0 ]]; then
+    v "$file"
+  else
+    echo       >> "$file"
+    echo "$*"  >> "$file"
+  fi
+}
+alias j=journal
 
 ############### }}}
 ### Completions {{{
