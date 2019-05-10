@@ -160,7 +160,7 @@ function journal {
     shift
     day=yesterday
   fi
-  local file="$HOME/journal/$(date -d $day +%F).md"
+  local file="$HOME/Dropbox/journal/$(date -d $day +%F).md"
 
   if [[ $# -eq 0 ]]; then
     v "$file"
