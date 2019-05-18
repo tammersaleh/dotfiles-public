@@ -32,16 +32,6 @@ __source_if_exists() {
 }
 
 ############ }}}
-### Terminfo {{{
-# Enable italics in xterm-256color
-{
-  infocmp -1 xterm-256color
-  echo -e "\tsitm=\\E[3m,\n\tritm=\\E[23m,\tMs@,";
-} > /tmp/xterm-256color.terminfo
-tic -x /tmp/xterm-256color.terminfo
-rm /tmp/xterm-256color.terminfo
-
-############# }}}
 ### Variables {{{
 
 __prependpath /home/linuxbrew/.linuxbrew/bin
@@ -64,7 +54,7 @@ __prependpath "$HOME/.local/bin"
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
 
-export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
+tty -s && export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
 export BOTO_CONFIG=/dev/null
 
 export CLICOLOR=1
@@ -117,100 +107,6 @@ export GID=$(id -g)
 __source_if_exists "$HOME/.bash/secret_variables"
 
 ####################### }}}
-### Aliases & Functions {{{
-
-alias chmod='chmod -v'
-alias cp='cp -i'
-alias mv='mv -i'
-alias c="cd .."
-alias ls="gls -ohF --color=auto"
-__has gsed && alias sed=gsed
-alias cidr=sipcalc
-alias lk="/Volumes/keys/load"
-alias grep="grep --color=auto"
-alias cg='cd "$(git rev-parse --show-toplevel)"'
-alias html="pup"
-alias pyconsole="pipenv run ptpython"
-alias grammarly="open -a Grammarly"
-alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
-alias da="direnv allow"
-alias de="vi .envrc && direnv allow"
-alias git=hub
-alias g=git
-alias https='http --default-scheme=https'
-alias pip=pip3
-alias slack="slack-term -config ~/.config/slack-term.json"
-alias ssh="TERM=xterm-color ssh"
-alias tf=terraform
-alias dc=docker-compose
-alias :q=exit
-
-__has bat && alias less="bat --style=changes"
-
-gpip(){
-  # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
-  PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
-}
-
-if __has bat; then
-  # Print the top of the README.md file when changing to a directory.
-  cd() {
-    builtin cd "$@"
-    ret=$?
-    if [[ $ret -eq 0 ]]; then
-      [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
-      true
-    else
-      return $ret
-    fi
-  }
-fi
-
-journal() {
-  local day=today
-  if [[ $1 == "yesterday" ]]; then
-    shift
-    day=yesterday
-  fi
-  local file="$HOME/Dropbox/journal/$(date -d $day +%F).md"
-
-  if [[ $# -eq 0 ]]; then
-    v "$file"
-  else
-    echo       >> "$file"
-    echo "$*"  >> "$file"
-  fi
-}
-alias j=journal
-
-fixssh() {
-  eval $(tmux show-env -s | grep '^SSH_')
-}
-
-############### }}}
-### Completions {{{
-
-__source_if_exists /usr/local/etc/bash_completion
-__source_if_exists /home/linuxbrew/.linuxbrew/etc/bash_completion
-__source_if_exists "$HOME/.asdf/completion/asdf.bash"
-__source_if_exists /etc/bash_completion.d/gcloud
-
-complete -o default -o nospace -F _git g
-complete -C aws_completer aws
-
-docker_etc=/Applications/Docker.app/Contents/Resources/etc
-__source_if_exists "$docker_etc/docker.bash-completion"
-__source_if_exists "$docker_etc/docker-machine.bash-completion"
-__source_if_exists "$docker_etc/docker-compose.bash-completion"
-
-__source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-__source_if_exists "$HOME/.bash/terraform-completion"
-
-__has kubectl && source <(kubectl completion bash)
-__has helm    && source <(helm completion bash)
-__has stern   && source <(stern --completion bash)
-
-################# }}}
 ### Shell Options {{{
 
 shopt -s checkwinsize
@@ -220,18 +116,125 @@ shopt -s globstar
 shopt -s checkjobs
 
 ########## }}}
-### Prompt {{{
 
-__source_if_exists "$HOME/.bash/prompt"
+if tty -s; then
+  ### Terminfo {{{
+  # Enable italics in xterm-256color
+  {
+    infocmp -1 xterm-256color
+    echo -e "\tsitm=\\E[3m,\n\tritm=\\E[23m,\tMs@,";
+  } > /tmp/xterm-256color.terminfo
+  tic -x /tmp/xterm-256color.terminfo
+  rm /tmp/xterm-256color.terminfo
 
-################# }}}
-### Hooks & Daemons {{{
-__has rbenv  && eval "$(rbenv init -)"
-__has direnv && eval "$(direnv hook bash)"
-__source_if_exists "$HOME/.asdf/asdf.sh"
+  ############# }}}
+  ### Aliases & Functions {{{
 
-if [[ -x ~/.dropbox-dist/dropboxd ]] && ! __running dropbox; then
-  echo "Restarting Dropbox..."
-  nohup ~/.dropbox-dist/dropboxd >> ~/.dropbox-dist/dropboxd.log &
+  alias chmod='chmod -v'
+  alias cp='cp -i'
+  alias mv='mv -i'
+  alias c="cd .."
+  alias ls="gls -ohF --color=auto"
+  __has gsed && alias sed=gsed
+  alias cidr=sipcalc
+  alias lk="/Volumes/keys/load"
+  alias grep="grep --color=auto"
+  alias cg='cd "$(git rev-parse --show-toplevel)"'
+  alias html="pup"
+  alias pyconsole="pipenv run ptpython"
+  alias grammarly="open -a Grammarly"
+  alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
+  alias da="direnv allow"
+  alias de="vi .envrc && direnv allow"
+  alias git=hub
+  alias g=git
+  alias https='http --default-scheme=https'
+  alias pip=pip3
+  alias slack="slack-term -config ~/.config/slack-term.json"
+  alias ssh="TERM=xterm-color ssh"
+  alias tf=terraform
+  alias dc=docker-compose
+  alias :q=exit
+
+  __has bat && alias less="bat --style=changes"
+
+  gpip(){
+    # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
+    PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
+  }
+
+  if __has bat; then
+    # Print the top of the README.md file when changing to a directory.
+    cd() {
+      builtin cd "$@"
+      ret=$?
+      if [[ $ret -eq 0 ]]; then
+        [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
+        true
+      else
+        return $ret
+      fi
+    }
+  fi
+
+  journal() {
+    local day=today
+    if [[ $1 == "yesterday" ]]; then
+      shift
+      day=yesterday
+    fi
+    local file="$HOME/Dropbox/journal/$(date -d $day +%F).md"
+
+    if [[ $# -eq 0 ]]; then
+      v "$file"
+    else
+      echo       >> "$file"
+      echo "$*"  >> "$file"
+    fi
+  }
+  alias j=journal
+
+  fixssh() {
+    eval $(tmux show-env -s | grep '^SSH_')
+  }
+
+  ############### }}}
+  ### Completions {{{
+
+  __source_if_exists /usr/local/etc/bash_completion
+  __source_if_exists /home/linuxbrew/.linuxbrew/etc/bash_completion
+  __source_if_exists "$HOME/.asdf/completion/asdf.bash"
+  __source_if_exists /etc/bash_completion.d/gcloud
+
+  complete -o default -o nospace -F _git g
+  complete -C aws_completer aws
+
+  docker_etc=/Applications/Docker.app/Contents/Resources/etc
+  __source_if_exists "$docker_etc/docker.bash-completion"
+  __source_if_exists "$docker_etc/docker-machine.bash-completion"
+  __source_if_exists "$docker_etc/docker-compose.bash-completion"
+
+  __source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+  __source_if_exists "$HOME/.bash/terraform-completion"
+
+  __has kubectl && source <(kubectl completion bash)
+  __has helm    && source <(helm completion bash)
+  __has stern   && source <(stern --completion bash)
+
+  ################# }}}
+  ### Prompt {{{
+
+  __source_if_exists "$HOME/.bash/prompt"
+
+  ################# }}}
+  ### Hooks & Daemons {{{
+  __has rbenv  && eval "$(rbenv init -)"
+  __has direnv && eval "$(direnv hook bash)"
+  __source_if_exists "$HOME/.asdf/asdf.sh"
+
+  if [[ -x ~/.dropbox-dist/dropboxd ]] && ! __running dropbox; then
+    echo "Restarting Dropbox..."
+    nohup ~/.dropbox-dist/dropboxd >> ~/.dropbox-dist/dropboxd.log &
+  fi
+  # }}}
 fi
-# }}}
