@@ -3,15 +3,15 @@
 [include]
   path = ~/.gitconfig-local
 [user]
-  name = Tammer Saleh
-  email = me@tammersaleh.com
+	name = Tammer Saleh
+  email = tammer@superorbit.al
 [color]
   status = auto
   diff = auto
   branch = auto
   ui = true
 [alias]
-  aliases         = config --get-regexp "alias.*"
+  aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
 
   ql              = log --abbrev-commit --decorate --pretty=format:'%Cred%cn%Creset: %Cred%h%Creset %s %Cblue%ar%Creset' --graph
 

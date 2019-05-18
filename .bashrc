@@ -3,6 +3,7 @@
 # Default to -rw------- for files.
 umask 077
 
+
 ### Helpers {{{
 
 __has() {
@@ -108,7 +109,10 @@ export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
 export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
-export DOCKER_COMPOSE_RUN_AS_USER="$UID:$GID"
+
+# For the Dockers!
+export UID
+export GID=$(id -g)
 
 __source_if_exists "$HOME/.bash/secret_variables"
 
@@ -120,7 +124,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias c="cd .."
 alias ls="gls -ohF --color=auto"
-alias sed=gsed
+__has gsed && alias sed=gsed
 alias cidr=sipcalc
 alias lk="/Volumes/keys/load"
 alias grep="grep --color=auto"
@@ -138,23 +142,31 @@ alias pip=pip3
 alias slack="slack-term -config ~/.config/slack-term.json"
 alias ssh="TERM=xterm-color ssh"
 alias tf=terraform
+alias dc=docker-compose
 alias :q=exit
 
 __has bat && alias less="bat --style=changes"
 
-function gpip(){
+gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
 
 if __has bat; then
   # Print the top of the README.md file when changing to a directory.
-  function cd() {
-    builtin cd "$@" && [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
+  cd() {
+    builtin cd "$@"
+    ret=$?
+    if [[ $ret -eq 0 ]]; then
+      [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
+      true
+    else
+      return $ret
+    fi
   }
 fi
 
-function journal {
+journal() {
   local day=today
   if [[ $1 == "yesterday" ]]; then
     shift
@@ -170,6 +182,10 @@ function journal {
   fi
 }
 alias j=journal
+
+fixssh() {
+  eval $(tmux show-env -s | grep '^SSH_')
+}
 
 ############### }}}
 ### Completions {{{
