@@ -19,13 +19,12 @@ vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 noremap <buffer> <silent> K :silent !open dict://<cword><CR><CR>
 noremap <buffer> <silent> <leader>m :silent! !mark %<CR>:redraw!<CR>
 
-let g:vim_markdown_override_foldtext = 0
-let g:vim_markdown_folding_style_pythonic = 1
-let g:vim_markdown_folding_level = 6
-let g:vim_markdown_yaml_frontmatter = 1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_fenced_languages = ['bash=sh', 'console=sh']
+
+" vim-markdown's folding is too agressive (happens in after)
+" and breaks my markdownslides format.
+let g:vim_markdown_folding_disabled = 1
+setlocal foldexpr=Foldexpr_markdown(v:lnum)
+setlocal foldmethod=expr
 
 let b:surround_42 = "**\r**"
 

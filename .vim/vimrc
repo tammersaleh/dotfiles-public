@@ -431,6 +431,17 @@ set foldtext=CustomFoldText()
 
 let g:Illuminate_highlightUnderCursor = 0
 
+" vim-markdown {{{
+let g:vim_markdown_override_foldtext = 0
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_level = 6
+let g:vim_markdown_yaml_frontmatter = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_fenced_languages = ['bash=sh', 'console=sh']
+let g:vim_markdown_folding_disabled = 1 " We manage our own folding
+" }}}
+
 " https://github.com/romainl/vim-devdocs
 set keywordprg=:DD
 
