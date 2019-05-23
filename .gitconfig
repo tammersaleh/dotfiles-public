@@ -45,8 +45,9 @@
 
   # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
   uncommit = reset --soft HEAD^
-  unstage = reset
-  staged = diff --cached
+  unstage  = reset
+  staged   = diff --name-only --cached
+  modified = diff --name-only
 
 [merge]
   tool = opendiff
