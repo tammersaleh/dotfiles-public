@@ -185,6 +185,10 @@ if tty -s; then
     fi
     local file="$HOME/Dropbox/journal/$(date -d $day +%F).md"
 
+    if [[ ! -f "$file" ]]; then
+      echo "# $(date +'%A, %B %-d, %Y')" > "$file"
+    fi
+
     if [[ $# -eq 0 ]]; then
       v "$file"
     else
