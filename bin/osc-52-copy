@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # copy via OSC 52
-printf "\033]52;;%s\a" "$(cat "$@" | base64 -w0)"
+printf "\033]52;;%s\a" "$(cat "$@" | base64 | tr -d '\n')"

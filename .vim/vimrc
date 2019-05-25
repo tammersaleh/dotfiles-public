@@ -327,6 +327,17 @@ onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 noremap gs :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+function! OSC52Copy(text) abort
+  let escape = system('osc-52-copy', a:text)
+  if v:shell_error
+    echoerr escape
+  else
+    call writefile([escape], '/dev/tty', 'b')
+  endif
+endfunction
+xnoremap <silent> <Leader>y y:call OSC52Copy(getreg('"'))<CR>
+
 " }}}
 " Autocommands {{{
 
