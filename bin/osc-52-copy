@@ -27,7 +27,7 @@
 put() {
   esc=$1
   # [[ -v TMUX ]] && esc="\033Ptmux;\033$esc\033\\"
-  printf "%s" "$esc"
+  printf "$esc"
 }
 
 # KiTTY always appends to the clipboard, so clear it first
