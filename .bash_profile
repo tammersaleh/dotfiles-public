@@ -1,6 +1,7 @@
-# Safeguards.  Disable by SCPing a `.disable_tmux` file into `$HOME`, don't run
-# locally, and don't run if we don't have tmux.
-if [[ "$(hostname -s)" == "tardis" ]] || [[ -f .disable_tmux ]] || ! command -v tmux > /dev/null; then
+# Safeguards.  Disable by SCPing a `.disable_tmux` file into `$HOME` and don't
+# run if we don't have tmux.
+
+if [[ -f .disable_tmux ]] || ! command -v tmux > /dev/null; then
   . ~/.bashrc
 else
   if [[ -v TMUX ]]; then
@@ -21,5 +22,3 @@ else
 fi
 
 # https://github.com/mykeels/slack-theme-cli
-
-
