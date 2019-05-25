@@ -38,6 +38,9 @@ __prependpath /home/linuxbrew/.linuxbrew/bin
 __prependpath /usr/local/bin
 __prependpath /home/linuxbrew/.linuxbrew/sbin
 __prependpath /usr/local/sbin
+# Kitty was installed via:
+# sudo ./installer.sh dest=/opt launch=n
+__prependpath /opt/kitty.app/bin
 __prependmanpath /home/linuxbrew/.linuxbrew/man
 __prependmanpath /usr/local/man
 
