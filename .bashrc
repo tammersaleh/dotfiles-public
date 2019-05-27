@@ -64,7 +64,7 @@ export CLICOLOR=1
 export HISTCONTROL="ignoredups"
 export HISTSIZE="2000"
 export LS_COLORS
-eval $(TERM=xterm dircolors ~/.dircolors)
+eval $(dircolors ~/.dircolors)
 
 export EDITOR="vim"
 export VISUAL="vim"
@@ -80,7 +80,7 @@ export LESS_ADVANCED_PREPROCESSOR=1
 
 export PS4="\n$ "
 
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
@@ -103,6 +103,8 @@ export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
 export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
 
+export TERMINFO=~/.terminfo
+
 # For the Dockers!
 export UID
 export GID=$(id -g)
@@ -122,14 +124,9 @@ shopt -s checkjobs
 
 if tty -s; then
   ### Terminfo {{{
-  # Enable italics in xterm-256color
-  {
-    infocmp -1 xterm-256color
-    echo -e "\tsitm=\\E[3m,\n\tritm=\\E[23m,\tMs@,";
-  } > /tmp/xterm-256color.terminfo
-  tic -x /tmp/xterm-256color.terminfo
-  rm /tmp/xterm-256color.terminfo
-
+  for terminfo_file in ~/.terminfo-sources/*.terminfo; do
+    tic -x -o ~/.terminfo "$terminfo_file"
+  done
   ############# }}}
   ### Aliases & Functions {{{
 
@@ -154,7 +151,7 @@ if tty -s; then
   alias https='http --default-scheme=https'
   alias pip=pip3
   alias slack="slack-term -config ~/.config/slack-term.json"
-  alias ssh="TERM=xterm-color ssh"
+  # alias ssh="TERM=xterm-color ssh"
   alias tf=terraform
   alias dc=docker-compose
   alias :q=exit
