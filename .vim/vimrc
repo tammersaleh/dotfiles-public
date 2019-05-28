@@ -395,6 +395,18 @@ augroup MyColors
     autocmd ColorScheme * call MyHighlights()
 augroup END
 
+" https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+
+" https://vi.stackexchange.com/questions/15722/vim-tmux-and-xterm-bracketed-paste
+if &term =~ '^tmux'
+  let &t_BE="\<Esc>[?2004h"
+  let &t_BD="\<Esc>[?2004l"
+  let &t_PS="\<Esc>[200~"
+  let &t_PE="\<Esc>[201~"
+endif
+
 set termguicolors
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
