@@ -65,6 +65,7 @@ Plug 'https://github.com/terryma/vim-expand-region'     " +/_ expand/shrink visu
 Plug 'https://github.com/gfontenot/vim-url-opener'      " Open arbitrary strings as urls
 " https://github.com/TaDaa/vimade/issues/7
 Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
+Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
 " }}}
 
 " Color theme {{{
@@ -387,7 +388,7 @@ function! MyHighlights() abort
   highlight Folded      guifg=lightblue guibg=NONE     cterm=bold   
   highlight Cursor      guifg=yellow    guibg=blue     " Only works in GUI.  See kitty.conf for terminal
   highlight WildMenu    guifg=yellow
-  highlight ColorColumn guifg=yellow    guibg=#444444
+  " highlight ColorColumn guifg=yellow    guibg=#444444
   highlight slideDelim  guifg=#555555
   highlight kramdownIAL guifg=Grey                     cterm=italic
   highlight htmlH1      guifg=#b8bb26                  cterm=bold
@@ -397,7 +398,7 @@ function! MyHighlights() abort
   highlight htmlH5      guifg=#6e7016                  cterm=bold
   highlight htmlH6      guifg=#5c5d13                  cterm=bold
   highlight String      guifg=#999999
-  call matchadd('ColorColumn', '\%81v', 100)
+  " call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
 augroup MyColors
@@ -451,6 +452,11 @@ let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_fenced_languages = ['bash=sh', 'console=sh']
 let g:vim_markdown_folding_disabled = 1 " We manage our own folding
+" }}}
+
+" vim-qf {{{
+let g:qf_auto_resize = 0
+let g:qf_loclist_window_bottom = 0
 " }}}
 
 " https://github.com/romainl/vim-devdocs
@@ -542,15 +548,14 @@ map e  <Plug>(smartword-e)
 map ge <Plug>(smartword-ge)
 " }}}
 
+" vimade {{{
+let g:vimade = {}
+let g:vimade.enablesigns = 1
+" }}}
+
 " Terraform {{{
 let g:terraform_align=1
 let g:terraform_fmt_on_save = 1
-" }}}
-
-" vim-diminactive {{{
-let g:diminactive_use_colorcolumn = 0
-let g:diminactive_use_syntax = 1
-let g:diminactive_enable_focus = 1
 " }}}
 
 " Gitgutter {{{

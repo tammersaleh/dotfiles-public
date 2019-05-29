@@ -46,6 +46,8 @@ __prependmanpath /usr/local/man
 
 __prependpath /usr/local/opt/coreutils/libexec/gnubin
 __prependmanpath /usr/local/opt/coreutils/libexec/gnuman
+__prependpath /usr/local/opt/findutils/libexec/gnubin
+__prependmanpath /usr/local/opt/findutils/libexec/gnuman
 
 __prependpath /usr/local/share/npm/bin
 __prependpath /Applications/Postgres.app/Contents/Versions/9.4/bin
