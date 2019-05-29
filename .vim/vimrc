@@ -148,23 +148,10 @@ endif
 set undofile
 set nohidden
 
-" https://www.iterm2.com/documentation-escape-codes.html
-let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
-let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
-if &term =~? '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-  set t_ut=
-endif
-" }}}
-" Lets {{{
-" Space leader
-let mapleader = ' '
-
-" cargo-culted from https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+" disable Background Color Erase (BCE) so that color schemes
+" render properly when inside 256-color tmux and GNU screen.
+" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+set t_ut=
 
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes 
 let &t_SI = "\<Esc>[6 q"
@@ -172,6 +159,9 @@ let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 " }}}
 " Maps {{{
+" Space leader
+let mapleader = ' '
+
 " Do not show stupid q: window
 nnoremap q: :q
 
@@ -405,6 +395,18 @@ augroup MyColors
     autocmd!
     autocmd ColorScheme * call MyHighlights()
 augroup END
+
+" https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+
+" https://vi.stackexchange.com/questions/15722/vim-tmux-and-xterm-bracketed-paste
+if &term =~ '^tmux'
+  let &t_BE="\<Esc>[?2004h"
+  let &t_BD="\<Esc>[?2004l"
+  let &t_PS="\<Esc>[200~"
+  let &t_PE="\<Esc>[201~"
+endif
 
 set termguicolors
 set background=dark
