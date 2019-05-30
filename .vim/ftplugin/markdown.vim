@@ -1,9 +1,6 @@
-" Close Toc after enter
-" https://github.com/plasticboy/vim-markdown/issues/145
-nnoremap <buffer> <expr><enter> &ft=="qf" ? "<cr>:lcl<cr>" : (getpos(".")[2]==1 ? "i<cr><esc>": "i<cr><esc>l")
-nnoremap <buffer> <leader>t :Toc<enter>
 nnoremap <buffer> <leader>o :!mark "%"<enter><enter>
 
+vmap <buffer> - :s/^/- /<enter>:noh<enter>
 vmap <buffer> * :s/^/* /<enter>:noh<enter>
 vmap <buffer> # :s/^/1. /<enter>:noh<enter>
 
@@ -41,15 +38,4 @@ let b:AutoPairs = AutoPairsDefine({'```' : '```'}) " Add triple backticks
 ALEDisableBuffer
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
-
-function! s:Toc()
-  if &filetype ==# 'markdown'
-    :Toc
-    :exec "normal \<C-W>p"
-  endif
-endfunction
-augroup markdown
-  autocmd BufEnter     *.md call s:Toc()
-  autocmd BufWritePost *.md call s:Toc()
-augroup END
 
