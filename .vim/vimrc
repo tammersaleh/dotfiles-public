@@ -232,13 +232,6 @@ nnoremap j gj
 nnoremap gk k
 nnoremap gj j
 
-" dragvisuals
-vmap  <expr>  <LEFT>   DVB_Drag('left')
-vmap  <expr>  <RIGHT>  DVB_Drag('right')
-vmap  <expr>  <DOWN>   DVB_Drag('down')
-vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
-
 " quick fix for misspelled word
 nnoremap zf 1z=
 
