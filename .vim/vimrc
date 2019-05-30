@@ -75,12 +75,11 @@ Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 
 call plug#end()
 
-filetype plugin indent on
-syntax on
-
 command! PU source $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | source $MYVIMRC
+
 " }}}
-" Sets {{{
+" Options {{{
+
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
