@@ -143,7 +143,7 @@ set autoread
 set autowriteall
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
-  call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), 'p')
 endif
 set undofile
 set nohidden
@@ -152,6 +152,15 @@ set nohidden
 " render properly when inside 256-color tmux and GNU screen.
 " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
 set t_ut=
+
+" tmux will send xterm-style keys when its xterm-keys option is on
+" https://superuser.com/questions
+if &term =~# '^tmux'
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
 
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes 
 let &t_SI = "\<Esc>[6 q"
