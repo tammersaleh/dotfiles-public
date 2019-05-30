@@ -347,6 +347,9 @@ augroup vimrc
   autocmd BufEnter * :syntax sync fromstart
   " Fixed QF / Location window size
   autocmd FileType qf setlocal winfixwidth
+  " https://github.com/justinmk/vim-dirvish/issues/142
+  autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +Dirvish<CR>
+  autocmd FileType qf noremap <buffer> <C-Down> :lclose \| split +Dirvish<CR>
 augroup END
 "}}}
 " Colors {{{
