@@ -446,6 +446,7 @@ augroup dirvish
   autocmd!
   autocmd FileType dirvish silent keeppatterns g@\v/\.[^\/]+/?$@d _
   autocmd FileType dirvish nnoremap <buffer> <silent> <Leader>t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
+  autocmd FileType dirvish nnoremap <buffer> <silent> t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
 augroup END
 " }}}
 
