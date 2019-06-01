@@ -4,12 +4,6 @@
 /.envrc
 /.git
 /.ptpython/history
-/.vim/plugged/*
-/.vim/backups/*
-/.vim/info
-/.vim/undo
-.vim/localvimrc_persistent
-/.vim/view
 /.config/direnv/allow
 /.aws/cli/cache/*
 tags
