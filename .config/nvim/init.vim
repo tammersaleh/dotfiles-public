@@ -1,6 +1,3 @@
-set encoding=utf-8
-scriptencoding utf-8
-
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 
@@ -63,7 +60,7 @@ Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
 Plug 'https://github.com/w0rp/ale'                      " Linting and fixing
 Plug 'https://github.com/terryma/vim-expand-region'     " +/_ expand/shrink visual selection
 Plug 'https://github.com/gfontenot/vim-url-opener'      " Open arbitrary strings as urls
-" https://github.com/TaDaa/vimade/issues/7
+" TODO: nvim
 Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
 " }}}
@@ -84,20 +81,12 @@ set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
 set list
-set timeoutlen=1000 ttimeoutlen=10 " Fix esc delay
-if !has('nvim')
-  set viminfo+=n~/.vim/info
-endif
+" set timeoutlen=1000 ttimeoutlen=10 " Fix esc delay
 set iskeyword+=-      " This makes foo-bar a single "word" - affects "*" and others
 set mouse=a           " Allow mouse positioning and scrolling in terminal.
 set clipboard=unnamed " Use the system clipboard
-set backspace=indent,eol,start
 set backup            " keep a backup file
-set backupdir=~/.vim/backups
-set history=1000      " keep 50 lines of command line history
-set ruler             " show the cursor position all the time
-set incsearch
-set hlsearch
+set backupdir=~/.local/share/nvim/backup
 set expandtab
 set shiftwidth=2
 set tabstop=2
@@ -110,17 +99,13 @@ set nospell " Disable by default
 set completeopt=menu,menuone,preview
 " Hit tab once in : mode, get list.  Hit again to go through list.
 set wildmode=longest:full,full
-set wildmenu
 set signcolumn=yes
 set virtualedit=block
 set switchbuf="useopen"
 setlocal numberwidth=3
 
-" https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
-set nrformats-=octal
 set scrolloff=1
 set sidescrolloff=5
-set formatoptions+=j
 
 " Nicer splitting
 set splitbelow
@@ -139,19 +124,12 @@ let &showbreak='↳  '
 set regexpengine=1
 
 " Make vim save/restore when leaving buffer, etc
-set autoread
 set autowriteall
-set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
   call mkdir(expand(&undodir), 'p')
 endif
 set undofile
 set nohidden
-
-" disable Background Color Erase (BCE) so that color schemes
-" render properly when inside 256-color tmux and GNU screen.
-" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-set t_ut=
 
 " tmux will send xterm-style keys when its xterm-keys option is on
 " https://superuser.com/questions
@@ -163,6 +141,7 @@ if &term =~# '^tmux'
 endif
 
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes 
+" TODO: nvim
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
@@ -195,41 +174,48 @@ endif
 tnoremap <C-Right> <C-w>:vsplit +Dirvish<CR>
  noremap <C-Down> :split +Dirvish<CR>
 tnoremap <C-Down> <C-w>:split +Dirvish<CR>
- noremap <C-h> <C-W><C-H>
-tnoremap <C-h> <C-W><C-H>
- noremap <C-j> <C-W><C-J>
-tnoremap <C-j> <C-W><C-J>
- noremap <C-k> <C-W><C-K>
-tnoremap <C-k> <C-W><C-K>
- noremap <C-l> <C-W><C-L>
-tnoremap <C-l> <C-W><C-L>
+
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+
+inoremap <C-h> <C-\><C-N><C-w>h
+inoremap <C-j> <C-\><C-N><C-w>j
+inoremap <C-k> <C-\><C-N><C-w>k
+inoremap <C-l> <C-\><C-N><C-w>l
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Space-t spawns a terminal
-nnoremap <Leader>t :terminal ++curwin<CR>
+nnoremap <Leader>t :terminal<CR>
 
 " Indent/deindent
 nnoremap <Leader>] >>_
 nnoremap <Leader>[ <<_
 
 " Term scrolling
-function! TSExitNormalMode()
-  unmap <buffer> <silent> <LeftMouse>
-  unmap <buffer> <silent> <ESC>
-  call feedkeys('a')
-endfunction
-
-function! TSEnterNormalMode()
-  if &buftype ==? 'terminal' && mode('') ==? 't'
-    call feedkeys("\<c-w>N")
-    call feedkeys("\<c-y>")
-    map <buffer> <silent> <LeftMouse> :call TSExitNormalMode()<CR>
-    map <buffer> <silent> <ESC> :call TSExitNormalMode()<CR>
-    setlocal nonumber
-  endif
-endfunction
-
-tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
-tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
+" function! TSExitNormalMode()
+"   unmap <buffer> <silent> <LeftMouse>
+"   unmap <buffer> <silent> <ESC>
+"   call feedkeys('a')
+" endfunction
+"
+" function! TSEnterNormalMode()
+"   if &buftype ==? 'terminal' && mode('') ==? 't'
+"     call feedkeys("\<c-w>N")
+"     call feedkeys("\<c-y>")
+"     map <buffer> <silent> <LeftMouse> :call TSExitNormalMode()<CR>
+"     map <buffer> <silent> <ESC> :call TSExitNormalMode()<CR>
+"     setlocal nonumber
+"   endif
+" endfunction
+"
+" tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
+" tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <C-v> <C-w>"*
 
 map gb <C-^>
@@ -334,11 +320,13 @@ function! TSMkNonExDir(file, buf)
 endfunction
 augroup vimrc
   autocmd!
+  autocmd TermOpen * startinsert
+  autocmd TermOpen * set nonumber
+  autocmd BufEnter term://* startinsert
+
   " Open quickfix window after any :*grep* command
   " https://github.com/tpope/vim-fugitive
   autocmd QuickFixCmdPost *grep* cwindow
-  " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
-  autocmd GUIEnter * set vb t_vb=                     
   " Resize splits when the window is resized
   autocmd VimResized * wincmd =                       
   " Open fold under cursor on read/write
@@ -363,7 +351,7 @@ augroup END
 "}}}
 " Colors {{{
 function! MyHighlights() abort
-  highlight Normal                      guibg=black
+  highlight Normal                      guibg=NONE
   highlight Comment                                    cterm=italic
   highlight Pmenu       guifg=#c6c6c6   guibg=Blue
   highlight PmenuSel    guifg=Yellow    guibg=Blue     cterm=bold
@@ -392,19 +380,21 @@ augroup MyColors
 augroup END
 
 " https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+" TODO: nvim
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
 " https://vi.stackexchange.com/questions/15722/vim-tmux-and-xterm-bracketed-paste
-if &term =~ '^tmux'
+" TODO: nvim
+if &term =~# '^tmux'
   let &t_BE="\<Esc>[?2004h"
   let &t_BD="\<Esc>[?2004l"
   let &t_PS="\<Esc>[200~"
   let &t_PE="\<Esc>[201~"
 endif
 
+" TODO: nvim:  if this is set, italics doesn't work :shrug:.
 set termguicolors
-set background=dark
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 "}}}
@@ -446,8 +436,8 @@ let g:dirvish_mode = ':sort ,^.*[\/],'
 augroup dirvish
   autocmd!
   autocmd FileType dirvish silent keeppatterns g@\v/\.[^\/]+/?$@d _
-  autocmd FileType dirvish nnoremap <buffer> <silent> <Leader>t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
-  autocmd FileType dirvish nnoremap <buffer> <silent> t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
+  autocmd FileType dirvish nnoremap <buffer> <silent> <Leader>t :exec 'lcd ' . expand('%')<CR>:terminal<CR>
+  autocmd FileType dirvish nnoremap <buffer> <silent> t :exec 'lcd ' . expand('%')<CR>:terminal<CR>
 augroup END
 " }}}
 
@@ -599,7 +589,6 @@ function! TSprojname() abort
 endfunction
 
 set noshowmode
-set laststatus=2
 let g:lightline = {
 \   'active': {
 \     'left':  [ [ 'mode', 'paste' ],

@@ -1,7 +1,7 @@
 *.spl
 *.sug
 plugged/*
-backups/*
+backup/*
 info
 undo
 localvimrc_persistent
