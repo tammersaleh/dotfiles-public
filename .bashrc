@@ -1,9 +1,5 @@
 # vim: foldmethod=marker
 
-# Default to -rw------- for files.
-umask 077
-
-
 ### Helpers {{{
 
 __has() {
