@@ -5,16 +5,14 @@
 coverage
 coverage.data
 TAGS
-webrat-*.html
-capybara-*.html
 *Autosaved*
-tmp/email-*.txt
 .bundle
 .sass-cache
-.env
 .dat*
 .netrwhist
 crash.log
+shit
+shit.*
 
 !.keep
 !.keepme
