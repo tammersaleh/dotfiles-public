@@ -197,25 +197,25 @@ endif
 " Splits
 " Ctrl-n/ creates splits
 " Ctrl-hjkl changes splits
- noremap <C-Right> :vsplit +Dirvish<CR>
-tnoremap <C-Right> <C-w>:vsplit +Dirvish<CR>
- noremap <C-Down> :split +Dirvish<CR>
-tnoremap <C-Down> <C-w>:split +Dirvish<CR>
- noremap <C-h> <C-W><C-H>
-tnoremap <C-h> <C-W><C-H>
- noremap <C-j> <C-W><C-J>
-tnoremap <C-j> <C-W><C-J>
- noremap <C-k> <C-W><C-K>
-tnoremap <C-k> <C-W><C-K>
- noremap <C-l> <C-W><C-L>
-tnoremap <C-l> <C-W><C-L>
+ noremap <silent> <C-Right> :vsplit +Dirvish<CR>
+tnoremap <silent> <C-Right> <C-w>:vsplit +Dirvish<CR>
+ noremap <silent> <C-Down> :split +Dirvish<CR>
+tnoremap <silent> <C-Down> <C-w>:split +Dirvish<CR>
+ noremap <silent> <C-h> <C-W><C-H>
+tnoremap <silent> <C-h> <C-W><C-H>
+ noremap <silent> <C-j> <C-W><C-J>
+tnoremap <silent> <C-j> <C-W><C-J>
+ noremap <silent> <C-k> <C-W><C-K>
+tnoremap <silent> <C-k> <C-W><C-K>
+ noremap <silent> <C-l> <C-W><C-L>
+tnoremap <silent> <C-l> <C-W><C-L>
 
 " Space-t spawns a terminal
 nnoremap <silent> <Leader>t :bp\|bd #\|terminal ++curwin<CR>
 
 " Indent/deindent
-nnoremap <Leader>] >>_
-nnoremap <Leader>[ <<_
+nnoremap <silent> <Leader>] >>_
+nnoremap <silent> <Leader>[ <<_
 
 " Term scrolling
 function! TSExitNormalMode()
@@ -238,24 +238,22 @@ tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <C-v> <C-w>"*
 
-map gb <C-^>
+map <silent> gb <C-^>
 
 " Make j/k move to next visual line instead of physical line
 " http://yubinkim.com/?p=6
-nnoremap k gk
-nnoremap j gj
-nnoremap gk k
-nnoremap gj j
+nnoremap <silent> k gk
+nnoremap <silent> j gj
+nnoremap <silent> gk k
+nnoremap <silent> gj j
 
-" quick fix for misspelled word
+" Spelling
 nnoremap zf 1z=
-
-" No idea why I need this, honestly.
-noremap <nowait> dd dd
+nnoremap zb zw
 
 """ Text objects
-" 'in line' (entire line sans white-space; cursor at beginning--ie, ^)
 " https://vimways.org/2018/transactions-pending/
+" 'in line' (entire line sans white-space; cursor at beginning--ie, ^)
 xnoremap <silent> il :<c-u>normal! g_v^<cr>
 onoremap <silent> il :<c-u>normal! g_v^<cr>
 
@@ -268,8 +266,8 @@ xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
 onoremap <silent> id :<c-u>normal! GVgg<cr>
 
 " 'in fold' https://github.com/Konfekt/FastFold#fold-text-object
-xnoremap iz :<c-u>normal! ]zv[z<cr>
-xnoremap az :<c-u>normal! ]zV[z<cr>
+xnoremap <silent> iz :<c-u>normal! ]zv[z<cr>
+xnoremap <silent> az :<c-u>normal! ]zV[z<cr>
 
 " 'in indentation' (indentation level sans any surrounding empty lines)
 function! s:inIndentation()
