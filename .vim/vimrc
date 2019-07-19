@@ -81,6 +81,14 @@ command! PU source $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | source $MY
 " Options {{{
 
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
+
+set backupdir=$XDG_DATA_HOME/vim/backups
+set directory=$XDG_DATA_HOME/vim/swap
+set undodir=$XDG_DATA_HOME/vim/undo
+call mkdir(expand(&undodir), 'p')
+call mkdir(expand(&directory), 'p')
+call mkdir(expand(&backupdir), 'p')
+
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
 set list
@@ -94,7 +102,6 @@ set ttymouse=sgr      " Mouse can resize splits
 set clipboard=unnamed " Use the system clipboard
 set backspace=indent,eol,start
 set backup            " keep a backup file
-set backupdir=$XDG_DATA_HOME/vim/backups
 set history=1000      " keep 50 lines of command line history
 set ruler             " show the cursor position all the time
 set incsearch
@@ -142,10 +149,6 @@ set regexpengine=1
 " Make vim save/restore when leaving buffer, etc
 set autoread
 set autowriteall
-set undodir=$XDG_DATA_HOME/vim/undo
-if !isdirectory(expand(&undodir))
-  call mkdir(expand(&undodir), 'p')
-endif
 set undofile
 set nohidden
 
