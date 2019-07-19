@@ -35,7 +35,6 @@ setlocal spell
 let b:AutoPairs = {'(':')', '{':'}',"'":"'",'"':'"', '`':'`'} " [] screws with GFM checkboxes
 let b:AutoPairs = AutoPairsDefine({'```' : '```'}) " Add triple backticks
 
-ALEDisableBuffer
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 

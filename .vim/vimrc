@@ -90,6 +90,7 @@ if !has('nvim')
 endif
 set iskeyword+=-      " This makes foo-bar a single "word" - affects "*" and others
 set mouse=a           " Allow mouse positioning and scrolling in terminal.
+set ttymouse=sgr      " Mouse can resize splits
 set clipboard=unnamed " Use the system clipboard
 set backspace=indent,eol,start
 set backup            " keep a backup file
