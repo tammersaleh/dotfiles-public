@@ -211,7 +211,7 @@ tnoremap <C-k> <C-W><C-K>
 tnoremap <C-l> <C-W><C-L>
 
 " Space-t spawns a terminal
-nnoremap <Leader>t :terminal ++curwin<CR>
+nnoremap <silent> <Leader>t :bp\|bd #\|terminal ++curwin<CR>
 
 " Indent/deindent
 nnoremap <Leader>] >>_
