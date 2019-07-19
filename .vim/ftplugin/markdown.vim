@@ -38,12 +38,12 @@ let b:AutoPairs = AutoPairsDefine({'```' : '```'}) " Add triple backticks
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 
-function s:Toc()
-  :Toc
-  :wincmd p
-endfunction
-
-augroup markdown
-  autocmd!
-  autocmd BufWritePost *.md :call s:Toc()
-augroup END
+" function s:Toc()
+"   :Toc
+"   :wincmd p
+" endfunction
+"
+" augroup markdown
+"   autocmd!
+"   autocmd BufWritePost *.md :call s:Toc()
+" augroup END
