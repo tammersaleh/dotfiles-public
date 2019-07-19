@@ -55,6 +55,7 @@ __prependpath "$HOME/.local/bin"
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
 
+export XDG_DATA_HOME=$HOME/.local/share
 tty -s && export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
 export BOTO_CONFIG=/dev/null
 
@@ -62,6 +63,7 @@ export CLICOLOR=1
 export HISTCONTROL="ignoredups"
 export HISTSIZE="2000"
 export LS_COLORS
+# shellcheck disable=SC2046
 eval $(dircolors ~/.dircolors)
 
 export EDITOR="vim"

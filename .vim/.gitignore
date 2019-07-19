@@ -1,8 +1,2 @@
 *.spl
 *.sug
-plugged/*
-backups/*
-info
-undo
-localvimrc_persistent
-view

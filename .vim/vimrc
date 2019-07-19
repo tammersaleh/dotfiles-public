@@ -2,7 +2,7 @@ set encoding=utf-8
 scriptencoding utf-8
 
 " Plugins {{{
-call plug#begin('~/.vim/plugged')
+call plug#begin(expand('$XDG_DATA_HOME') . '/vim/plugged')
 
 if has('python3')
   " Force python3 support before loading other plugins
@@ -86,7 +86,7 @@ set listchars=tab:».,nbsp:_,conceal:×
 set list
 set timeoutlen=1000 ttimeoutlen=10 " Fix esc delay
 if !has('nvim')
-  set viminfo+=n~/.vim/info
+  set viminfo+=n$XDG_DATA_HOME/vim/info
 endif
 set iskeyword+=-      " This makes foo-bar a single "word" - affects "*" and others
 set mouse=a           " Allow mouse positioning and scrolling in terminal.
@@ -94,7 +94,7 @@ set ttymouse=sgr      " Mouse can resize splits
 set clipboard=unnamed " Use the system clipboard
 set backspace=indent,eol,start
 set backup            " keep a backup file
-set backupdir=~/.vim/backups
+set backupdir=$XDG_DATA_HOME/vim/backups
 set history=1000      " keep 50 lines of command line history
 set ruler             " show the cursor position all the time
 set incsearch
@@ -142,12 +142,14 @@ set regexpengine=1
 " Make vim save/restore when leaving buffer, etc
 set autoread
 set autowriteall
-set undodir=~/.vim/undo
+set undodir=$XDG_DATA_HOME/vim/undo
 if !isdirectory(expand(&undodir))
   call mkdir(expand(&undodir), 'p')
 endif
 set undofile
 set nohidden
+
+set viewdir=$XDG_DATA_HOME/vim/view
 
 " disable Background Color Erase (BCE) so that color schemes
 " render properly when inside 256-color tmux and GNU screen.
@@ -481,7 +483,7 @@ endif
 
 " localvimrc {{{
 let g:localvimrc_persistent = 2
-let g:localvimrc_persistence_file = expand('$HOME') . '/.vim/localvimrc_persistent'
+let g:localvimrc_persistence_file = $XDG_DATA_HOME . '/vim/localvimrc_persistent'
 " }}}
 
 " Surround {{{
