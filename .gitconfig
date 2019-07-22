@@ -36,7 +36,7 @@
   latest-branches = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
   push-branch     = !bash -c 'git push --set-upstream origin "$(git current-branch)"'
   delete-branch   = !bash -c 'git branch -d $0 && git push origin --delete $0'
-  track-branch    = !bash -c 'git fetch origin && git branch --set-upstream $0 origin/$0 && git checkout $0'
+  # track-branch    = !bash -c 'git fetch origin && git branch --set-upstream $0 origin/$0 && git checkout $0'
   publish-branch  = push -u origin
   update          = "!git fetch upstream && git rebase \"upstream/$(git current-branch)\""
 
