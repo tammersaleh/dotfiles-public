@@ -105,3 +105,8 @@ namespaces/!
 Namespaces
 NetworkPolicy
 Deployment
+Namespace
+StatefulSets
+maxUnavailable
+pods/!
+Pods

@@ -66,6 +66,7 @@ Plug 'https://github.com/gfontenot/vim-url-opener'      " Open arbitrary strings
 " https://github.com/TaDaa/vimade/issues/7
 Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
+" Plug 'https://github.com/chrisbra/Recover.vim'          " Swap file diff - pretty sure this broke swap files.  They just disappear.
 " }}}
 
 " Color theme {{{

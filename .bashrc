@@ -156,7 +156,7 @@ if tty -s; then
   alias dc=docker-compose
   alias :q=exit
 
-  __has bat && alias less="bat --style=changes"
+  __has bat && alias less="bat"
 
   gpip(){
     # https://hackercodex.com/guide/python-development-environment-on-mac-osx/

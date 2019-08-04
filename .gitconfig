@@ -18,7 +18,6 @@
   a               = add -A
 
   current-branch  = rev-parse --abbrev-ref HEAD
-  st              = status -sb
   conflicts       = !git st | grep unmerged: | cut -c 15-
   modified        = ls-files -m
   last            = log @{1}.. --decorate --reverse --stat -C --no-merges
