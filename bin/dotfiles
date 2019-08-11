@@ -12,10 +12,11 @@ function usage {
   echo "Error: $1"
   echo
   echo "Usage:"
-  echo "  $ME public FILE       # Track a file publicly"
-  echo "  $ME private FILE      # Track a file privately"
-  echo "  $ME ignore FILE       # Ignore a file path (use full path with \$HOME as root)"
-  echo "  $ME install           # Install dotfiles.  Idempotent."
+  echo "  $ME public FILE   - Track a file publicly"
+  echo "  $ME private FILE  - Track a file privately"
+  echo "  $ME ignore FILE   - Ignore a file path (use full path with \$HOME as root)"
+  echo "  $ME pull          - Update to latest version from github."
+  echo "  $ME install       - Install dotfiles.  Idempotent."
   exit 3
 }
 
@@ -27,6 +28,9 @@ command=$1
 shift
 
 function private {
+  if [[ "$HOME" != "$PWD" ]]; then
+    usage "This must be run from $HOME"
+  fi
   file=$1
   dest="$PRIVATE/$file"
   mkdir -p "$(dirname "$dest")"
@@ -36,6 +40,9 @@ function private {
 }
 
 function public {
+  if [[ "$HOME" != "$PWD" ]]; then
+    usage "This must be run from $HOME"
+  fi
   file=$1
   dest="$PUBLIC/$file"
   mkdir -p "$(dirname "$dest")"
