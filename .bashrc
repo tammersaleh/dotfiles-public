@@ -78,6 +78,8 @@ export LESS="-FRMX --tabs 4"
 export LESSOPEN="|lesspipe.sh %s"
 export LESS_ADVANCED_PREPROCESSOR=1
 
+__has bat && export MANPAGER="sh -c 'col -b | bat -l man -p'"
+
 export PS4="\n$ "
 
 # export TERM=xterm-256color
