@@ -110,3 +110,5 @@ StatefulSets
 maxUnavailable
 pods/!
 Pods
+CronJobs
+SuperOrbital's
