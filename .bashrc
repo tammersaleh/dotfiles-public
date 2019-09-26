@@ -137,9 +137,7 @@ if tty -s; then
   alias mv='mv -i'
   alias c="cd .."
   alias ls="gls -ohF --color=auto"
-  __has gsed && alias sed=gsed
   alias cidr=sipcalc
-  alias lk="/Volumes/keys/load"
   alias grep="grep --color=auto"
   alias cg='cd "$(git rev-parse --show-toplevel)"'
   alias html="pup"
@@ -152,12 +150,13 @@ if tty -s; then
   alias g=git
   alias https='http --default-scheme=https'
   alias pip=pip3
-  alias slack="slack-term -config ~/.config/slack-term.json"
-  # alias ssh="TERM=xterm-color ssh"
   alias tf=terraform
+  alias k=kubectl
   alias dc=docker-compose
+  alias d=docker
   alias :q=exit
 
+  __has gsed && alias sed=gsed
   __has bat && alias less="bat"
 
   gpip(){
@@ -204,6 +203,15 @@ if tty -s; then
     eval $(tmux show-env -s | grep '^SSH_')
   }
 
+  tmux-detach() {
+    my_id="$(echo "$TMUX_PANE" | cut -c 2-)"
+    for id in $(tmux ls -F '#{session_name}' | grep -vx "$my_id"); do
+      echo "detaching $id"
+      tmux detach-client -s "$id"
+    done
+    exit
+  }
+
   ############### }}}
   ### Completions {{{
 
@@ -224,6 +232,7 @@ if tty -s; then
   __source_if_exists "$HOME/.bash/terraform-completion"
 
   __has kubectl && source <(kubectl completion bash)
+  __has kubectl && complete -o default -F __start_kubectl k
   __has helm    && source <(helm completion bash)
   __has stern   && source <(stern --completion bash)
 
