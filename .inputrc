@@ -19,6 +19,9 @@ set input-meta on
 set output-meta on
 set convert-meta off
 
+# Don't record changes in history
+set revert-all-at-newline
+
 # Remove ESC delay
 set keyseq-timeout 1
 
