@@ -49,12 +49,18 @@ bash_prompt() {
   SHORT_HOST="$(hostname -s)"
   if [[ $SHORT_HOST == "tardis" ]]; then
     local H=""
+    local TS="\[\033]0;"
+    local TE="\007\]"
+    local TITLE="$TS\w$TE"
   else
     local H="$SHORT_HOST:"
+    local TS="\[\033]0;"
+    local TE="\007\]"
+    local TITLE="$TS\h:\w$TE"
   fi
 
   PROMPT_DIRTRIM=2
-  PS1="$EMW$H$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
+  PS1="$TITLE$EMW$H$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
 }
 
 bash_prompt
