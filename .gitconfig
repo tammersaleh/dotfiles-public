@@ -24,7 +24,7 @@
   files-in-commit = diff-tree --no-commit-id --name-only -r
   bl              = blame -wMC
 
-  co              = checkout
+  co              = !echo Use either git-switch or git-restore
 
   ci              = commit -v
   append          = commit --amend --no-edit
