@@ -193,7 +193,6 @@ if has('gui_macvim')
   set macmeta
 endif
 
-" }}
 " Splits
 " Ctrl-n/ creates splits
 " Ctrl-hjkl changes splits
@@ -214,8 +213,11 @@ tnoremap <silent> <C-l> <C-W><C-L>
 nnoremap <silent> <Leader>t :bp\|bd #\|terminal ++curwin<CR>
 
 " Indent/deindent
-nnoremap <silent> <Leader>] >>_
-nnoremap <silent> <Leader>[ <<_
+nnoremap <silent> <Tab> >>_
+nnoremap <silent> <S-Tab> <<_
+inoremap <silent> <S-Tab> <C-D>
+vnoremap <silent> <Tab> >gv
+vnoremap <silent> <S-Tab> <gv
 
 " Term scrolling
 function! TSExitNormalMode()
@@ -238,6 +240,7 @@ tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <C-v> <C-w>"*
 
+" go back
 map <silent> gb <C-^>
 
 " Make j/k move to next visual line instead of physical line
@@ -250,6 +253,9 @@ nnoremap <silent> gj j
 " Spelling
 nnoremap zf 1z=
 nnoremap zb zw
+
+" write and quit on ctrl-D
+nnoremap <C-d> :wq<CR>
 
 """ Text objects
 " https://vimways.org/2018/transactions-pending/
@@ -309,6 +315,7 @@ endfunction
 xnoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 
+" show current highlight
 noremap gs :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
@@ -321,6 +328,7 @@ function! OSC52Copy(text) abort
     call writefile([escape], '/dev/tty', 'b')
   endif
 endfunction
+" copy to system clipboard over ssh
 xnoremap <silent> <Leader>y y:call OSC52Copy(getreg('"'))<CR>
 
 " }}}
@@ -387,6 +395,7 @@ function! MyHighlights() abort
   highlight htmlH5      guifg=#6e7016                  cterm=bold
   highlight htmlH6      guifg=#5c5d13                  cterm=bold
   highlight String      guifg=#999999
+  highlight Visual      guifg=#c4c400   guibg=black
   " call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
