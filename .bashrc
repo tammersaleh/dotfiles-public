@@ -150,6 +150,7 @@ if tty -s; then
   alias g=git
   alias https='http --default-scheme=https'
   alias pip=pip3
+  alias dush=dust # Better du -sh
   alias tf=terraform
   alias k=kubectl
   alias dc=docker-compose

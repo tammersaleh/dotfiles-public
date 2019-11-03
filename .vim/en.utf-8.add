@@ -112,3 +112,6 @@ pods/!
 Pods
 CronJobs
 SuperOrbital's
+nodes/!
+Nodes
+ConfigMap

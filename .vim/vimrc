@@ -79,13 +79,13 @@ command! PU source $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | source $MY
 " }}}
 " Options {{{
 
-if !empty($TMUX)
-  " https://stackoverflow.com/questions/49316018/vimscript-t-ts-for-title-use-two-escape-codes
-  set t_ts=]0;
-  set t_fs=
-endif
-set title
-set titlestring=%{hostname()\ .\ \":\"\ .\ substitute(getcwd(),\ $HOME,\ '~',\ '')}
+" if !empty($TMUX)
+"   " https://stackoverflow.com/questions/49316018/vimscript-t-ts-for-title-use-two-escape-codes
+"   set t_ts=]0;
+"   set t_fs=
+" endif
+" set title
+" set titlestring=%{hostname()\ .\ \":\"\ .\ substitute(getcwd(),\ $HOME,\ '~',\ '')}
 
 set backupdir=$XDG_DATA_HOME/vim/backups
 set directory=$XDG_DATA_HOME/vim/swap
@@ -202,10 +202,10 @@ endif
 " Splits
 " Ctrl-n/ creates splits
 " Ctrl-hjkl changes splits
- noremap <silent> <C-Right> :vsplit +Dirvish<CR>
-tnoremap <silent> <C-Right> <C-w>:vsplit +Dirvish<CR>
- noremap <silent> <C-Down> :split +Dirvish<CR>
-tnoremap <silent> <C-Down> <C-w>:split +Dirvish<CR>
+ noremap <silent> <C-Right> :vsplit +Dirvish\ %<CR>
+tnoremap <silent> <C-Right> <C-w>:vsplit +Dirvish\ %<CR>
+ noremap <silent> <C-Down> :split +Dirvish\ %<CR>
+tnoremap <silent> <C-Down> <C-w>:split +Dirvish\ %<CR>
  noremap <silent> <C-h> <C-W><C-H>
 tnoremap <silent> <C-h> <C-W><C-H>
  noremap <silent> <C-j> <C-W><C-J>
@@ -376,8 +376,8 @@ augroup vimrc
   " Fixed QF / Location window size
   autocmd FileType qf setlocal winfixwidth
   " https://github.com/justinmk/vim-dirvish/issues/142
-  autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +Dirvish<CR>
-  autocmd FileType qf noremap <buffer> <C-Down> :lclose \| split +Dirvish<CR>
+  autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +Dirvish\ %<CR>
+  autocmd FileType qf noremap <buffer> <C-Down> :lclose \| split +Dirvish\ %<CR>
 augroup END
 "}}}
 " Colors {{{
@@ -578,6 +578,8 @@ map ge <Plug>(smartword-ge)
 " vimade {{{
 let g:vimade = {}
 let g:vimade.enablesigns = 1
+" https://github.com/TaDaa/vimade/issues/19
+let g:vimade.usecursorhold=1
 " }}}
 
 " Terraform {{{
