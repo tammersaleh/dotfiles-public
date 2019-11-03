@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # https://github.com/PlatyPew/dotfiles/blob/master/configs/git/git-st
-set -euo pipefail
+set -eo pipefail
 
 if [[ "$#" -eq 1 ]]; then
   cd "$1"
@@ -20,6 +20,7 @@ done
 (( len *= -1 ))
 
 for i in $(seq 1 $(( ${#status[@]} - 1))); do
+  # set -u breaks this line:
   if [ -n "${diff[i - 1]}" ]; then
     currDiff="|${diff[i - 1]}"
   else
