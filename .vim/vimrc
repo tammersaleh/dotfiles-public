@@ -261,7 +261,8 @@ nnoremap zf 1z=
 nnoremap zb zw
 
 " write and quit on ctrl-D
-nnoremap <C-d> :wq<CR>
+" This conflicts with normal pagedown behavior
+" nnoremap <C-d> :wq<CR>
 
 """ Text objects
 " https://vimways.org/2018/transactions-pending/
