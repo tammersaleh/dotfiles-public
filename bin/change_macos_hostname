@@ -26,6 +26,7 @@ usage() {
   Usage:   $(basename "$0") HOSTNAME
   Example: $(basename "$0") tardis
 	EOF
+  exit 2
 }
 
 main "$@"
