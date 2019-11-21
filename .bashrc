@@ -136,7 +136,8 @@ if tty -s; then
   alias cp='cp -i'
   alias mv='mv -i'
   alias c="cd .."
-  alias ls="gls -ohF --color=auto"
+  alias ls="gls -ohF  --color=auto"
+  alias la="gls -ohFa --color=auto"
   alias cidr=sipcalc
   alias grep="grep --color=auto"
   alias cg='cd "$(git rev-parse --show-toplevel)"'
