@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+main() {
+  [[ "$#" -eq 1 ]] || usage "HOSTNAME required"
+  [[ "$(uname -s)" == "Darwin" ]] || usage "Only runs on macOS"
+
+  new="$1"
+  old="$(scutil --get HostName)"
+
+  echo "Changing hostname from $old to $new:"
+
+  set -x
+  sudo scutil --set HostName "$new"
+  sudo scutil --set LocalHostName "$new"
+  sudo scutil --set ComputerName "$new"
+}
+
+usage() {
+  cat <<-EOF
+  Error: $1
+
+  Changes the macOS hostname - _all_ of them.
+
+  Usage:   $(basename "$0") HOSTNAME
+  Example: $(basename "$0") tardis
+	EOF
+}
+
+main "$@"
