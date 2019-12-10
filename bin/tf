@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# This used to be an alias, but that doesn't work with aws-vault.
+exec terraform "$@"

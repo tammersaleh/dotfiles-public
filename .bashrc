@@ -142,8 +142,6 @@ if tty -s; then
   alias cidr=sipcalc
   alias grep="grep --color=auto"
   alias cg='cd "$(git rev-parse --show-toplevel)"'
-  alias html="pup"
-  alias pyconsole="pipenv run ptpython"
   alias grammarly="open -a Grammarly"
   alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
   alias da="direnv allow"
@@ -151,14 +149,16 @@ if tty -s; then
   alias git=hub
   alias g=git
   alias https='http --default-scheme=https'
+  alias html="pup"
+  alias pyconsole="pipenv run ptpython"
   alias pip=pip3
   alias dush=dust # Better du -sh
-  alias tf=terraform
   alias k=kubectl
   alias dc=docker-compose
   alias d=docker
   alias :q=exit
   alias sw='ssh workspace.superorbit.al'
+  # This needs to be an alias to avoid recursion.
   alias aws='aws-vault exec "$AWS_DEFAULT_PROFILE" -- aws'
 
   __has gsed && alias sed=gsed
