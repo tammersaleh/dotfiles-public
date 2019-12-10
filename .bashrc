@@ -103,8 +103,8 @@ export GOBIN="$GOPATH/bin/$(uname -s)"
 export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
-# export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
 export AWS_DEFAULT_PROFILE=superorbital-staging
+export AWS_VAULT_BACKEND=file
 
 export TERMINFO=~/.terminfo
 
