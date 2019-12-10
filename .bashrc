@@ -103,7 +103,8 @@ export GOBIN="$GOPATH/bin/$(uname -s)"
 export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
-export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
+# export AWS_SDK_LOAD_CONFIG=true # Load _both_ ~/.aws/credentials and ~/.aws/config
+export AWS_DEFAULT_PROFILE=superorbital-staging
 
 export TERMINFO=~/.terminfo
 
@@ -158,6 +159,7 @@ if tty -s; then
   alias d=docker
   alias :q=exit
   alias sw='ssh workspace.superorbit.al'
+  alias aws='aws-vault exec "$AWS_DEFAULT_PROFILE" -- aws'
 
   __has gsed && alias sed=gsed
   __has bat && alias less="bat"
@@ -170,6 +172,7 @@ if tty -s; then
   if __has bat; then
     # Print the top of the README.md file when changing to a directory.
     cd() {
+      # shellcheck disable=SC2164
       builtin cd "$@"
       ret=$?
       if [[ $ret -eq 0 ]]; then
@@ -203,12 +206,13 @@ if tty -s; then
   alias j=journal
 
   fixssh() {
+    # shellcheck disable=SC2046
     eval $(tmux show-env -s | grep '^SSH_')
   }
 
   tmux-detach() {
     my_id="$(echo "$TMUX_PANE" | cut -c 2-)"
-    for id in $(tmux ls -F '#{session_name}' | grep -vx "$my_id"); do
+    for id in $(tmux "ls" -F '#{session_name}' | grep -vx "$my_id"); do
       echo "detaching $id"
       tmux detach-client -s "$id"
     done
