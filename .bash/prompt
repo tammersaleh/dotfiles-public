@@ -10,6 +10,14 @@ function __git_branch {
   __git_ps1 " %s"
 }
 
+function __aws_vault {
+  if [[ -v AWS_VAULT ]]; then
+    echo -n " <$AWS_VAULT>"
+  else
+    echo -n ""
+  fi
+}
+
 bash_prompt() {
   local NONE="\[\033[0m\]"    # unsets color to term's fg color
 
@@ -60,7 +68,7 @@ bash_prompt() {
   fi
 
   PROMPT_DIRTRIM=2
-  PS1="$TITLE$EMW$H$EMY\w$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
+  PS1="$TITLE$EMW$H$EMY\w$EMW\$(__aws_vault)\$(__git_branch)$EMY\$(__git_dirty) $Y\$ ${NONE}"
 }
 
 bash_prompt

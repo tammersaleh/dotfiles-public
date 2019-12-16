@@ -103,8 +103,6 @@ export GOBIN="$GOPATH/bin/$(uname -s)"
 export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
-export AWS_DEFAULT_PROFILE=superorbital-staging
-export AWS_VAULT_BACKEND=file
 
 export TERMINFO=~/.terminfo
 
@@ -158,8 +156,6 @@ if tty -s; then
   alias d=docker
   alias :q=exit
   alias sw='ssh workspace.superorbit.al'
-  # This needs to be an alias to avoid recursion.
-  alias aws='aws-vault exec "$AWS_DEFAULT_PROFILE" -- aws'
 
   __has gsed && alias sed=gsed
   __has bat && alias less="bat"
