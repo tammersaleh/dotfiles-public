@@ -251,7 +251,7 @@ tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <C-v> <C-w>"*
 
 " go back
-map <silent> gb <C-^>
+map <silent> gb <C-t>
 
 " Make j/k move to next visual line instead of physical line
 " http://yubinkim.com/?p=6
