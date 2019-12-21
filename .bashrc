@@ -82,8 +82,6 @@ __has bat && export MANPAGER="sh -c 'col -b | bat -l man -p'"
 
 export PS4="\n$ "
 
-# export TERM=xterm-256color
-
 export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=1000000000
@@ -105,6 +103,8 @@ export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
 
 export TERMINFO=~/.terminfo
+
+export AWS_VAULT_BACKEND=file
 
 # For the Dockers!
 export UID
