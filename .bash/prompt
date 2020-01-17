@@ -68,7 +68,7 @@ bash_prompt() {
   fi
 
   PROMPT_DIRTRIM=2
-  PS1="$TITLE$EMW$H$EMY\w$EMW\$(__aws_vault)\$(__git_branch)$EMY\$(__git_dirty) $Y\n❯ ${NONE}"
+  PS1="\n$TITLE$EMW$H$EMY\w$EMW\$(__aws_vault)\$(__git_branch)$EMY\$(__git_dirty) $Y\n❯ ${NONE}"
 }
 
 bash_prompt
