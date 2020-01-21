@@ -65,6 +65,7 @@ Plug 'https://github.com/terryma/vim-expand-region'     " +/_ expand/shrink visu
 Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'            " Fast fuzzy navigation
+Plug 'https://github.com/ap/vim-templates'              " Templates in ~/.vim/templates
 " }}}
 
 " Color theme {{{
@@ -344,7 +345,6 @@ xnoremap <silent> <Leader>y y:call OSC52Copy(getreg('"'))<CR>
 
 " }}}
 " Autocommands {{{
-
 " Make required directories when writing a file..
 " http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
 function! TSMkNonExDir(file, buf)

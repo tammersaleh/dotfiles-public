@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  [[ $# -ge 1 ]] || usage "Expected ARGUMENT"
+  
+}
+
+usage() {
+  cat <<EOF
+  ERROR: $1
+
+  USAGE: $(basename "$0") ARGUMENT
+
+  Explanation
+
+  Examples:
+
+    $(basename "$0") foo
+EOF
+  exit 1
+}
+
+main "$@"
+
+# cursor: 8 del
