@@ -12,7 +12,7 @@ function __git_branch {
 
 function __aws_vault {
   if [[ -v AWS_VAULT ]]; then
-    echo -n " 🔒$AWS_VAULT"
+    echo -n " [$AWS_VAULT]"
   else
     echo -n ""
   fi
@@ -67,8 +67,8 @@ bash_prompt() {
     local TITLE="$TS\h:\w$TE"
   fi
 
-  PROMPT_DIRTRIM=2
-  PS1="\n$TITLE$EMW$H$EMY\w$EMW\$(__aws_vault)\$(__git_branch)$EMY\$(__git_dirty) $Y\n❯ ${NONE}"
+  PROMPT_DIRTRIM=3
+  PS1="\n$TITLE$EMW$H$EMY\w$EMC\$(__aws_vault)$EMW\$(__git_branch)$EMY\$(__git_dirty) $Y\n❯ ${NONE}"
 }
 
 bash_prompt
