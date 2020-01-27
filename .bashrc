@@ -173,7 +173,7 @@ if tty -s; then
       builtin cd "$@"
       ret=$?
       if [[ $ret -eq 0 ]]; then
-        [[ -f README.md ]] && bat --style=numbers --line-range=:9 --italic-text=always --paging=never README.md
+        [[ -f README.md ]] && bat --style=grid --line-range=:9 --italic-text=always --paging=never README.md
         true
       else
         return $ret
