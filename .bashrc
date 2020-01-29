@@ -156,7 +156,6 @@ if tty -s; then
   alias dc=docker-compose
   alias d=docker
   alias :q=exit
-  alias sw='ssh workspace.superorbit.al'
 
   __has gsed && alias sed=gsed
   __has bat && alias less="bat"
