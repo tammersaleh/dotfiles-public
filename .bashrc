@@ -111,7 +111,7 @@ export AWS_VAULT_BACKEND=file
 export UID
 export GID=$(id -g)
 
-__source_if_exists "$HOME/.bash/secret_variables"
+__source_if_exists "$HOME/.bash/secret"
 
 ####################### }}}
 ### Shell Options {{{
