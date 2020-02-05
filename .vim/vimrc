@@ -203,14 +203,14 @@ endif
 " Splits
 " Ctrl-n/ creates splits
 " Ctrl-hjkl changes splits
-function! s:term_at_cwd() abort
+function! s:dirvish_at_cwd() abort
   exec 'Dirvish ' . getcwd()
 endfunction
 
- noremap <silent> <C-Right>      :vsplit +call\ <sid>term_at_cwd()<CR>
-tnoremap <silent> <C-Right> <C-w>:vsplit +call\ <sid>term_at_cwd()<CR>
- noremap <silent> <C-Down>       :split  +call\ <sid>term_at_cwd()<CR>
-tnoremap <silent> <C-Down>  <C-w>:split  +call\ <sid>term_at_cwd()<CR>
+ noremap <silent> <C-Right>      :vsplit +call\ <sid>dirvish_at_cwd()<CR>
+tnoremap <silent> <C-Right> <C-w>:vsplit +call\ <sid>dirvish_at_cwd()<CR>
+ noremap <silent> <C-Down>       :split  +call\ <sid>dirvish_at_cwd()<CR>
+tnoremap <silent> <C-Down>  <C-w>:split  +call\ <sid>dirvish_at_cwd()<CR>
  noremap <silent> <C-h> <C-W><C-H>
 tnoremap <silent> <C-h> <C-W><C-H>
  noremap <silent> <C-j> <C-W><C-J>
@@ -380,8 +380,8 @@ augroup vimrc
   " Fixed QF / Location window size
   autocmd FileType qf setlocal winfixwidth
   " https://github.com/justinmk/vim-dirvish/issues/142
-  autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +call\ <sid>term_at_cwd()<CR>
-  autocmd FileType qf noremap <buffer> <C-Down> :lclose \| split +call\ <sid>term_at_cwd()<CR>
+  autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +call\ <sid>dirvish_at_cwd()<CR>
+  autocmd FileType qf noremap <buffer> <C-Down> :lclose \| split +call\ <sid>dirvish_at_cwd()<CR>
 augroup END
 "}}}
 " Colors {{{
