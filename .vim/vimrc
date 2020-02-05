@@ -466,7 +466,7 @@ let g:Illuminate_highlightUnderCursor = 0
 
 " vim-dirvish {{{
 let g:dirvish_mode = ':sort ,^.*[\/],'
-augroup dirvish
+augroup my_dirvish
   autocmd!
   autocmd FileType dirvish silent keeppatterns g@\v/\.[^\/]+/?$@d _
   autocmd FileType dirvish nnoremap <buffer> <silent> <Leader>t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
