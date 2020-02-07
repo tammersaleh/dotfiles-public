@@ -233,6 +233,7 @@ if tty -s; then
 
   __source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
   __source_if_exists "$HOME/.bash/terraform-completion"
+  __source_if_exists "$HOME/.bash/aws-vault-completion"
 
   __has kubectl && source <(kubectl completion bash)
   __has kubectl && complete -o default -F __start_kubectl k
