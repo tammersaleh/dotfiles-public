@@ -13,6 +13,8 @@ TAGS
 crash.log
 shit
 shit.*
+do-not-commit/
+do_not_commit/
 
 !.keep
 !.keepme
