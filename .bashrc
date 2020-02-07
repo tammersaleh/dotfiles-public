@@ -240,6 +240,7 @@ if tty -s; then
   __has kubectl && complete -o default -F __start_kubectl k
   __has helm    && source <(helm completion bash)
   __has stern   && source <(stern --completion bash)
+  __has fly     && source <(fly completion --shell bash)
 
   ################# }}}
   ### Prompt {{{
