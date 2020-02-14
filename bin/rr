@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  [[ $# -eq 2 ]] || usage "Expected 2 arguments, received $#.  Did you quote?"
+  GLOB="$1"
+  COMMAND="$2"
+  reflex -g "$GLOB" -d none -- bash -c "$COMMAND"
+}
+
+usage() {
+  cat <<EOF
+  ERROR: $1
+
+  USAGE: $(basename "$0") GLOB COMMAND
+
+  Runs reflex configured to watch GLOB and run COMMAND if any matching files
+  change.  Quote liberally.
+
+  Examples:
+
+    $(basename "$0") "*.rb" "clear && bundle exec rspec *_spec.rb"
+EOF
+  exit 1
+}
+
+main "$@"
