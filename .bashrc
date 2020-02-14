@@ -79,6 +79,7 @@ export LESSOPEN="|lesspipe.sh %s"
 export LESS_ADVANCED_PREPROCESSOR=1
 
 __has bat && export MANPAGER="sh -c 'col -b | bat -l man -p'"
+__has bat && export MANROFFOPT="-c"
 __has bat && export HOMEBREW_BAT=true
 
 export PS4="\n$ "
