@@ -1,12 +1,11 @@
+### Powerlevel10k Start {{{
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# vim: foldmethod=marker
-
+############ }}}
 ### Helpers {{{
 
 __has() { whence $1 > /dev/null; }
@@ -115,18 +114,11 @@ export AWS_VAULT_BACKEND=file
 export UID
 export GID=$(id -g)
 
+export HISTFILE="$HOME/.local/share/zsh/history"
+
 __source_if_exists "$HOME/.bash/secret"
 
 ####################### }}}
-### Shell Options {{{
-
-# shopt -s checkwinsize
-# shopt -s histappend
-# shopt -s no_empty_cmd_completion
-# shopt -s globstar
-# shopt -s checkjobs
-
-########## }}}
 ### Terminfo {{{
 for terminfo_file in ~/.terminfo-sources/*.terminfo; do
   tic -x -o ~/.terminfo "$terminfo_file"
@@ -219,33 +211,30 @@ tmux-detach() {
 
 ############### }}}
 ### Completions {{{
+autoload -Uz compinit && compinit -d "$HOME/.local/share/zsh/compdump"
+autoload bashcompinit && bashcompinit
 
-# __source_if_exists /usr/local/etc/bash_completion
-# __source_if_exists /home/linuxbrew/.linuxbrew/etc/bash_completion
-# __source_if_exists "$HOME/.asdf/completion/asdf.bash"
-# __source_if_exists /etc/bash_completion.d/gcloud
+DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
+__source_if_exists "$DOCKER_ETC/docker.zsh-completion"
+__source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
+__source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 
-# complete -o default -o nospace -F _git g
-# complete -C aws_completer aws
+__source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+__source_if_exists "$HOME/.bash/terraform-completion"
+__source_if_exists "$HOME/.bash/aws-vault-completion"
 
-# DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
-# __source_if_exists "$DOCKER_ETC/docker.bash-completion"
-# __source_if_exists "$DOCKER_ETC/docker-machine.bash-completion"
-# __source_if_exists "$DOCKER_ETC/docker-compose.bash-completion"
+__source_if_exists /usr/local/etc/zsh_completion
+__source_if_exists /home/linuxbrew/.linuxbrew/etc/zsh_completion
+__source_if_exists "$HOME/.asdf/completion/asdf.zsh"
+__source_if_exists /etc/zsh_completion.d/gcloud
 
-# __source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-# __source_if_exists "$HOME/.bash/terraform-completion"
-# __source_if_exists "$HOME/.bash/aws-vault-completion"
+complete -o default -o nospace -F _git g
+complete -C aws_completer aws
 
 __has kubectl && source <(kubectl completion zsh)
-# __has kubectl && complete -o default -F __start_kubectl k
+__has kubectl && complete -o default -F __start_kubectl k
 __has helm    && source <(helm completion zsh)
 __has stern   && source <(stern --completion zsh)
-
-################# }}}
-### Prompt {{{
-
-# __source_if_exists "$HOME/.bash/prompt"
 
 ################# }}}
 ### Hooks & Daemons {{{
@@ -257,7 +246,60 @@ if [[ -x ~/.dropbox-dist/dropboxd ]] && ! __running dropbox; then
   nohup ~/.dropbox-dist/dropboxd >> ~/.dropbox-dist/dropboxd.log &
 fi
 # }}}
+### Vim Mode {{{
+# http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
+# https://dougblack.io/words/zsh-vi-mode.html
+# Better searching in command mode
+bindkey -v
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+
+# Beginning search with j/k
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
+
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
+
+# https://www.reddit.com/r/vim/comments/7wj81e/you_can_get_vim_bindings_in_zsh_and_bash/du3tx3z/
+# ci"
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+  for c in {a,i}{\',\",\`}; do
+    bindkey -M $m $c select-quoted
+  done
+done
+
+# ci{, ci(
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $m $c select-bracketed
+  done
+done
+
+# surround
+autoload -Uz surround
+zle -N delete-surround surround
+zle -N add-surround surround
+zle -N change-surround surround
+bindkey -a cs change-surround
+bindkey -a ds delete-surround
+bindkey -a ys add-surround
+bindkey -M visual S add-surround
+#}}}
+### Powerlevel10k Finish {{{
 source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
 [[ ! -f ~/.zsh/.p10k.zsh ]] || source ~/.zsh/.p10k.zsh
+
+#}}}
+source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# vim: foldmethod=marker
