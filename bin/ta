@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -eu
+# shopt -s inherit_errexit
+
+if [[ -v TMUX ]]; then
+  echo "Alraedy in tmux!"
+  exit 1
+fi
+
+unattached_tmux_session=$(tmux ls -F "#{session_attached}:#{session_name}" 2>/dev/null | grep -E '^0:' | cut -f 2 -d : | head -n 1)
+if [[ -z "$unattached_tmux_session" ]]; then
+  # There are no unattached tmux sessions.  Create a new one.
+  tmux -2
+else
+  # There are unattached tmux sessions.  Reattach.
+  tmux -2 a -t "$unattached_tmux_session"
+fi
