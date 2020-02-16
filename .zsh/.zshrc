@@ -300,6 +300,12 @@ source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
 [[ ! -f ~/.zsh/.p10k.zsh ]] || source ~/.zsh/.p10k.zsh
 
+function prompt_aws_vault() {
+  [[ ! -v AWS_VAULT ]] && return
+  p10k segment -s $AWS_VAULT -i '⭐' -f blue -t $AWS_VAULT
+}
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=("aws_vault")
 #}}}
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# vim: foldmethod=marker
+# vim: foldmethod=marker ft=zsh
