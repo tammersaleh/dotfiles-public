@@ -302,10 +302,11 @@ source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
 
 function prompt_aws_vault() {
   [[ ! -v AWS_VAULT ]] && return
-  p10k segment -s $AWS_VAULT -i '⭐' -f blue -t $AWS_VAULT
+  p10k segment -i '⭐' -f yellow -b blue -t $AWS_VAULT
 }
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=("aws_vault")
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS="${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS#context}"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=("context" "aws_vault")
 #}}}
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # vim: foldmethod=marker ft=zsh
