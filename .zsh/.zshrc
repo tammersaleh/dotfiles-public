@@ -307,6 +307,17 @@ function prompt_aws_vault() {
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS="${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS#context}"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=("context" "aws_vault")
+# Context color when running with privileges.
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=black
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=red
+# Context color in SSH without privileges.
+typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=black
+typeset -g POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND=yellow
+typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=black
+typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_BACKGROUND=red
+# Default context color (no privileges, no SSH).
+typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=black
+typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
 #}}}
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # vim: foldmethod=marker ft=zsh
