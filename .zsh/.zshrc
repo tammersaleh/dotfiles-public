@@ -114,7 +114,10 @@ export AWS_VAULT_BACKEND=file
 export UID
 export GID=$(id -g)
 
-export HISTFILE="$HOME/.local/share/zsh/history"
+HISTFILE="$HOME/.local/share/zsh/history"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 __source_if_exists "$HOME/.bash/secret"
 
