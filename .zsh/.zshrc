@@ -74,6 +74,8 @@ export PAGER=less
 export BLOCKSIZE=K
 export PARINIT='w72jrT4bgqR B=.,?_A_a Q=_s>|'
 export LC_CTYPE=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export VIM_APP_DIR=/Applications
 
 export LESS="-FRMX --tabs 4"
