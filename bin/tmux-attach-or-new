@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+   command -v tmux > /dev/null || usage "Cannot find tmux"
+   [[ -v TMUX ]] && usage "Already in tmux"
+
+   echo "Looking for sessions."
+   # tmux ls will fail if no server, in which case, we want to `tmux -2`
+   set +o pipefail
+   unattached_tmux_session=$(tmux ls -F "#{session_attached}:#{session_name}" 2> /dev/null | grep -E '^0:' | cut -f 2 -d : | head -n 1)
+   set -o pipefail
+
+   if [[ -z "$unattached_tmux_session" ]]; then
+     echo "Creating a new session..."
+     exec tmux -2
+   else
+     echo "Connecting to session $unattached_tmux_session"
+     exec tmux -2 attach -t "$unattached_tmux_session"
+   fi
+}
+
+usage() {
+  cat <<EOF
+  ERROR: $1
+
+  USAGE: $(basename "$0")
+
+  Attaches to the first unattached tmux session.  If none exist, creates a new
+  one.  Intended to be used as an ssh command:
+
+    $ ssh -t $HOST ~/bin/tmux-attach-or-new
+
+EOF
+  exit 1
+}
+
+main "$@"
