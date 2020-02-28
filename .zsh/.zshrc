@@ -158,6 +158,7 @@ alias :q=exit
 
 __has gsed && alias sed=gsed
 __has bat && alias less="bat"
+__has bat && alias cat="bat"
 
 gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
