@@ -13,7 +13,7 @@
 [alias]
   aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
 
-  ql              = log --abbrev-commit --decorate --pretty=format:'%Cred%an%Creset: %Cred%h%Creset %s %Cblue%ar%Creset' --graph
+  ql              = log -n 5 --abbrev-commit --decorate --pretty=format:'%Cred%an%Creset: %Cred%h%Creset %s %Cgreen%ar%Creset' --graph
 
   a               = add -A
 
