@@ -310,22 +310,30 @@ source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
 
 function prompt_aws_vault() {
   [[ ! -v AWS_VAULT ]] && return
-  p10k segment -i '⭐' -f yellow -b blue -t $AWS_VAULT
+  local name=${AWS_VAULT:u}
+  p10k segment -f yellow -b blue -t ${name//[-_]/ }
 }
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS="${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS#context}"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=("context" "aws_vault")
+typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  context
+  dir                     # current directory
+  aws_vault
+  vcs                     # git status
+  prompt_char             # prompt symbol
+)
 # Context color when running with privileges.
-typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=black
-typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=red
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=red
+# typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=red
 # Context color in SSH without privileges.
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=black
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND=yellow
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=black
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_BACKGROUND=red
+typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=white
+# typeset -g POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND=yellow
+typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
+# typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_BACKGROUND=red
 # Default context color (no privileges, no SSH).
-typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=black
-typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
+typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
+# typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
 #}}}
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # vim: foldmethod=marker ft=zsh
