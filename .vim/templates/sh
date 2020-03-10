@@ -4,14 +4,13 @@ set -euo pipefail
 shopt -s inherit_errexit
 
 main() {
-  [[ $# -ge 1 ]] || usage "Expected ARGUMENT"
+  [[ $# -eq 3 ]] || usage "Expected three arguments, got $#"
   
 }
 
 usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
   cat <<EOF
-  ERROR: $1
-
   USAGE: $(basename "$0") ARGUMENT
 
   Explanation
