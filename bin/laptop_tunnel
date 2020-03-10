@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+set -x
+# autossh -o ExitOnForwardFailure=yes -Nv workspace_reverse_tunnel
+ssh -Nv workspace_reverse_tunnel
