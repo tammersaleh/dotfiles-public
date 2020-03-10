@@ -1,5 +1,6 @@
 " https://kramdown.gettalong.org/syntax.html#inline-attribute-lists
 syn match kramdownIAL /{:.*}/ containedin=ALL
+set sw=2 ts=2
 
 " function! s:OpenToc()
 "   if &filetype ==# 'markdown'
