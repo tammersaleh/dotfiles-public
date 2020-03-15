@@ -64,8 +64,6 @@ tty -s && export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
 export BOTO_CONFIG=/dev/null
 
 export CLICOLOR=1
-export HISTCONTROL="ignoredups"
-export HISTSIZE="2000"
 export LS_COLORS
 # shellcheck disable=SC2046
 eval $(dircolors ~/.dircolors)
@@ -118,10 +116,15 @@ export AWS_VAULT_BACKEND=file
 export UID
 export GID=$(id -g)
 
-HISTFILE="$HOME/.local/share/zsh/history"
-HISTSIZE=10000
-SAVEHIST=10000
+export HISTFILE="$HOME/.local/share/zsh/history"
+export HISTSIZE=10000000
+export SAVEHIST=10000000
 setopt appendhistory
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
 __source_if_exists "$HOME/.bash/secret"
 
