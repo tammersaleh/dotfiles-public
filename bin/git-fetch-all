@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+yellow=$(tput bold; tput setaf 3)
+reset=$(tput sgr0)
+
+skips=()
+dirs=()
+
+main() {
+  process_args "$@"
+
+  for dir in "${dirs[@]}"; do
+    for repo in $(repos "$dir"); do
+      if [[ "$repo" == "." ]]; then
+        echo -n "$yellow$DIR..."
+      else
+        echo -n "$yellow$repo..."
+      fi
+
+      if should-skip "$repo"; then
+        echo " skipping$reset"
+        continue
+      fi
+
+      if output=$(fetch-all "$repo"); then
+        echo " done$reset"
+      else
+        echo " error$reset"
+        echo "$output"
+      fi
+    done
+  done
+}
+
+should-skip() {
+  for skip in "${skips[@]}"; do
+    if [[ $(basename "$1") == "$skip" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+fetch-all() {
+  repo="$1"
+  cd "$repo"
+  git fetch --quiet --all --recurse-submodules=on-demand 2>&1
+}
+
+repos() {
+  find "$1" -name .git -type d -exec dirname {} \;
+}
+
+process_args() {
+  [[ $# -ge 1 ]] || usage "Must provide directory to search."
+  for arg in "$@"; do
+    case $arg in
+      -h|--help)
+        usage
+        ;;
+      --skip=*)
+        skips+=("${arg#*=}")
+        ;;
+      *)
+        dirs+=("$1")
+        ;;
+    esac
+    shift
+  done
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  cat <<EOF
+  USAGE: $(basename "$0") DIR [DIR...] [--skip=repo]
+
+  Finds all git repositories under given directories and runs 'git fetch --all'
+  against each one.
+
+  -h|--help       Print this usage
+  --skip=repo     Do not fetch for a particular repo.  Must match the repo name.
+
+  Examples:
+
+    $(basename "$0") .
+    $(basename "$0") ~/src/github.com/
+    $(basename "$0") ~/src/github.com/ --skip=big-repo
+EOF
+  exit 1
+}
+
+main "$@"
