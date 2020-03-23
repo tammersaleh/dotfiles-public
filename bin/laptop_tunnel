@@ -3,6 +3,9 @@
 set -euo pipefail
 shopt -s inherit_errexit
 
-set -x
-# autossh -o ExitOnForwardFailure=yes -Nv workspace_reverse_tunnel
-ssh -Nv workspace_reverse_tunnel
+while true; do
+  (set -x; ssh -N workspace_reverse_tunnel || true)
+  echo "Disconnected."
+  sleep 10
+  echo "Reconnecting."
+done
