@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  [[ $# -ge 2 ]]  || usage "Expected at least 2 arguments, got $#"
+  authed_with_aws || usage "Not authenticated with AWS.  Did you forget aws-vault?"
+
+  local bucket_url="$1"; shift
+  local file_or_dir="$1"; shift
+
+  [[ "$bucket_url" =~ ^s3://[a-z_-]+$ ]] || usage "$bucket_url doesn't look like an S3 bucket to me."
+  local bucket_name=$(basename "$bucket_url")
+
+  local me=$(basename "$0")
+
+  tmp_dir="/tmp/$me/$bucket_name/"
+  mkdir -p "$tmp_dir"
+
+  if [[ -d $file_or_dir ]]; then
+    aws s3 cp --recursive "$bucket_url" "$tmp_dir"
+    diff "$@" --recursive "$tmp_dir/" "$file_or_dir"
+
+  elif [[ -f $file_or_dir ]]; then
+    local file=$(basename "$file_or_dir")
+    aws s3 cp  "$bucket_url/$file" "$tmp_dir/$file"
+    diff "$@" "$tmp_dir/$file" "$file_or_dir"
+
+  else
+    usage "$file_or_dir does not appear to be a file or a directory."
+  fi
+}
+
+authed_with_aws() {
+  aws sts get-caller-identity --output text > /dev/null 2>&1
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me BUCKET PATH [DIFF_OPTIONS...]
+
+  Prints the diff of a file against the same file in the S3 bucket.  If given a
+  directory, runs the diff against _all_ files in the bucket.  Currently only
+  supports files in the / folder in the S3 bucket.
+
+  Obviously, this requires valid AWS credentials.  The suggested way is using
+  https://github.com/99designs/aws-vault.
+
+  Examples:
+
+    $me s3://my_bucket my_file.yml       # Diffs a single file
+    $me s3://my_bucket my_file.yml -q    # Diffs a single file. Passes -q to the diff command.
+    $me s3://my_bucket .                 # Diffs all files in this directory
+	EOF
+  exit 1
+}
+
+main "$@"
