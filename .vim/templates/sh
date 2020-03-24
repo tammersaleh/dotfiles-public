@@ -10,15 +10,17 @@ main() {
 
 usage() {
   [[ $# -gt 0 ]] && echo "ERROR: $*"
-  cat <<EOF
-  USAGE: $(basename "$0") ARGUMENT
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me ARGUMENT
 
   Explanation
 
   Examples:
 
-    $(basename "$0") foo
-EOF
+    $me foo
+	EOF
   exit 1
 }
 
