@@ -3,7 +3,7 @@
 [include]
   path = ~/.gitconfig-local
 [user]
-	name = Tammer Saleh
+  name = Tammer Saleh
   email = tammer@superorbit.al
 [color]
   status = auto
@@ -58,7 +58,8 @@
   excludesfile = ~/.gitglobalignore
   whitespace = trailing-space,space-before-tab,tab-in-indent
   pager = diff-so-fancy | less --tabs=4 -RFX
-	preloadindex = true
+  preloadindex = true
+  hooksPath = ~/src/github.com/superorbital/git-hooks
 [pager]
   # diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [status]
@@ -90,8 +91,10 @@
   new = green bold
   whitespace = red reverse
 [rebase]
-	autosquash = true
+  autosquash = true
 [gc]
-	auto = 256
+  auto = 256
 [pull]
-	rebase = true
+  rebase = true
+[hooks]
+  gitleaks = true
