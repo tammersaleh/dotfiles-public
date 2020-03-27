@@ -142,8 +142,9 @@ alias mv='mv -i'
 alias c="cd .."
 alias ls="gls -ohF  --color=auto"
 alias la="gls -ohFa --color=auto"
-alias cidr=sipcalc
+alias diff="diff --color=auto"
 alias grep="grep --color=auto"
+alias cidr=sipcalc
 alias cg='cd "$(git rev-parse --show-toplevel)"'
 alias grammarly="open -a Grammarly"
 alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
