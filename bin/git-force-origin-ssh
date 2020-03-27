@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  repositories=("$@")
+  (( ${#repositories[@]} )) || repositories=(".")
+  for repo in "${repositories[@]}"; do
+    echo "$repo"
+    (
+      cd "$repo"
+
+      origin=$(git remote get-url origin)
+      if [[ -z "$origin" ]]; then
+        echo "Warning: $repo doesn't seem to have an origin set.  Skipping."
+      else
+        if [[ ! "$origin" =~ ^http ]]; then
+          echo "$repo is already ssh.  Skipping."
+        else
+          new_origin=${origin/#https:\/\/github.com\//git@github.com:/}
+          git remote set-url origin "$new_origin"
+        fi
+      fi
+    )
+  done
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me [REPO_PATH...]
+
+  Changes a git origin from https to ssh.
+
+  Examples:
+
+    $me
+    $me path/to/repo
+	EOF
+  exit 1
+}
+
+main "$@"
