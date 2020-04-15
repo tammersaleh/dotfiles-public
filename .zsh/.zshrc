@@ -112,6 +112,8 @@ export TERMINFO=~/.terminfo
 
 export AWS_VAULT_BACKEND=file
 
+export HUB_PROTOCOL=ssh
+
 # For the Dockers!
 export UID
 export GID=$(id -g)
