@@ -48,6 +48,9 @@
   staged   = diff --name-only --cached
   modified = diff --name-only
 
+  caulking-disable = config --local hooks.gitleaks false
+  caulking-enable = config --local hooks.gitleaks true
+
 [merge]
   tool = opendiff
   summary = true
