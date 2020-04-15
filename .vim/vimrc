@@ -36,6 +36,7 @@ Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
 Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 Plug 'https://github.com/tpope/vim-git'
 Plug 'https://github.com/aliou/bats.vim'
+Plug 'https://github.com/raimon49/requirements.txt.vim' " Python requirements.txt support
 " }}}
 
 " General {{{

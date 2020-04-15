@@ -14,7 +14,7 @@ let b:SimpylFold_fold_docstring = 0
 let b:SimpylFold_fold_import = 0
 let g:SimpylFold_docstring_preview = 0
 
-let g:ale_python_auto_pipenv = 1
+" let g:ale_python_auto_pipenv = 1
 let b:ale_fix_on_save = 1
 " let b:ale_fixers = ['isort', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'] 
 let b:ale_fixers = ['isort', 'autopep8', 'remove_trailing_lines', 'trim_whitespace'] 
