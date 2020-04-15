@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  [[ $# -ge 1 ]] || usage "Expected subcommand."
+  command=$1; shift
+
+  case $command in
+    create)
+      create "$@"
+      ;;
+    *)
+      usage "$command isn't yet supported"
+      ;;
+  esac
+
+}
+
+create() {
+  [[ $# -eq 1 ]] || usage "Expected milestone name."
+  milestone="$1"
+  hub api "repos/{owner}/{repo}/milestones" -f "title=$milestone"
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  cat <<-EOF
+
+  USAGE: git milestone create MILESTONE_TITLE
+
+  Manages milestones in the current repo.
+
+  Examples:
+
+    git milestone create "The End"
+	EOF
+  exit 1
+}
+
+main "$@"
