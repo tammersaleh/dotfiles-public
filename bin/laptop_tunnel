@@ -4,8 +4,8 @@ set -euo pipefail
 shopt -s inherit_errexit
 
 while true; do
-  (set -x; ssh -N workspace_reverse_tunnel || true)
+  echo "Port forwarding through workstation."
+  ssh -N workspace_reverse_tunnel || true
   echo "Disconnected."
-  sleep 10
-  echo "Reconnecting."
+  sleep 1
 done
