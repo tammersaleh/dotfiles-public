@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  [[ $# -eq 1 ]] || usage "Expected ORG"
+  has hub || usage "Requires the hub command: brew install hub"
+
+  org=$1
+  hub api --paginate "orgs/$org/repos" | jq -r '.[].name' | sort
+}
+
+has() { command -v "$1" > /dev/null; }
+
+usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  local me=$(basename "$0")
+  me=${me/-/ }
+  cat <<-EOF
+
+  USAGE: $me ORG
+
+  Lists the names of repositories under the given organization.  Uses hub.
+
+  Examples:
+
+    $me superorbital
+	EOF
+  exit 1
+}
+
+main "$@"
