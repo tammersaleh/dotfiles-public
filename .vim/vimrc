@@ -336,6 +336,33 @@ endfunction
 " copy to system clipboard over ssh
 xnoremap <silent> <Leader>y y:call OSC52Copy(getreg('"'))<CR>
 
+" https://vi.stackexchange.com/questions/5658/fold-unfold-on-moving-vertically
+function! MoveAndFoldLeft()
+    let line = getpos('.')[1]
+    let col  = getpos('.')[2]
+
+    if l:col ==# 1 && foldlevel(l:line)
+        execute "foldclose"
+    else
+        execute "normal! h"
+    endif
+endfunction
+
+function! MoveAndFoldRight()
+    let line = getpos('.')[1]
+
+    if foldlevel(line) && foldclosed(line) != -1
+        execute "foldopen"
+    else
+        execute "normal! l"
+    endif
+endfunction
+
+nnoremap <silent> <Left>  :call MoveAndFoldLeft()<cr>
+nnoremap <silent> h       :call MoveAndFoldLeft()<cr>
+nnoremap <silent> <Right> :call MoveAndFoldRight()<cr>
+nnoremap <silent> l       :call MoveAndFoldRight()<cr>
+
 " }}}
 " Autocommands {{{
 " Make required directories when writing a file..
@@ -426,6 +453,9 @@ colorscheme gruvbox
 packadd! matchit " % now works with if/else/fi
 " Folding {{{
 " set foldopen=all " Too aggressive.  Can't move through file.
+set foldopen&
+set foldopen+=insert
+set foldopen+=jump
 " Toggle folds under cursor recursively
 nnoremap zz zA
 
