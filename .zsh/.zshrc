@@ -235,7 +235,6 @@ __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 
 __source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
 __source_if_exists "$HOME/.bash/terraform-completion"
-__source_if_exists "$HOME/.bash/aws-vault-completion"
 
 __source_if_exists /usr/local/etc/zsh_completion
 __source_if_exists /home/linuxbrew/.linuxbrew/etc/zsh_completion
@@ -245,10 +244,11 @@ __source_if_exists /etc/zsh_completion.d/gcloud
 complete -o default -o nospace -F _git g
 complete -C aws_completer aws
 
-__has kubectl && source <(kubectl completion zsh)
-__has kubectl && complete -o default -F __start_kubectl k
-__has helm    && source <(helm completion zsh)
-__has stern   && source <(stern --completion zsh)
+__has kubectl   && source <(kubectl completion zsh)
+__has kubectl   && complete -o default -F __start_kubectl k
+__has helm      && source <(helm completion zsh)
+__has stern     && source <(stern --completion zsh)
+__has aws-vault && eval "$(aws-vault --completion-script-zsh)"
 
 ################# }}}
 ### Hooks & Daemons {{{
