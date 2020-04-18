@@ -16,7 +16,6 @@ vmap <buffer> <Leader><Bslash> :EasyAlign*<Bar><Enter>
 noremap <buffer> <silent> K :silent !open dict://<cword><CR><CR>
 noremap <buffer> <silent> <leader>m :silent! !mark %<CR>:redraw!<CR>
 
-
 " vim-markdown's folding is too agressive (happens in after)
 " and breaks my markdownslides format.  We disable folding in vimrc, and
 " enable it here more simply:
@@ -32,18 +31,6 @@ setlocal linebreak
 setlocal foldenable
 setlocal spell
 
-let b:AutoPairs = {'(':')', '{':'}',"'":"'",'"':'"', '`':'`'} " [] screws with GFM checkboxes
-let b:AutoPairs = AutoPairsDefine({'```' : '```'}) " Add triple backticks
-
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 
-" function s:Toc()
-"   :Toc
-"   :wincmd p
-" endfunction
-"
-" augroup markdown
-"   autocmd!
-"   autocmd BufWritePost *.md :call s:Toc()
-" augroup END

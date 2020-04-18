@@ -13,10 +13,6 @@ runtime! ftplugin/markdown.vim
 setlocal foldmethod=expr 
 setlocal foldexpr=getline(v:lnum)=~#'^===.*\\s#'?'>1':'='
 
-" Why isn't this being picked up from after/markdown.vim?
-let b:AutoPairs = {'(':')', '{':'}',"'":"'",'"':'"', '`':'`'} " [] screws with GFM checkboxes
-let b:AutoPairs = AutoPairsDefine({'```' : '```'}) " Add triple backticks
-
 " restore Vi compatibility settings
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
