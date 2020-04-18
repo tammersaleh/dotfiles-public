@@ -128,7 +128,7 @@ setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded 
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
-__source_if_exists "$HOME/.bash/secret"
+__source_if_exists "$HOME/.secret_vars_and_aliases"
 
 ####################### }}}
 ### Terminfo {{{
@@ -166,7 +166,7 @@ alias :q=exit
 
 __has gsed && alias sed=gsed
 __has bat && alias less="bat"
-__has bat && alias cat="bat"
+__has bat && alias cat="bat --pager=never"
 
 gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
@@ -225,30 +225,31 @@ tmux-detach() {
 
 ############### }}}
 ### Completions {{{
-autoload -Uz compinit && compinit -d "$HOME/.local/share/zsh/compdump"
-autoload bashcompinit && bashcompinit
+#
+# Great reference: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+#
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit 
+compinit -d "$HOME/.local/share/zsh/compdump" # This isn't working for some reason, so gitignored the .zcompdump file.
+autoload bashcompinit 
+bashcompinit
 
 DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
 __source_if_exists "$DOCKER_ETC/docker.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 
-__source_if_exists /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-__source_if_exists "$HOME/.bash/terraform-completion"
+__has aws_completer && complete -C aws_completer aws
+__has kubectl       && source <(kubectl completion zsh)
+__has kubectl       && compdef k=kubectl
+__has helm          && source <(helm completion zsh)
+__has stern         && source <(stern --completion zsh)
+__has aws-vault     && source <(aws-vault --completion-script-zsh)
+__has fly           && source <(fly completion --shell zsh)
+__has fly           && compdef ci=fly
 
-__source_if_exists /usr/local/etc/zsh_completion
-__source_if_exists /home/linuxbrew/.linuxbrew/etc/zsh_completion
-__source_if_exists "$HOME/.asdf/completion/asdf.zsh"
-__source_if_exists /etc/zsh_completion.d/gcloud
-
-complete -o default -o nospace -F _git g
-complete -C aws_completer aws
-
-__has kubectl   && source <(kubectl completion zsh)
-__has kubectl   && complete -o default -F __start_kubectl k
-__has helm      && source <(helm completion zsh)
-__has stern     && source <(stern --completion zsh)
-__has aws-vault && eval "$(aws-vault --completion-script-zsh)"
+compdef g=git
+compdef av=exec
 
 ################# }}}
 ### Hooks & Daemons {{{
