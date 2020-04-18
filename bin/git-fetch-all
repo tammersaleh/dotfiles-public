@@ -15,7 +15,7 @@ main() {
   for dir in "${dirs[@]}"; do
     for repo in $(repos "$dir"); do
       if [[ "$repo" == "." ]]; then
-        echo -n "$yellow$DIR..."
+        echo -n "${yellow}Current Direcotry..."
       else
         echo -n "$yellow$repo..."
       fi
