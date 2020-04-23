@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git st | grep unmerged: | cut -c 15-

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+git fetch origin
+git checkout -b "$0" "origin/$0"

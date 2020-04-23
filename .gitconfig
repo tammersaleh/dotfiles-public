@@ -11,35 +11,25 @@
   branch = auto
   ui = true
 [alias]
-  aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
-
   ql              = log -n 5 --abbrev-commit --decorate --pretty=format:'%Cred%h%Creset: %Cred%an%Creset %Cgreen%ar%Creset %s' --graph
 
   a               = add -A
 
   current-branch  = rev-parse --abbrev-ref HEAD
-  conflicts       = !git st | grep unmerged: | cut -c 15-
   modified        = ls-files -m
   last            = log @{1}.. --decorate --reverse --stat -C --no-merges
   files-in-commit = diff-tree --no-commit-id --name-only -r
   bl              = blame -wMC
-
-  co              = !echo Use either git-switch or git-restore
 
   ci              = commit -v
   append          = commit --amend --no-edit
   fixup           = commit --fixup
 
   br              = branch -av --sort=-committerdate --format='%(HEAD) %(align:1,40)%(color:yellow)%(refname:short)%(color:reset)%(end) %(color:green)%(committerdate:relative)%(color:reset) - %(contents:subject) - %(authorname)'
-  my-branches     = "br --list '*tsaleh*'"
+  my-branches     = br --list '*tsaleh*'
   latest-branches = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
-  push-branch     = !bash -c 'git push --set-upstream origin "$(git current-branch)"'
-  delete-branch   = "!bash -c 'git switch master && git branch -d $0; git push origin --delete $0; git remote prune origin'"
-  track-branch    = !bash -c 'git fetch origin && git checkout -b $0 origin/$0'
   publish-branch  = push -u origin
-  update          = "!git fetch upstream && git rebase \"upstream/$(git current-branch)\""
 
-  nuke            = !git clean -df && git reset --hard
   suir            = submodule update --init --recursive --jobs=4
 
   # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
