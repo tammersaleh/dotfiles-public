@@ -15,6 +15,8 @@ shit
 shit.*
 do-not-commit/
 do_not_commit/
+.envrc
+.direnv/
 
 !.keep
 !.keepme
