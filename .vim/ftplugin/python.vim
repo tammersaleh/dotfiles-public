@@ -5,6 +5,9 @@ let g:pymode_options = 0
 let g:pymode_folding = 0
 let g:pymode_lint = 0 " We use ALE
 
+let g:jedi#use_splits_not_buffers = "right"
+
+
 setlocal formatoptions-=ta
 setlocal commentstring=#%s
 setlocal define=^\s*\\(def\\\\|class\\)
@@ -17,4 +20,6 @@ let g:SimpylFold_docstring_preview = 0
 " let g:ale_python_auto_pipenv = 1
 let b:ale_fix_on_save = 1
 " let b:ale_fixers = ['isort', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'] 
-let b:ale_fixers = ['isort', 'autopep8', 'remove_trailing_lines', 'trim_whitespace'] 
+let b:ale_fixers = ['isort', 'black', 'remove_trailing_lines', 'trim_whitespace'] 
+
+nnoremap <buffer> gd :call jedi#goto()<CR>
