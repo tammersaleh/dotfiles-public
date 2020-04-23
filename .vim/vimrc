@@ -77,9 +77,9 @@ command! PU source $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | source $MY
 
 " }}}
 " Options {{{
-set backupdir=$XDG_DATA_HOME/vim/backups
-set directory=$XDG_DATA_HOME/vim/swap
-set undodir=$XDG_DATA_HOME/vim/undo
+set backupdir=$XDG_DATA_HOME/vim/backups//
+set directory=$XDG_DATA_HOME/vim/swap//
+set undodir=$XDG_DATA_HOME/vim/undo//
 call mkdir(expand(&undodir), 'p')
 call mkdir(expand(&directory), 'p')
 call mkdir(expand(&backupdir), 'p')
