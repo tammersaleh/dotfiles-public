@@ -24,5 +24,5 @@ if [[ -v VIM_TERMINAL ]]; then
 fi
 
 # Not inside a running vim..
-vi "$@"
+vi -o "$@"
 
