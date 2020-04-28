@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+log() {
+  git log \
+    -n 5 \
+    --abbrev-commit \
+    --decorate \
+    --shortstat \
+    --pretty=format:'%Cred%h%Creset: %Cred%an%Creset %Cgreen%ar%Creset %s' \
+    --graph \
+    "$@"
+}
+
+if [[ "master" == "$(git branch --show-current)" ]]; then
+  log
+else
+  echo "Compared to master..."
+  log "master.."
+fi

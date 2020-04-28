@@ -11,10 +11,8 @@
   branch = auto
   ui = true
 [alias]
-  ql              = log -n 5 --abbrev-commit --decorate --pretty=format:'%Cred%h%Creset: %Cred%an%Creset %Cgreen%ar%Creset %s' --graph
-
+  aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
   a               = add -A
-
   current-branch  = rev-parse --abbrev-ref HEAD
   modified        = ls-files -m
   last            = log @{1}.. --decorate --reverse --stat -C --no-merges
@@ -24,7 +22,6 @@
   ci              = commit -v
   append          = commit --amend --no-edit
   fixup           = commit --fixup
-
   br              = branch -av --sort=-committerdate --format='%(HEAD) %(align:1,40)%(color:yellow)%(refname:short)%(color:reset)%(end) %(color:green)%(committerdate:relative)%(color:reset) - %(contents:subject) - %(authorname)'
   my-branches     = br --list '*tsaleh*'
   latest-branches = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
@@ -37,6 +34,8 @@
   unstage  = reset
   staged   = diff --name-only --cached
   modified = diff --name-only
+
+  url = browse -u
 
   caulking-disable = config --local hooks.gitleaks false
   caulking-enable = config --local hooks.gitleaks true

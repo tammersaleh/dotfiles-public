@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-set -x
 
 CUR=$(git rev-parse --abbrev-ref HEAD)
 git push origin "$CUR:refs/heads/$1"
