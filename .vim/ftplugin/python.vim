@@ -19,7 +19,7 @@ let g:SimpylFold_docstring_preview = 0
 
 " let g:ale_python_auto_pipenv = 1
 let b:ale_fix_on_save = 1
-" let b:ale_fixers = ['isort', 'autopep8', 'yapf', 'remove_trailing_lines', 'trim_whitespace'] 
-let b:ale_fixers = ['isort', 'black', 'remove_trailing_lines', 'trim_whitespace'] 
+let b:ale_fixers = ['isort', 'autopep8', 'black', 'remove_trailing_lines', 'trim_whitespace'] 
+" let b:ale_fixers = ['isort', 'black', 'remove_trailing_lines', 'trim_whitespace'] 
 
 nnoremap <buffer> gd :call jedi#goto()<CR>
