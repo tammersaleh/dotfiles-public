@@ -19,6 +19,5 @@ let g:SimpylFold_docstring_preview = 0
 " let g:ale_python_auto_pipenv = 1
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['black', 'add_blank_lines_for_python_control_statements'] 
-" let b:ale_fixers = ['isort', 'black', 'remove_trailing_lines', 'trim_whitespace'] 
 
 nnoremap <buffer> gd :call jedi#goto()<CR>
