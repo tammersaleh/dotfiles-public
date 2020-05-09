@@ -31,6 +31,6 @@ setlocal linebreak
 setlocal foldenable
 setlocal spell
 
-let b:ale_fix_on_save = 1
-let b:ale_fixers = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
+" let b:ale_fix_on_save = 1
+" let b:ale_fixers = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
 
