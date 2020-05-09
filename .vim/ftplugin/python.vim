@@ -7,7 +7,6 @@ let g:pymode_lint = 0 " We use ALE
 
 let g:jedi#use_splits_not_buffers = "right"
 
-
 setlocal formatoptions-=ta
 setlocal commentstring=#%s
 setlocal define=^\s*\\(def\\\\|class\\)
