@@ -7,8 +7,8 @@ main() {
   [[ $# -eq 1 ]] || usage "Expected BRANCH name"
   
   git switch master
-  git branch -d "$0" || true
-  git push origin --delete "$0" || true
+  git branch -d "$1" || true
+  git push origin --delete "$1" || true
   git remote prune origin
 }
 
