@@ -1,12 +1,39 @@
 #!/usr/bin/env bash
 
 set -eou pipefail
+shopt -s inherit_errexit
 
 ME="$(basename "$0")"
 ROOT="$HOME/dotfiles/"
 PUBLIC="$ROOT/public"
 PRIVATE="$ROOT/private"
 TARGET="$HOME"
+
+main() {
+  [[ "$#" -eq 0 ]] && usage "Need at least one command"
+
+  command=$1; shift
+
+  case $command in
+    "private")
+      private "$@"
+      ;;
+    "public")
+      public "$@"
+      ;;
+    "ignore")
+      ignore "$@"
+      ;;
+    "install")
+      install
+      ;;
+    "pull")
+      pull
+      ;;
+    *)
+      usage "don't recognize $command"
+  esac
+}
 
 function usage {
   echo "Error: $1"
@@ -20,17 +47,9 @@ function usage {
   exit 3
 }
 
-if [[ "$#" -eq 0 ]]; then
-  usage "Need at least one command"
-fi
-
-command=$1
-shift
-
 function private {
-  if [[ "$HOME" != "$PWD" ]]; then
-    usage "This must be run from $HOME"
-  fi
+  [[ "$HOME" == "$PWD" ]] || usage "This must be run from $HOME"
+
   file=$1
   dest="$PRIVATE/$file"
   mkdir -p "$(dirname "$dest")"
@@ -54,52 +73,32 @@ function public {
 function ignore {
   file=$1
   echo "Adding /$file to .gitignore"
-  echo "/$file" >> $PUBLIC/.gitignore
+  echo "/$file" >> "$PUBLIC/.gitignore"
 }
 
 function install {
-  if ! which stow > /dev/null 2>&1; then
+  if ! command -v stow > /dev/null 2>&1; then
     usage "can't find GNU stow"
   fi
   stow -d "$ROOT" -t "$TARGET" -R public -R private
+
+  [[ -x "$PUBLIC/post-pull.sh" ]] && "$PUBLIC/post-pull.sh"
+  [[ -x "$PRIVATE/post-pull.sh" ]] && "$PRIVATE/post-pull.sh"
 }
 
 function pull {
-  (
-    cd $PUBLIC
-    touch .force-stash
-    git stash -u
-    git pull --rebase
-    git stash apply
-    rm .force-stash
-  )
-  (
-    cd $PRIVATE
-    touch .force-stash
-    git stash -u
-    git pull --rebase
-    git stash apply
-    rm .force-stash
-  )
+  for dir in $PUBLIC $PRIVATE; do
+    (
+      cd "$dir"
+      touch .force-stash
+      git stash -u --quiet
+      git fetch --quiet
+      git rebase FETCH_HEAD
+      git stash apply --quiet
+      rm .force-stash
+    )
+  done
   install
 }
 
-case $command in
-  "private")
-    private "$@"
-    ;;
-  "public")
-    public "$@"
-    ;;
-  "ignore")
-    ignore "$@"
-    ;;
-  "install")
-    install
-    ;;
-  "pull")
-    pull
-    ;;
-  *)
-    usage "don't recognize $command"
-esac
+main "$@"
