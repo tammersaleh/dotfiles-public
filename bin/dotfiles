@@ -84,9 +84,6 @@ function install {
     usage "can't find GNU stow"
   fi
   stow -d "$ROOT" -t "$TARGET" -R public -R private
-
-  [[ -x "$PUBLIC/post-pull.sh" ]] && "$PUBLIC/post-pull.sh"
-  [[ -x "$PRIVATE/post-pull.sh" ]] && "$PRIVATE/post-pull.sh"
 }
 
 function pull-dir {
@@ -107,6 +104,8 @@ function pull {
     pull-dir "$dir"
   done
   install
+  [[ -x "$PUBLIC/post-pull.sh" ]] && "$PUBLIC/post-pull.sh"
+  [[ -x "$PRIVATE/post-pull.sh" ]] && "$PRIVATE/post-pull.sh"
 }
 
 [[ -v DEBUG ]] && set -x
