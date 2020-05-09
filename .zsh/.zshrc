@@ -82,9 +82,12 @@ export LESS="-FRMX --tabs 4"
 export LESSOPEN="|lesspipe.sh %s"
 export LESS_ADVANCED_PREPROCESSOR=1
 
-__has bat && export MANPAGER="sh -c 'col -b | bat -l man -p'"
-__has bat && export MANROFFOPT="-c"
-__has bat && export HOMEBREW_BAT=true
+if __has bat; then
+  export BAT_CONFIG_FILE=~/.config/bat/config
+  export MANPAGER="sh -c 'col -b | bat -l man -p'"
+  export MANROFFOPT="-c"
+  export HOMEBREW_BAT=true
+fi
 
 export PS4="\n$ "
 

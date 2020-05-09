@@ -1,0 +1,3 @@
+# vi: ft=sh
+# https://github.com/sharkdp/bat#configuration-file
+--theme=zenburn
