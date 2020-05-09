@@ -27,6 +27,9 @@ main() {
     "install")
       install
       ;;
+    "pull-dir")
+      pull-dir "$@"
+      ;;
     "pull")
       pull
       ;;
@@ -86,19 +89,26 @@ function install {
   [[ -x "$PRIVATE/post-pull.sh" ]] && "$PRIVATE/post-pull.sh"
 }
 
+function pull-dir {
+  (
+    cd "$1"
+    touch .force-stash
+    git stash push -u --quiet -m "In dotfiles pull"
+    git fetch --quiet
+    git rebase FETCH_HEAD --quiet
+    git stash pop --quiet | grep -v "Already up to date" || true
+    rm .force-stash
+    git status --short --untracked-files
+  )
+}
+
 function pull {
   for dir in $PUBLIC $PRIVATE; do
-    (
-      cd "$dir"
-      touch .force-stash
-      git stash -u --quiet
-      git fetch --quiet
-      git rebase FETCH_HEAD
-      git stash apply --quiet
-      rm .force-stash
-    )
+    pull-dir "$dir"
   done
   install
 }
+
+[[ -v DEBUG ]] && set -x
 
 main "$@"
