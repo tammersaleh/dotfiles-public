@@ -91,7 +91,7 @@ function pull-dir {
     cd "$1"
     touch .force-stash
     git stash push -u --quiet -m "In dotfiles pull"
-    git fetch --quiet
+    git fetch --all --quiet
     git rebase FETCH_HEAD --quiet
     git stash pop --quiet | grep -v "Already up to date" || true
     rm .force-stash
