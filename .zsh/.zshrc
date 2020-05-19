@@ -53,6 +53,8 @@ __prependpath /usr/local/share/npm/bin
 __prependpath /Applications/Postgres.app/Contents/Versions/9.4/bin
 __prependpath /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
 __prependpath /usr/local/opt/macvim/MacVim.app/Contents/MacOS/
+__prependpath /usr/local/opt/gnu-getopt/bin
+__prependpath /usr/local/opt/ruby/bin
 
 __prependpath "$HOME/.local/bin"
 
