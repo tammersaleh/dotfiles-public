@@ -460,6 +460,47 @@ if executable('ag')
   set grepformat=%f:%l:%c:%m
 endif
 
+" COC {{{
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+" }}}
+
 " localvimrc {{{
 let g:localvimrc_persistent = 2
 let g:localvimrc_persistence_file = $XDG_DATA_HOME . '/vim/localvimrc_persistent'
@@ -473,29 +514,6 @@ let g:surround_{char2nr("<")} = "<\r>"
 let g:surround_{char2nr("%")} = "%{\r}"
 let g:surround_{char2nr("#")} = "#{\r}"
 let g:surround_{char2nr("$")} = "$(\r)"
-" }}}
-
-" ALE {{{
-let g:ale_sign_error           = '🔥'
-let g:ale_echo_msg_error_str   = '🔥'
-let g:ale_sign_warning         = '🤔'
-let g:ale_echo_msg_warning_str = '🤔'
-let g:ale_sign_info            = '👋'
-let g:ale_echo_msg_info_str    = '👋'
-let g:ale_echo_msg_format = '%severity% %s [%code% %linter%]'
-let g:ale_open_list = 0
-let g:ale_loclist = 0
-let g:ale_sign_column_always = 1
-set signcolumn="yes"
-
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-highlight clear ALEInfoSign
-augroup LanguageClient_config
-  autocmd!
-  autocmd User LanguageClientStarted setlocal signcolumn=yes
-  autocmd User LanguageClientStopped setlocal signcolumn=yes
-augroup END
 " }}}
 
 " EasyAlign {{{
@@ -564,13 +582,18 @@ function! TSprojname() abort
   return fnamemodify(projectroot#get(), ':t')
 endfunction
 
+" https://github.com/neoclide/coc.nvim/wiki/Statusline-integration
+function! TSCocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
 set noshowmode
 set laststatus=2
 let g:lightline = {
 \   'active': {
 \     'left':  [ [ 'mode', 'paste' ],
 \                [ 'gitbranch', 'projectroot', 'relativepath'], 
-\                ['readonly', 'modified' ] ],
+\                [ 'cocstatus', 'currentfunction', 'readonly', 'modified' ] ],
 \     'right': [ [ 'lineinfo' ],
 \                [ 'percent' ],
 \                [ 'filetype'] ]
@@ -582,7 +605,9 @@ let g:lightline = {
 \   },
 \   'component_function': {
 \     'gitbranch': 'gitbranch#name',
-\     'projectroot': 'TSprojname'
+\     'projectroot': 'TSprojname',
+\     'cocstatus': 'coc#status',
+\     'currentfunction': 'CocCurrentFunction'
 \   },
 \   'mode_map': {
 \     'n': 'N', 'i': 'I', 'R': 'R', 'v': 'V', 'V': 'VL', "\<C-v>": 'VB',
