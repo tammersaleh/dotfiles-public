@@ -181,9 +181,6 @@ tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
 tnoremap <C-v> <C-w>"*
 
-" go back
-map <silent> gb <C-t>
-
 " Make j/k move to next visual line instead of physical line
 " http://yubinkim.com/?p=6
 nnoremap <silent> k gk
@@ -460,6 +457,7 @@ if executable('ag')
   set grepformat=%f:%l:%c:%m
 endif
 
+" }}}
 " COC {{{
 set cmdheight=2
 set updatetime=300
@@ -468,9 +466,26 @@ set shortmess+=c
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+" This maintains the tag list, enabling `gb` when jumping to a definition.
+function! s:coc_definition_with_tag_list() abort
+  " Cribbed from :h tagstack-examples
+  let tag = expand('<cword>')
+  let pos = [bufnr()] + getcurpos()[1:]
+  let item = {'bufnr': pos[0], 'from': pos, 'tagname': tag}
+  if CocAction('jumpDefinition')
+    " Jump was successful, write previous location to tag stack.
+    let winid = win_getid()
+    let stack = gettagstack(winid)
+    let stack['items'] = [item]
+    call settagstack(winid, stack, 't')
+  endif
+endfunction
+
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gd :call <SID>coc_definition_with_tag_list()<CR>
 nmap <silent> gr <Plug>(coc-references)
+map <silent> gb <C-t>
+
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
