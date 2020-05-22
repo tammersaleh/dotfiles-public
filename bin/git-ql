@@ -8,7 +8,6 @@ log() {
     -n 5 \
     --abbrev-commit \
     --decorate \
-    --shortstat \
     --pretty=format:'%Cred%h%Creset: %Cred%an%Creset %Cgreen%ar%Creset %s' \
     --graph \
     "$@"

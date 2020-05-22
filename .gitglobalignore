@@ -11,8 +11,7 @@ TAGS
 .dat*
 .netrwhist
 crash.log
-shit
-shit.*
+shit*
 do-not-commit/
 do_not_commit/
 .envrc

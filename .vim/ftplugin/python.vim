@@ -17,6 +17,7 @@ let b:SimpylFold_fold_import = 0
 let g:SimpylFold_docstring_preview = 0
 
 " let g:ale_python_auto_pipenv = 1
+let g:ale_python_flake8_change_directory = 0  " Use the project config files.
 let b:ale_fix_on_save = 1
 let b:ale_fixers = ['black', 'add_blank_lines_for_python_control_statements'] 
 
