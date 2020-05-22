@@ -2,12 +2,6 @@ setlocal foldmethod=marker
 setlocal foldmarker={,}
 setlocal commentstring=#%s
 
-let b:ale_fix_on_save = 1
-let b:ale_fixers = [
-      \ 'remove_trailing_lines', 
-      \ 'trim_whitespace',
-      \ ]
-
 " Using devdocs.io instead.  Remove eventually.
 "" Open the terraform resource under the current line in the online
 "" documenation at https://https://www.terraform.io/docs
