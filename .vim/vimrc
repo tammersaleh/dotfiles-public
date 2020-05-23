@@ -120,6 +120,9 @@ nnoremap q: :q
 nnoremap ; :
 tnoremap <silent> <C-W>; <C-W>:
 
+" https://vim.fandom.com/wiki/Highlight_current_line
+nnoremap <silent> <Leader>m mm:execute 'match Search /\%'.line('.').'l/'<CR>
+
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " cmap w!! w !sudo tee > /dev/null %
 " Causes :w to wait before printing w
@@ -334,6 +337,9 @@ augroup vimrc
   " https://github.com/justinmk/vim-dirvish/issues/142
   autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +call\ <sid>dirvish_at_cwd()<CR>
   autocmd FileType qf noremap <buffer> <C-Down> :lclose \| split +call\ <sid>dirvish_at_cwd()<CR>
+
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
 augroup END
 "}}}
 " Colors {{{
@@ -359,6 +365,9 @@ function! MyHighlights() abort
   highlight htmlH6      guifg=#5c5d13                  cterm=bold
   highlight String      guifg=#999999
   highlight Visual      guifg=#c4c400   guibg=black
+  highlight CursorLine   guibg=#222222
+  highlight CursorColumn guibg=#222222
+
   " call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
@@ -381,7 +390,7 @@ endif
 
 set termguicolors
 set background=dark
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'soft'
 colorscheme gruvbox
 "}}}
 packadd! matchit " % now works with if/else/fi
