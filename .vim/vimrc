@@ -18,12 +18,12 @@ source $HOME/.vim/plugins.vim
 
 
 " Options {{{
-set backupdir=$XDG_DATA_HOME/vim/backups//
+" set backupdir=$XDG_DATA_HOME/vim/backups//
 set directory=$XDG_DATA_HOME/vim/swap//
 set undodir=$XDG_DATA_HOME/vim/undo//
 call mkdir(expand(&undodir), 'p')
 call mkdir(expand(&directory), 'p')
-call mkdir(expand(&backupdir), 'p')
+" call mkdir(expand(&backupdir), 'p')
 
 set fillchars=vert:\│
 set listchars=tab:».,nbsp:_,conceal:×
@@ -37,7 +37,7 @@ set mouse=a           " Allow mouse positioning and scrolling in terminal.
 set ttymouse=sgr      " Mouse can resize splits
 set clipboard=unnamed " Use the system clipboard
 set backspace=indent,eol,start
-set backup            " keep a backup file
+" set backup            " keep a backup file
 set history=1000      " keep 50 lines of command line history
 set ruler             " show the cursor position all the time
 set incsearch
@@ -328,7 +328,7 @@ augroup vimrc
   autocmd CmdlineLeave /,\? :set nohlsearch
 
   " Sync syntax highlighting when entering a buffer
-  autocmd BufEnter * :syntax sync fromstart
+  " autocmd BufEnter * :syntax sync fromstart
   " Fixed QF / Location window size
   autocmd FileType qf setlocal winfixwidth
   " https://github.com/justinmk/vim-dirvish/issues/142
@@ -426,6 +426,9 @@ augroup my_dirvish
   autocmd FileType dirvish silent keeppatterns g@\v/\.[^\/]+/?$@d _
   autocmd FileType dirvish nnoremap <buffer> <silent> <Leader>t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
   autocmd FileType dirvish nnoremap <buffer> <silent> t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
+
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup END
 " }}}
 
@@ -459,6 +462,7 @@ endif
 
 " }}}
 " COC {{{
+set nobackup " Supposedly causes issues
 set cmdheight=2
 set updatetime=300
 set shortmess+=c
@@ -497,9 +501,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)

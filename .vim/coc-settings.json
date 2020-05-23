@@ -7,7 +7,7 @@
   "coc.preferences.formatOnSaveFiletypes": ["python"],
   "coc.preferences.extensionUpdateCheck": "never",
   "python.autoComplete.addBrackets": true,
-  "python.jediEnabled": false,
+  //"python.jediEnabled": false,
   "python.linting.mypyEnabled": true,
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
