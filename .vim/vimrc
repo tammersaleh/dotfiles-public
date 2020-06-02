@@ -213,10 +213,6 @@ onoremap <silent> al :<c-u>normal! $v0<cr>
 xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
 onoremap <silent> id :<c-u>normal! GVgg<cr>
 
-" 'in fold' https://github.com/Konfekt/FastFold#fold-text-object
-xnoremap <silent> iz :<c-u>normal! ]zv[z<cr>
-xnoremap <silent> az :<c-u>normal! ]zV[z<cr>
-
 " 'in indentation' (indentation level sans any surrounding empty lines)
 function! s:inIndentation()
   let l:magic = &magic
@@ -399,8 +395,6 @@ packadd! matchit " % now works with if/else/fi
 set foldopen&
 set foldopen+=insert
 set foldopen+=jump
-" Toggle folds under cursor recursively
-nnoremap zz zA
 
 " http://gregsexton.org/2011/03/27/improving-the-text-displayed-in-a-vim-Fold.html
 fu! CustomFoldText()

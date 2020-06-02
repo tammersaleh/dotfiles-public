@@ -23,7 +23,7 @@ Plug 'https://github.com/hail2u/vim-css3-syntax'
 Plug 'https://github.com/hashivim/vim-terraform'
 Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'https://github.com/plasticboy/vim-markdown'
-Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
+" Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
 Plug 'https://github.com/raimon49/requirements.txt.vim' " Python requirements.txt support
 Plug 'https://github.com/vim-ruby/vim-ruby'
 Plug 'https://github.com/vim-scripts/jQuery'
