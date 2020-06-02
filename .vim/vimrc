@@ -363,6 +363,7 @@ function! MyHighlights() abort
   highlight Visual      guifg=#c4c400   guibg=black
   highlight CursorLine   guibg=#222222
   highlight CursorColumn guibg=#222222
+  highlight illuminatedWord guibg=#3c3a05
 
   " call matchadd('ColorColumn', '\%81v', 100)
 endfunction
@@ -420,7 +421,8 @@ set foldtext=CustomFoldText()
 " }}}
 " Plugin Config {{{
 
-let g:Illuminate_highlightUnderCursor = 0
+" let g:Illuminate_highlightUnderCursor = 0
+let g:Illuminate_delay = 1000
 
 " vim-dirvish {{{
 let g:dirvish_mode = ':sort ,^.*[\/],'
