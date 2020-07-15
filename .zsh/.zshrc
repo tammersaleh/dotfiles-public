@@ -140,6 +140,7 @@ __source_if_exists "$HOME/.secret_vars_and_aliases"
 for terminfo_file in ~/.terminfo-sources/*.terminfo; do
   tic -x -o ~/.terminfo "$terminfo_file"
 done
+stty -ixon -ixoff < $TTY
 ############# }}}
 ### Aliases & Functions {{{
 
