@@ -6,6 +6,7 @@
   "coc.preferences.formatOnSaveFiletypes": ["python"],
   "coc.preferences.extensionUpdateCheck": "never",
   "python.autoComplete.addBrackets": true,
+  "python.trace.server": "verbose",
   "python.linting.mypyEnabled": true,
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
@@ -37,4 +38,5 @@
     "typeParameter": "\uf728",
     "default": "\uf29c"
   }
+
 }

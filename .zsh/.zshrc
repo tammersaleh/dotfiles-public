@@ -137,11 +137,12 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 __source_if_exists "$HOME/.secret_vars_and_aliases"
 
 ####################### }}}
-### Terminfo {{{
+### Settings {{{
 for terminfo_file in ~/.terminfo-sources/*.terminfo; do
   tic -x -o ~/.terminfo "$terminfo_file"
 done
 stty -ixon -ixoff < $TTY
+umask 027
 ############# }}}
 ### Aliases & Functions {{{
 
