@@ -1,0 +1,8 @@
+[Unit]
+Description=GnuPG cryptographic agent and passphrase cache
+Documentation=man:gpg-agent(1)
+Requires=gpg-agent.socket
+
+[Service]
+ExecStart=/home/linuxbrew/.linuxbrew/bin/gpg-agent --supervised
+ExecReload=/home/linuxbrew/.linuxbrew/bin/gpgconf --reload gpg-agent
