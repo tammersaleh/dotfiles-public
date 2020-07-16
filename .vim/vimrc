@@ -3,20 +3,6 @@ scriptencoding utf-8
 
 source $HOME/.vim/plugins.vim
 
-" command! PU source $MYVIMRC | PlugClean! | PlugUpdate | PlugUpgrade | source $MYVIMRC
-" command! -bar PU call s:plugins_update()
-"
-" function! s:plugins_update() abort
-"     source $MYVIMRC 
-"     PlugClean!
-"     exe 'PlugSnapshot! '.fnameescape($HOME.'/.vim/plug-snapshot.vim')
-"     close
-"     PlugUpgrade
-"     PlugUpdate
-"     source $MYVIMRC 
-" endfu
-
-
 " Options {{{
 " set backupdir=$XDG_DATA_HOME/vim/backups//
 set directory=$XDG_DATA_HOME/vim/swap//
@@ -157,11 +143,25 @@ tnoremap <silent> <C-l> <C-W><C-L>
 nnoremap <silent> <Leader>t :bp\|bd #\|terminal ++curwin<CR>
 
 " Indent/deindent
-nnoremap <silent> <Tab> >>_
-nnoremap <silent> <S-Tab> <<_
-inoremap <silent> <S-Tab> <C-D>
 vnoremap <silent> <Tab> >gv
 vnoremap <silent> <S-Tab> <gv
+nnoremap <silent> <Tab> >>_
+nnoremap <silent> <S-Tab> <<_
+
+function! s:is_after_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <S-Tab>
+      \ pumvisible() ? "\<C-p>" :
+      \ <SID>is_after_space() ? "\<C-D>" :
+      \ coc#refresh()
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>is_after_space() ? "\<C-T>" :
+      \ coc#refresh()
 
 " Term scrolling
 function! TSExitNormalMode()
@@ -295,6 +295,8 @@ nnoremap <silent> <Left>  :call MoveAndFoldLeft()<cr>
 nnoremap <silent> h       :call MoveAndFoldLeft()<cr>
 nnoremap <silent> <Right> :call MoveAndFoldRight()<cr>
 nnoremap <silent> l       :call MoveAndFoldRight()<cr>
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " }}}
 " Autocommands {{{
@@ -545,8 +547,8 @@ nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
 " SuperTab {{{
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabCrMapping             = 0
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:SuperTabCrMapping             = 0
 " }}}
 
 " TComment {{{

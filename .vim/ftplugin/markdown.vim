@@ -31,3 +31,4 @@ setlocal linebreak
 setlocal foldenable
 setlocal spell
 
+let b:coc_suggest_disable = 1
