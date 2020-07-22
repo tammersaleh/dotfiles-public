@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  # shellcheck disable=2016
+  [[ $# -eq 1 ]] || usage 'Must give the issue number.  Try `git issue`'
+  [[ $1 =~ ^[0-9]+$ ]] || usage 'Issue number must be numeric.  Duh.'
+  n="$1"
+  branch="tammersaleh/$n"
+  main=$(git rev-parse --abbrev-ref HEAD)
+  message=$(hub issue show -f "%t%n%n%b%n%n[closes #$n]" "$n")
+
+  set -x
+  hub issue update -a tammersaleh "$n"
+  git push origin "$main:refs/heads/$branch"
+  git fetch origin
+  git branch "$branch" "origin/$branch"
+  git checkout "$branch"
+  git commit -m "$message" --allow-empty
+  git push
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me ISSUE_NUMBER
+
+  Start working on an issue.  Updates github, assigning the issue to yourself.
+  Creates a new branch for the issue.  Creates a commit that will close the
+  issue.
+
+  Examples:
+
+    git start 123
+
+  See also: git finish
+	EOF
+  exit 1
+}
+
+main "$@"
+
