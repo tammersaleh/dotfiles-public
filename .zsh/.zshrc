@@ -318,6 +318,9 @@ bindkey -a ds delete-surround
 bindkey -a ys add-surround
 bindkey -M visual S add-surround
 #}}}
+### Local Config {{{
+__source_if_exists "$HOME/.zsh/$(uname -s).zsh"
+#}}}
 ### Powerlevel10k Finish {{{
 source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
 
