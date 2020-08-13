@@ -3,6 +3,13 @@
 set -euo pipefail
 shopt -s inherit_errexit
 
+_err_trap() {
+  local lineno=$1
+  local cmd=$2
+  echo "$0 failed at line $lineno: $cmd"
+}
+trap '_err_trap ${LINENO} "$BASH_COMMAND"' ERR
+
 main() {
   [[ $# -eq 3 ]] || usage "Expected three arguments, got $#"
   
@@ -26,4 +33,4 @@ usage() {
 
 main "$@"
 
-# cursor: 8 del
+# cursor: 15 del
