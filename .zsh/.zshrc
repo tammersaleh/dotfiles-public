@@ -119,6 +119,7 @@ export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 
 export HUB_PROTOCOL=ssh
+export MOSH_TITLE_NOPREFIX=true
 
 # For the Dockers!
 export UID
