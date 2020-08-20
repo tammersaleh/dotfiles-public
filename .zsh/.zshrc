@@ -112,6 +112,7 @@ export GOBIN="$GOPATH/bin/$(uname -s)"
 export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
 export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
+export CLOUDSDK_PYTHON=$(which python3)
 
 export TERMINFO=~/.terminfo
 
@@ -156,7 +157,7 @@ alias la="gls -ohFa --color=auto"
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 alias cidr=sipcalc
-alias cg='cd "$(git rev-parse --show-toplevel)"'
+alias cg='d=$(git rev-parse --show-cdup) && [[ -n "$d" ]] && cd "$d"'
 alias grammarly="open -a Grammarly"
 alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
 alias da="direnv allow"
