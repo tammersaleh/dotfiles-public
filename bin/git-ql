@@ -14,8 +14,8 @@ log() {
 }
 
 if [[ "master" == "$(git branch --show-current)" ]]; then
-  log
+  log "$@"
 else
   echo "Compared to master..."
-  log "master.."
+  log "$@" "master.."
 fi
