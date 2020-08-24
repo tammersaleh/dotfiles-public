@@ -3,25 +3,57 @@
 set -euo pipefail
 shopt -s inherit_errexit
 
+SRC_BASE="$HOME/src/github.com"
+
 main() {
   [[ $# == 1 ]] || usage "Missing REPO"
 
-  url_or_pair=$1
-  org=$( nth_item_from_end "$url_or_pair" 2)
-  repo=$(nth_item_from_end "$url_or_pair" 1)
-
-  if [[ -d "$HOME/src/github.com/$org/$repo" ]]; then
-    echo "$HOME/src/github.com/$org/$repo is already cloned."
-    exit
+  if is_url "$1"; then
+    tuple=$(tuple_from_url "$1")
+    org=$(org_from_tuple "$tuple")
+    repo=$(repo_from_tuple "$tuple")
+  elif is_tuple "$1"; then
+    tuple=$1
+    org=$(org_from_tuple "$tuple")
+    repo=$(repo_from_tuple "$tuple")
   else
-    mkdir -p "$HOME/src/github.com/$org"
-    cd "$HOME/src/github.com/$org"
-    git clone "https://github.com/${org}/${repo}.git"
+    realpwd=$(pwd -P)
+    [[ "$(dirname "$realpwd")" == "$SRC_BASE" ]] || \
+      usage "Provided repo, but not in an org directory under $SRC_BASE"
+
+    org=$(basename "$realpwd")
+    repo=$1
+    tuple="$org/$repo"
   fi
+
+  if [[ -d "$HOME/src/github.com/$tuple" ]]; then
+    echo "$HOME/src/github.com/$tuple is already cloned."
+    exit
+  fi
+
+  mkdir -p "$SRC_BASE/$org"
+  cd "$SRC_BASE/$org"
+  git clone "https://github.com/${tuple}.git"
 }
 
-nth_item_from_end() {
-  echo "$1" | rev | cut -d / -f "$2" | rev
+is_url() {
+  [[ "$1" =~ ^https?: ]] || [[ "$1" =~ ^git: ]]
+}
+
+is_tuple() {
+  [[ "$1" =~ [:alnum:]+/[:alnum:]+ ]]
+}
+
+tuple_from_url() {
+  echo "$1" | rev | cut -d / -f 1,2 | rev
+}
+
+org_from_tuple() {
+  cut -f 1 -d / <<< "$1"
+}
+
+repo_from_tuple() {
+  cut -f 2 -d / <<< "$1"
 }
 
 usage() {
@@ -31,9 +63,12 @@ usage() {
   USAGE: $me [REPO_PAIR|REPO_URL]
 
   Clones the github repo into ~/src/github.com/org/repo
-  Where REPO is either a full URL (without the .git) or an ORG/REPO tuple.
-  Example: $me superorbital/git-grab
-           $me https://github.com/superorbital/git-grab
+  Where REPO is either a full URL (without the .git), an ORG/REPO tuple, or
+  just REPO. If just REPO, you must be in the ~/src/github.com/org directory.
+
+  Example: $me superorbital/foo
+           $me https://github.com/superorbital/foo
+           cd ~/src/github.com/superorbital; $me foo
 
 EOF
   exit 1
