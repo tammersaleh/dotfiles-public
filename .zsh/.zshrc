@@ -170,8 +170,6 @@ alias pyconsole="pipenv run ptpython"
 alias pip=pip3
 alias dush=dust # Better du -sh
 alias k=kubectl
-alias dc=docker-compose
-alias d=docker
 alias :q=exit
 
 __has gsed && alias sed=gsed
