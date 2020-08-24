@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -Eeuo pipefail
 shopt -s inherit_errexit
-
-_err_trap() {
-  local lineno=$1
-  local cmd=$2
-  echo "$0 failed at line $lineno: $cmd"
-}
-trap '_err_trap ${LINENO} "$BASH_COMMAND"' ERR
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+export SHELLOPTS
 
 main() {
   [[ $# -eq 3 ]] || usage "Expected three arguments, got $#"
