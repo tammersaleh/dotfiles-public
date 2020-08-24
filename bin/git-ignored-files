@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s inherit_errexit
+
+main() {
+  [[ "$#" == 1 ]] && [[ "$1" == "-h" ]] && usage
+  [[ "$#" != 0 ]] && usage "Expected zero arguments, got $#"
+
+  find . -type f -not -path "./.git/*" | git check-ignore -v --stdin
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me
+
+  Lists all ignored files.
+
+  Examples:
+
+    $me foo
+	EOF
+  exit 1
+}
+
+main "$@"
+

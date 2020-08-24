@@ -2,6 +2,30 @@
 
 set -euo pipefail
 shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 
-git fetch origin
-git checkout -b "$0" "origin/$0"
+main() {
+  [[ $# -eq 1 ]] || usage "Expected one argument, got $#"
+  
+  git fetch origin
+  git checkout -b "$1" "origin/$1"
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me NAME
+
+  Creates a local branch named NAME that tracks origin/NAME
+
+  Examples:
+
+    $me tammersaleh/foo
+	EOF
+  exit 1
+}
+
+main "$@"
+
