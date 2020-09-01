@@ -24,5 +24,8 @@ if [[ -v VIM_TERMINAL ]]; then
 fi
 
 # Not inside a running vim..
-vi -o "$@"
-
+if [[ $# -eq 0 ]]; then
+  vi -c "terminal ++curwin"
+else
+  vi -o "$@"
+fi
