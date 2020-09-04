@@ -41,11 +41,11 @@ is_url() {
 }
 
 is_tuple() {
-  [[ "$1" =~ [:alnum:]+/[:alnum:]+ ]]
+  [[ "$1" =~ [[:alnum:]]+/[[:alnum:]]+ ]]
 }
 
 tuple_from_url() {
-  echo "$1" | rev | cut -d / -f 1,2 | rev
+  rev <<< "$1" | cut -d / -f 1,2 | rev
 }
 
 org_from_tuple() {
@@ -58,17 +58,16 @@ repo_from_tuple() {
 
 usage() {
   [[ $# -gt 0 ]] && echo "ERROR: $*"
-  local me=$(basename "$0")
   cat <<EOF
-  USAGE: $me [REPO_PAIR|REPO_URL]
+  USAGE: git grab [REPO_PAIR|REPO_URL]
 
   Clones the github repo into ~/src/github.com/org/repo
   Where REPO is either a full URL (without the .git), an ORG/REPO tuple, or
   just REPO. If just REPO, you must be in the ~/src/github.com/org directory.
 
-  Example: $me superorbital/foo
-           $me https://github.com/superorbital/foo
-           cd ~/src/github.com/superorbital; $me foo
+  Example: git grab superorbital/foo
+           git grab https://github.com/superorbital/foo
+           cd ~/src/github.com/superorbital; git grab foo
 
 EOF
   exit 1
