@@ -15,7 +15,7 @@ main() {
 
    if [[ -z "$unattached_tmux_session" ]]; then
      echo "Creating a new session..."
-     exec tmux -2
+     exec tmux -2 new-session
    else
      echo "Connecting to session $unattached_tmux_session"
      exec tmux -2 attach -t "$unattached_tmux_session"
