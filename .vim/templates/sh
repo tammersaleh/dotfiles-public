@@ -3,10 +3,9 @@
 set -Eeuo pipefail
 shopt -s inherit_errexit
 trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
-# export SHELLOPTS  # This breaks any bash script you call.
 
 main() {
-  [[ $# -eq 3 ]] || usage "Expected three arguments, got $#"
+  [[ $# -eq 1 ]] || usage "Expected 1 argument, got $#"
   
 }
 
