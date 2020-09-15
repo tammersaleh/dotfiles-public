@@ -7,13 +7,14 @@ main() {
   # shellcheck disable=2016
   [[ $# -eq 1 ]] || usage 'Must give the issue number.  Try `git issue`'
   [[ $1 =~ ^[0-9]+$ ]] || usage 'Issue number must be numeric.  Duh.'
-  n="$1"
-  branch="tammersaleh/$n"
+  issue_number="$1"
+  branch="tammersaleh/$issue_number"
   main=$(git rev-parse --abbrev-ref HEAD)
-  message=$(hub issue show -f "%t%n%n%b%n%n[closes #$n]" "$n")
+  message=$(hub issue show -f "%t%n%n%b%n%n[closes #$issue_number]" "$issue_number")
 
   set -x
-  hub issue update -a tammersaleh "$n"
+  hub issue update -a tammersaleh "$issue_number"
+  hub api "repos/{owner}/{repo}/issues/$issue_number/comments" --raw-field "body=Work being done in $branch"
   git push origin "$main:refs/heads/$branch"
   git fetch origin
   git branch "$branch" "origin/$branch"
