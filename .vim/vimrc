@@ -346,7 +346,6 @@ augroup END
 " Colors {{{
 function! MyHighlights() abort
   highlight Normal                      guibg=black
-  highlight Comment                                    cterm=italic
   highlight Pmenu       guifg=#c6c6c6   guibg=Blue
   highlight PmenuSel    guifg=Yellow    guibg=Blue     cterm=bold
   highlight PmenuSbar                   guibg=Grey
@@ -355,7 +354,6 @@ function! MyHighlights() abort
   highlight Folded      guifg=lightblue guibg=NONE     cterm=bold   
   highlight Cursor      guifg=yellow    guibg=blue     " Only works in GUI.  See kitty.conf for terminal
   highlight WildMenu    guifg=yellow
-  " highlight ColorColumn guifg=yellow    guibg=#444444
   highlight slideDelim  guifg=#555555
   highlight kramdownIAL guifg=Grey                     cterm=italic
   highlight htmlH1      guifg=#b8bb26                  cterm=bold
@@ -369,7 +367,6 @@ function! MyHighlights() abort
   highlight CursorLine   guibg=#222222
   highlight CursorColumn guibg=#222222
   highlight illuminatedWord guibg=#3c3a05
-
   " call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
@@ -381,6 +378,7 @@ augroup END
 " https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
 " https://vi.stackexchange.com/questions/15722/vim-tmux-and-xterm-bracketed-paste
 if &term =~ '^tmux'
@@ -390,9 +388,28 @@ if &term =~ '^tmux'
   let &t_PE="\<Esc>[201~"
 endif
 
-set termguicolors
+let g:terminal_ansi_colors = [
+  \ '#cc241d',
+  \ '#98971a',
+  \ '#d79921',
+  \ '#458588',
+  \ '#b16286',
+  \ '#689d6a',
+  \ '#d65d0e',
+  \ '#928374',
+  \ '#fb4934',
+  \ '#b8bb26',
+  \ '#fabd2f',
+  \ '#83a598',
+  \ '#d3869b',
+  \ '#8ec07c',
+  \ '#f38019',
+  \ '#a89984',
+  \ ]
+
 set background=dark
 let g:gruvbox_contrast_dark = 'soft'
+let g:gruvbox_italic=1
 colorscheme gruvbox
 "}}}
 packadd! matchit " % now works with if/else/fi
