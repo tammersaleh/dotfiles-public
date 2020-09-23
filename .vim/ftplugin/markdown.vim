@@ -31,6 +31,6 @@ setlocal linebreak
 setlocal foldenable
 setlocal spell
 
-let b:coc_suggest_disable = 1
+" let b:coc_suggest_disable = 1
 let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'hcl=terraform']
 
