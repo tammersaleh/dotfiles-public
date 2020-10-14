@@ -11,7 +11,7 @@ main() {
 }
 
 usage() {
-  [[ $# -gt 0 ]] && echo "ERROR: $*"
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
   local me=$(basename "$0")
   cat <<-EOF
 
