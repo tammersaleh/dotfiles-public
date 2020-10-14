@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+__has() {
+  command -v "$1" > /dev/null
+}
+
+main() {
+  [[ $# -eq 1 ]] || usage "Expected 1 argument, got $#"
+
+  size="$1"
+  
+  pass=$(date +%s | sha256sum | base64 | head -c "$size")
+
+  echo "$pass"
+
+  if __has pbcopy; then
+    echo -n "$pass" | pbcopy
+    echo "also copied to the clipboard"
+  fi
+
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me SIZE_IN_CHARS
+
+  Generates a random password of size SIZE_IN_CHARS, and copies it to the
+  clipboard.
+
+  Examples:
+
+    $me 12
+	EOF
+  exit 1
+}
+
+main "$@"
