@@ -125,10 +125,12 @@ export MOSH_TITLE_NOPREFIX=true
 # For the Dockers!
 export UID
 export GID=$(id -g)
+export DOCKER_BUILDKIT=1
 
 export HISTFILE="$HOME/.local/share/zsh/history"
 export HISTSIZE=10000000
 export SAVEHIST=10000000
+
 setopt appendhistory
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
@@ -234,11 +236,12 @@ tmux-detach() {
 ############### }}}
 ### Completions {{{
 #
-# Great reference: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 #
 fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit 
-compinit -d "$HOME/.local/share/zsh/compdump" # This isn't working for some reason, so gitignored the .zcompdump file.
+# The below isn't working for some reason, so gitignored the .zcompdump file.
+compinit -d "$HOME/.local/share/zsh/compdump"
 autoload bashcompinit 
 bashcompinit
 
