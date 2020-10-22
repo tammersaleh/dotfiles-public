@@ -675,4 +675,7 @@ let g:url_transformers = [ 'TScolor_code' ]
 " }}}
 "}}}
 
+set exrc
+set secure
+
 " vim: foldmethod=marker
