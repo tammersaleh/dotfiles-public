@@ -292,6 +292,8 @@ nnoremap <silent> h       :call MoveAndFoldLeft()<cr>
 nnoremap <silent> <Right> :call MoveAndFoldRight()<cr>
 nnoremap <silent> l       :call MoveAndFoldRight()<cr>
 
+nnoremap <silent> <Leader>k :Files<cr>
+
 " }}}
 " Autocommands {{{
 " Make required directories when writing a file..
@@ -568,8 +570,6 @@ augroup END
 " }}}
 
 " Gitgutter {{{
-" TODO: figure out how to disable signcolumn _only_ for terminal windows.
-" set signcolumn=yes
 let g:gitgutter_max_signs = 1000
 let g:gitgutter_highlight_lines = 0
 let g:gitgutter_sign_added              = '+'

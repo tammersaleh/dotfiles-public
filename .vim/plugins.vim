@@ -52,6 +52,8 @@ Plug 'https://github.com/w0rp/ale'                      " Linting and fixing
 Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
 Plug 'https://github.com/ap/vim-templates'              " Templates in ~/.vim/templates
+Plug 'https://github.com/junegunn/fzf'
+Plug 'https://github.com/junegunn/fzf.vim'
 
 " Color theme
 Plug 'https://github.com/morhetz/gruvbox'
