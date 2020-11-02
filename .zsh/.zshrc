@@ -102,7 +102,7 @@ export RACK_ENV=development
 export SHELLCHECK_OPTS='-e SC2155 -e SC1090'
 
 export VAGRANT_VMWARE_CLONE_DIRECTORY=/tmp/vagrant_machines/
-export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 
