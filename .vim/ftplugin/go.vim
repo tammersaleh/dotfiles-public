@@ -12,3 +12,5 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+let b:ale_fix_on_save = 1
+let b:ale_fixers = [ 'remove_trailing_lines', 'trim_whitespace', 'gofmt', 'goimports' ]

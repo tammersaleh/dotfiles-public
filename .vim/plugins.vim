@@ -9,13 +9,10 @@ if has('python3')
   silent! python3 1
 endif
 
-" Languages & syntax 
-" Plug 'https://github.com/hashicorp/sentinel.vim'
-" Plug 'https://github.com/wannesm/wmgraphviz.vim'
+" Languages & syntax
 Plug 'https://github.com/Matt-Deacalion/vim-systemd-syntax'
 Plug 'https://github.com/cakebaker/scss-syntax.vim'
 Plug 'https://github.com/cespare/vim-toml'
-" Plug 'https://github.com/digitaltoad/vim-pug'   " Jade
 Plug 'https://github.com/ekalinin/Dockerfile.vim'
 Plug 'https://github.com/elzr/vim-json'
 Plug 'https://github.com/fatih/vim-go'
@@ -23,23 +20,16 @@ Plug 'https://github.com/hail2u/vim-css3-syntax'
 Plug 'https://github.com/hashivim/vim-terraform'
 Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'https://github.com/plasticboy/vim-markdown'
-" Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
+Plug 'https://github.com/tmhedberg/SimpylFold'  " Better python folding
+Plug 'https://github.com/davidhalter/jedi-vim'  " Better python code completion
 Plug 'https://github.com/raimon49/requirements.txt.vim' " Python requirements.txt support
 Plug 'https://github.com/vim-ruby/vim-ruby'
 Plug 'https://github.com/vim-scripts/jQuery'
 Plug 'https://github.com/tpope/vim-rails'
-" Plug 'https://github.com/szymonmaszke/vimpyter' " edit jupyter notebooks.  cray.
 Plug 'https://github.com/tpope/vim-git'
 Plug 'https://github.com/aliou/bats.vim'
 
-" COC
-Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
-Plug 'https://github.com/neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-Plug 'https://github.com/neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'https://github.com/neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
-Plug 'https://github.com/iamcco/coc-diagnostic', {'do': 'yarn install --frozen-lockfile'}
-
-" General 
+" General
 Plug 'https://github.com/justinmk/vim-dirvish'          " Betterer netrw
 Plug 'https://github.com/kana/vim-smartword'            " make `w` better.
 Plug 'https://github.com/airblade/vim-gitgutter'        " Show git signs in gutter
@@ -57,12 +47,13 @@ Plug 'https://github.com/zhimsel/vim-stay'              " Keep cursor pos, etc b
 Plug 'https://github.com/itchyny/lightline.vim'         " Simple status line
 Plug 'https://github.com/itchyny/vim-gitbranch'         " Used for lightline
 Plug 'https://github.com/dbakker/vim-projectroot'       " Used for lightline
-" Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
+Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
+Plug 'https://github.com/w0rp/ale'                      " Linting and fixing                    
 Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
 Plug 'https://github.com/ap/vim-templates'              " Templates in ~/.vim/templates
 
-" Color theme 
+" Color theme
 Plug 'https://github.com/morhetz/gruvbox'
 Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 
