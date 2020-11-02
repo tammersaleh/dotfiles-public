@@ -292,7 +292,9 @@ nnoremap <silent> h       :call MoveAndFoldLeft()<cr>
 nnoremap <silent> <Right> :call MoveAndFoldRight()<cr>
 nnoremap <silent> l       :call MoveAndFoldRight()<cr>
 
-nnoremap <silent> <Leader>k :Files<cr>
+" nnoremap <silent> <Leader>k :Files<cr>
+nnoremap <silent> <Leader>k :GFiles --cached --exclude-standard --others<cr>
+
 
 " }}}
 " Autocommands {{{
