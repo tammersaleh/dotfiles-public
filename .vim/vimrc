@@ -121,14 +121,18 @@ endif
 " Splits
 " Ctrl-n/ creates splits
 " Ctrl-hjkl changes splits
-function! s:dirvish_at_cwd() abort
+function! s:dirvish_at_file_cwd() abort
+  exec 'Dirvish %'
+endfunction
+
+function! s:dirvish_at_project_cwd() abort
   exec 'Dirvish ' . getcwd()
 endfunction
 
- noremap <silent> <C-Right>      :vsplit +call\ <sid>dirvish_at_cwd()<CR>
-tnoremap <silent> <C-Right> <C-w>:vsplit +call\ <sid>dirvish_at_cwd()<CR>
- noremap <silent> <C-Down>       :split  +call\ <sid>dirvish_at_cwd()<CR>
-tnoremap <silent> <C-Down>  <C-w>:split  +call\ <sid>dirvish_at_cwd()<CR>
+ noremap <silent> <C-Right>      :vsplit +call\ <sid>dirvish_at_file_cwd()<CR>
+tnoremap <silent> <C-Right> <C-w>:vsplit +call\ <sid>dirvish_at_project_cwd()<CR>
+ noremap <silent> <C-Down>       :split  +call\ <sid>dirvish_at_file_cwd()<CR>
+tnoremap <silent> <C-Down>  <C-w>:split  +call\ <sid>dirvish_at_project_cwd()<CR>
  noremap <silent> <C-h> <C-W><C-H>
 tnoremap <silent> <C-h> <C-W><C-H>
  noremap <silent> <C-j> <C-W><C-J>
@@ -139,7 +143,7 @@ tnoremap <silent> <C-k> <C-W><C-K>
 tnoremap <silent> <C-l> <C-W><C-L>
 
 " Space-t spawns a terminal
-nnoremap <silent> <Leader>t :bp\|bd #\|terminal ++curwin<CR>
+nnoremap <silent> <Leader>t :lcd %:h\|bp\|bd #\|terminal ++curwin<CR>
 
 " Indent/deindent
 vnoremap <silent> <Tab> >gv
@@ -336,8 +340,8 @@ augroup vimrc
   " Fixed QF / Location window size
   autocmd FileType qf setlocal winfixwidth
   " https://github.com/justinmk/vim-dirvish/issues/142
-  autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +call\ <sid>dirvish_at_cwd()<CR>
-  autocmd FileType qf noremap <buffer> <C-Down> :lclose \| split +call\ <sid>dirvish_at_cwd()<CR>
+  autocmd FileType qf noremap <buffer> <C-Right> :lclose \| vsplit +call\ <sid>dirvish_at_file_cwd()<CR>
+  autocmd FileType qf noremap <buffer> <C-Down>  :lclose \| split  +call\ <sid>dirvish_at_file_cwd()<CR>
 
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
@@ -452,7 +456,7 @@ augroup my_dirvish
   autocmd!
   autocmd FileType dirvish silent keeppatterns g@\v/\.[^\/]+/?$@d _
   autocmd FileType dirvish nnoremap <buffer> <silent> <Leader>t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
-  autocmd FileType dirvish nnoremap <buffer> <silent> t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
+  autocmd FileType dirvish nnoremap <buffer> <silent>         t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
 
   " Highlight the symbol and its references when holding the cursor.
   autocmd CursorHold * silent call CocActionAsync('highlight')
