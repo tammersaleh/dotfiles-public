@@ -156,6 +156,16 @@ function! s:is_after_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+inoremap <silent><expr> <S-Tab>
+      \ pumvisible() ? "\<C-p>" :
+      \ <SID>is_after_space() ? "\<C-D>" :
+      \ deoplete#complete()
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>is_after_space() ? "\<C-T>" :
+      \ deoplete#complete()
+
 " Term scrolling
 function! TSExitNormalMode()
   unmap <buffer> <silent> <LeftMouse>
@@ -481,6 +491,12 @@ endif
 
 " }}}
 set cmdheight=2
+
+" Deoplete {{{
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('auto_complete_delay', 200)
+call deoplete#custom#option('num_processes', 0)
+" }}}
 
 " localvimrc {{{
 let g:localvimrc_persistent = 2

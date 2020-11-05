@@ -47,7 +47,12 @@ Plug 'https://github.com/zhimsel/vim-stay'              " Keep cursor pos, etc b
 Plug 'https://github.com/itchyny/lightline.vim'         " Simple status line
 Plug 'https://github.com/itchyny/vim-gitbranch'         " Used for lightline
 Plug 'https://github.com/dbakker/vim-projectroot'       " Used for lightline
-Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
+" Plug 'https://github.com/ervandew/supertab'             " Tab does autocomplete
+"
+Plug 'https://github.com/Shougo/deoplete.nvim'
+Plug 'https://github.com/roxma/nvim-yarp'
+Plug 'https://github.com/roxma/vim-hug-neovim-rpc'
+
 Plug 'https://github.com/w0rp/ale'                      " Linting and fixing                    
 Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
 Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
