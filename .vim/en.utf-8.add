@@ -55,3 +55,6 @@ cgroups
 cgroup
 UID
 microservices
+Istio
+VirtualService
+DestinationRule
