@@ -159,32 +159,59 @@ endfunction
 inoremap <silent><expr> <S-Tab>
       \ pumvisible() ? "\<C-p>" :
       \ <SID>is_after_space() ? "\<C-D>" :
-      \ deoplete#complete()
+      \ "\<C-p>"
 
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>is_after_space() ? "\<C-T>" :
-      \ deoplete#complete()
+      \ "\<C-n>"
 
 " Term scrolling
-function! TSExitNormalMode()
+" function! TSEnterNormalMode()
+"   if &buftype ==? 'terminal' && mode('') ==? 't'
+"     call feedkeys("\<c-w>N")
+"     call feedkeys("\<c-y>")
+"     map <buffer> <silent> <LeftMouse> :call ExitTerminalNormalMode()<CR>
+"     map <buffer> <silent> <ESC> :call ExitTerminalNormalMode()<CR>
+"     setlocal nonumber
+"   endif
+" endfunction
+
+" tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
+
+function! EnterTerminalNormalMode()
+  if &buftype == 'terminal' && mode('') == 't'
+    call feedkeys("\<c-w>N")
+    call feedkeys("\<c-y>")
+    map <buffer> <silent> <LeftMouse> :call ExitTerminalNormalMode()<CR>
+    map <buffer> <silent> <ESC> :call ExitTerminalNormalMode()<CR>
+    setlocal nonumber
+  endif
+endfunction
+
+function! ExitTerminalNormalMode()
   unmap <buffer> <silent> <LeftMouse>
   unmap <buffer> <silent> <ESC>
   call feedkeys('a')
 endfunction
 
-function! TSEnterNormalMode()
-  if &buftype ==? 'terminal' && mode('') ==? 't'
-    call feedkeys("\<c-w>N")
-    call feedkeys("\<c-y>")
-    map <buffer> <silent> <LeftMouse> :call TSExitNormalMode()<CR>
-    map <buffer> <silent> <ESC> :call TSExitNormalMode()<CR>
-    setlocal nonumber
-  endif
+function! ExitTerminalNormalModeIfBottom()
+  unmap <buffer> <silent> <LeftMouse>
+  unmap <buffer> <silent> <ESC>
+  call feedkeys("3\<c-e>") " retrigger default scroll
+  let overscroll = 0 " fractional window overscroll to go terminal mode
+  let winh = winheight(winnr())
+  let is_terminal_normal = &buftype == 'terminal' && mode('') == 'n'
+  let at_buf_end = (line('w0') + winh) >= (line('$') + winh * overscroll)
+  if is_terminal_normal && at_buf_end | call feedkeys("i") | endif
 endfunction
 
-tnoremap <silent> <ScrollWheelUp> <c-w>:call TSEnterNormalMode()<CR>
-tnoremap <silent> <C-u> <c-w>:call TSEnterNormalMode()<CR>
+" scrolling up enters normal mod in terminal window, scrolling past end
+" of buffer triggers re-entry into terminal mode
+tnoremap <silent> <ScrollWheelUp> <c-w>:call EnterTerminalNormalMode()<CR>
+nnoremap <silent> <ScrollWheelDown> :call ExitTerminalNormalModeIfBottom()<CR>
+tnoremap <silent> <C-u> <c-w>:call EnterTerminalNormalMode()<CR>
+
 tnoremap <C-v> <C-w>"*
 
 " Go back
@@ -304,7 +331,6 @@ nnoremap <silent> l       :call MoveAndFoldRight()<cr>
 
 " nnoremap <silent> <Leader>k :Files<cr>
 nnoremap <silent> <Leader>k :GFiles --cached --exclude-standard --others<cr>
-
 
 " }}}
 " Autocommands {{{
@@ -493,9 +519,7 @@ endif
 set cmdheight=2
 
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('auto_complete_delay', 200)
-call deoplete#custom#option('num_processes', 0)
+"let g:deoplete#enable_at_startup = 1
 " }}}
 
 " localvimrc {{{
@@ -521,8 +545,7 @@ nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
 " SuperTab {{{
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-" let g:SuperTabCrMapping             = 0
+let g:SuperTabDefaultCompletionType = '<C-n>'
 " }}}
 
 " TComment {{{
