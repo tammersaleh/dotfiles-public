@@ -58,3 +58,7 @@ microservices
 Istio
 VirtualService
 DestinationRule
+Graphana
+Kiali
+LoadBalancer
+Grafana
