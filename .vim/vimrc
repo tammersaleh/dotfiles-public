@@ -182,35 +182,37 @@ inoremap <silent><expr> <Tab>
 function! EnterTerminalNormalMode()
   if &buftype == 'terminal' && mode('') == 't'
     call feedkeys("\<c-w>N")
-    call feedkeys("\<c-y>")
-    map <buffer> <silent> <LeftMouse> :call ExitTerminalNormalMode()<CR>
-    map <buffer> <silent> <ESC> :call ExitTerminalNormalMode()<CR>
+    " call feedkeys("\<c-y>")
+    " nnoremap <buffer> <silent> <ESC> :call ExitTerminalNormalMode()<CR>
+    " needed so that vim still understands escape sequences
+    " inoremap <buffer> <esc> <esc>
     setlocal nonumber
   endif
 endfunction
 
 function! ExitTerminalNormalMode()
-  unmap <buffer> <silent> <LeftMouse>
-  unmap <buffer> <silent> <ESC>
+  " unmap <buffer> <silent> <ESC>
   call feedkeys('a')
 endfunction
 
 function! ExitTerminalNormalModeIfBottom()
-  unmap <buffer> <silent> <LeftMouse>
-  unmap <buffer> <silent> <ESC>
   call feedkeys("3\<c-e>") " retrigger default scroll
-  let overscroll = 0 " fractional window overscroll to go terminal mode
-  let winh = winheight(winnr())
-  let is_terminal_normal = &buftype == 'terminal' && mode('') == 'n'
-  let at_buf_end = (line('w0') + winh) >= (line('$') + winh * overscroll)
-  if is_terminal_normal && at_buf_end | call feedkeys("i") | endif
+  if &buftype == 'terminal' && mode('') == 'n'
+    let winh = winheight(winnr())
+    let overscroll = 0 " fractional window overscroll to go terminal mode
+    let at_buf_end = (line('w0') + winh) >= (line('$') + winh * overscroll)
+    if at_buf_end 
+      " unmap <buffer> <silent> <ESC>
+      call feedkeys("a") 
+    endif
+  endif
 endfunction
 
 " scrolling up enters normal mod in terminal window, scrolling past end
 " of buffer triggers re-entry into terminal mode
-tnoremap <silent> <ScrollWheelUp> <c-w>:call EnterTerminalNormalMode()<CR>
-nnoremap <silent> <ScrollWheelDown> :call ExitTerminalNormalModeIfBottom()<CR>
-tnoremap <silent> <C-u> <c-w>:call EnterTerminalNormalMode()<CR>
+tnoremap <silent> <C-u>              <c-w>:call EnterTerminalNormalMode()<CR>
+tnoremap <silent> <ScrollWheelUp>    <c-w>:call EnterTerminalNormalMode()<CR>
+nnoremap <silent> <ScrollWheelDown>       :call ExitTerminalNormalModeIfBottom()<CR>
 
 tnoremap <C-v> <C-w>"*
 
