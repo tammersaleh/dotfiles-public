@@ -62,3 +62,6 @@ Graphana
 Kiali
 LoadBalancer
 Grafana
+ethernet
+veth
+hostnames
