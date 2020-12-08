@@ -184,18 +184,14 @@ gpip(){
 }
 
 if __has bat; then
-  # Print the top of the README.md file when changing to a directory.
-  cd() {
-    # shellcheck disable=SC2164
-    builtin cd "$@"
-    ret=$?
-    if [[ $ret -eq 0 ]]; then
-      [[ -f README.md ]] && bat --style=grid --line-range=:9 --italic-text=always --paging=never README.md
-      true
-    else
-      return $ret
-    fi
+  # https://stackoverflow.com/a/3964198/9932792
+  function head_readme() {
+      emulate -L zsh
+      if [[ -f README.md ]]; then
+        bat --style=grid --line-range=:9 --italic-text=always --paging=never README.md
+      fi
   }
+  chpwd_functions=(${chpwd_functions[@]} "head_readme")
 fi
 
 journal() {
