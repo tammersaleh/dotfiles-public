@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -Eeuo pipefail
+set -Eeu
 shopt -s inherit_errexit
 trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 [[ -v DEBUG ]] && set -x
@@ -13,8 +13,12 @@ main() {
   [[ $# -eq 1 ]] || usage "Expected 1 argument, got $#"
 
   size="$1"
-  
-  pass=$(date +%s | sha256sum | base64 | head -c "$size")
+
+  export LC_CTYPE=c
+  num=$(tr -dc "0-9" < /dev/urandom | head -c 1)
+  sym=$(tr -dc "!@#$%^&*()_+" < /dev/urandom | head -c 1)
+  alpha=$(tr -dc "a-zA-Z0-9" < /dev/urandom | head -c $(( size - 2 )))
+  pass="$alpha$sym$num"
 
   echo "$pass"
 
