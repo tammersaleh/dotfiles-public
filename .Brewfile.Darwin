@@ -1,8 +1,7 @@
-tap "cloudfoundry/tap"
 tap "garethr/kubeval"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "keith/formulae"
@@ -11,7 +10,6 @@ tap "sachaos/todoist"
 tap "tylerbrock/saw"
 tap "universal-ctags/universal-ctags"
 tap "wallix/awless"
-tap "wata727/tflint"
 
 brew "aspell"                        # Spell checker with better logic than ispell
 brew "autoconf"                      # Automatic configure script builder
@@ -45,7 +43,6 @@ brew "git-lfs"                       # Git extension for versioning large files
 brew "gnu-tar"                       # GNU version of the tar archiving utility
 brew "go"                            # Open source programming language to build simple/reliable/efficient software
 brew "gron"                          # Make JSON greppable
-brew "heroku/brew/heroku"            # Everything you need to get started with Heroku
 brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
 brew "hub"                           # Add GitHub support to git on the command-line
 brew "hugo"                          # Configurable static site generator
@@ -54,7 +51,6 @@ brew "jid"                           # Json incremental digger
 brew "jq"                            # Lightweight and flexible command-line JSON processor
 brew "kafka"                         # Publish-subscribe messaging rethought as a distributed commit log
 brew "kafkacat"                      # Generic command-line non-JVM Apache Kafka producer and consumer
-brew "kibana@6.2.3"                  # Analytics and search dashboard for Elasticsearch
 brew "kops"                          # Production Grade K8s Installation, Upgrades, and Management
 brew "kube-ps1"                      # Kubernetes prompt info for bash and zsh
 brew "kubectx"                       # Tool that can switch between kubectl contexts easily and create aliases
@@ -110,7 +106,7 @@ brew "unixodbc"                      # ODBC 3 connectivity for UNIX
 brew "upx"                           # Compress/expand executable files
 brew "vault"                         # Secures, stores, and tightly controls access to secrets
 brew "wallix/awless/awless"          # The Mighty CLI for AWS
-brew "wata727/tflint/tflint"         # Terraform linter
+brew "tflint"                        # Terraform linter
 brew "watch"                         # Executes a program periodically, showing output fullscreen
 brew "watchman"                      # Watch files and take action when they change
 brew "wget"                          # Internet file retriever
@@ -120,7 +116,8 @@ brew "zlib"                          # General-purpose lossless data-compression
 
 cask "aws-vault"
 cask "google-cloud-sdk"
-cask "java8"
-cask "pdfinfo"
+cask "rectangle"
+cask "font-hack-nerd-font"
+cask "font-source-sans-pro"
 
 # vim: ft=ruby
