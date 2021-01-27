@@ -25,7 +25,6 @@ brew "consul"                        # Tool for service discovery, monitoring an
 brew "coreutils"                     # GNU File, Shell, and Text utilities
 brew "ctags"                         # Reimplementation of ctags(1)
 brew "dash"                          # POSIX-compliant descendant of NetBSD's ash (the Almquist SHell)
-brew "dep"                           # Go dependency management tool
 brew "diff-so-fancy"                 # Good-lookin' diffs with diff-highlight and more
 brew "direnv"                        # Load/unload environment variables based on $PWD
 brew "docker-machine-driver-xhyve"   # Docker Machine driver for xhyve
@@ -39,6 +38,7 @@ brew "gdb"                           # GNU debugger
 brew "gettext", link: true           # GNU internationalization (i18n) and localization (l10n) library
 brew "git"                           # Distributed revision control system
 brew "git-crypt"                     # Enable transparent encryption/decryption of files in a git repo
+brew "git-delta"
 brew "git-lfs"                       # Git extension for versioning large files
 brew "gnu-tar"                       # GNU version of the tar archiving utility
 brew "go"                            # Open source programming language to build simple/reliable/efficient software
@@ -98,6 +98,7 @@ brew "stern"                         # Tail multiple Kubernetes pods & their con
 brew "stow"                          # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "terraform"                     # Tool to build, change, and version infrastructure
 brew "terraform_landscape"           # Improve Terraform's plan output
+brew "tflint"                        # Terraform linter
 brew "the_silver_searcher"           # Code-search similar to ack
 brew "tmux"                          # Terminal multiplexer
 brew "tree"                          # Display directories as trees (with optional color/HTML output)
@@ -106,7 +107,6 @@ brew "unixodbc"                      # ODBC 3 connectivity for UNIX
 brew "upx"                           # Compress/expand executable files
 brew "vault"                         # Secures, stores, and tightly controls access to secrets
 brew "wallix/awless/awless"          # The Mighty CLI for AWS
-brew "tflint"                        # Terraform linter
 brew "watch"                         # Executes a program periodically, showing output fullscreen
 brew "watchman"                      # Watch files and take action when they change
 brew "wget"                          # Internet file retriever
