@@ -10,17 +10,18 @@ main() {
   issue_number="$1"
   branch="tammersaleh/$issue_number"
   main=$(git rev-parse --abbrev-ref HEAD)
-  message=$(hub issue show -f "%t%n%n%b%n%n[closes #$issue_number]" "$issue_number")
+  issue_title=$(hub issue show -f "%t" "$issue_number")
+  first_commit_message=$(hub issue show -f "%t%n%n%b%n%n[closes #$issue_number]" "$issue_number")
 
   set -x
   hub issue update -a tammersaleh "$issue_number"
-  hub api "repos/{owner}/{repo}/issues/$issue_number/comments" --raw-field "body=Work being done in $branch"
   git push origin "$main:refs/heads/$branch"
   git fetch origin
   git branch "$branch" "origin/$branch"
   git checkout "$branch"
-  git commit -m "$message" --allow-empty
+  git commit -m "$first_commit_message" --allow-empty
   git push
+  gh pr create --assignee tammersaleh --body "PR for #$issue_number" --title "$issue_title" --draft
 }
 
 usage() {
@@ -31,8 +32,8 @@ usage() {
   USAGE: $me ISSUE_NUMBER
 
   Start working on an issue.  Updates github, assigning the issue to yourself.
-  Creates a new branch for the issue.  Creates a commit that will close the
-  issue.
+  Creates a new branch and PR for the issue.  Creates a commit that will close
+  the issue when the PR is merged.
 
   Examples:
 
@@ -44,4 +45,3 @@ usage() {
 }
 
 main "$@"
-
