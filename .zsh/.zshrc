@@ -104,8 +104,6 @@ export SHELLCHECK_OPTS='-e SC2155 -e SC1090'
 export VAGRANT_VMWARE_CLONE_DIRECTORY=/tmp/vagrant_machines/
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
-export HOMEBREW_NO_AUTO_UPDATE=1
-
 export GOPATH=$HOME
 export GOBIN="$GOPATH/bin/$(uname -s)"
 
@@ -131,6 +129,7 @@ export HISTFILE="$HOME/.local/share/zsh/history"
 export HISTSIZE=10000000
 export SAVEHIST=10000000
 
+export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BUNDLE_NO_LOCK=true # https://github.com/Homebrew/homebrew-bundle/pull/552
 export HOMEBREW_BUNDLE_FILE="~/.Brewfile.$(uname -s)"
 
