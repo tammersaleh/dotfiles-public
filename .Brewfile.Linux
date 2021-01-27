@@ -1,11 +1,11 @@
-tap "cloudfoundry/tap"
-tap "homebrew/boneyard"
+tap "github/gh"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "linuxbrew/extra"
 tap "netlify/netlifyctl"
 tap "wata727/tflint"
+tap "wallix/awless"
 # General-purpose lossless data-compression library
 brew "zlib"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -39,7 +39,7 @@ brew "docker"
 # GNU Emacs text editor
 brew "emacs"
 # The GNU Compiler Collection
-brew "gcc@5"
+brew "gcc"
 # Distributed revision control system
 brew "git"
 # Enable transparent encryption/decryption of files in a git repo
@@ -91,13 +91,57 @@ brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Vi 'workalike' with many additional features
-brew "vim", args: ["with-override-system-vi"]
+brew "vim"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
 brew "wget"
-brew "cloudfoundry/tap/cf-cli"
 # CLI to interact with netlify.com
 brew "netlify/netlifyctl/netlifyctl"
 # Terraform linter
-brew "wata727/tflint/tflint"
+brew "tflint"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Remove large files or passwords from Git history like git-filter-branch
+brew "bfg"
+# Static analysis of C and C++ code
+brew "cppcheck"
+# Tools to manipulate dates with a focus on financial data
+brew "dateutils"
+# Go dependency management tool
+brew "dep"
+# More intuitive version of du in rust
+brew "dust"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# GitHub Markdown previewer
+brew "grip"
+# Handy way to save and run project-specific commands
+brew "just"
+# Input filter for the pager less
+brew "lesspipe"
+# Password manager
+brew "pass"
+# Shell command parallelization utility
+brew "parallel"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
+# Linter for YAML files
+brew "yamllint"
+# Process YAML documents from the CLI
+brew "yq"
+# UNIX shell (command interpreter)
+brew "zsh"
+
+brew "git-delta"
+brew "upx"
+
+# vim: ft=ruby
