@@ -119,7 +119,7 @@ brew "kops"
 # Kubernetes prompt info for bash and zsh
 brew "kube-ps1"
 # Tool that can switch between kubectl contexts easily and create aliases
-brew "kubectx", args: ["with-short-names"]
+brew "kubectx"
 # The Kubernetes package manager
 brew "kubernetes-helm"
 # Input filter for the pager less
@@ -230,3 +230,5 @@ cask "aws-vault"
 cask "google-cloud-sdk"
 cask "java8"
 cask "pdfinfo"
+
+brew "lazygit"
