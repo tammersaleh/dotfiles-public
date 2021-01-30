@@ -129,10 +129,6 @@ export HISTFILE="$HOME/.local/share/zsh/history"
 export HISTSIZE=10000000
 export SAVEHIST=10000000
 
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_BUNDLE_NO_LOCK=true # https://github.com/Homebrew/homebrew-bundle/pull/552
-export HOMEBREW_BUNDLE_FILE="~/.Brewfile.$(uname -s)"
-
 setopt appendhistory
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
