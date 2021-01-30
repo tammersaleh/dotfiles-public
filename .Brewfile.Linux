@@ -6,142 +6,75 @@ tap "linuxbrew/extra"
 tap "netlify/netlifyctl"
 tap "wata727/tflint"
 tap "wallix/awless"
-# General-purpose lossless data-compression library
-brew "zlib"
-# Tool for generating GNU Standards-compliant Makefiles
-brew "automake"
-# General-purpose data compression with high compression ratio
-brew "xz"
-# Official Amazon AWS command-line interface
-brew "awscli"
-# Bourne-Again SHell, a UNIX command interpreter
-brew "bash"
-# Programmable completion for Bash 3.2
-brew "bash-completion"
-# Tool to obtain certs from Let's Encrypt and autoenable HTTPS
-brew "certbot"
-# CloudFlare's PKI toolkit
-brew "cfssl"
-# Cross-platform make
-brew "cmake"
-# GNU File, Shell, and Text utilities
-brew "coreutils"
-# Reimplementation of ctags(1)
-brew "ctags"
-# Get a file from an HTTP, HTTPS or FTP server
-brew "curl"
-# Good-lookin' diffs with diff-highlight and more
-brew "diff-so-fancy"
-# Load/unload environment variables based on $PWD
-brew "direnv"
-# Pack, ship and run any application as a lightweight container
-brew "docker"
-# GNU Emacs text editor
-brew "emacs"
-# The GNU Compiler Collection
-brew "gcc"
-# Distributed revision control system
-brew "git"
-# Enable transparent encryption/decryption of files in a git repo
-brew "git-crypt"
-# Git extension for versioning large files
-brew "git-lfs"
-# Make JSON greppable
-brew "gron"
-# Add GitHub support to git on the command-line
-brew "hub"
-# Lightweight and flexible command-line JSON processor
-brew "jq"
-# Kubernetes prompt info for bash and zsh
-brew "kube-ps1"
-# The Kubernetes package manager
-brew "kubernetes-helm"
-# C XSLT library for GNOME
-brew "libxslt"
-# Modern and intuitive terminal-based text editor
-brew "micro"
-# Remote terminal application
-brew "mosh"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
-# Platform built on V8 to build network applications
-brew "node"
-# Highly capable, feature-rich programming language
-brew "perl"
-# Show ps output as a tree
-brew "pstree"
-# Ruby version manager
-brew "rbenv"
-# Wrapper around libsass that helps to create command-line apps
-brew "sassc"
-# Static analysis and lint tool, for (ba)sh scripts
-brew "shellcheck"
-# netcat on steroids
-brew "socat"
-# Tail multiple Kubernetes pods & their containers
-brew "stern"
-# Organize software neatly under a single directory tree (e.g. /usr/local)
-brew "stow"
-# Tool to build, change, and version infrastructure
-brew "terraform"
-# Code-search similar to ack
-brew "the_silver_searcher"
-# Terminal multiplexer
-brew "tmux"
-# Display directories as trees (with optional color/HTML output)
-brew "tree"
-# Vi 'workalike' with many additional features
-brew "vim"
-# Executes a program periodically, showing output fullscreen
-brew "watch"
-# Internet file retriever
-brew "wget"
-# CLI to interact with netlify.com
-brew "netlify/netlifyctl/netlifyctl"
-# Terraform linter
-brew "tflint"
-# Microsoft Azure CLI 2.0
-brew "azure-cli"
-# Clone of cat(1) with syntax highlighting and Git integration
-brew "bat"
-# Remove large files or passwords from Git history like git-filter-branch
-brew "bfg"
-# Static analysis of C and C++ code
-brew "cppcheck"
-# Tools to manipulate dates with a focus on financial data
-brew "dateutils"
-# Go dependency management tool
-brew "dep"
-# More intuitive version of du in rust
-brew "dust"
-# Command-line fuzzy finder written in Go
-brew "fzf"
-# GitHub command-line tool
-brew "gh"
-# GNU Pretty Good Privacy (PGP) package
-brew "gnupg"
-# Open source programming language to build simple/reliable/efficient software
-brew "go"
-# GitHub Markdown previewer
-brew "grip"
-# Handy way to save and run project-specific commands
-brew "just"
-# Input filter for the pager less
-brew "lesspipe"
-# Password manager
-brew "pass"
-# Shell command parallelization utility
-brew "parallel"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
-# Linter for YAML files
-brew "yamllint"
-# Process YAML documents from the CLI
-brew "yq"
-# UNIX shell (command interpreter)
-brew "zsh"
 
+brew "automake"                      # Tool for generating GNU Standards-compliant Makefiles
+brew "awscli"                        # Official Amazon AWS command-line interface
+brew "azure-cli"                     # Microsoft Azure CLI 2.0
+brew "bash"                          # Bourne-Again SHell, a UNIX command interpreter
+brew "bash-completion"               # Programmable completion for Bash 3.2
+brew "bat"                           # Clone of cat(1) with syntax highlighting and Git integration
+brew "bfg"                           # Remove large files or passwords from Git history like git-filter-branch
+brew "certbot"                       # Tool to obtain certs from Let's Encrypt and autoenable HTTPS
+brew "cfssl"                         # CloudFlare's PKI toolkit
+brew "cmake"                         # Cross-platform make
+brew "coreutils"                     # GNU File, Shell, and Text utilities
+brew "cppcheck"                      # Static analysis of C and C++ code
+brew "ctags"                         # Reimplementation of ctags(1)
+brew "curl"                          # Get a file from an HTTP, HTTPS or FTP server
+brew "dateutils"                     # Tools to manipulate dates with a focus on financial data
+brew "dep"                           # Go dependency management tool
+brew "diff-so-fancy"                 # Good-lookin' diffs with diff-highlight and more
+brew "direnv"                        # Load/unload environment variables based on $PWD
+brew "docker"                        # Pack, ship and run any application as a lightweight container
+brew "dust"                          # More intuitive version of du in rust
+brew "emacs"                         # GNU Emacs text editor
+brew "fzf"                           # Command-line fuzzy finder written in Go
+brew "gcc"                           # The GNU Compiler Collection
+brew "gh"                            # GitHub command-line tool
+brew "git"                           # Distributed revision control system
+brew "git-crypt"                     # Enable transparent encryption/decryption of files in a git repo
 brew "git-delta"
+brew "git-lfs"                       # Git extension for versioning large files
+brew "gnupg"                         # GNU Pretty Good Privacy (PGP) package
+brew "go"                            # Open source programming language to build simple/reliable/efficient software
+brew "grip"                          # GitHub Markdown previewer
+brew "gron"                          # Make JSON greppable
+brew "hub"                           # Add GitHub support to git on the command-line
+brew "jq"                            # Lightweight and flexible command-line JSON processor
+brew "just"                          # Handy way to save and run project-specific commands
+brew "kube-ps1"                      # Kubernetes prompt info for bash and zsh
+brew "kubernetes-helm"               # The Kubernetes package manager
+brew "lesspipe"                      # Input filter for the pager less
+brew "libxslt"                       # C XSLT library for GNOME
+brew "micro"                         # Modern and intuitive terminal-based text editor
+brew "mosh"                          # Remote terminal application
+brew "neovim"                        # Ambitious Vim-fork focused on extensibility and agility
+brew "netlify/netlifyctl/netlifyctl" # CLI to interact with netlify.com
+brew "node"                          # Platform built on V8 to build network applications
+brew "parallel"                      # Shell command parallelization utility
+brew "pass"                          # Password manager
+brew "perl"                          # Highly capable, feature-rich programming language
+brew "pstree"                        # Show ps output as a tree
+brew "python@3.9"                    # Interpreted, interactive, object-oriented programming language
+brew "rbenv"                         # Ruby version manager
+brew "sassc"                         # Wrapper around libsass that helps to create command-line apps
+brew "shellcheck"                    # Static analysis and lint tool, for (ba)sh scripts
+brew "socat"                         # netcat on steroids
+brew "stern"                         # Tail multiple Kubernetes pods & their containers
+brew "stow"                          # Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "terraform"                     # Tool to build, change, and version infrastructure
+brew "tflint"                        # Terraform linter
+brew "the_silver_searcher"           # Code-search similar to ack
+brew "tmux"                          # Terminal multiplexer
+brew "tree"                          # Display directories as trees (with optional color/HTML output)
 brew "upx"
+brew "vim"                           # Vi 'workalike' with many additional features
+brew "watch"                         # Executes a program periodically, showing output fullscreen
+brew "wget"                          # Internet file retriever
+brew "xz"                            # General-purpose data compression with high compression ratio
+brew "yamllint"                      # Linter for YAML files
+brew "yq"                            # Process YAML documents from the CLI
+brew "zlib"                          # General-purpose lossless data-compression library
+brew "zsh"                           # UNIX shell (command interpreter)
 
 # vim: ft=ruby

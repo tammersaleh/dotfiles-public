@@ -70,6 +70,7 @@ brew "luarocks"                      # Package manager for the Lua programming l
 brew "lynx"                          # Text-based web browser
 brew "macvim"                        # GUI for vim, made for macOS
 brew "mosh"                          # Remote terminal application
+brew "moreutils"
 brew "ncdu"                          # NCurses Disk Usage
 brew "neovim"                        # Ambitious Vim-fork focused on extensibility and agility
 brew "netlify/netlifyctl/netlifyctl" # CLI to interact with netlify.com
