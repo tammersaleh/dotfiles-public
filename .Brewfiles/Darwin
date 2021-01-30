@@ -10,44 +10,16 @@ tap "universal-ctags/universal-ctags"
 brew "aspell"                        # Spell checker with better logic than ispell
 brew "autoconf"                      # Automatic configure script builder
 brew "bzip2"                         # Freely available high-quality data compressor
-brew "consul"                        # Tool for service discovery, monitoring and configuration
-brew "dash"                          # POSIX-compliant descendant of NetBSD's ash (the Almquist SHell)
+brew "diffutils"
 brew "docker-machine-driver-xhyve"   # Docker Machine driver for xhyve
-brew "elinks"                        # Text mode web browser
-brew "entr"                          # Run arbitrary commands when files change
-brew "exiftool"                      # Perl lib for reading and writing EXIF metadata
-brew "ffmpeg"                        # Play, record, convert, and stream audio and video
-brew "fzy"                           # Fast, simple fuzzy text selector with an advanced scoring algorithm
 brew "gdb"                           # GNU debugger
 brew "gettext", link: true           # GNU internationalization (i18n) and localization (l10n) library
 brew "gnu-tar"                       # GNU version of the tar archiving utility
-brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
-brew "hugo"                          # Configurable static site generator
-brew "imagemagick"                   # Tools and libraries to manipulate images in many formats
-brew "jid"                           # Json incremental digger
-brew "kafka"                         # Publish-subscribe messaging rethought as a distributed commit log
-brew "kafkacat"                      # Generic command-line non-JVM Apache Kafka producer and consumer
-brew "kops"                          # Production Grade K8s Installation, Upgrades, and Management
-brew "kubectx"                       # Tool that can switch between kubectl contexts easily and create aliases
-brew "kubernetes-cli"                # Kubernetes command-line interface
-brew "lazygit"
-brew "libcaca"                       # Convert pixel information into colored ASCII art
 brew "libnotify"                     # Library that sends desktop notifications to a notification daemon
-brew "librdkafka"                    # The Apache Kafka C/C++ library
-brew "librsvg"                       # Library to render SVG files using Cairo
-brew "libtool"                       # Generic library support script
-brew "libyaml"                       # YAML Parser
-brew "links"                         # Lynx-like WWW browser that supports tables, menus, etc.
-brew "luarocks"                      # Package manager for the Lua programming language
-brew "lynx"                          # Text-based web browser
 brew "macvim"                        # GUI for vim, made for macOS
 brew "moreutils"
-brew "ncdu"                          # NCurses Disk Usage
-brew "noti"                          # Trigger notifications when a process completes
 brew "openssl"                       # SSL/TLS cryptography library
 brew "openssl@1.1"                   # Cryptography and SSL/TLS Toolkit
-brew "packer"                        # Tool for creating identical machine images for multiple platforms
-brew "pandoc"                        # Swiss-army knife of markup format conversion
 brew "peco"                          # Simplistic interactive filtering tool
 brew "python"                        # Interpreted, interactive, object-oriented programming language
 brew "readline"                      # Library for command-line editing
@@ -73,6 +45,6 @@ cask "rectangle"
 cask "font-hack-nerd-font"
 cask "font-source-sans-pro"
 
-instance_eval(File.read(".Brewfile.common"))
+instance_eval(File.read("common"))
 
 # vim: ft=ruby
