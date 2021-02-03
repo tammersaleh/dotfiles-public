@@ -10,4 +10,5 @@ cd "$(dirname "$0")"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BUNDLE_NO_LOCK=true # https://github.com/Homebrew/homebrew-bundle/pull/552
 export HOMEBREW_BUNDLE_FILE="$(uname -s)"
+brew update
 brew bundle install --cleanup --force
