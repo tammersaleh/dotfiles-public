@@ -10,9 +10,9 @@ __has() {
 }
 
 main() {
-  [[ $# -eq 1 ]] || usage "Expected 1 argument, got $#"
+  [[ $# -le 1 ]] || usage "Expected 1 argument, got $#"
 
-  size="$1"
+  size="${1-12}"
 
   export LC_CTYPE=c
   num=$(tr -dc "0-9" < /dev/urandom | head -c 1)
