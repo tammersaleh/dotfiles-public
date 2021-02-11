@@ -349,6 +349,7 @@ typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
 # Default context color (no privileges, no SSH).
 typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
 # typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #}}}
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # vim: foldmethod=marker ft=zsh
