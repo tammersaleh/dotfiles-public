@@ -627,12 +627,21 @@ function! TSprojname() abort
   return fnamemodify(projectroot#get(), ':t')
 endfunction
 
+function! TSFilename() abort
+  if &filetype ==# 'vimfiler' | return vimfiler#get_status_string() | endif
+  if &filetype ==# 'unite'    | return unite#get_status_string()    | endif
+  if &filetype ==# 'vimshell' | return vimshell#get_status_string() | endif
+  if &filetype ==# 'dirvish'  | return expand('%:.')                | endif
+
+  return expand('%:t')
+endfunction
+
 set noshowmode
 set laststatus=2
 let g:lightline = {
 \   'active': {
 \     'left':  [ [ 'mode', 'paste' ],
-\                [ 'gitbranch', 'projectroot', 'relativepath'], 
+\                [ 'gitbranch', 'projectroot', 'filename'], 
 \                [ 'readonly', 'modified' ] ],
 \     'right': [ [ 'lineinfo' ],
 \                [ 'percent' ],
@@ -644,6 +653,7 @@ let g:lightline = {
 \                [ 'percent' ] ]
 \   },
 \   'component_function': {
+\     'filename': 'TSFilename',
 \     'gitbranch': 'gitbranch#name',
 \     'projectroot': 'TSprojname'
 \   },
