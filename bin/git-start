@@ -21,7 +21,7 @@ main() {
   git checkout "$branch"
   git commit -m "$first_commit_message" --allow-empty
   git push
-  gh pr create --assignee tammersaleh --body "PR for #$issue_number" --title "$issue_title" --draft
+  gh pr create --assignee tammersaleh --body "[closes #$issue_number]" --title "$issue_title" --draft
 }
 
 usage() {
@@ -39,7 +39,7 @@ usage() {
 
     git start 123
 
-  See also: git finish
+  See also: git finish (TBD)
 	EOF
   exit 1
 }
