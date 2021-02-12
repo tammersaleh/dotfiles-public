@@ -30,7 +30,6 @@ brew "sachaos/todoist/todoist"       # Todoist CLI client
 brew "sipcalc"                       # Advanced console-based IP subnet calculator
 brew "speedtest-cli"                 # Command-line interface for https://speedtest.net bandwidth tests
 brew "sqlite"                        # Command-line interface for SQLite
-brew "terraform_landscape"           # Improve Terraform's plan output
 brew "tylerbrock/saw/saw"            # Fast, multipurpose tool for AWS CloudWatch Logs
 brew "unixodbc"                      # ODBC 3 connectivity for UNIX
 brew "upx"                           # Compress/expand executable files

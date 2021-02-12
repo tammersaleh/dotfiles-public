@@ -52,7 +52,7 @@ brew "shellcheck"                    # Static analysis and lint tool, for (ba)sh
 brew "socat"                         # netcat on steroids
 brew "stern"                         # Tail multiple Kubernetes pods & their containers
 brew "stow"                          # Organize software neatly under a single directory tree (e.g. /usr/local)
-brew "terraform"                     # Tool to build, change, and version infrastructure
+brew "tfenv"                         # Terraform version manager
 brew "tflint"                        # Terraform linter
 brew "the_silver_searcher"           # Code-search similar to ack
 brew "tmux"                          # Terminal multiplexer
