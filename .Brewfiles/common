@@ -26,25 +26,25 @@ brew "git-delta"
 brew "git-lfs"                       # Git extension for versioning large files
 brew "go"                            # Open source programming language to build simple/reliable/efficient software
 brew "gron"                          # Make JSON greppable
-brew "hub"                           # Add GitHub support to git on the command-line
 brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
-brew "jq"                            # Lightweight and flexible command-line JSON processor
+brew "hub"                           # Add GitHub support to git on the command-line
 brew "imagemagick"                   # Tools and libraries to manipulate images in many formats
-brew "kubectx"                       # Tool that can switch between kubectl contexts easily and create aliases
-brew "lazygit"
-brew "links"                         # Lynx-like WWW browser that supports tables, menus, etc.
-brew "lynx"                          # Text-based web browser
-brew "noti"                          # Trigger notifications when a process completes
-brew "kubernetes-cli"                # Kubernetes command-line interface
-brew "pandoc"                        # Swiss-army knife of markup format conversion
+brew "jq"                            # Lightweight and flexible command-line JSON processor
 brew "kube-ps1"                      # Kubernetes prompt info for bash and zsh
+brew "kubectx"                       # Tool that can switch between kubectl contexts easily and create aliases
+brew "kubernetes-cli"                # Kubernetes command-line interface
 brew "kubernetes-helm"               # The Kubernetes package manager
+brew "lazygit"
 brew "lesspipe"                      # Input filter for the pager less
 brew "libxslt"                       # C XSLT library for GNOME
+brew "links"                         # Lynx-like WWW browser that supports tables, menus, etc.
+brew "lynx"                          # Text-based web browser
 brew "mosh"                          # Remote terminal application
 brew "neovim"                        # Ambitious Vim-fork focused on extensibility and agility
 brew "netlify/netlifyctl/netlifyctl" # CLI to interact with netlify.com
 brew "node"                          # Platform built on V8 to build network applications
+brew "noti"                          # Trigger notifications when a process completes
+brew "pandoc"                        # Swiss-army knife of markup format conversion
 brew "pstree"                        # Show ps output as a tree
 brew "rbenv"                         # Ruby version manager
 brew "sassc"                         # Wrapper around libsass that helps to create command-line apps
@@ -52,6 +52,7 @@ brew "shellcheck"                    # Static analysis and lint tool, for (ba)sh
 brew "socat"                         # netcat on steroids
 brew "stern"                         # Tail multiple Kubernetes pods & their containers
 brew "stow"                          # Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "terraform"
 brew "tflint"                        # Terraform linter
 brew "the_silver_searcher"           # Code-search similar to ack
 brew "tmux"                          # Terminal multiplexer
