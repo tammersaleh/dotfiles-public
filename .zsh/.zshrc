@@ -232,7 +232,7 @@ tmux-detach() {
 #
 # https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 #
-fpath=(~/.zsh/completions $fpath)
+fpath=(~/.zsh/completions $(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -Uz compinit 
 # The below isn't working for some reason, so gitignored the .zcompdump file.
 compinit -d "$HOME/.local/share/zsh/compdump"
