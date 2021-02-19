@@ -5,6 +5,7 @@ brew "azure-cli"                     # Microsoft Azure CLI 2.0
 brew "bfg"                           # Remove large files or passwords from Git history like git-filter-branch
 brew "certbot"                       # Tool to obtain certs from Let's Encrypt and autoenable HTTPS
 brew "cppcheck"                      # Static analysis of C and C++ code
+brew "curl"                          # Get a file from an HTTP, HTTPS or FTP server
 brew "dateutils"                     # Tools to manipulate dates with a focus on financial data
 brew "dep"                           # Go dependency management tool
 brew "docker"                        # Pack, ship and run any application as a lightweight container
