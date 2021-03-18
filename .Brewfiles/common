@@ -26,6 +26,7 @@ brew "git"                           # Distributed revision control system
 brew "git-crypt"                     # Enable transparent encryption/decryption of files in a git repo
 brew "git-delta"
 brew "git-lfs"                       # Git extension for versioning large files
+brew "gnupg"                         # GNU Pretty Good Privacy (PGP) package
 brew "go"                            # Open source programming language to build simple/reliable/efficient software
 brew "gron"                          # Make JSON greppable
 brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
@@ -64,5 +65,6 @@ brew "wget"                          # Internet file retriever
 brew "xz"                            # General-purpose data compression with high compression ratio
 brew "zlib"                          # General-purpose lossless data-compression library
 
+cask "wkhtmltopdf"
 
 # vim: ft=ruby

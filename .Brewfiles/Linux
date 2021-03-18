@@ -12,7 +12,6 @@ brew "docker"                        # Pack, ship and run any application as a l
 brew "dust"                          # More intuitive version of du in rust
 brew "emacs"                         # GNU Emacs text editor
 brew "gcc"                           # The GNU Compiler Collection
-brew "gnupg"                         # GNU Pretty Good Privacy (PGP) package
 brew "grip"                          # GitHub Markdown previewer
 brew "just"                          # Handy way to save and run project-specific commands
 brew "micro"                         # Modern and intuitive terminal-based text editor
