@@ -162,8 +162,6 @@ alias grammarly="open -a Grammarly"
 alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
 alias da="direnv allow"
 alias de="vi .envrc && direnv allow"
-alias git=hub
-alias g=git
 alias https='http --default-scheme=https'
 alias html="pup"
 alias pyconsole="pipenv run ptpython"
@@ -225,6 +223,15 @@ tmux-detach() {
     tmux detach-client -s "$id"
   done
   exit
+}
+
+# https://stackoverflow.com/questions/30542491/push-force-with-lease-by-default
+g() {
+  if [[ $1 == 'push' && ( $@ == *'--force'* || $@ == *' -f'*) && $@ != *'-with-lease'* ]]; then
+    echo 'Hey stupid, use --force-with-lease instead'
+  else
+    command hub "$@"
+  fi
 }
 
 ############### }}}
