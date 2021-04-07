@@ -136,6 +136,9 @@ setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded 
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+export GPG_TTY=$(tty)
+
 __source_if_exists "$HOME/.secret_vars_and_aliases"
 
 ####################### }}}
