@@ -39,10 +39,11 @@ brew "watchman"                      # Watch files and take action when they cha
 brew "yasm"                          # Modular BSD reimplementation of NASM
 
 cask "aws-vault"
-cask "google-cloud-sdk"
-cask "rectangle"
 cask "font-hack-nerd-font"
 cask "font-source-sans-pro"
+cask "google-cloud-sdk"
+cask "rectangle"
+cask "wkhtmltopdf"
 
 instance_eval(File.read("common"))
 

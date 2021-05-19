@@ -66,6 +66,4 @@ brew "xz"                            # General-purpose data compression with hig
 brew "zlib"                          # General-purpose lossless data-compression library
 brew "vale"                          # Prose Linter https://docs.errata.ai/vale
 
-cask "wkhtmltopdf"
-
 # vim: ft=ruby
