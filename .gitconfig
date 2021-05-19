@@ -4,7 +4,8 @@
   path = ~/.gitconfig-local
 [user]
   name = Tammer Saleh
-  email = tammer@superorbit.al
+  email = tammer@superorbital.io
+	signingkey = 6EFD49B64C131F81
 [color]
   status = auto
   diff = auto
@@ -92,3 +93,5 @@
 [interactive]
   # https://github.com/dandavison/delta
   diffFilter = delta --color-only --theme=zenburn
+[commit]
+	# gpgsign = true
