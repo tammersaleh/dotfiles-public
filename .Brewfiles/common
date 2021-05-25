@@ -21,6 +21,7 @@ brew "entr"                          # Run arbitrary commands when files change
 brew "exiftool"                      # Perl lib for reading and writing EXIF metadata
 brew "ffmpeg"                        # Play, record, convert, and stream audio and video
 brew "fzf"                           # Command-line fuzzy finder written in Go
+brew "gcalcli"                       # Google Calendar CLI https://github.com/insanum/gcalcli 
 brew "gh"                            # GitHub command-line tool
 brew "git"                           # Distributed revision control system
 brew "git-crypt"                     # Enable transparent encryption/decryption of files in a git repo
@@ -60,10 +61,10 @@ brew "tflint"                        # Terraform linter
 brew "the_silver_searcher"           # Code-search similar to ack
 brew "tmux"                          # Terminal multiplexer
 brew "tree"                          # Display directories as trees (with optional color/HTML output)
+brew "vale"                          # Prose Linter https://docs.errata.ai/vale
 brew "watch"                         # Executes a program periodically, showing output fullscreen
 brew "wget"                          # Internet file retriever
 brew "xz"                            # General-purpose data compression with high compression ratio
 brew "zlib"                          # General-purpose lossless data-compression library
-brew "vale"                          # Prose Linter https://docs.errata.ai/vale
 
 # vim: ft=ruby
