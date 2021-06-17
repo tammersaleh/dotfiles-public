@@ -83,7 +83,7 @@ function install {
   if ! command -v stow > /dev/null 2>&1; then
     usage "can't find GNU stow"
   fi
-  stow -d "$ROOT" -t "$TARGET" -R public -R private
+  stow --dir="$ROOT" --target="$TARGET" --restow public private
 }
 
 function pull-dir {
