@@ -40,6 +40,7 @@ brew "kubernetes-cli"                # Kubernetes command-line interface
 brew "kubernetes-helm"               # The Kubernetes package manager
 brew "lazygit"
 brew "lesspipe"                      # Input filter for the pager less
+brew "libpq"
 brew "libxslt"                       # C XSLT library for GNOME
 brew "links"                         # Lynx-like WWW browser that supports tables, menus, etc.
 brew "lynx"                          # Text-based web browser
@@ -49,6 +50,7 @@ brew "netlify/netlifyctl/netlifyctl" # CLI to interact with netlify.com
 brew "node"                          # Platform built on V8 to build network applications
 brew "noti"                          # Trigger notifications when a process completes
 brew "pandoc"                        # Swiss-army knife of markup format conversion
+brew "pdftk-java"
 brew "pstree"                        # Show ps output as a tree
 brew "rbenv"                         # Ruby version manager
 brew "sassc"                         # Wrapper around libsass that helps to create command-line apps
@@ -65,6 +67,7 @@ brew "vale"                          # Prose Linter https://docs.errata.ai/vale
 brew "watch"                         # Executes a program periodically, showing output fullscreen
 brew "wget"                          # Internet file retriever
 brew "xz"                            # General-purpose data compression with high compression ratio
+brew "yarn"
 brew "zlib"                          # General-purpose lossless data-compression library
 
 # vim: ft=ruby
