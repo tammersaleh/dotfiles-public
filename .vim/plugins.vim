@@ -60,6 +60,10 @@ Plug 'https://github.com/ap/vim-templates'              " Templates in ~/.vim/te
 Plug 'https://github.com/junegunn/fzf'
 Plug 'https://github.com/junegunn/fzf.vim'
 
+Plug 'https://github.com/tpope/vim-endwise'
+Plug 'https://github.com/jiangmiao/auto-pairs'
+Plug 'https://github.com/alvan/vim-closetag'
+
 " Color theme
 Plug 'https://github.com/morhetz/gruvbox'
 Plug 'https://github.com/rafi/awesome-vim-colorschemes'

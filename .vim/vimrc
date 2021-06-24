@@ -73,6 +73,9 @@ set autowriteall
 set undofile
 set nohidden
 
+" Stop resizing all windows when a split is opened
+set noequalalways
+
 set viewdir=$XDG_DATA_HOME/vim/view
 
 " disable Background Color Erase (BCE) so that color schemes
@@ -354,7 +357,7 @@ augroup vimrc
   " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
   autocmd GUIEnter * set vb t_vb=                     
   " Resize splits when the window is resized
-  autocmd VimResized * wincmd =                       
+  " autocmd VimResized * wincmd =                       
   " Auto-read vimrc on write
   autocmd BufWritePost {.vimrc,vimrc} nested source % 
 
@@ -676,6 +679,11 @@ function! TScolor_code(word)
 endfunction
 let g:url_transformers = [ 'TScolor_code' ]
 " }}}
+
+" CloseTag {{{
+let g:closetag_filenames = "*.html.erb,*.html,*.xhtml,*.phtml"
+" }}}
+
 "}}}
 
 set exrc
