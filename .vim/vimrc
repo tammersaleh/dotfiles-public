@@ -24,6 +24,7 @@ set ttymouse=sgr      " Mouse can resize splits
 set clipboard=unnamed " Use the system clipboard
 set backspace=indent,eol,start
 " set backup            " keep a backup file
+set backupcopy=yes
 set history=1000      " keep 50 lines of command line history
 set ruler             " show the cursor position all the time
 set incsearch
