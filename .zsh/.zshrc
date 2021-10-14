@@ -129,12 +129,18 @@ export HISTFILE="$HOME/.local/share/zsh/history"
 export HISTSIZE=10000000
 export SAVEHIST=10000000
 
+# Stop tar from creating ._ files
+export COPYFILE_DISABLE=1
+
 setopt appendhistory
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+
+# don't append failed command to ~/.zsh_history
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 export GPG_TTY=$(tty)
@@ -331,7 +337,7 @@ __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
 source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
-[[ ! -f ~/.zsh/.p10k.zsh ]] || source ~/.zsh/.p10k.zsh
+[[ -f ~/.zsh/.p10k.zsh ]] && source ~/.zsh/.p10k.zsh
 
 function prompt_aws_vault() {
   [[ ! -v AWS_VAULT ]] && return
