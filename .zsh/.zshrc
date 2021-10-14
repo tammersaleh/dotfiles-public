@@ -334,7 +334,8 @@ bindkey -M visual S add-surround
 __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
 #}}}
 ### Powerlevel10k Finish {{{
-source $ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme
+p10ktheme=$(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
+[[ -f $p10ktheme ]] && source $p10ktheme
 
 # To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
 [[ -f ~/.zsh/.p10k.zsh ]] && source ~/.zsh/.p10k.zsh
