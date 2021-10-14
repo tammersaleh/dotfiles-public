@@ -14,8 +14,8 @@ crash.log
 shit*
 do-not-commit/
 do_not_commit/
-.envrc
-.direnv/
+# .envrc
+# .direnv/
 
 !.keep
 !.keepme
