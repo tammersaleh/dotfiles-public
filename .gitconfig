@@ -34,12 +34,9 @@
   uncommit = reset --soft HEAD^
   unstage  = reset
   staged   = diff --name-only --cached
-  modified = diff --name-only
+  files    = ls-files -mo --exclude-standard
 
   url = browse -u
-
-  caulking-disable = config --local hooks.gitleaks false
-  caulking-enable = config --local hooks.gitleaks true
 
 [merge]
   tool = opendiff
@@ -63,11 +60,6 @@
   enabled = 1
 [gh]
   autoUpdate = always
-[filter "lfs"]
-  required = true
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  clean = git-lfs clean -- %f
 [hub]
   protocol = https
 [color "diff-highlight"]
@@ -95,3 +87,8 @@
   diffFilter = delta --color-only --theme=zenburn
 [commit]
 	# gpgsign = true
+[filter "lfs"]
+  required = true
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process 
+	clean = git-lfs clean -- %f
