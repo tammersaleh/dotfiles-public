@@ -2,7 +2,8 @@ tap "github/gh"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "netlify/netlifyctl"
-tap "wallix/awless"
+tap "romkatv/powerlevel10k"
+tap "dopplerhq/cli"
 
 brew "automake"                      # Tool for generating GNU Standards-compliant Makefiles
 brew "awscli"                        # Official Amazon AWS command-line interface
@@ -16,12 +17,13 @@ brew "coreutils"                     # GNU File, Shell, and Text utilities
 brew "ctags"                         # Reimplementation of ctags(1)
 brew "diff-so-fancy"                 # Good-lookin' diffs with diff-highlight and more
 brew "direnv"                        # Load/unload environment variables based on $PWD
+brew "doppler"         # doppler.com
 brew "elinks"                        # Text mode web browser
 brew "entr"                          # Run arbitrary commands when files change
 brew "exiftool"                      # Perl lib for reading and writing EXIF metadata
 brew "ffmpeg"                        # Play, record, convert, and stream audio and video
 brew "fzf"                           # Command-line fuzzy finder written in Go
-brew "gcalcli"                       # Google Calendar CLI https://github.com/insanum/gcalcli 
+brew "gcalcli"                       # Google Calendar CLI https://github.com/insanum/gcalcli
 brew "gh"                            # GitHub command-line tool
 brew "git"                           # Distributed revision control system
 brew "git-crypt"                     # Enable transparent encryption/decryption of files in a git repo
@@ -69,5 +71,7 @@ brew "wget"                          # Internet file retriever
 brew "xz"                            # General-purpose data compression with high compression ratio
 brew "yarn"
 brew "zlib"                          # General-purpose lossless data-compression library
+brew "powerlevel10k"
+brew "zsh"
 
 # vim: ft=ruby

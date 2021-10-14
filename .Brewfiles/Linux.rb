@@ -25,6 +25,6 @@ brew "yamllint"                      # Linter for YAML files
 brew "yq"                            # Process YAML documents from the CLI
 brew "zsh"                           # UNIX shell (command interpreter)
 
-instance_eval(File.read("common"))
+instance_eval(File.read("common.rb"))
 
 # vim: ft=ruby
