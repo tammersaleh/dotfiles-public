@@ -1,7 +1,6 @@
 tap "linuxbrew/extra"
 tap "wata727/tflint"
 
-brew "azure-cli"                     # Microsoft Azure CLI 2.0
 brew "bfg"                           # Remove large files or passwords from Git history like git-filter-branch
 brew "certbot"                       # Tool to obtain certs from Let's Encrypt and autoenable HTTPS
 brew "cppcheck"                      # Static analysis of C and C++ code
@@ -13,7 +12,6 @@ brew "dust"                          # More intuitive version of du in rust
 brew "emacs"                         # GNU Emacs text editor
 brew "gcc"                           # The GNU Compiler Collection
 brew "grip"                          # GitHub Markdown previewer
-brew "just"                          # Handy way to save and run project-specific commands
 brew "micro"                         # Modern and intuitive terminal-based text editor
 brew "parallel"                      # Shell command parallelization utility
 brew "pass"                          # Password manager
