@@ -71,3 +71,5 @@ BuildKit
 Dockerfile
 Untar
 Kustomize
+ServiceAccount
+Linkerd
