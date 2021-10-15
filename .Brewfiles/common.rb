@@ -8,7 +8,6 @@ tap "dopplerhq/cli"
 brew "automake"                      # Tool for generating GNU Standards-compliant Makefiles
 brew "awscli"                        # Official Amazon AWS command-line interface
 brew "bash"                          # Bourne-Again SHell, a UNIX command interpreter
-brew "bash-completion"               # Programmable completion for Bash 3.2
 brew "bat"                           # Clone of cat(1) with syntax highlighting and Git integration
 brew "cfssl"                         # CloudFlare's PKI toolkit
 brew "cmake"                         # Cross-platform make
