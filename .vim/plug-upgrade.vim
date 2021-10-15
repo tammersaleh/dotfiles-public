@@ -1,4 +1,4 @@
-#!/usr/local/bin/vim -S
+#!vim -S
 
 source $HOME/.vim/plugins.vim
 PlugClean!
