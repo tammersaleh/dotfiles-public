@@ -1,0 +1,6 @@
+#!vim -S
+
+source $HOME/.vim/plugins/snapshot.vim
+qall
+
+" ft=vim

@@ -1,0 +1,13 @@
+#!vim -S
+
+source $HOME/.vim/plugins/list.vim
+PlugClean!
+close
+PlugUpgrade
+source $HOME/.vim/plugins/list.vim
+exe 'PlugSnapshot! '.fnameescape($HOME.'/.vim/plugins/snapshot.vim')
+close
+PlugUpdate
+qall
+
+" ft=vim

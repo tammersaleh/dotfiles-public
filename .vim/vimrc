@@ -1,7 +1,7 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-source $HOME/.vim/plugins.vim
+source $HOME/.vim/plugins/list.vim
 
 " Options {{{
 " set backupdir=$XDG_DATA_HOME/vim/backups//
@@ -583,7 +583,7 @@ map ge <Plug>(smartword-ge)
 
 " vimade {{{
 let g:vimade = {}
-let g:vimade.enablesigns = 1
+let g:vimade.enablesigns = 0 " Currently producing errors with my emoji signs
 " https://github.com/TaDaa/vimade/issues/19
 let g:vimade.usecursorhold=1
 " }}}

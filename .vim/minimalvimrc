@@ -1,3 +1,5 @@
+" Use with vim -u minimalvimrc
+
 set nocompatible
 
 call plug#begin('~/.vim/plugged')
