@@ -126,7 +126,11 @@ endif
 " Ctrl-n/ creates splits
 " Ctrl-hjkl changes splits
 function! s:dirvish_at_file_cwd() abort
-  exec 'Dirvish %'
+  if &buftype == 'terminal' 
+    exec 'Dirvish'
+  else
+    exec 'Dirvish %'
+  endif
 endfunction
 
 function! s:dirvish_at_project_cwd() abort
