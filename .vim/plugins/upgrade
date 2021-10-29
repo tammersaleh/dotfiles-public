@@ -3,6 +3,7 @@
 PlugClean!
 close
 PlugUpgrade
+PlugUpdate
 exe 'PlugSnapshot! '.fnameescape($HOME.'/.vim/plugins/snapshot.vim')
 close
 qall
