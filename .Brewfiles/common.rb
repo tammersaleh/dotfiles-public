@@ -47,12 +47,12 @@ brew "libxslt"                       # C XSLT library for GNOME
 brew "links"                         # Lynx-like WWW browser that supports tables, menus, etc.
 brew "lynx"                          # Text-based web browser
 brew "mosh"                          # Remote terminal application
-brew "neovim"                        # Ambitious Vim-fork focused on extensibility and agility
 brew "netlify/netlifyctl/netlifyctl" # CLI to interact with netlify.com
 brew "node"                          # Platform built on V8 to build network applications
 brew "noti"                          # Trigger notifications when a process completes
 brew "pandoc"                        # Swiss-army knife of markup format conversion
 brew "pdftk-java"
+brew "powerlevel10k"
 brew "pstree"                        # Show ps output as a tree
 brew "rbenv"                         # Ruby version manager
 brew "sassc"                         # Wrapper around libsass that helps to create command-line apps
@@ -66,12 +66,17 @@ brew "the_silver_searcher"           # Code-search similar to ack
 brew "tmux"                          # Terminal multiplexer
 brew "tree"                          # Display directories as trees (with optional color/HTML output)
 brew "vale"                          # Prose Linter https://docs.errata.ai/vale
+brew "vim"                           # Vi 'workalike' with many additional features
+# This is to work around https://github.com/vim/vim/issues/9058
+# tap "my/vim", "https://raw.githubusercontent.com/Homebrew/homebrew-core/0dca70ab73aa27c0b62671acb3dd3f68044cdb80/Formula/vim.rb"
+# brew "my/vim"
+# brew "https://raw.githubusercontent.com/Homebrew/homebrew-core/0dca70ab73aa27c0b62671acb3dd3f68044cdb80/Formula/vim.rb"
+# brew "vim.rb"
 brew "watch"                         # Executes a program periodically, showing output fullscreen
 brew "wget"                          # Internet file retriever
 brew "xz"                            # General-purpose data compression with high compression ratio
 brew "yarn"
 brew "zlib"                          # General-purpose lossless data-compression library
-brew "powerlevel10k"
 brew "zsh"
 
 # vim: ft=ruby

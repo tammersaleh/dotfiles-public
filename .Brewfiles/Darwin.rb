@@ -16,7 +16,6 @@ brew "gettext", link: true        # GNU internationalization (i18n) and localiza
 brew "gnu-sed"
 brew "gnu-tar"                    # GNU version of the tar archiving utility
 brew "libnotify"                  # Library that sends desktop notifications to a notification daemon
-brew "macvim"                     # GUI for vim, made for macOS
 brew "moreutils"
 brew "openssl"                    # SSL/TLS cryptography library
 brew "openssl@1.1"                # Cryptography and SSL/TLS Toolkit

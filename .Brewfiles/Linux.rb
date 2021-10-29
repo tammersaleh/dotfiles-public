@@ -12,7 +12,6 @@ brew "parallel"                      # Shell command parallelization utility
 brew "pass"                          # Password manager
 brew "python@3.9"                    # Interpreted, interactive, object-oriented programming language
 brew "upx"
-brew "vim"                           # Vi 'workalike' with many additional features
 brew "yamllint"                      # Linter for YAML files
 brew "yq"                            # Process YAML documents from the CLI
 brew "zsh"                           # UNIX shell (command interpreter)
