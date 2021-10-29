@@ -13,16 +13,19 @@ brew "bzip2"                      # Freely available high-quality data compresso
 brew "diffutils"
 brew "gdb"                        # GNU debugger
 brew "gettext", link: true        # GNU internationalization (i18n) and localization (l10n) library
+brew "gnu-sed"
 brew "gnu-tar"                    # GNU version of the tar archiving utility
 brew "libnotify"                  # Library that sends desktop notifications to a notification daemon
 brew "macvim"                     # GUI for vim, made for macOS
 brew "moreutils"
 brew "openssl"                    # SSL/TLS cryptography library
 brew "openssl@1.1"                # Cryptography and SSL/TLS Toolkit
+brew "parallel"                   # GNU Parallel
 brew "peco"                       # Simplistic interactive filtering tool
 brew "python"                     # Interpreted, interactive, object-oriented programming language
 brew "readline"                   # Library for command-line editing
 brew "reattach-to-user-namespace" # Reattach process (e.g., tmux) to background
+brew "rsync"
 brew "ruby-build"                 # Install various Ruby versions and implementations
 brew "s3cmd"                      # Command-line tool for the Amazon S3 service
 brew "sachaos/todoist/todoist"    # Todoist CLI client
