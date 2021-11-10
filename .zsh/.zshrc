@@ -147,6 +147,8 @@ export GPG_TTY=$(tty)
 
 __source_if_exists "$HOME/.secret_vars_and_aliases"
 
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
 ####################### }}}
 ### Settings {{{
 for terminfo_file in ~/.terminfo-sources/*.terminfo; do

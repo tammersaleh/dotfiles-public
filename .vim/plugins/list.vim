@@ -29,6 +29,7 @@ Plug 'https://github.com/tpope/vim-rails'
 Plug 'https://github.com/tpope/vim-git'
 Plug 'https://github.com/aliou/bats.vim'
 Plug 'https://github.com/kevinoid/vim-jsonc' " Json with comments
+Plug 'https://github.com/rust-lang/rust.vim'
 
 " General
 Plug 'https://github.com/justinmk/vim-dirvish'          " Betterer netrw
