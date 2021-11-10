@@ -9,7 +9,6 @@ brew "docker"                        # Pack, ship and run any application as a l
 brew "gcc"                           # The GNU Compiler Collection
 brew "grip"                          # GitHub Markdown previewer
 brew "parallel"                      # Shell command parallelization utility
-brew "pass"                          # Password manager
 brew "python@3.9"                    # Interpreted, interactive, object-oriented programming language
 brew "upx"
 brew "yamllint"                      # Linter for YAML files

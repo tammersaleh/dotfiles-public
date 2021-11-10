@@ -21,6 +21,7 @@ brew "openssl"                    # SSL/TLS cryptography library
 brew "openssl@1.1"                # Cryptography and SSL/TLS Toolkit
 brew "parallel"                   # GNU Parallel
 brew "peco"                       # Simplistic interactive filtering tool
+brew "pinentry-mac"
 brew "python"                     # Interpreted, interactive, object-oriented programming language
 brew "readline"                   # Library for command-line editing
 brew "reattach-to-user-namespace" # Reattach process (e.g., tmux) to background

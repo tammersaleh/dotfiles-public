@@ -51,6 +51,7 @@ brew "netlify/netlifyctl/netlifyctl" # CLI to interact with netlify.com
 brew "node"                          # Platform built on V8 to build network applications
 brew "noti"                          # Trigger notifications when a process completes
 brew "pandoc"                        # Swiss-army knife of markup format conversion
+brew "pass"                          # Password manager
 brew "pdftk-java"
 brew "powerlevel10k"
 brew "pstree"                        # Show ps output as a tree
