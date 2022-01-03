@@ -79,5 +79,6 @@ brew "xz"                            # General-purpose data compression with hig
 brew "yarn"
 brew "zlib"                          # General-purpose lossless data-compression library
 brew "zsh"
+brew "rclone"
 
 # vim: ft=ruby
