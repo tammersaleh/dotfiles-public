@@ -689,6 +689,10 @@ let g:url_transformers = [ 'TScolor_code' ]
 let g:closetag_filenames = "*.html.erb,*.html,*.xhtml,*.phtml"
 " }}}
 
+" Bullets {{{
+let g:bullets_enable_in_empty_buffers = 0 
+" }}}
+
 "}}}
 
 set exrc

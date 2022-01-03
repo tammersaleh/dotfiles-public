@@ -10,4 +10,4 @@ echo "Installing Brewfile"
 ~/.Brewfiles/go
 
 echo "Syncing vim plugins"
-~/.vim/plugins/install
+~/.vim/plugins/install-from-snapshot
