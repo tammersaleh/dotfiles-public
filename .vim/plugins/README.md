@@ -1,5 +1,14 @@
 ## Plugins
 
-Install New / Upgrade:  Add plugin to `list.vim`, and run `./upgrade-all`.  This locks the versions into `snapshot.vim`.  Now run `./install-from-snapshot` to actually install it.
+### Installing a New Plugin
 
-Install from `snapshot.vim`:  Run `./install-from-snapshot`
+`./add-plugin URL`
+
+### Installing All from Snapshot
+
+`./install-from-snapshot`
+
+### Upgrading All
+
+`./upgrade-all` This locks the versions into `snapshot.vim`.
+

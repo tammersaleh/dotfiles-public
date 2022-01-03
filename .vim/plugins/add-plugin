@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+me=$(basename "$0")
+
+main() {
+  [[ $# -eq 1 ]] || usage "Expected URL, got $# arguments"
+
+  url=$1
+  [[ $url =~ ^https://github.com/[a-zA-Z_.-]+/[a-zA-Z_.-]+$ ]] || usage "Refusing non-github url."
+
+  grep -Fq "$url" list.vim && usage "Looks like $url is already installed in list.vim?"
+
+  owner=$(echo "$url" | cut -f 4 -d /)
+  name=$(echo "$url" | cut -f 5 -d /)
+
+  sha=$(
+    gh api graphql \
+      --paginate \
+      --jq='.. | .oid? // empty | strings' \
+      -f query="{
+        repository(name: \"$name\", owner: \"$owner\") {
+          defaultBranchRef {
+            target {
+              ... on Commit {
+                history(first: 1) {
+                  nodes {
+                    oid
+                  }
+                }
+              }
+            }
+          }
+        }
+      }"
+  )
+
+  awk -i inplace -v new="Plug '$url' \" Added by $me\n" '/call plug#end()/{print new}1' list.vim
+  awk -i inplace -v new="silent! let g:plugs['$name'].commit = '$sha' \" Added by $me\n" '/PlugUpdate/{print new}1' snapshot.vim
+
+  echo "Added $url to list.vim and snapshot.vim.  Installing from the snapshot."
+
+  # Somehow the #!vim -S shebang in install-from-snapshot doesn't work when called from here.
+  vim -S ./install-from-snapshot
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  cat <<-EOF
+
+  USAGE: $me URL
+
+  Add a plugin to list.vim and snapshot.vim, and then install the plugin.
+
+  Examples:
+
+    $me https://github.com/junegunn/vim-plug
+	EOF
+  exit 1
+}
+
+main "$@"
