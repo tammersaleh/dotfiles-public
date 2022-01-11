@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+main() {
+  [[ $# -eq 1 ]] || usage "Expected 1 argument, got $#"
+  
+  id="$1"
+  title=$(gh issue view --json title --jq '.title' "$id")
+  [ -z "$title" ] && usage "Couldn't find issue ID $id"
+
+  git commit -m "$title [closes #$id]"
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me GITHUB_ISSUE_ID
+
+  Commits the added files using the title from the given Github issue and
+  appending a [closes #?] tag to the message.
+
+  Examples:
+
+    $me 1234
+	EOF
+  exit 1
+}
+
+main "$@"
+
