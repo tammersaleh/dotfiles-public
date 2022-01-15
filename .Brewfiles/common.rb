@@ -4,6 +4,7 @@ tap "homebrew/core"
 tap "netlify/netlifyctl"
 tap "romkatv/powerlevel10k"
 tap "dopplerhq/cli"
+tap "superfly/tap"
 
 brew "automake"                      # Tool for generating GNU Standards-compliant Makefiles
 brew "awscli"                        # Official Amazon AWS command-line interface
@@ -68,11 +69,6 @@ brew "tmux"                          # Terminal multiplexer
 brew "tree"                          # Display directories as trees (with optional color/HTML output)
 brew "vale"                          # Prose Linter https://docs.errata.ai/vale
 brew "vim"                           # Vi 'workalike' with many additional features
-# This is to work around https://github.com/vim/vim/issues/9058
-# tap "my/vim", "https://raw.githubusercontent.com/Homebrew/homebrew-core/0dca70ab73aa27c0b62671acb3dd3f68044cdb80/Formula/vim.rb"
-# brew "my/vim"
-# brew "https://raw.githubusercontent.com/Homebrew/homebrew-core/0dca70ab73aa27c0b62671acb3dd3f68044cdb80/Formula/vim.rb"
-# brew "vim.rb"
 brew "watch"                         # Executes a program periodically, showing output fullscreen
 brew "wget"                          # Internet file retriever
 brew "xz"                            # General-purpose data compression with high compression ratio
@@ -80,5 +76,6 @@ brew "yarn"
 brew "zlib"                          # General-purpose lossless data-compression library
 brew "zsh"
 brew "rclone"
+brew "flyctl"                        # Fly.io
 
 # vim: ft=ruby

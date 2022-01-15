@@ -268,8 +268,7 @@ __has kubectl       && compdef k=kubectl
 __has helm          && source <(helm completion zsh)
 __has stern         && source <(stern --completion zsh)
 __has aws-vault     && source <(aws-vault --completion-script-zsh)
-__has fly           && source <(fly completion --shell zsh)
-__has fly           && compdef ci=fly
+__has fly           && source <(fly completion zsh)
 
 compdef g=git
 compdef av=exec
