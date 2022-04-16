@@ -5,6 +5,7 @@ tap "netlify/netlifyctl"
 tap "romkatv/powerlevel10k"
 tap "dopplerhq/cli"
 tap "superfly/tap"
+tap "heroku/brew"
 
 brew "automake"                      # Tool for generating GNU Standards-compliant Makefiles
 brew "awscli"                        # Official Amazon AWS command-line interface
@@ -35,12 +36,13 @@ brew "go"                            # Open source programming language to build
 brew "gron"                          # Make JSON greppable
 brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
 brew "hub"                           # Add GitHub support to git on the command-line
+brew "heroku"                        # Add GitHub support to git on the command-line
 brew "imagemagick"                   # Tools and libraries to manipulate images in many formats
 brew "jq"                            # Lightweight and flexible command-line JSON processor
 brew "kube-ps1"                      # Kubernetes prompt info for bash and zsh
 brew "kubectx"                       # Tool that can switch between kubectl contexts easily and create aliases
 brew "kubernetes-cli"                # Kubernetes command-line interface
-brew "kubernetes-helm"               # The Kubernetes package manager
+brew "helm"                          # The Kubernetes package manager
 brew "lazygit"
 brew "lesspipe"                      # Input filter for the pager less
 brew "libpq"
