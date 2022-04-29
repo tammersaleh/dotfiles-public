@@ -48,7 +48,7 @@
   excludesfile = ~/.gitglobalignore
   whitespace = trailing-space,space-before-tab,tab-in-indent
   # https://github.com/dandavison/delta
-  pager = delta --theme=zenburn
+  pager = delta
   preloadindex = true
   hooksPath = ~/src/github.com/superorbital/git-hooks
 [status]
@@ -84,7 +84,7 @@
   gitleaks = true
 [interactive]
   # https://github.com/dandavison/delta
-  diffFilter = delta --color-only --theme=zenburn
+  diffFilter = delta --color-only
 [commit]
 	# gpgsign = true
 [filter "lfs"]
@@ -94,3 +94,15 @@
 	clean = git-lfs clean -- %f
 [init]
 	defaultBranch = main
+[delta]
+  features = decorations
+[delta "interactive"]
+  keep-plus-minus-markers = false
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
