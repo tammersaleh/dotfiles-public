@@ -139,6 +139,12 @@ setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded 
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
+# To make psql work and to allow bundler to find libpq
+export PATH="$(brew --prefix libpq)/bin:$PATH"
+export LDFLAGS="-L$(brew --prefix libpq)/lib"
+export CPPFLAGS="-I$(brew --prefix libpq)/include"
+
+
 # don't append failed command to ~/.zsh_history
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
@@ -335,7 +341,7 @@ bindkey -M visual S add-surround
 __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
 #}}}
 ### Powerlevel10k Finish {{{
-p10ktheme=$(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
+p10ktheme=$(brew --prefix powerlevel10k)/powerlevel10k.zsh-theme
 [[ -f $p10ktheme ]] && source $p10ktheme
 
 # To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
