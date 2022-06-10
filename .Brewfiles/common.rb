@@ -21,6 +21,7 @@ brew "doppler" # doppler.com
 brew "entr"                          # Run arbitrary commands when files change
 brew "exiftool"                      # Perl lib for reading and writing EXIF metadata
 brew "ffmpeg"                        # Play, record, convert, and stream audio and video
+brew "fzf"  # used by vim finder
 brew "gh"                            # GitHub command-line tool
 brew "git"                           # Distributed revision control system
 brew "git-crypt"                     # Enable transparent encryption/decryption of files in a git repo
