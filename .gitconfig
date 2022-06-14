@@ -1,108 +1,102 @@
 [include]
-  path = ~/.gitconfig-private
+    path = ~/.gitconfig-private
 [include]
-  path = ~/.gitconfig-local
+    path = ~/.gitconfig-local
 [user]
-  name = Tammer Saleh
-  email = tammer@superorbital.io
-	signingkey = 6EFD49B64C131F81
-[color]
-  status = auto
-  diff = auto
-  branch = auto
-  ui = true
+    name = Tammer Saleh
+    email = tammer@superorbital.io
+    signingkey = 6EFD49B64C131F81
 [alias]
-  aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
-  a               = add -A
-  current-branch  = rev-parse --abbrev-ref HEAD
-  modified        = ls-files -m
-  last            = log @{1}.. --decorate --reverse --stat -C --no-merges
-  files-in-commit = diff-tree --no-commit-id --name-only -r
-  bl              = blame -wMC
+    aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
+    a               = add -A
+    current-branch  = rev-parse --abbrev-ref HEAD
+    modified        = ls-files -m
+    last            = log @{1}.. --decorate --reverse --stat -C --no-merges
+    files-in-commit = diff-tree --no-commit-id --name-only -r
+    bl              = blame -wMC
 
-  ci              = commit -v
-  append          = commit --amend --no-edit
-  fixup           = commit --fixup
-  br              = branch -av --sort=-committerdate --format='%(HEAD) %(align:1,40)%(color:yellow)%(refname:short)%(color:reset)%(end) %(color:green)%(committerdate:relative)%(color:reset) - %(contents:subject) - %(authorname)'
-  my-branches     = br --list '*tsaleh*'
-  latest-branches = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
-  publish-branch  = push -u origin
+    ci              = commit -v
+    append          = commit --amend --no-edit
+    fixup           = commit --fixup
+    br              = branch -av --sort=-committerdate --format='%(HEAD) %(align:1,40)%(color:yellow)%(refname:short)%(color:reset)%(end) %(color:green)%(committerdate:relative)%(color:reset) - %(contents:subject) - %(authorname)'
+    my-branches     = br --list '*tsaleh*'
+    latest-branches = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
+    publish-branch  = push -u origin
 
-  suir            = submodule update --init --recursive --jobs=4
+    suir            = submodule update --init --recursive --jobs=4
 
   # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
-  uncommit = reset --soft HEAD^
-  unstage  = reset
-  staged   = diff --name-only --cached
-  files    = ls-files -mo --exclude-standard
+    uncommit = reset --soft HEAD^
+    unstage  = reset
+    staged   = diff --name-only --cached
+    files    = ls-files -mo --exclude-standard
 
-  url = browse -u
+    url = browse -u
 
 [merge]
-  tool = opendiff
-  summary = true
+    # tool = opendiff
+    # summary = true
+    conflictstyle = diff3
 [diff]
-  wordRegex = [^[:space:]]
-  submodule = log
+    wordRegex = [^[:space:]]
+    submodule = log
+    colorMoved = default
 [core]
-  excludesfile = ~/.gitglobalignore
-  whitespace = trailing-space,space-before-tab,tab-in-indent
-  # https://github.com/dandavison/delta
-  pager = delta
-  preloadindex = true
-  hooksPath = ~/src/github.com/superorbital/git-hooks
+    excludesfile = ~/.gitglobalignore
+    whitespace = trailing-space,space-before-tab,tab-in-indent
+    # https://github.com/dandavison/delta
+    pager = delta
+    preloadindex = true
+    hooksPath = ~/src/github.com/superorbital/git-hooks
 [status]
-  relativePaths = false
-  submodulesummary = 1
+    relativePaths = false
+    submodulesummary = 1
 [apply]
-  whitespace = nowarn
+    whitespace = nowarn
 [rerere]
-  enabled = 1
+    enabled = 1
 [gh]
-  autoUpdate = always
+    autoUpdate = always
 [hub]
-  protocol = https
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
-[color "diff"]
-  meta = yellow
-  frag = magenta bold
-  commit = yellow bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
+    protocol = https
 [rebase]
-  autosquash = true
+    autosquash = true
 [gc]
-  auto = 256
+    auto = 256
 [pull]
-  rebase = true
+    rebase = true
 [hooks]
-  gitleaks = true
+    gitleaks = true
 [interactive]
-  # https://github.com/dandavison/delta
-  diffFilter = delta --color-only
-[commit]
-	# gpgsign = true
+    # https://github.com/dandavison/delta
+    diffFilter = delta
 [filter "lfs"]
-  required = true
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process 
-	clean = git-lfs clean -- %f
+    required = true
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process 
+    clean = git-lfs clean -- %f
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [delta]
-  features = decorations
-[delta "interactive"]
-  keep-plus-minus-markers = false
+    features = decorations navigation
+    light = false
+    navigate = true
+    line-numbers = true
+    hyperlinks = true
+    # side-by-side = true
+# [delta "interactive"]
+#     keep-plus-minus-markers = false
 [delta "decorations"]
-  commit-decoration-style = blue ol
-  commit-style = raw
-  file-style = omit
-  hunk-header-decoration-style = blue box
-  hunk-header-file-style = red
-  hunk-header-line-number-style = "#067a00"
-  hunk-header-style = file line-number syntax
+    file-style = bold green ul
+    hunk-header-style = omit 
+
+    minus-style = darkred
+    minus-emph-style = normal bold darkred
+    minus-nonemph-style = ""
+
+    plus-style = green
+    plus-emph-style = "#000000" bold palegreen 
+    # plus-nonemph-style = normal normal
+
+    zero-style = darkslategray normal
+
