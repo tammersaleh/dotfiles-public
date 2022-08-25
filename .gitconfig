@@ -83,20 +83,23 @@
     navigate = true
     line-numbers = true
     hyperlinks = true
-    # side-by-side = true
-# [delta "interactive"]
-#     keep-plus-minus-markers = false
 [delta "decorations"]
     file-style = bold green ul
     hunk-header-style = omit 
-
-    minus-style = darkred
-    minus-emph-style = normal bold darkred
-    minus-nonemph-style = ""
-
-    plus-style = green
-    plus-emph-style = "#000000" bold palegreen 
-    # plus-nonemph-style = normal normal
-
     zero-style = darkslategray normal
+
+    # minus-style = normal pink
+    # plus-style = normal palegreen
+    # minus-emph-style = normal red
+    # plus-emph-style  = normal green
+    # minus-non-emph-style = normal normal
+    # plus-non-emph-style = normal normal
+
+    minus-style = red strike
+    minus-emph-style = normal darkred strike
+    minus-non-emph-style = normal normal
+
+    plus-style = green bold
+    plus-emph-style = "#000000 green bold"
+    plus-non-emph-style = normal normal
 
