@@ -21,11 +21,10 @@
     br              = branch -av --sort=-committerdate --format='%(HEAD) %(align:1,40)%(color:yellow)%(refname:short)%(color:reset)%(end) %(color:green)%(committerdate:relative)%(color:reset) - %(contents:subject) - %(authorname)'
     my-branches     = br --list '*tsaleh*'
     latest-branches = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
-    publish-branch  = push -u origin
 
     suir            = submodule update --init --recursive --jobs=4
 
-  # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
+    # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
     uncommit = reset --soft HEAD^
     unstage  = reset
     staged   = diff --name-only --cached
@@ -103,3 +102,6 @@
     plus-emph-style = "#000000 green bold"
     plus-non-emph-style = normal normal
 
+[push]
+    # https://twitter.com/JI/status/1546948817462800384
+    autoSetupRemote = true
