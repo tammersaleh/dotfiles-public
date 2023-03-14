@@ -62,6 +62,7 @@ brew "watch"                         # Executes a program periodically, showing 
 brew "wget"                          # Internet file retriever
 brew "xz"                            # General-purpose data compression with high compression ratio
 brew "yarn"
+brew "yq"
 brew "zlib"                          # General-purpose lossless data-compression library
 brew "zsh"
 
