@@ -32,31 +32,21 @@ __source_if_exists() {
 ############ }}}
 ### Variables {{{
 
-__prependpath /opt/homebrew/bin
-__prependpath /opt/homebrew/sbin
-#__prependpath /home/linuxbrew/.linuxbrew/bin
-#__prependpath /usr/local/bin
-#__prependpath /home/linuxbrew/.linuxbrew/sbin
-#__prependpath /usr/local/sbin
-# Kitty was installed via:
-# sudo ./installer.sh dest=/opt launch=n
-#__prependpath /opt/kitty.app/bin
-__prependmanpath /home/linuxbrew/.linuxbrew/man
-__prependmanpath /usr/local/man
-
-__prependpath /usr/local/opt/coreutils/libexec/gnubin
-__prependmanpath /usr/local/opt/coreutils/libexec/gnuman
-__prependpath /usr/local/opt/findutils/libexec/gnubin
-__prependmanpath /usr/local/opt/findutils/libexec/gnuman
-__prependpath /usr/local/opt/gnu-tar/libexec/gnubin
-__prependmanpath /usr/local/opt/gnu-tar/libexec/gnuman
-
-__prependpath /usr/local/share/npm/bin
-__prependpath /Applications/Postgres.app/Contents/Versions/9.4/bin
-__prependpath /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
-__prependpath /usr/local/opt/macvim/MacVim.app/Contents/MacOS/
-__prependpath /usr/local/opt/gnu-getopt/bin
-__prependpath /usr/local/opt/ruby/bin
+__prependpath    /opt/homebrew/bin
+__prependpath    /opt/homebrew/sbin
+__prependmanpath /opt/homebrew/man
+__prependpath    /opt/homebrew/opt/coreutils/libexec/gnubin
+__prependmanpath /opt/homebrew/opt/coreutils/libexec/gnuman
+__prependpath    /opt/homebrew/opt/findutils/libexec/gnubin
+__prependmanpath /opt/homebrew/opt/findutils/libexec/gnuman
+__prependpath    /opt/homebrew/opt/gnu-tar/libexec/gnubin
+__prependmanpath /opt/homebrew/opt/gnu-tar/libexec/gnuman
+__prependpath    /opt/homebrew/share/npm/bin
+__prependpath    /Applications/Postgres.app/Contents/Versions/9.4/bin
+__prependpath    /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
+__prependpath    /opt/homebrew/opt/macvim/MacVim.app/Contents/MacOS/
+__prependpath    /opt/homebrew/opt/gnu-getopt/bin
+__prependpath    /opt/homebrew/opt/ruby/bin
 
 __prependpath "$HOME/.local/bin"
 
