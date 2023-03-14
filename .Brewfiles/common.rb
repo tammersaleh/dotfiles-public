@@ -1,11 +1,12 @@
+tap "dopplerhq/cli"
 tap "github/gh"
+tap "heroku/brew"
 tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "netlify/netlifyctl"
 tap "romkatv/powerlevel10k"
-tap "dopplerhq/cli"
 tap "superfly/tap"
-tap "heroku/brew"
 
 brew "automake"                      # Tool for generating GNU Standards-compliant Makefiles
 brew "awscli"                        # Official Amazon AWS command-line interface
@@ -80,5 +81,7 @@ brew "zsh"
 # brew "noti"                          # Trigger notifications when a process completes
 # brew "stern"                         # Tail multiple Kubernetes pods & their containers
 # brew "vale"                          # Prose Linter https://docs.errata.ai/vale
+
+cask "font-fira-code"
 
 # vim: ft=ruby
