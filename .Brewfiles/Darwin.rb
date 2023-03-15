@@ -40,13 +40,14 @@ brew "vault"                      # Secures, stores, and tightly controls access
 brew "watchman"                   # Watch files and take action when they change
 brew "yasm"                       # Modular BSD reimplementation of NASM
 
+#cask "rectangle"
 cask "aws-vault"
+cask "docker"
 cask "font-hack-nerd-font"
 cask "font-source-sans-pro"
 cask "google-cloud-sdk"
-#cask "rectangle"
-cask "wkhtmltopdf"
 cask "wezterm"
+cask "wkhtmltopdf"
 
 instance_eval(File.read("common.rb"))
 
