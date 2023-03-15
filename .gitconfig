@@ -46,7 +46,6 @@
     # https://github.com/dandavison/delta
     pager = delta
     preloadindex = true
-    hooksPath = ~/src/github.com/superorbital/git-hooks
 [status]
     relativePaths = false
     submodulesummary = 1
