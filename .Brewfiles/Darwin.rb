@@ -6,7 +6,6 @@ tap "keith/formulae"
 tap "sachaos/todoist"
 tap "tylerbrock/saw"
 tap "universal-ctags/universal-ctags"
-tap "wez/wezterm"
 
 brew "aspell"                     # Spell checker with better logic than ispell
 brew "autoconf"                   # Automatic configure script builder
@@ -46,7 +45,7 @@ cask "docker"
 cask "font-hack-nerd-font"
 cask "font-source-sans-pro"
 cask "google-cloud-sdk"
-cask "wezterm"
+cask "wez/wezterm/wezterm-nightly"
 cask "wkhtmltopdf"
 
 instance_eval(File.read("common.rb"))
