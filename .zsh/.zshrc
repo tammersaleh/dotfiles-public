@@ -118,6 +118,7 @@ export GID=$(id -g)
 export DOCKER_BUILDKIT=1
 
 export HISTFILE="$HOME/.local/share/zsh/history"
+mkdir -p "$(dirname $HISTFILE)"
 export HISTSIZE=10000000
 export SAVEHIST=10000000
 
