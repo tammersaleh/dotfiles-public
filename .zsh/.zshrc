@@ -145,8 +145,7 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 export GPG_TTY=$(tty)
 
 __source_if_exists "$HOME/.secret_vars_and_aliases"
-
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+__source_if_exists "$HOME/.cargo/env"
 
 ####################### }}}
 ### Settings {{{
@@ -369,4 +368,5 @@ typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #}}}
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+__source_if_exists "$HOME/.zsh/fzf.zsh"
 # vim: foldmethod=marker ft=zsh
