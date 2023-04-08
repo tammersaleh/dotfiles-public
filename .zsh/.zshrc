@@ -369,4 +369,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #}}}
 source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 __source_if_exists "$HOME/.zsh/fzf.zsh"
+
+bindkey -M vicmd '/' fzf-history-widget
 # vim: foldmethod=marker ft=zsh
