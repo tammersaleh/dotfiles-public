@@ -44,7 +44,7 @@ return {
   disable_default_key_bindings = true,
 
   keys = {
-    { key = '`', mods = 'CMD',     action = act.ShowDebugOverlay },
+    { key = 'd', mods = 'CMD|OPT', action = act.ShowDebugOverlay },
     { key = 'r', mods = 'CMD|OPT', action = act.ReloadConfiguration },
 
     { key = 'q', mods = 'CMD', action = act.QuitApplication },
