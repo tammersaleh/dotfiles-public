@@ -105,7 +105,7 @@
     # https://twitter.com/JI/status/1546948817462800384
     autoSetupRemote = true
 	default = simple
-	autoSetupMerge = automatic
+	autoSetupMerge = always
 [credential]
 	helper = store
 [credential "https://github.com"]
