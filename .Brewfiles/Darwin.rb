@@ -47,6 +47,8 @@ cask "font-source-sans-pro"
 cask "google-cloud-sdk"
 cask "wez/wezterm/wezterm-nightly"
 cask "wkhtmltopdf"
+cask "1password/tap/1password-cli"
+
 
 instance_eval(File.read("common.rb"))
 
