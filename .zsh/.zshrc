@@ -341,6 +341,7 @@ typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
 # typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #}}}
+
 ### Completions {{{
 
 # https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
@@ -367,5 +368,6 @@ compdef g=git
 compdef av=exec
 
 ################# }}}
+__source_if_exists "$HOME/.zsh/fzf.zsh"
 
 # vim: foldmethod=marker ft=zsh
