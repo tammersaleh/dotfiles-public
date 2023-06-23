@@ -244,34 +244,6 @@ g() {
 }
 
 ############### }}}
-### Completions {{{
-#
-# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
-#
-fpath=(~/.zsh/completions $(brew --prefix)/share/zsh/site-functions $fpath)
-autoload -Uz compinit 
-# The below isn't working for some reason, so gitignored the .zcompdump file.
-compinit -d "$HOME/.local/share/zsh/compdump"
-autoload bashcompinit 
-bashcompinit
-
-DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
-__source_if_exists "$DOCKER_ETC/docker.zsh-completion"
-__source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
-__source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
-
-__has aws_completer && complete -C aws_completer aws
-__has kubectl       && source <(kubectl completion zsh)
-__has kubectl       && compdef k=kubectl
-__has helm          && source <(helm completion zsh)
-__has stern         && source <(stern --completion zsh)
-__has aws-vault     && source <(aws-vault --completion-script-zsh)
-__has fly           && source <(fly completion zsh)
-
-compdef g=git
-compdef av=exec
-
-################# }}}
 ### Hooks & Daemons {{{
 __has rbenv  && eval "$(rbenv init -)"
 __has direnv && eval "$(direnv hook zsh)"
@@ -367,7 +339,34 @@ typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
 # typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #}}}
-source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+### Completions {{{
+
+# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+fpath=(~/.zsh/completions $(brew --prefix)/share/zsh/site-functions $fpath)
+autoload -Uz compinit bashcompinit
+# The below isn't working for some reason, so gitignored the .zcompdump file.
+compinit -d "$HOME/.local/share/zsh/compdump"
+bashcompinit
+
+DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
+__source_if_exists "$DOCKER_ETC/docker.zsh-completion"
+__source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
+__source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
+__source_if_exists "$ZDOTDIR/fzf-tab/fzf-tab.plugin.zsh"
+
+__has aws_completer && complete -C aws_completer aws
+__has kubectl       && source <(kubectl completion zsh)
+__has kubectl       && compdef k=kubectl
+__has helm          && source <(helm completion zsh)
+__has stern         && source <(stern --completion zsh)
+__has aws-vault     && source <(aws-vault --completion-script-zsh)
+__has fly           && source <(fly completion zsh)
+
+compdef g=git
+compdef av=exec
+
+################# }}}
+source $ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 __source_if_exists "$HOME/.zsh/fzf.zsh"
 
 bindkey -M vicmd '/' fzf-history-widget
