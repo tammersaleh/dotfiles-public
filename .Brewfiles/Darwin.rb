@@ -34,7 +34,6 @@ brew "sqlite"                     # Command-line interface for SQLite
 brew "svn"                        # Required for source-sans-pro
 brew "tylerbrock/saw/saw"         # Fast, multipurpose tool for AWS CloudWatch Logs
 brew "unixodbc"                   # ODBC 3 connectivity for UNIX
-#brew "upx"                        # Compress/expand executable files
 brew "vault"                      # Secures, stores, and tightly controls access to secrets
 brew "watchman"                   # Watch files and take action when they change
 brew "yasm"                       # Modular BSD reimplementation of NASM
@@ -45,7 +44,7 @@ cask "docker"
 cask "font-hack-nerd-font"
 cask "font-source-sans-pro"
 cask "google-cloud-sdk"
-cask "wez/wezterm/wezterm-nightly"
+cask "wez/wezterm/wezterm-nightly", greedy: true
 cask "wkhtmltopdf"
 cask "1password/tap/1password-cli"
 

@@ -3,7 +3,6 @@ tap "github/gh"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
 tap "netlify/netlifyctl"
 tap "romkatv/powerlevel10k"
 tap "superfly/tap"
@@ -20,6 +19,7 @@ brew "diff-so-fancy"                 # Good-lookin' diffs with diff-highlight an
 brew "direnv"                        # Load/unload environment variables based on $PWD
 brew "doppler" # doppler.com
 brew "entr"                          # Run arbitrary commands when files change
+brew "exa"
 brew "exiftool"                      # Perl lib for reading and writing EXIF metadata
 brew "ffmpeg"                        # Play, record, convert, and stream audio and video
 brew "fzf"  # used by vim finder
