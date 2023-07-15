@@ -180,7 +180,7 @@ alias k=kubectl
 alias :q=exit
 
 __has gsed && alias sed=gsed
-__has bat && alias less="bat"
+# __has bat && alias less="bat"
 __has bat && alias cat="bat --pager=never"
 
 gpip(){
@@ -373,8 +373,8 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with exa when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
+# TAB selects the current option (instead of ENTER)
+zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
 
 
 ################# }}}
