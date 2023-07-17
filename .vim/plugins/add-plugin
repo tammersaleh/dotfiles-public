@@ -62,4 +62,5 @@ usage() {
   exit 1
 }
 
+cd "$(dirname "$0")"
 main "$@"

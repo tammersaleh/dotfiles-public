@@ -41,6 +41,8 @@ __prependpath    /opt/homebrew/opt/findutils/libexec/gnubin
 __prependmanpath /opt/homebrew/opt/findutils/libexec/gnuman
 __prependpath    /opt/homebrew/opt/gnu-tar/libexec/gnubin
 __prependmanpath /opt/homebrew/opt/gnu-tar/libexec/gnuman
+__prependpath    /opt/homebrew/opt/gawk/libexec/gnubin
+__prependmanpath /opt/homebrew/opt/gawk/libexec/gnuman
 __prependpath    /opt/homebrew/share/npm/bin
 __prependpath    /Applications/Postgres.app/Contents/Versions/9.4/bin
 __prependpath    /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/

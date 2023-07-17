@@ -14,6 +14,7 @@ brew "diffutils"
 brew "gettext", link: true        # GNU internationalization (i18n) and localization (l10n) library
 brew "gnu-sed"
 brew "gnu-tar"                    # GNU version of the tar archiving utility
+brew "gawk"
 brew "libnotify"                  # Library that sends desktop notifications to a notification daemon
 brew "moreutils"
 brew "openssl"                    # SSL/TLS cryptography library

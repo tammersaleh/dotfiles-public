@@ -71,4 +71,6 @@ Plug 'https://github.com/alvan/vim-closetag'
 Plug 'https://github.com/morhetz/gruvbox'
 Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 
+Plug 'https://github.com/vim-scripts/icalendar.vim' " Added by add-plugin
+
 call plug#end()
