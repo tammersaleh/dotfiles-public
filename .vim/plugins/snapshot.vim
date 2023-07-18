@@ -56,7 +56,8 @@ silent! let g:plugs['vim-terraform'].commit = 'f0b17ac9f1bbdf3a29dba8b17ab429b1e
 silent! let g:plugs['vim-toml'].commit = '3c5face8e8944a217af45bc5bb708ff7dfcf1a54'
 silent! let g:plugs['vimade'].commit = '4f7f2ae1821dabffce52a566e7bc653012cb4940'
 
-silent! let g:plugs['icalendar.vim'].commit = '542fff45385b1b5ad9781b0ad4878ba3b7ee9d5f' " Added by add-plugin
+
+silent! let g:plugs['icalendar.vim'].commit = '9f6424f7e6700bb7187cd75fed440e0d5523b179' " Added by add-plugin
 
 PlugUpdate!
 
