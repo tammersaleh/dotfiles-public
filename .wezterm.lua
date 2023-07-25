@@ -17,6 +17,18 @@ return {
   cursor_blink_ease_out = "Constant",
   default_cursor_style = "BlinkingBlock",
 
+  audible_bell = 'Disabled',
+  visual_bell = {
+    fade_in_duration_ms = 0,
+    fade_out_duration_ms = 20,
+    fade_in_function = 'Linear',
+    fade_out_function = 'EaseOut',
+  },
+
+  colors = {
+    visual_bell = '#4d4800'
+  },
+
   window_frame = {
     -- font = wezterm.font({ family = "Cascadia Code Semibold" }),
     font = wezterm.font('Fira Code'),
