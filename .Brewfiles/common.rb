@@ -13,6 +13,7 @@ brew "bash"                          # Bourne-Again SHell, a UNIX command interp
 brew "bash-completion@2"             # Common bash-completion libraries
 brew "bat"                           # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat-extras"
+brew "bfg"
 brew "cmake"                         # Cross-platform make
 brew "coreutils"                     # GNU File, Shell, and Text utilities
 brew "ctags"                         # Reimplementation of ctags(1)
