@@ -134,7 +134,7 @@ setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded 
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
-  # To make psql work and to allow bundler to find libpq
+# To make psql work and to allow bundler to find libpq
 export PATH="$(brew --prefix libpq)/bin:$PATH"
 export LDFLAGS="-L$(brew --prefix libpq)/lib"
 export CPPFLAGS="-I$(brew --prefix libpq)/include"
