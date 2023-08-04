@@ -50,6 +50,7 @@ brew "pandoc"                        # Swiss-army knife of markup format convers
 brew "pass"                          # Password manager
 brew "pdftk-java"
 brew "powerlevel10k"
+brew "libpq"
 brew "pstree"                        # Show ps output as a tree
 brew "rbenv"                         # Ruby version manager
 brew "rclone"

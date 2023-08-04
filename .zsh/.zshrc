@@ -134,7 +134,7 @@ setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded 
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
-# To make psql work and to allow bundler to find libpq
+  # To make psql work and to allow bundler to find libpq
 export PATH="$(brew --prefix libpq)/bin:$PATH"
 export LDFLAGS="-L$(brew --prefix libpq)/lib"
 export CPPFLAGS="-I$(brew --prefix libpq)/include"
@@ -354,7 +354,6 @@ DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
 __source_if_exists "$DOCKER_ETC/docker.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
-__source_if_exists "$ZDOTDIR/fzf-tab/fzf-tab.plugin.zsh"
 
 __has aws_completer && complete -C aws_completer aws
 __has kubectl       && source <(kubectl completion zsh)
@@ -367,21 +366,6 @@ __has fly           && source <(fly completion zsh)
 compdef g=git
 compdef av=exec
 
-# disable sort when completing
-zstyle ':completion:complete:*:options' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# TAB selects the current option (instead of ENTER)
-zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
-
-
 ################# }}}
-source $ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-__source_if_exists "$HOME/.zsh/fzf.zsh"
 
-bindkey -M vicmd '/' fzf-history-widget
 # vim: foldmethod=marker ft=zsh

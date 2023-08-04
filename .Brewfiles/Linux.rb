@@ -5,7 +5,6 @@ brew "bfg"                           # Remove large files or passwords from Git 
 brew "curl"                          # Get a file from an HTTP, HTTPS or FTP server
 brew "dateutils"                     # Tools to manipulate dates with a focus on financial data
 brew "dep"                           # Go dependency management tool
-brew "docker"                        # Pack, ship and run any application as a lightweight container
 brew "gcc"                           # The GNU Compiler Collection
 brew "grip"                          # GitHub Markdown previewer
 brew "parallel"                      # Shell command parallelization utility

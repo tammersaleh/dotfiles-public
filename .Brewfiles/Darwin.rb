@@ -41,11 +41,9 @@ brew "yasm"                       # Modular BSD reimplementation of NASM
 
 #cask "rectangle"
 cask "aws-vault"
-cask "docker"
 cask "font-hack-nerd-font"
-cask "font-source-sans-pro"
+cask "font-source-sans-3"
 cask "google-cloud-sdk"
-cask "wez/wezterm/wezterm-nightly", greedy: true
 cask "wkhtmltopdf"
 cask "1password/tap/1password-cli"
 
