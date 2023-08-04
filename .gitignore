@@ -1,4 +1,6 @@
 /.zsh/.zcompdump
+/.zsh/.zsh_history
+/.zsh/.zsh_sessions/*
 /.config/gcloud
 /.config/gh-update
 /.config/keybase/
