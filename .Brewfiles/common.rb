@@ -6,6 +6,7 @@ tap "homebrew/cask-fonts"
 tap "netlify/netlifyctl"
 tap "romkatv/powerlevel10k"
 tap "superfly/tap"
+tap "spacelift-io/spacelift"
 
 brew "automake"                      # Tool for generating GNU Standards-compliant Makefiles
 brew "awscli"                        # Official Amazon AWS command-line interface
@@ -33,6 +34,7 @@ brew "git-delta"
 brew "git-lfs"                       # Git extension for versioning large files
 brew "gnupg"                         # GNU Pretty Good Privacy (PGP) package
 brew "go"                            # Open source programming language to build simple/reliable/efficient software
+brew "gomplate"                      # For https://github.com/superorbital/infrastructure/blob/main/students/generate 
 brew "gron"                          # Make JSON greppable
 brew "heroku"                        # Add GitHub support to git on the command-line
 brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
@@ -58,6 +60,7 @@ brew "rclone"
 brew "sassc"                         # Wrapper around libsass that helps to create command-line apps
 brew "shellcheck"                    # Static analysis and lint tool, for (ba)sh scripts
 brew "socat"                         # netcat on steroids
+brew "spacectl"
 brew "stow"  # Used by dotfiles
 brew "terraform"
 brew "tflint"                        # Terraform linter
