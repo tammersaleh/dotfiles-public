@@ -61,8 +61,8 @@ return {
 
     { key = 'q', mods = 'CMD', action = act.QuitApplication },
     { key = 'w', mods = 'CMD', action = act.CloseCurrentTab{ confirm = true } },
-    { key = 'n', mods = 'CMD', action = act.SpawnWindow },
-    { key = 't', mods = 'CMD', action = act.SpawnTab 'DefaultDomain' },
+    { key = 'n', mods = 'CMD', action = act.SpawnCommandInNewWindow { cwd = '~' } },
+    { key = 't', mods = 'CMD', action = act.SpawnCommandInNewTab { cwd = '~' } },
 
     { key = '1', mods = 'CMD', action = act.ActivateTab(0) },
     { key = '2', mods = 'CMD', action = act.ActivateTab(1) },
