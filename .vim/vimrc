@@ -590,6 +590,7 @@ let g:vimade = {}
 let g:vimade.enablesigns = 0 " Currently producing errors with my emoji signs
 " https://github.com/TaDaa/vimade/issues/19
 let g:vimade.usecursorhold=1
+let g:vimade.fadelevel = 0.7
 " }}}
 
 " Terraform {{{
