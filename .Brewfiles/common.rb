@@ -3,7 +3,6 @@ tap "github/gh"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
-tap "netlify/netlifyctl"
 tap "romkatv/powerlevel10k"
 tap "superfly/tap"
 tap "spacelift-io/spacelift"
@@ -34,7 +33,7 @@ brew "git-delta"
 brew "git-lfs"                       # Git extension for versioning large files
 brew "gnupg"                         # GNU Pretty Good Privacy (PGP) package
 brew "go"                            # Open source programming language to build simple/reliable/efficient software
-brew "gomplate"                      # For https://github.com/superorbital/infrastructure/blob/main/students/generate 
+brew "gomplate"                      # For https://github.com/superorbital/infrastructure/blob/main/students/generate
 brew "gron"                          # Make JSON greppable
 brew "heroku"                        # Add GitHub support to git on the command-line
 brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
@@ -47,7 +46,7 @@ brew "lesspipe"                      # Input filter for the pager less
 brew "libpq", force: true # Used to get libpq and force linked to get psql cli in PATH
 brew "libxslt"                       # C XSLT library for GNOME
 brew "mediainfo"                     # For lesspipe
-brew "netlify/netlifyctl/netlifyctl" # CLI to interact with netlify.com
+brew "netlify-cli"                   # CLI to interact with netlify.com
 brew "node"                          # Platform built on V8 to build network applications
 brew "pandoc"                        # Swiss-army knife of markup format conversion
 brew "pass"                          # Password manager
