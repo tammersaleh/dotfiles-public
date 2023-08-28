@@ -14,8 +14,7 @@ crash.log
 shit*
 do-not-commit/
 do_not_commit/
-# .envrc
-# .direnv/
+.netlify
 
 !.keep
 !.keepme

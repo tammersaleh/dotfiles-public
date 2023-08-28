@@ -491,20 +491,14 @@ let g:Illuminate_delay = 1000
 let g:dirvish_mode = ':sort ,^.*[\/],'
 augroup my_dirvish
   autocmd!
-  autocmd FileType dirvish silent keeppatterns g@\v/\.[^\/]+/?$@d _
+  " autocmd FileType dirvish silent keeppatterns g@\v/\.[^\/]+/?$@d _
   autocmd FileType dirvish nnoremap <buffer> <silent> <Leader>t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
   autocmd FileType dirvish nnoremap <buffer> <silent>         t :exec 'lcd ' . expand('%')<CR>:terminal ++curwin<CR>
 augroup END
 " }}}
 
 " vim-markdown {{{
-let g:vim_markdown_override_foldtext = 0
-let g:vim_markdown_folding_style_pythonic = 1
-let g:vim_markdown_folding_level = 6
-let g:vim_markdown_yaml_frontmatter = 1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_fenced_languages = ['bash=sh', 'console=sh']
+" See comments in ftplugin/markdown.vim
 let g:vim_markdown_folding_disabled = 1 " We manage our own folding
 " }}}
 

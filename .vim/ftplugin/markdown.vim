@@ -31,6 +31,12 @@ setlocal linebreak
 setlocal foldenable
 setlocal spell
 
+let g:vim_markdown_override_foldtext = 0
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_level = 6
+let g:vim_markdown_yaml_frontmatter = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_new_list_item_indent = 0
 " let b:coc_suggest_disable = 1
-let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'hcl=terraform']
+let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'hcl=terraform', 'bash=sh', 'console=sh']
 

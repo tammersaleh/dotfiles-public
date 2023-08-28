@@ -34,6 +34,7 @@ Plug 'https://github.com/rust-lang/rust.vim'
 
 " General
 Plug 'https://github.com/justinmk/vim-dirvish'          " Betterer netrw
+Plug 'https://github.com/kristijanhusak/vim-dirvish-git'
 Plug 'https://github.com/kana/vim-smartword'            " make `w` better.
 Plug 'https://github.com/airblade/vim-gitgutter'        " Show git signs in gutter
 Plug 'https://github.com/RRethy/vim-illuminate'         " Highlight word under cursor after delay
