@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+main() {
+  [[ $# -eq 1 ]] || usage "Expected one argument"
+
+  case $1 in
+
+    toggle)
+      toggle
+      ;;
+
+    current)
+      current
+      ;;
+
+    *)
+      choose "$1"
+      ;;
+  esac
+}
+
+toggle() {
+  case $(current) in
+
+    headphones) choose puc ;;
+    puc)        choose macbook ;;
+    macbook)    choose headphones ;;
+    *)          choose headphones ;;
+
+  esac
+}
+
+current () {
+  out=$(SwitchAudioSource -c -f cli)
+  case $out in
+
+    "Jabra Link"*)
+      echo "headphones"
+      ;;
+
+    "Jabra SPEAK"*)
+      echo "puc"
+      ;;
+
+    "Macbook"*)
+      echo "macbook"
+      ;;
+
+    *)
+      echo "unknown: $out"
+      ;;
+  esac
+}
+
+choose() {
+  case $1 in
+
+    headphones)
+      SwitchAudioSource -t input  -s 'Jabra Link 380'
+      SwitchAudioSource -t output -s 'Jabra Link 380'
+      SwitchAudioSource -m unmute
+      echo "Headphones"
+      ;;
+
+    puc)
+      SwitchAudioSource -t input  -s 'Jabra SPEAK 410 USB'
+      SwitchAudioSource -t output -s 'Jabra SPEAK 410 USB'
+      SwitchAudioSource -m unmute
+      echo "Puc"
+      ;;
+
+    macbook)
+      SwitchAudioSource -t input  -s 'MacBook Air Microphone'
+      SwitchAudioSource -t output -s 'MacBook Air Speakers'
+      SwitchAudioSource -m unmute
+      echo "Macbook"
+      ;;
+
+    *)
+      usage "$1 is an unknown device pair."
+      ;;
+  esac
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me [headphones|puc|macbook]
+
+  Switches between the three speaker/mic combinations
+
+  Examples:
+
+    $me headphones
+    $me puc
+    $me macbook
+	EOF
+  exit 1
+}
+
+main "$@"
