@@ -46,7 +46,7 @@ cask "font-hack-nerd-font"
 cask "font-source-sans-3"
 cask "google-cloud-sdk"
 cask "wkhtmltopdf"
-
+cask "1password-cli"
 
 instance_eval(File.read("common.rb"))
 
