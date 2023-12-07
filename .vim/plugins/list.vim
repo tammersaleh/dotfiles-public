@@ -58,7 +58,7 @@ Plug 'https://github.com/roxma/nvim-yarp'
 Plug 'https://github.com/roxma/vim-hug-neovim-rpc'
 
 Plug 'https://github.com/w0rp/ale'                      " Linting and fixing                    
-Plug 'https://github.com/TaDaa/vimade'                  " Fade the inactive windows
+Plug 'https://github.com/tammersaleh/vimade'            " Fade the inactive windows. Go back to original when https://github.com/TaDaa/vimade/pull/74 is fixed
 Plug 'https://github.com/romainl/vim-qf'                " Better quickfix/location windows
 Plug 'https://github.com/ap/vim-templates'              " Templates in ~/.vim/templates
 Plug 'https://github.com/junegunn/fzf'

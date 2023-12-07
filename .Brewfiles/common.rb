@@ -76,6 +76,5 @@ brew "yq"
 brew "zlib"                          # General-purpose lossless data-compression library
 brew "zsh"
 
-cask "font-fira-code"
 
 # vim: ft=ruby

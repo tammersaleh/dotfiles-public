@@ -5,10 +5,15 @@ shopt -s inherit_errexit
 trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 [[ -v DEBUG ]] && set -x
 
+system=$(uname -s)
+
 cd "$(dirname "$0")"
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BUNDLE_NO_LOCK=true # https://github.com/Homebrew/homebrew-bundle/pull/552
-export HOMEBREW_BUNDLE_FILE="$(uname -s).rb"
+export HOMEBREW_BUNDLE_FILE="$system.rb"
+
 brew update
 brew bundle install --cleanup --force
+
+brew list --versions > "installed-$system.txt"

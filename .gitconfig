@@ -67,7 +67,7 @@
     gitleaks = true
 [interactive]
     # https://github.com/dandavison/delta
-    diffFilter = delta
+    diffFilter = delta --color-only
 [filter "lfs"]
     required = true
     smudge = git-lfs smudge -- %f
