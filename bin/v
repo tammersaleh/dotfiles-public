@@ -2,34 +2,13 @@
 
 set -euo pipefail
 
-die() {
-  echo "$1"
-  exit 1
-}
-
-has() {
-  command -v "$1" > /dev/null
-}
-
-if [[ -v VIM_TERMINAL ]]; then
-  # We're inside a vim terminal.  Use the drop command.
-  [[ $# -eq 0 ]] && die "You're already in vim."
-
-  for file in "$@"; do
-    file=$(realpath -Ls $file)
-    # shellcheck disable=SC1117
-    echo -ne "\033]51;[\"drop\", \"$file\"]\007"
-  done
-  exit 0
-fi
-
-# Not inside a running vim..
-if [[ $# -eq 0 ]]; then
-  vi -c "terminal ++curwin"
-else
-  if [[ $# -eq 1 ]] && [[ -d "$1" ]]; then
-    cd "$1" && vi -c "terminal ++curwin"
+main() {
+  if [[ $# -eq 0 ]]; then
+    # open dirvish here
+    nvr -o .
   else
-    vi -o "$@"
+    nvr -o "$@"
   fi
-fi
+}
+
+main "$@"
