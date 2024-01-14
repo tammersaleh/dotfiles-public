@@ -47,6 +47,7 @@ brew "libpq", force: true # Used to get libpq and force linked to get psql cli i
 brew "libxslt"                       # C XSLT library for GNOME
 brew "mediainfo"                     # For lesspipe
 brew "neovim", args: ['HEAD']
+brew "neovim-remote"
 brew "netlify-cli"                   # CLI to interact with netlify.com
 brew "node"                          # Platform built on V8 to build network applications
 brew "pandoc"                        # Swiss-army knife of markup format conversion
