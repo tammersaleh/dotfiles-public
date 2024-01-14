@@ -137,10 +137,12 @@ function! s:dirvish_at_project_cwd() abort
   exec 'Dirvish ' . getcwd()
 endfunction
 
- noremap <silent> <C-Right>      :vsplit +call\ <sid>dirvish_at_file_cwd()<CR>
 tnoremap <silent> <C-Right> <C-w>:vsplit +call\ <sid>dirvish_at_project_cwd()<CR>
- noremap <silent> <C-Down>       :split  +call\ <sid>dirvish_at_file_cwd()<CR>
 tnoremap <silent> <C-Down>  <C-w>:split  +call\ <sid>dirvish_at_project_cwd()<CR>
+
+ noremap <silent> <C-Right>      :vsplit +call\ <sid>dirvish_at_file_cwd()<CR>
+ noremap <silent> <C-Down>       :split  +call\ <sid>dirvish_at_file_cwd()<CR>
+
  noremap <silent> <C-h> <C-W><C-H>
 tnoremap <silent> <C-h> <C-W><C-H>
  noremap <silent> <C-j> <C-W><C-J>

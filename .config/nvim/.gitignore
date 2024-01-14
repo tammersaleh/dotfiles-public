@@ -1,8 +1,4 @@
-*.spl
-*.sug
-plugged/*
-backup/*
-info
-undo
-localvimrc_persistent
-view
+tags
+test.sh
+.luarc.json
+nvim
