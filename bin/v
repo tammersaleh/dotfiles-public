@@ -3,11 +3,13 @@
 set -euo pipefail
 
 main() {
-  if [[ $# -eq 0 ]]; then
-    # open dirvish here
-    nvr -o .
+  local files="$*"
+  if [[ $# -eq 0 ]]; then files="."; fi 
+
+  if [[ -v NVIM ]]; then
+    nvr -o "$files"
   else
-    nvr -o "$@"
+    nvim --listen "$(mktemp)" -o "$files"
   fi
 }
 
