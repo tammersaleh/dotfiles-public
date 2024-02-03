@@ -1,6 +1,7 @@
 return {
   -- Autocompletion
   'hrsh7th/nvim-cmp',
+
   dependencies = {
     'L3MON4D3/LuaSnip',
     -- 'SergioRibera/cmp-dotenv',
@@ -10,6 +11,7 @@ return {
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-path',
     'saadparwaiz1/cmp_luasnip',
+    { 'windwp/nvim-autopairs', opts = {} }
   },
   config = function ()
     local cmp = require 'cmp'
@@ -54,6 +56,13 @@ return {
         end, { 'i', 's' }),
       },
     }
+
+    -- Insert `(` after select function or method item
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    cmp.event:on(
+      'confirm_done',
+      cmp_autopairs.on_confirm_done()
+    )
 
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
