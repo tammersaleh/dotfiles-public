@@ -1,8 +1,9 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
+local commonfont = wezterm.font('FiraCode Nerd Font')
 
 return {
-  font = wezterm.font('Fira Code'),
+  font = commonfont,
   font_size = 18,
   window_padding = {
     left = 10,
@@ -30,8 +31,7 @@ return {
   },
 
   window_frame = {
-    -- font = wezterm.font({ family = "Cascadia Code Semibold" }),
-    font = wezterm.font('Fira Code'),
+    font = commonfont,
 
     -- The size of the font in the tab bar.
     -- Default to 10. on Windows but 12.0 on other systems
