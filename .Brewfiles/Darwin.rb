@@ -42,7 +42,8 @@ brew "yasm"                       # Modular BSD reimplementation of NASM
 
 cask "1password-cli"
 cask "aws-vault"
-cask "font-fira-code"
+cask "font-fira-code-nerd-font"
+cask "font-meslo-lg-nerd-font"
 cask "font-hack-nerd-font"
 cask "font-source-sans-3"
 cask "google-cloud-sdk"

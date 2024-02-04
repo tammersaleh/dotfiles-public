@@ -59,7 +59,7 @@ git 2.43.0
 git-crypt 0.7.0_1
 git-delta 0.16.5
 git-lfs 3.4.1
-glib 2.78.3
+glib 2.78.4
 glog 0.6.0
 gmp 6.3.0
 gnu-getopt 2.39.1
@@ -109,7 +109,7 @@ libidn2 2.3.7 2.3.4_1
 libksba 1.6.5 1.6.4
 liblqr 0.4.2_1
 libmagic 5.45
-libmediainfo 23.11
+libmediainfo 24.01 23.11
 libmicrohttpd 1.0.0
 libmms 0.6.4
 libmpc 1.3.1
@@ -160,7 +160,7 @@ lz4 1.9.4
 lzo 2.10
 m4 1.4.19
 mbedtls 3.5.1
-media-info 23.11
+media-info 24.01
 moreutils 0.68
 mpdecimal 4.0.0 2.5.1
 mpfr 4.2.0-p12 4.2.1
@@ -280,8 +280,9 @@ zsh 5.9
 zstd 1.5.5
 1password-cli 2.24.0
 aws-vault 7.2.0
-font-fira-code 6.2
+font-fira-code-nerd-font 3.1.1
 font-hack-nerd-font 3.1.1
+font-meslo-lg-nerd-font 3.1.1
 font-source-sans-3 latest
 google-cloud-sdk 440.0.0
 wkhtmltopdf 0.12.6-2
