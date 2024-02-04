@@ -11,7 +11,10 @@ return {
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-path',
     'saadparwaiz1/cmp_luasnip',
-    { 'windwp/nvim-autopairs', opts = {} }
+    { 'windwp/nvim-autopairs', opts = {} },
+    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+    {'neovim/nvim-lspconfig'},
+    {'hrsh7th/cmp-nvim-lsp'},
   },
   config = function ()
     local cmp = require 'cmp'

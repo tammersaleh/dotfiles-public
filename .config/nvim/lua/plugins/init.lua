@@ -25,7 +25,6 @@ return {
   'Matt-Deacalion/vim-systemd-syntax',
   'cakebaker/scss-syntax.vim',
   'cespare/vim-toml',
-  'ekalinin/Dockerfile.vim',
   'elzr/vim-json',
   'fatih/vim-go',
   'hail2u/vim-css3-syntax',

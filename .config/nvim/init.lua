@@ -498,18 +498,32 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  bashls = {},
+  cmake = {},
+  cssls = {},
+  docker_compose_language_service = {},
+  dockerls = {},
+  gopls = {},
+  grammarly = {},
+  marksman = {},
+  pyright = {},
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  solargraph = {},
+  stylelint_lsp = {},
+  -- terraformls = {},
+  tflint = {},
+  typos_lsp = {},
+  yamlls = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+      },
+    },
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
-      -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       diagnostics = { disable = { 'missing-fields' } },
     },
   },
