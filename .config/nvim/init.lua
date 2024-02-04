@@ -504,7 +504,7 @@ local servers = {
   docker_compose_language_service = {},
   dockerls = {},
   gopls = {},
-  grammarly = {},
+  grammarly = {init_options = { clientId = "client_BaDkMgx4X19X9UxxYRCXZo" }},
   marksman = {},
   pyright = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
