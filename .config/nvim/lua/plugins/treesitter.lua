@@ -1,46 +1,125 @@
-local function get_custom_foldtxt_suffix(foldstart)
-  local fold_suffix_str = string.format(
-    "  %s [%s lines]",
-    '┉',
-    vim.v.foldend - foldstart + 1
-  )
+local function MoveAndFoldLeft()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 
-  return { fold_suffix_str, "Folded" }
+    if col == 1 and vim.fn.foldlevel(line) ~= 0 then
+        vim.cmd.foldclose()
+    else
+        vim.cmd.normal({ 'h', bang = true })
+    end
 end
 
-local function get_custom_foldtext(foldtxt_suffix, foldstart)
-  local line = vim.api.nvim_buf_get_lines(0, foldstart - 1, foldstart, false)[1]
+local function MoveAndFoldRight()
+    local line = vim.api.nvim_win_get_cursor(0)[1]
 
-  return {
-    { line, "Normal" },
-    foldtxt_suffix
-  }
+    if vim.fn.foldlevel(line) ~= 0 and vim.fn.foldclosed(line) ~= -1 then
+        vim.cmd.foldopen()
+    else
+        vim.cmd.normal({'l', bang = true})
+    end
 end
-
-_G.get_foldtext = function()
-  local foldstart = vim.v.foldstart
-  local ts_foldtxt = vim.treesitter.foldtext()
-  local foldtxt_suffix = get_custom_foldtxt_suffix(foldstart)
-
-  if type(ts_foldtxt) == "string" then
-    return get_custom_foldtext(foldtxt_suffix, foldstart)
-  else
-    table.insert(ts_foldtxt, foldtxt_suffix)
-    return ts_foldtxt
-  end
-end
-
-vim.opt.foldtext = "v:lua.get_foldtext()"
 
 return {
   {
-    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      { 'nvim-treesitter/nvim-treesitter-textobjects' },
+      { 'folke/which-key.nvim' },
     },
     build = ':TSUpdate',
-    opts = {}
+    config = function ()
+      -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
+      vim.defer_fn(function()
+        require('nvim-treesitter.configs').setup {
+          -- Add languages to be installed here that you want installed for treesitter
+          ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+
+          -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+          auto_install = true,
+
+          highlight = { enable = true },
+          indent = { enable = true },
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = '<c-space>',
+              node_incremental = '<c-space>',
+              scope_incremental = '<c-s>',
+              node_decremental = '<M-space>',
+            },
+          },
+          textobjects = {
+            select = {
+              enable = true,
+              lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+              keymaps = {
+                -- You can use the capture groups defined in textobjects.scm
+                ['aa'] = '@parameter.outer',
+                ['ia'] = '@parameter.inner',
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = '@class.inner',
+              },
+            },
+            move = {
+              enable = true,
+              set_jumps = true, -- whether to set jumps in the jumplist
+              goto_next_start = {
+                [']m'] = '@function.outer',
+                [']]'] = '@class.outer',
+              },
+              goto_next_end = {
+                [']M'] = '@function.outer',
+                [']['] = '@class.outer',
+              },
+              goto_previous_start = {
+                ['[m'] = '@function.outer',
+                ['[['] = '@class.outer',
+              },
+              goto_previous_end = {
+                ['[M'] = '@function.outer',
+                ['[]'] = '@class.outer',
+              },
+            },
+            swap = {
+              enable = true,
+              swap_next = {
+                ['<leader>a'] = '@parameter.inner',
+              },
+              swap_previous = {
+                ['<leader>A'] = '@parameter.inner',
+              },
+            },
+          },
+        }
+        vim.opt.foldmethod = 'expr'
+        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+        vim.opt.foldnestmax = 2
+      end, 0)
+
+      require('which-key').register {
+        ['<leader>c'] = { name = '[C]ode',      _ = 'which_key_ignore' },
+        ['<leader>d'] = { name = '[D]ocument',  _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]it',       _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = 'Git [H]unk',  _ = 'which_key_ignore' },
+        ['<leader>r'] = { name = '[R]ename',    _ = 'which_key_ignore' },
+        ['<leader>s'] = { name = '[S]earch',    _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]oggle',    _ = 'which_key_ignore' },
+        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+      }
+      -- register which-key VISUAL mode
+      -- required for visual <leader>hs (hunk stage) to work
+      require('which-key').register({
+        ['<leader>'] = { name = 'VISUAL <leader>' },
+        ['<leader>h'] = { 'Git [H]unk' },
+      }, { mode = 'v' })
+
+      vim.keymap.set('n', '<Left>', MoveAndFoldLeft, {desc = "Move left, possibly closing folds."})
+      vim.keymap.set('n', 'h',      MoveAndFoldLeft, {desc = "Move left, possibly closing folds."})
+      vim.keymap.set('n', '<Right>', MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
+      vim.keymap.set('n', 'l',      MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
+    end
   }
 }
 
