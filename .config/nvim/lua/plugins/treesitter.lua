@@ -119,6 +119,10 @@ return {
       vim.keymap.set('n', 'h',      MoveAndFoldLeft, {desc = "Move left, possibly closing folds."})
       vim.keymap.set('n', '<Right>', MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
       vim.keymap.set('n', 'l',      MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
+
+      -- Treesitter for Ruby for some reason re-indents incorrectly every time you type '.'
+      vim.api.nvim_create_autocmd("FileType", { pattern = "ruby", callback = function() vim.opt_local.indentkeys:remove('.') end })
+
     end
   }
 }
