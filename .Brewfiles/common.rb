@@ -65,6 +65,7 @@ brew "stow"  # Used by dotfiles
 brew "terraform"
 brew "tflint"                        # Terraform linter
 brew "the_silver_searcher"           # Code-search similar to ack
+brew "ripgrep"                       # Needed by vim treesitter
 brew "tmux"                          # Terminal multiplexer
 brew "tree"                          # Display directories as trees (with optional color/HTML output)
 brew "vim"                           # Vi 'workalike' with many additional features

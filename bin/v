@@ -3,13 +3,14 @@
 set -euo pipefail
 
 main() {
-  local files="$*"
-  if [[ $# -eq 0 ]]; then files="."; fi 
+  local files=("$@")
+  if [[ $# -eq 0 ]]; then files=("."); fi 
 
   if [[ -v NVIM ]]; then
-    nvr -o "$files"
+    nvr -o "${files[@]}"
+    
   else
-    nvim --listen "$(mktemp)" -o "$files"
+    nvim --listen "$(mktemp)" -o "${files[@]}"
   fi
 }
 
