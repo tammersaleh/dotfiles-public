@@ -88,6 +88,9 @@ vim.o.cmdheight = 2
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Disable markdown folding.  We manage manually in after/ftplugin.
+vim.g.vim_markdown_folding_disabled = 1
+
 -- Splits
 
 local function save_last_mode()
