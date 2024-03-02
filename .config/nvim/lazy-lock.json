@@ -1,7 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
   "LuaSnip": { "branch": "master", "commit": "2dbef19461198630b3d7c39f414d09fb07d1fdd2" },
-  "SimpylFold": { "branch": "master", "commit": "ff4c85197c5555715093c08a8d4f9d493c4d80cd" },
   "bats.vim": { "branch": "master", "commit": "19eb3c5a05aaa889647af8107a4518b3fb4a4711" },
   "bullets.vim": { "branch": "master", "commit": "d9a47f114031d3030b1e4de3c0b6a664b1201524" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
@@ -31,6 +30,7 @@
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "dd0b2036c3a27cb6e6486f8bd24188c6ca43af0b" },
   "nvim-web-devicons": { "branch": "master", "commit": "7f30f2da3c3641841ceb0e2c150281f624445e8f" },
   "plenary.nvim": { "branch": "master", "commit": "4f71c0c4a196ceb656c824a70792f3df3ce6bb6d" },
+  "refactoring.nvim": { "branch": "master", "commit": "fb4990a0546c59136930ea624b8640d07957f281" },
   "requirements.txt.vim": { "branch": "master", "commit": "f7abd4d5dd1fe1625108dbb4e9ad3f29213b80e3" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
   "scss-syntax.vim": { "branch": "master", "commit": "bda22a93d1dcfcb8ee13be1988560d9bb5bd0fef" },
