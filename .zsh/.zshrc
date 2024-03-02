@@ -114,6 +114,8 @@ export AWS_VAULT_PASS_PREFIX=aws-vault
 export HUB_PROTOCOL=ssh
 export MOSH_TITLE_NOPREFIX=true
 
+export GH_NO_UPDATE_NOTIFIER="this is set to stop gh from letting us know about new version."
+
 # For the Dockers!
 export UID
 export GID=$(id -g)
