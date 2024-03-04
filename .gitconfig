@@ -35,11 +35,12 @@
 [merge]
     # tool = opendiff
     # summary = true
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [diff]
     wordRegex = [^[:space:]]
     submodule = log
     colorMoved = default
+    algorithm = histogram
 [core]
     excludesfile = ~/.gitglobalignore
     whitespace = trailing-space,space-before-tab,tab-in-indent
@@ -48,17 +49,18 @@
     preloadindex = true
 [status]
     relativePaths = false
-    submodulesummary = 1
+    submodulesummary = true
 [apply]
     whitespace = nowarn
 [rerere]
-    enabled = 1
+    enabled = true
 [gh]
     autoUpdate = always
 [hub]
     protocol = https
 [rebase]
     autosquash = true
+    autostash = true
 [gc]
     auto = 256
 [pull]
@@ -104,13 +106,31 @@
 [push]
     # https://twitter.com/JI/status/1546948817462800384
     autoSetupRemote = true
-	default = simple
-	autoSetupMerge = always
+    default = current
+    autoSetupMerge = always
+[commit]
+    verbose = true
 [credential]
-	helper = store
+	helper = osxkeychain
 [credential "https://github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[transfer]
+    fsckobjects = true
+[fetch]
+    fsckobjects = true
+    prune = true
+    prunetags = true
+[receive]
+    fsckobjects = true
+[submodule]
+    recurse = true
+[branch]
+    sort = -committerdate
+[gpg]
+    format = ssh
+[log]
+    date = iso
