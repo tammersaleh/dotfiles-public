@@ -16,7 +16,7 @@ vmap <buffer> <Leader><Bslash> :EasyAlign*<Bar><Enter>
 noremap <buffer> <silent> K :silent !open dict://<cword><CR><CR>
 noremap <buffer> <silent> <leader>m :silent! !mark %<CR>:redraw!<CR>
 
-" vim-markdown's folding is too agressive (happens in after)
+" vim-markdown's folding is too aggressive (happens in after)
 " and breaks my markdownslides format.  We disable folding in vimrc, and
 " enable it here more simply:
 setlocal foldexpr=Foldexpr_markdown(v:lnum)
