@@ -27,28 +27,23 @@ main() {
 toggle() {
   case $(current) in
 
-    headphones) choose puc ;;
-    puc)        choose macbook ;;
-    macbook)    choose headphones ;;
+    headphones) choose shure ;;
+    shure)    choose headphones ;;
     *)          choose headphones ;;
 
   esac
 }
 
 current () {
-  out=$(SwitchAudioSource -c -f cli)
+  out=$(SwitchAudioSource -c -f cli -t input)
   case $out in
 
     "Jabra Link"*)
       echo "headphones"
       ;;
 
-    "Jabra SPEAK"*)
-      echo "puc"
-      ;;
-
-    "Macbook"*)
-      echo "macbook"
+    "Shure"*)
+      echo "shure"
       ;;
 
     *)
@@ -67,18 +62,11 @@ choose() {
       echo "Headphones"
       ;;
 
-    puc)
-      SwitchAudioSource -t input  -s 'Jabra SPEAK 410 USB'
-      SwitchAudioSource -t output -s 'Jabra SPEAK 410 USB'
-      SwitchAudioSource -m unmute
-      echo "Puc"
-      ;;
-
-    macbook)
-      SwitchAudioSource -t input  -s 'MacBook Air Microphone'
+    shure)
+      SwitchAudioSource -t input  -s 'Shure MV7'
       SwitchAudioSource -t output -s 'MacBook Air Speakers'
       SwitchAudioSource -m unmute
-      echo "Macbook"
+      echo "Shure"
       ;;
 
     *)
@@ -92,15 +80,15 @@ usage() {
   local me=$(basename "$0")
   cat <<-EOF
 
-  USAGE: $me [headphones|puc|macbook]
+  USAGE: $me [toggle|headphones|shure]
 
   Switches between the three speaker/mic combinations
 
   Examples:
 
     $me headphones
-    $me puc
-    $me macbook
+    $me shure
+    $me toggle
 	EOF
   exit 1
 }
