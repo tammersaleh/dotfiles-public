@@ -13,9 +13,11 @@ log() {
     "$@"
 }
 
-if [[ "master" == "$(git branch --show-current)" ]]; then
+main_branch=$(sed -e 's/^.*\///' < .git/refs/remotes/origin/HEAD)
+
+if [[ main_branch == "$(git branch --show-current)" ]]; then
   log "$@"
 else
-  echo "Compared to master..."
-  log "$@" "master.."
+  echo "Compared to $main_branch..."
+  log "$@" "$main_branch.."
 fi

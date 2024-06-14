@@ -3,5 +3,10 @@
 set -euo pipefail
 shopt -s inherit_errexit
 
+# We move to the top of the repo, so that clean -df deletes all files
+d=$(git rev-parse --show-cdup) 
+[[ -n "$d" ]] 
+cd "$d"
+
 git clean -df 
 git reset --hard
