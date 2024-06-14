@@ -23,6 +23,7 @@ brew "elinks"                        # For lesspipe
 brew "entr"                          # Run arbitrary commands when files change
 brew "exa"
 brew "exiftool"                      # Perl lib for reading and writing EXIF metadata
+brew "fd"                            # Used by nvim treesitter
 brew "ffmpeg"                        # Play, record, convert, and stream audio and video
 brew "fzf"                           # used by vim finder
 brew "gh"                            # GitHub command-line tool
@@ -35,8 +36,8 @@ brew "go"                            # Open source programming language to build
 brew "gomplate"                      # For https://github.com/superorbital/infrastructure/blob/main/students/generate
 brew "gron"                          # Make JSON greppable
 brew "heroku"                        # Add GitHub support to git on the command-line
-brew "httpie"                        # User-friendly cURL replacement (command-line HTTP client)
-brew "hub"  # Used for campus
+brew "hub"                           # Used for campus
+brew "efm-langserver"                # Trying this out with vim
 brew "id3v2"                         # For lesspipe
 brew "imagemagick"                   # Tools and libraries to manipulate images in many formats
 brew "jq"                            # Lightweight and flexible command-line JSON processor
@@ -57,6 +58,7 @@ brew "libpq"
 brew "pstree"                        # Show ps output as a tree
 brew "rbenv"                         # Ruby version manager
 brew "rclone"
+brew "ruff"                          # Python linting
 brew "sassc"                         # Wrapper around libsass that helps to create command-line apps
 brew "shellcheck"                    # Static analysis and lint tool, for (ba)sh scripts
 brew "socat"                         # netcat on steroids
