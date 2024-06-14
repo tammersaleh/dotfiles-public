@@ -43,7 +43,7 @@ brew "imagemagick"                   # Tools and libraries to manipulate images 
 brew "jq"                            # Lightweight and flexible command-line JSON processor
 brew "lazygit"
 brew "lesspipe"                      # Input filter for the pager less
-brew "libpq", force: true # Used to get libpq and force linked to get psql cli in PATH
+brew "libpq", force: true            # Used to get libpq and force linked to get psql cli in PATH
 brew "libxslt"                       # C XSLT library for GNOME
 brew "mediainfo"                     # For lesspipe
 brew "neovim", args: ['HEAD']
@@ -54,7 +54,6 @@ brew "pandoc"                        # Swiss-army knife of markup format convers
 brew "pass"                          # Password manager
 brew "pdftk-java"
 brew "powerlevel10k"
-brew "libpq"
 brew "pstree"                        # Show ps output as a tree
 brew "rbenv"                         # Ruby version manager
 brew "rclone"

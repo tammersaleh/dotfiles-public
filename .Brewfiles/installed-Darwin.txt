@@ -5,17 +5,17 @@ aribb24 1.0.4
 aspell 0.60.8.1_1
 autoconf 2.72
 automake 1.16.5
-awscli 2.16.4
+awscli 2.16.8
 bash 5.2.26
 bash-completion@2 2.14.0
 bat 0.24.0
-bat-extras 2024.06.01
+bat-extras 2024.07.10
 berkeley-db@5 5.3.28_1
 bfg 1.14.0
 boost 1.85.0
 brotli 1.1.0
 bzip2 1.0.8
-c-ares 1.29.0
+c-ares 1.30.0 1.29.0
 ca-certificates 2024-03-11
 cairo 1.18.0
 cjson 1.7.18
@@ -26,21 +26,21 @@ dav1d 1.4.2
 diff-so-fancy 1.4.4
 diffutils 3.10
 direnv 2.34.0
-doppler 3.68.0
+doppler 3.69.0
 double-conversion 3.3.0
 efm-langserver 0.0.53
 elinks 0.11.7_3
 entr 5.5
 exa 0.10.1_2
 exiftool 12.76
-fb303 2024.05.06.00
-fbthrift 2024.05.06.00
+fb303 2024.05.06.00 2024.06.10.00
+fbthrift 2024.05.06.00 2024.06.10.00
 fd 10.1.0
 ffmpeg 7.0.1
-fizz 2024.05.06.00
+fizz 2024.05.06.00 2024.06.10.00
 flac 1.4.3
 fmt 10.2.1_1
-folly 2024.05.06.00
+folly 2024.05.06.00 2024.06.10.00
 fontconfig 2.15.0
 freetype 2.13.2
 frei0r 2.3.2
@@ -51,7 +51,7 @@ gdbm 1.23
 gdk-pixbuf 2.42.12
 gettext 0.22.5
 gflags 2.2.2
-gh 2.50.0
+gh 2.51.0
 ghostscript 10.03.1
 giflib 5.2.2
 git 2.45.2
@@ -118,7 +118,7 @@ librist 0.2.10_1
 libsamplerate 0.2.2
 libsass 3.6.5
 libsndfile 1.2.2
-libsodium 1.0.19
+libsodium 1.0.19 1.0.20
 libsoxr 0.1.3
 libssh 0.10.6
 libssh2 1.11.0_1
@@ -160,11 +160,12 @@ mpdecimal 4.0.0
 mpfr 4.2.1
 mpg123 1.32.4 1.32.6
 msgpack 6.0.0 6.0.1
+mvfst 2024.06.10.00
 ncurses 6.5 6.4
 neovim HEAD-88fe467
 neovim-remote 2.5.1_1
 nettle 3.9.1
-node 22.2.0
+node 22.3.0
 npth 1.7 1.6
 oniguruma 6.9.9
 opencore-amr 0.1.6
@@ -207,7 +208,8 @@ ripgrep 14.1.0
 rsync 3.3.0
 rubberband 3.3.0
 ruby 3.3.1 3.3.0
-ruby-build 20240530.1
+ruby-build 20240612
+ruff 0.4.8
 s3cmd 2.4.0_1
 sassc 3.6.2
 saw 0.2.2
@@ -241,9 +243,9 @@ unixodbc 2.3.12
 utf8proc 2.9.0
 vault 1.14.4
 vim 9.1.0450
-wangle 2024.05.06.00 2024.01.22.00
+wangle 2024.05.06.00 2024.01.22.00 2024.06.10.00
 watch 4.0.4
-watchman 2024.05.06.00
+watchman 2024.06.10.00
 webp 1.4.0 1.3.2
 wget 1.24.5
 x264 r3108
