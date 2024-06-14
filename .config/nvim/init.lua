@@ -1,12 +1,3 @@
---[[
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-
-  And then you can explore or search through `:help lua-guide`
-  - https://neovim.io/doc/user/lua-guide.html
---]]
-
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
@@ -83,6 +74,7 @@ vim.o.undofile = true
 vim.o.hidden = false
 vim.o.equalalways = false
 vim.o.cmdheight = 2
+vim.o.foldlevel = 99
 
 -- Disable netrw
 vim.g.loaded_netrw = 1

@@ -17,4 +17,27 @@ return {
       end,
     },
   },
+  keys = {
+    {
+      "<leader>f",
+      function() require('telescope.builtin').find_files() end,
+      mode = {'n'},
+      desc = "[F]ind files"
+    },
+  },
+  opts = {
+    defaults = {
+      layout_strategy = "horizontal",
+      layout_config = { prompt_position = "top" },
+      sorting_strategy = "ascending",
+      winblend = 0,
+
+      mappings = {
+        i = {
+          ["<esc>"] = require('telescope.actions').close,
+        },
+      },
+    },
+
+  }
 }

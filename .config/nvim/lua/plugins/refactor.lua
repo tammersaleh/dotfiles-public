@@ -10,7 +10,8 @@ return {
        "<leader>rr",
       function() require('telescope').extensions.refactoring.refactors() end,
       mode = {'n', 'x'},
-      desc = "[R]efactor"},
+      desc = "[R]efactor"
+    },
   },
   config = function()
     require('refactoring').setup()
