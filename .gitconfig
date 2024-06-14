@@ -10,9 +10,7 @@
     aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
     a               = add -A
     current-branch  = rev-parse --abbrev-ref HEAD
-    modified        = ls-files -m
     last            = log @{1}.. --decorate --reverse --stat -C --no-merges
-    files-in-commit = diff-tree --no-commit-id --name-only -r
     bl              = blame -wMC
 
     ci              = commit -v
@@ -24,11 +22,14 @@
 
     suir            = submodule update --init --recursive --jobs=4
 
-    # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
-    uncommit = reset --soft HEAD^
-    unstage  = reset
-    staged   = diff --name-only --cached
-    files    = ls-files -mo --exclude-standard
+    uncommit  = reset --soft HEAD^
+    unstage   = reset
+
+    files-in-commit = diff-tree --no-commit-id --name-only -r
+    modified        = ls-files -m
+    staged          = diff --name-only --cached
+    untracked       = ls-files --others
+    files           = ls-files -mo --exclude-standard
 
     url = browse -u
 
