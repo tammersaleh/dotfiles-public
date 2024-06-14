@@ -18,6 +18,9 @@ return {
   cursor_blink_ease_out = "Constant",
   default_cursor_style = "BlinkingBlock",
 
+  enable_kitty_keyboard = true,
+  enable_csi_u_key_encoding = false,
+
   audible_bell = 'Disabled',
   visual_bell = {
     fade_in_duration_ms = 0,
@@ -54,7 +57,7 @@ return {
   quit_when_all_windows_are_closed = false,
 
   disable_default_key_bindings = true,
-
+  -- debug_key_events = true,
   keys = {
     { key = 'd', mods = 'CMD|OPT', action = act.ShowDebugOverlay },
     { key = 'r', mods = 'CMD|OPT', action = act.ReloadConfiguration },
