@@ -25,6 +25,12 @@ return {
       desc = "[F]ind Text in File Contents"
     },
     {
+      "<leader>f",
+      function() require('telescope.builtin').grep_string() end,
+      mode = {'v'},
+      desc = "[F]ind Text in File Contents"
+    },
+    {
       "<leader>o",
       function() require('telescope.builtin').find_files() end,
       mode = {'n'},
