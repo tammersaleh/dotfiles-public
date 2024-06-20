@@ -169,23 +169,26 @@ alias ls="gls -ohF  --color=auto"
 alias la="gls -ohFa --color=auto"
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
-alias cidr=sipcalc
+__has gsed && alias sed=gsed
+__has bat && alias cat="bat --pager=never"
+
 alias cg='d=$(git rev-parse --show-cdup) && [[ -n "$d" ]] && cd "$d"'
-alias grammarly="open -a Grammarly"
+
 alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
+
 alias da="direnv allow"
 alias de="vi .envrc && direnv allow"
-alias https='http --default-scheme=https'
-alias html="pup"
+
+alias dr="doppler run --"
+
 alias pyconsole="pipenv run ptpython"
 alias pip=pip3
-alias dush=dust # Better du -sh
-alias k=kubectl
-alias :q=exit
 
-__has gsed && alias sed=gsed
-# __has bat && alias less="bat"
-__has bat && alias cat="bat --pager=never"
+alias dush=dust # Better du -sh
+
+alias k=kubectl
+
+alias :q=exit
 
 gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
