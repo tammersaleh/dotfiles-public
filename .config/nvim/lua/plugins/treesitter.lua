@@ -1,7 +1,7 @@
 local function MoveAndFoldLeft()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 
-    if col == 1 and vim.fn.foldlevel(line) ~= 0 then
+    if col == 0 and vim.fn.foldlevel(line) ~= 0 then
         vim.cmd.foldclose()
     else
         vim.cmd.normal({ 'h', bang = true })
@@ -99,7 +99,6 @@ return {
         ['<leader>c'] = { name = '[C]ode',      _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument',  _ = 'which_key_ignore' },
         ['<leader>g'] = { name = '[G]it',       _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk',  _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch',    _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]oggle',    _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
@@ -108,7 +107,6 @@ return {
       -- required for visual <leader>hs (hunk stage) to work
       require('which-key').register({
         ['<leader>'] = { name = 'VISUAL <leader>' },
-        ['<leader>h'] = { 'Git [H]unk' },
       }, { mode = 'v' })
 
       vim.keymap.set('n', '<Left>', MoveAndFoldLeft, {desc = "Move left, possibly closing folds."})

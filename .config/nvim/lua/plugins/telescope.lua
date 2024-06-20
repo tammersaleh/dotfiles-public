@@ -20,9 +20,21 @@ return {
   keys = {
     {
       "<leader>f",
+      function() require('telescope.builtin').live_grep() end,
+      mode = {'n'},
+      desc = "[F]ind Text in File Contents"
+    },
+    {
+      "<leader>o",
       function() require('telescope.builtin').find_files() end,
       mode = {'n'},
-      desc = "[F]ind files"
+      desc = "Fuzzy [O]pen File"
+    },
+    {
+      "<leader>h",
+      function() require('telescope.builtin').help_tags() end,
+      mode = {'n'},
+      desc = "Fuzzy Find [H]elp"
     },
   },
   opts = {
