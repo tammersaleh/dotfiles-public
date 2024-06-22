@@ -79,5 +79,6 @@ brew "yq"
 brew "zlib"                          # General-purpose lossless data-compression library
 brew "zsh"
 
+cask "font-codicon"                  # VSCode font icons
 
 # vim: ft=ruby

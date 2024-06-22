@@ -60,7 +60,16 @@ return {
         end, { 'i', 's' }),
       },
       formatting = {
-        format = require('lspkind').cmp_format()
+        format = require('lspkind').cmp_format({
+          preset = 'codicons', -- uses vscode icons installed via homebrew
+          menu = ({
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[LuaSnip]",
+            nvim_lua = "[Lua]",
+            path = "[Path]",
+          })
+        })
       }
     }
 
