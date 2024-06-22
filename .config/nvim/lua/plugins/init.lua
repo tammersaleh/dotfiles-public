@@ -50,13 +50,8 @@ return {
   { 'aliou/bats.vim' },
   { 'kevinoid/vim-jsonc' },
   { 'rust-lang/rust.vim' },
-  { 'echasnovski/mini.animate',
-    version = '*',
-    config = function()
-      require('mini.animate').setup()
-    end
-},
-
+  { 'echasnovski/mini.animate', version = '*', opts = {} },
+  { 'echasnovski/mini.splitjoin', version = '*', opts = {} },
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
