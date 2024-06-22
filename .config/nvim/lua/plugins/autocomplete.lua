@@ -4,6 +4,7 @@ return {
 
   dependencies = {
     'L3MON4D3/LuaSnip',
+    'onsails/lspkind.nvim',
     -- 'SergioRibera/cmp-dotenv',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
@@ -58,6 +59,9 @@ return {
           end
         end, { 'i', 's' }),
       },
+      formatting = {
+        format = require('lspkind').cmp_format()
+      }
     }
 
     -- Insert `(` after select function or method item
