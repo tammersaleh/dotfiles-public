@@ -207,40 +207,54 @@ vim.keymap.set('n', '<S-Tab>', '<<_', { silent = true, desc = "Dendent line" })
 vim.keymap.set('n', 'gb', '<C-t>', {silent = true, desc = "[G]o [b]ack in tag stack"})
 -- Better tab-completion
 
-local function is_after_whitespace()
-  local prev_col = vim.fn.col(".") - 1
-  local prev_char = vim.fn.getline("."):sub(prev_col, prev_col)
-  if prev_col == 0 then
-    return true
-  elseif prev_char:match("%s") == nil then
-    return false
+local function already_in_autocomplete()
+  return vim.fn.pumvisible() == 1
+end
+
+local function only_whitespace_before_cursor()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
+  local text_before_cursor = vim.api.nvim_get_current_line():sub(1, cursor_pos)
+  return text_before_cursor:match("^%s*$") ~= nil
+end
+
+local function character_just_before_cursor()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
+  local line = vim.api.nvim_get_current_line()
+
+  if cursor_pos == 0 then
+    return false -- If the cursor is at the first position, return false
+  end
+
+  local char_before_cursor = line:sub(cursor_pos, cursor_pos)
+  return not char_before_cursor:match("%s")
+end
+
+local function supertab(forward)
+  local autocomplete_key = forward and "<C-n>" or "<C-p>"
+  local tab_key = forward and "<Tab>" or "<S-Tab>"
+  local indent_key = forward and "<C-t>" or "<C-d>"
+
+  if already_in_autocomplete() then
+    return autocomplete_key
+  elseif only_whitespace_before_cursor() then
+    return tab_key
+  elseif character_just_before_cursor() then
+    return autocomplete_key
   else
-    return true
+    return indent_key
   end
 end
 
-local function possible_autocomplete_forward()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-n>"
-  elseif is_after_whitespace() then
-    return "<Tab>"
-  else
-    return "<C-n>"
-  end
+local function supertab_forward()
+  return supertab(true)
 end
 
-local function possible_autocomplete_backward()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-p>"
-  elseif is_after_whitespace() then
-    return "<S-Tab>"
-  else
-    return "<C-n>"
-  end
+local function supertab_backward()
+  return supertab(false)
 end
 
-vim.keymap.set('i', '<Tab>',   possible_autocomplete_forward,  {silent = true, expr = true})
-vim.keymap.set('i', '<S-Tab>', possible_autocomplete_backward, {silent = true, expr = true})
+vim.keymap.set('i', '<Tab>',   supertab_forward,  {silent = true, expr = true})
+vim.keymap.set('i', '<S-Tab>', supertab_backward, {silent = true, expr = true})
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
