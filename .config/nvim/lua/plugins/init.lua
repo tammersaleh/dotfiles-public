@@ -20,13 +20,44 @@ return {
   },
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "*",
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end
+    opts = {
+      move_cursor = false,
+      surrounds = {
+        ["~"] = { -- Markdown fenced code blocks
+          add = function()
+            local config = require("nvim-surround.config")
+            local result = config.get_input("Markdown code block language: ")
+            return {
+              { "```" .. result, '' },
+              { "", "```" },
+            }
+          end,
+        },
+        ["l"] = { -- Markdown links
+            add = function()
+                local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                return {
+                    { "[" },
+                    { "](" .. clipboard .. ")" },
+                }
+            end,
+            find = "%b[]%b()",
+            delete = "^(%[)().-(%]%b())()$",
+            change = {
+                target = "^()()%b[]%((.-)()%)$",
+                replacement = function()
+                    local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                    return {
+                        { "" },
+                        { clipboard },
+                    }
+                end,
+            },
+        },
+      },
+    },
   },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
 

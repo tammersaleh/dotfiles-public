@@ -22,7 +22,7 @@ noremap <buffer> <silent> <leader>m :silent! !mark %<CR>:redraw!<CR>
 setlocal foldexpr=Foldexpr_markdown(v:lnum)
 setlocal foldmethod=expr
 
-let b:surround_42 = "**\r**"
+" let b:surround_42 = "**\r**"
 
 setlocal conceallevel=0
 setlocal tabstop=4
