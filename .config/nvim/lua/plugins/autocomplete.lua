@@ -29,6 +29,13 @@ return {
         -- completion = cmp.config.window.bordered(),
         -- documentation = cmp.config.window.bordered(),
       },
+      matching = {
+        disallow_fuzzy_matching = true,
+        disallow_fullfuzzy_matching = true,
+        disallow_partial_fuzzy_matching = true,
+        disallow_partial_matching = true,
+        disallow_prefix_unmatching = false,
+      },
       sources = cmp.config.sources({
           -- { name = "dotenv" },
           { name = "luasnip" }, -- For luasnip users.
@@ -43,7 +50,6 @@ return {
       mapping = cmp.mapping.preset.insert {
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<CR>'] = cmp.mapping.confirm { select = true },
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
