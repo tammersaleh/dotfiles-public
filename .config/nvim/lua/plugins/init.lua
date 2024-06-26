@@ -29,18 +29,17 @@ return {
           add = function()
             local config = require("nvim-surround.config")
             local result = config.get_input("Markdown code block language: ")
-            return {
-              { "```" .. result, '' },
-              { "", "```" },
-            }
+            return { { "```" .. result }, { "```" } }
           end,
         },
         ["l"] = { -- Markdown links
             add = function()
                 local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                local p="^(.*)://"
+                local l = string.match(clipboard,p) and clipboard or "URL"
                 return {
                     { "[" },
-                    { "](" .. clipboard .. ")" },
+                    { "](" .. l .. ")" },
                 }
             end,
             find = "%b[]%b()",
@@ -49,9 +48,11 @@ return {
                 target = "^()()%b[]%((.-)()%)$",
                 replacement = function()
                     local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                    local p="^(.*)://"
+                    local l = string.match(clipboard,p) and clipboard or "URL"
                     return {
                         { "" },
-                        { clipboard },
+                        { l },
                     }
                 end,
             },
