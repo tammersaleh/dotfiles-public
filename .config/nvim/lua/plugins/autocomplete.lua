@@ -18,6 +18,24 @@ return {
     {'hrsh7th/cmp-nvim-lsp'},
   },
   config = function ()
+    local function only_whitespace_before_cursor()
+      local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
+      local text_before_cursor = vim.api.nvim_get_current_line():sub(1, cursor_pos)
+      return text_before_cursor:match("^%s*$") ~= nil
+    end
+
+    local function character_just_before_cursor()
+      local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
+      local line = vim.api.nvim_get_current_line()
+
+      if cursor_pos == 0 then
+        return false -- If the cursor is at the first position, return false
+      end
+
+      local char_before_cursor = line:sub(cursor_pos, cursor_pos)
+      return not char_before_cursor:match("%s")
+    end
+
     local cmp = require 'cmp'
     cmp.setup {
       snippet = {
@@ -26,8 +44,8 @@ return {
         end,
       },
       window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
       matching = {
         disallow_fuzzy_matching = true,
@@ -53,6 +71,8 @@ return {
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
+          elseif character_just_before_cursor() then
+            cmp.complete()
           else
             fallback()
           end
@@ -60,6 +80,8 @@ return {
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
+          elseif character_just_before_cursor() then
+            cmp.complete()
           else
             fallback()
           end

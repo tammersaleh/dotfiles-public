@@ -207,42 +207,16 @@ vim.keymap.set('n', '<S-Tab>', '<<_', { silent = true, desc = "Dendent line" })
 vim.keymap.set('n', 'gb', '<C-t>', {silent = true, desc = "[G]o [b]ack in tag stack"})
 -- Better tab-completion
 
-local function already_in_autocomplete()
-  return vim.fn.pumvisible() == 1
-end
-
 local function only_whitespace_before_cursor()
   local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
   local text_before_cursor = vim.api.nvim_get_current_line():sub(1, cursor_pos)
   return text_before_cursor:match("^%s*$") ~= nil
 end
 
-local function character_just_before_cursor()
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
-  local line = vim.api.nvim_get_current_line()
-
-  if cursor_pos == 0 then
-    return false -- If the cursor is at the first position, return false
-  end
-
-  local char_before_cursor = line:sub(cursor_pos, cursor_pos)
-  return not char_before_cursor:match("%s")
-end
-
 local function supertab(forward)
-  local autocomplete_key = forward and "<C-n>" or "<C-p>"
   local tab_key = forward and "<Tab>" or "<S-Tab>"
   local indent_key = forward and "<C-t>" or "<C-d>"
-
-  if already_in_autocomplete() then
-    return autocomplete_key
-  elseif only_whitespace_before_cursor() then
-    return tab_key
-  elseif character_just_before_cursor() then
-    return autocomplete_key
-  else
-    return indent_key
-  end
+  return only_whitespace_before_cursor() and tab_key or indent_key
 end
 
 local function supertab_forward()
@@ -265,8 +239,8 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next,         { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count = -1}) end, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count = 1}) end, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
