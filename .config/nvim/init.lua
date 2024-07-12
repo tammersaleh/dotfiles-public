@@ -214,6 +214,9 @@ local function only_whitespace_before_cursor()
 end
 
 local function supertab(forward)
+  -- Hit <tab> after a word in a line like such:
+  -- Hello darling! <tab>
+  -- ...and the entire line indents.
   local tab_key = forward and "<Tab>" or "<S-Tab>"
   local indent_key = forward and "<C-t>" or "<C-d>"
   return only_whitespace_before_cursor() and tab_key or indent_key
