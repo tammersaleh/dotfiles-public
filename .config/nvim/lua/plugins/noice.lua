@@ -2,7 +2,13 @@ return {
   "folke/noice.nvim",
   dependencies = {
     {'MunifTanjim/nui.nvim'},
-    {'rcarriga/nvim-notify'}
+    {
+      "rcarriga/nvim-notify",
+      opts = {
+        render = "compact",
+        timeout = 100,
+      },
+    },
   },
   event = "VeryLazy",
   opts = {
