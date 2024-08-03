@@ -106,9 +106,9 @@ return {
       end,
     }
 
-    -- installed outside of Mason for rbenv compatability
+    -- installed outside of Mason for rbenv compatibility
     lspconfig.solargraph.setup {
-      -- cmd = { os.getenv( "HOME" ) .. "/.rbenv/shims/solargraph", 'stdio' },
+      -- This requires that solargraph is added to the Gemfile for every project
       cmd = {"bundle", "exec", "solargraph", 'stdio' },
       root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
       settings = {
