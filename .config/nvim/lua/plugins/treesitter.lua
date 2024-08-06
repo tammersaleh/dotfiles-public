@@ -92,7 +92,9 @@ return {
       }
       vim.opt.foldmethod = 'expr'
       vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+      -- This doesn't work.  Prints:
+      -- 0................
+      -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
       vim.opt.foldnestmax = 2
 
       require('which-key').register {
