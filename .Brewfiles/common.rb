@@ -60,6 +60,7 @@ brew "rclone"
 brew "ruff"                          # Python linting
 brew "sassc"                         # Wrapper around libsass that helps to create command-line apps
 brew "shellcheck"                    # Static analysis and lint tool, for (ba)sh scripts
+brew "shfmt"                         # Shell fmt
 brew "socat"                         # netcat on steroids
 brew "spacectl"
 brew "stow"  # Used by dotfiles
