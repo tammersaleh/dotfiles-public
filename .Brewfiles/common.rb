@@ -56,7 +56,6 @@ brew 'pdftk-java'
 brew 'powerlevel10k'
 brew 'pstree'                        # Show ps output as a tree
 brew 'python'                        # Interpreted, interactive, object-oriented programming language
-brew 'python@3.11'                   # Needed for google-cloud-sdk https://www.yellowduck.be/posts/updating-gcloud-after-installing-python-3-12
 brew 'rbenv'                         # Ruby version manager
 brew 'rclone'
 brew 'ripgrep'                       # Needed by vim treesitter
