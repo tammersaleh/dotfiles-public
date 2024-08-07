@@ -16,9 +16,10 @@ brew 'bfg'
 brew 'cmake'                         # Cross-platform make
 brew 'coreutils'                     # GNU File, Shell, and Text utilities
 brew 'ctags'                         # Reimplementation of ctags(1)
-brew 'diff-so-fancy'                 # Good-lookin' diffs with diff-highlight and more
+brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
 brew 'direnv'                        # Load/unload environment variables based on $PWD
 brew 'doppler' # doppler.com
+brew 'efm-langserver'                # Trying this out with vim
 brew 'elinks'                        # For lesspipe
 brew 'entr'                          # Run arbitrary commands when files change
 brew 'exa'
@@ -37,7 +38,6 @@ brew 'gomplate'                      # For https://github.com/superorbital/infra
 brew 'gron'                          # Make JSON greppable
 brew 'heroku'                        # Add GitHub support to git on the command-line
 brew 'hub'                           # Used for campus
-brew 'efm-langserver'                # Trying this out with vim
 brew 'id3v2'                         # For lesspipe
 brew 'imagemagick'                   # Tools and libraries to manipulate images in many formats
 brew 'jq'                            # Lightweight and flexible command-line JSON processor
@@ -48,26 +48,32 @@ brew 'libxslt'                       # C XSLT library for GNOME
 brew 'mediainfo'                     # For lesspipe
 brew 'neovim', args: ['HEAD']
 brew 'neovim-remote'
-# brew 'netlify-cli'                   # CLI to interact with netlify.com
 brew 'node'                          # Platform built on V8 to build network applications
 brew 'pandoc'                        # Swiss-army knife of markup format conversion
+brew 'parallel'                      # GNU Parallel
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
 brew 'powerlevel10k'
 brew 'pstree'                        # Show ps output as a tree
+brew 'python'                        # Interpreted, interactive, object-oriented programming language
 brew 'rbenv'                         # Ruby version manager
 brew 'rclone'
+brew 'ripgrep'                       # Needed by vim treesitter
+brew 'ruby-build'                    # Install various Ruby versions and implementations
 brew 'ruff'                          # Python linting
+brew 's3cmd'                         # Command-line tool for the Amazon S3 service
 brew 'sassc'                         # Wrapper around libsass that helps to create command-line apps
-brew 'shellcheck'                    # Static analysis and lint tool, for (ba)sh scripts
+brew 'shellcheck'                    # Static analysis and lint tool, for bash scripts
 brew 'shfmt'                         # Shell fmt
+brew 'sipcalc'                       # Advanced console-based IP subnet calculator
 brew 'socat'                         # netcat on steroids
 brew 'spacectl'
-brew 'stow'  # Used by dotfiles
+brew 'speedtest-cli'                 # Command-line interface for https://speedtest.net bandwidth tests
+brew 'sqlite'                        # Command-line interface for SQLite
+brew 'stow'                          # Used by dotfiles
 brew 'terraform'
 brew 'tflint'                        # Terraform linter
 brew 'the_silver_searcher'           # Code-search similar to ack
-brew 'ripgrep'                       # Needed by vim treesitter
 brew 'tmux'                          # Terminal multiplexer
 brew 'tree'                          # Display directories as trees (with optional color/HTML output)
 brew 'vim'                           # Vi 'workalike' with many additional features
@@ -79,8 +85,6 @@ brew 'yarn'
 brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
-brew 'parallel'                   # GNU Parallel
-brew 'python'                     # Interpreted, interactive, object-oriented programming language
 
 cask 'font-codicon'                  # VSCode font icons
 
