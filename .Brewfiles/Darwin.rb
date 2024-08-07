@@ -25,7 +25,6 @@ cask 'font-fira-code-nerd-font'
 cask 'font-meslo-lg-nerd-font'
 cask 'font-hack-nerd-font'
 cask 'font-source-sans-3'
-cask 'google-cloud-sdk'
 cask 'wkhtmltopdf'
 
 instance_eval(File.read('common.rb'))
