@@ -106,8 +106,6 @@ export PYTEST_ADDOPTS="--color=yes"
 export PYTHONDONTWRITEBYTECODE=1
 export CLOUDSDK_PYTHON=$(which python3)
 
-export TERMINFO=~/.terminfo
-
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 
@@ -153,9 +151,6 @@ __source_if_exists "$HOME/.cargo/env"
 
 ####################### }}}
 ### Settings {{{
-for terminfo_file in ~/.terminfo-sources/*.terminfo; do
-  tic -x -o ~/.terminfo "$terminfo_file"
-done
 stty -ixon -ixoff < $TTY
 umask 027
 ############# }}}

@@ -35,7 +35,7 @@
 # 
 # Changing this configuration at runtime will only affect new terminals, i.e.
 # new windows, tabs, etc.
-font-family = 
+font-family = "FiraCode Nerd Font"
 
 font-family-bold = 
 font-family-italic = 
@@ -87,7 +87,7 @@ font-feature =
 # depending on your `window-inherit-font-size` setting. If that setting is
 # true, only the first window will be affected by this change since all
 # subsequent windows will inherit the font size of the previous window.
-font-size = 13
+font-size = 16
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -580,7 +580,7 @@ cursor-click-to-move = true
 # Hide the mouse immediately when typing. The mouse becomes visible again when
 # the mouse is used. The mouse is only hidden if the mouse cursor is over the
 # active terminal surface.
-mouse-hide-while-typing = false
+mouse-hide-while-typing = true
 
 # Determines whether running programs can detect the shift key pressed with a
 # mouse click. Typically, the shift key is used to extend mouse selection.
@@ -1005,7 +1005,7 @@ window-vsync = true
 # If true, new windows and tabs will inherit the working directory of the
 # previously focused window. If no window was previously focused, the default
 # working directory will be used (the `working-directory` option).
-window-inherit-working-directory = true
+window-inherit-working-directory = false
 
 # If true, new windows and tabs will inherit the font size of the previously
 # focused window. If no window was previously focused, the default font size
@@ -1481,7 +1481,7 @@ macos-non-native-fullscreen = false
 # most cases.
 # 
 # Changing this option at runtime only applies to new windows.
-macos-titlebar-style = transparent
+macos-titlebar-style = native
 
 # If `true`, the *Option* key will be treated as *Alt*. This makes terminal
 # sequences expecting *Alt* to work properly, but will break Unicode input
