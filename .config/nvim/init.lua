@@ -241,6 +241,14 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Move line up/down
+vim.keymap.set('n', '<c-s-down>', ":m .+1<CR>==",        {silent = true})
+vim.keymap.set('n', '<c-s-up>',   ":m .-2<CR>==",        {silent = true})
+vim.keymap.set('i', '<c-s-down>', "<Esc>:m .+1<CR>==gi", {silent = true})
+vim.keymap.set('i', '<c-s-up>',   "<Esc>:m .-2<CR>==gi", {silent = true})
+vim.keymap.set('v', '<c-s-down>', ":m '>+1<CR>gv=gv",    {silent = true})
+vim.keymap.set('v', '<c-s-up>',   ":m '<-2<CR>gv=gv",    {silent = true})
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count = -1}) end, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count = 1}) end, { desc = 'Go to next diagnostic message' })
