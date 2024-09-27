@@ -63,7 +63,7 @@ choose() {
       ;;
 
     shure)
-      SwitchAudioSource -t input  -s 'Shure MV7'
+      SwitchAudioSource -t input  -s 'Shure MV7+'
       SwitchAudioSource -t output -s 'MacBook Air Speakers'
       SwitchAudioSource -m unmute
       echo "Shure"
