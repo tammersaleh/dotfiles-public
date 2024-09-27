@@ -85,6 +85,7 @@ brew 'yarn'
 brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
+brew 'man-db'                        # Avoid "This manpage is not compatible with mandoc(1) and might display incorrectly" errors
 
 cask 'font-codicon'                  # VSCode font icons
 cask 'google-cloud-sdk'

@@ -3,7 +3,7 @@ aribb24 1.0.4
 aspell 0.60.8.1_1
 autoconf 2.72
 automake 1.17
-awscli 2.17.24
+awscli 2.17.31
 bash 5.2.32
 bash-completion@2 2.14.0
 bat 0.24.0_1
@@ -15,7 +15,7 @@ bzip2 1.0.8
 c-ares 1.33.0
 ca-certificates 2024-07-02
 cairo 1.18.0
-cffi 1.16.0_1
+cffi 1.17.0
 cjson 1.7.18
 cmake 3.30.2
 coreutils 9.5
@@ -48,7 +48,7 @@ ghostscript 10.03.1
 giflib 5.2.2
 git 2.46.0
 git-crypt 0.7.0_1
-git-delta 0.17.0
+git-delta 0.18.0
 git-lfs 3.5.1
 glib 2.80.4
 gmp 6.3.0
@@ -60,6 +60,7 @@ gnutls 3.8.4
 go 1.22.6
 gomplate 4.1.0
 graphite2 1.3.14
+groff 1.23.0
 gron 0.7.1
 harfbuzz 9.0.0
 heroku 9.1.0
@@ -75,11 +76,11 @@ jbig2dec 0.20
 jpeg-turbo 3.0.3
 jpeg-xl 0.10.3
 jq 1.7.1
-krb5 1.21.2
+krb5 1.21.2 1.21.3
 lame 3.100
 lazygit 0.43.1
 leptonica 1.84.1
-lesspipe 2.13
+lesspipe 2.14
 libarchive 3.7.4
 libass 0.17.3
 libassuan 3.0.1 2.5.7
@@ -104,8 +105,10 @@ libnghttp2 1.61.0
 libnotify 0.8.3
 libogg 1.3.5
 libomp 17.0.6 18.1.8 18.1.6
+libpaper 2.2.5
+libpipeline 1.5.7
 libpng 1.6.43
-libpq 16.3
+libpq 16.4
 libraw 0.21.2
 librist 0.2.10_1
 libsamplerate 0.2.2
@@ -145,6 +148,7 @@ luv 1.48.0-2
 lz4 1.9.4
 lzo 2.10
 m4 1.4.19
+man-db 2.12.1
 mbedtls 3.6.0
 media-info 24.06
 moreutils 0.69
@@ -155,8 +159,9 @@ msgpack 6.0.0 6.0.1 6.0.2
 ncurses 6.5
 neovim HEAD-88fe467 0.10.1
 neovim-remote 2.5.1_2
+netpbm 11.02.09
 nettle 3.10 3.9.1
-node 22.5.1
+node 22.6.0
 npth 1.7
 oniguruma 6.9.9
 opencore-amr 0.1.6
@@ -184,21 +189,22 @@ pkg-config 0.29.2_3
 popt 1.19
 powerlevel10k 1.20.0
 pstree 2.40
+psutils 3.3.4
 pycparser 2.22
 python@3.11 3.11.7_1 3.11.9_1 3.11.9
-python@3.12 3.12.4
+python@3.12 3.12.5
 qrencode 4.1.1
 qt@5 5.15.13_1
 rav1e 0.7.1
 rbenv 1.3.0
 rclone 1.67.0
-readline 8.2.10
+readline 8.2.13
 ripgrep 14.1.0
 rsync 3.3.0
 rubberband 3.3.0
 ruby 3.3.1 3.3.0 3.3.3 3.3.4
 ruby-build 20240727
-ruff 0.5.6
+ruff 0.6.0
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.30.3 2.28.5 2.30.6
@@ -208,10 +214,10 @@ shfmt 3.8.0
 sipcalc 1.1.6
 snappy 1.2.1
 socat 1.8.0.0
-spacectl 1.2.0
+spacectl 1.2.1
 speedtest-cli 2.1.3_1
 speex 1.2.1
-sqlite 3.46.0
+sqlite 3.46.0 3.46.1
 srt 1.5.3
 stow 2.4.0
 svt-av1 2.1.2 2.1.0 1.8.0
@@ -224,6 +230,7 @@ theora 1.1.1
 tmux 3.4_1
 tree 2.1.3
 tree-sitter 0.22.6
+uchardet 0.0.8
 unbound 1.20.0
 unibilium 2.1.1
 utf8proc 2.9.0

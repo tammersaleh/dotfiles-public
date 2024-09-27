@@ -18,4 +18,4 @@ brew bundle install --cleanup --force
 brew list --versions > "installed-$system.txt"
 
 echo Updating gcloud components
-gcloud components update
+gcloud --quiet components update
