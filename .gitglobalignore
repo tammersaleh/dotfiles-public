@@ -15,6 +15,7 @@ shit*
 do-not-commit/
 do_not_commit/
 .netlify
+.venv
 
 !.keep
 !.keepme
