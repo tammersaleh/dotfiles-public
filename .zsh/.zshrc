@@ -29,31 +29,31 @@ __source_if_exists() {
   source "$1"
 }
 
-############ }}}
-### Variables {{{
+### }}}
+### PATH and MANPATH {{{
 
-__prependpath    /opt/homebrew/bin
-__prependpath    /opt/homebrew/sbin
-__prependmanpath /opt/homebrew/man
-__prependpath    /opt/homebrew/opt/coreutils/libexec/gnubin
-__prependmanpath /opt/homebrew/opt/coreutils/libexec/gnuman
-__prependpath    /opt/homebrew/opt/findutils/libexec/gnubin
-__prependmanpath /opt/homebrew/opt/findutils/libexec/gnuman
-__prependpath    /opt/homebrew/opt/gnu-tar/libexec/gnubin
-__prependmanpath /opt/homebrew/opt/gnu-tar/libexec/gnuman
-__prependpath    /opt/homebrew/opt/gawk/libexec/gnubin
-__prependmanpath /opt/homebrew/opt/gawk/libexec/gnuman
-__prependpath    /opt/homebrew/share/npm/bin
+for package in man-db coreutils findutils gnu-tar gawk gnu-getopt ruby; do
+  __prependpath    /opt/homebrew/opt/$package/libexec/gnubin
+  __prependmanpath /opt/homebrew/opt/$package/libexec/gnuman
+  __prependpath    /opt/homebrew/opt/$package/libexec/bin
+  __prependmanpath /opt/homebrew/opt/$package/libexec/man
+  __prependpath    /opt/homebrew/opt/$package/bin
+  __prependmanpath /opt/homebrew/opt/$package/man
+done
+
 __prependpath    /Applications/Postgres.app/Contents/Versions/9.4/bin
 __prependpath    /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
 __prependpath    /opt/homebrew/opt/macvim/MacVim.app/Contents/MacOS/
-__prependpath    /opt/homebrew/opt/gnu-getopt/bin
-__prependpath    /opt/homebrew/opt/ruby/bin
-
-__prependpath "$HOME/.local/bin"
+__prependpath    /opt/homebrew/bin
+__prependpath    /opt/homebrew/sbin
+__prependmanpath /opt/homebrew/share/man
+__prependpath    /opt/homebrew/share/npm/bin
 
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
+
+### }}}
+### Variables {{{
 
 export XDG_DATA_HOME=$HOME/.local/share
 tty -s && export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
