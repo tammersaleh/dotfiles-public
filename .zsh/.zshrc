@@ -367,6 +367,8 @@ __has fly           && source <(fly completion zsh)
 compdef g=git
 compdef av=exec
 
+zstyle ':completion:*' verbose yes
+
 ################# }}}
 __source_if_exists "$HOME/.zsh/fzf.zsh"
 
