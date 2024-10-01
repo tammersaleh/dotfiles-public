@@ -1,89 +1,89 @@
-aom 3.9.1
+aom 3.10.0
 aribb24 1.0.4
 aspell 0.60.8.1_1
 autoconf 2.72
 automake 1.17
-awscli 2.17.31
-bash 5.2.32
+awscli 2.17.61
+bash 5.2.37
 bash-completion@2 2.14.0
 bat 0.24.0_1
-bat-extras 2024.07.10
+bat-extras 2024.08.24
 berkeley-db@5 5.3.28_1
 bfg 1.14.0
 brotli 1.1.0
 bzip2 1.0.8
-c-ares 1.33.0
-ca-certificates 2024-07-02
-cairo 1.18.0
-cffi 1.17.0
+c-ares 1.33.1
+ca-certificates 2024-09-24
+cairo 1.18.2
+cffi 1.17.1
 cjson 1.7.18
-cmake 3.30.2
+cmake 3.30.4
 coreutils 9.5
-cryptography 43.0.0
+cryptography 43.0.1
 ctags 5.8_2
 dav1d 1.4.3
 diff-so-fancy 1.4.4
 diffutils 3.10
 direnv 2.34.0
-doppler 3.69.0
+doppler 3.69.1
 efm-langserver 0.0.53
 elinks 0.11.7_3
-entr 5.5
+entr 5.6
 exa 0.10.1_2
 exiftool 12.76
-fd 10.1.0
-ffmpeg 7.0.2
+fd 10.2.0
+ffmpeg 7.1
 flac 1.4.3
 fontconfig 2.15.0
-freetype 2.13.2
+freetype 2.13.3
 frei0r 2.3.3
-fribidi 1.0.15
-fzf 0.54.3
-gawk 5.3.0
+fribidi 1.0.16
+fzf 0.55.0
+gawk 5.3.1
 gdbm 1.24
 gdk-pixbuf 2.42.12
 gettext 0.22.5
-gh 2.54.0
-ghostscript 10.03.1
+gh 2.57.0
+ghostscript 10.04.0
 giflib 5.2.2
-git 2.46.0
+git 2.46.2
 git-crypt 0.7.0_1
-git-delta 0.18.0
+git-delta 0.18.2
 git-lfs 3.5.1
-glib 2.80.4
+glib 2.82.1
 gmp 6.3.0
 gnu-getopt 2.39.1
 gnu-sed 4.9
 gnu-tar 1.35
 gnupg 2.4.5_1
 gnutls 3.8.4
-go 1.22.6
+go 1.23.1
 gomplate 4.1.0
 graphite2 1.3.14
 groff 1.23.0
 gron 0.7.1
-harfbuzz 9.0.0
-heroku 9.1.0
-highway 1.0.7 1.1.0 1.2.0
+harfbuzz 10.0.1
+heroku 9.3.0
+highway 1.2.0
 hub 2.14.2
 icu4c 74.2
 id3lib 3.8.3_1
 id3v2 0.1.12
-imagemagick 7.1.1-36
-imath 3.1.11
+imagemagick 7.1.1-38_2
+imath 3.1.12 3.1.11
 jasper 4.2.4
 jbig2dec 0.20
-jpeg-turbo 3.0.3
-jpeg-xl 0.10.3
+jpeg-turbo 3.0.3 3.0.4
+jpeg-xl 0.11.0 0.10.3
 jq 1.7.1
-krb5 1.21.2 1.21.3
+krb5 1.21.3
 lame 3.100
-lazygit 0.43.1
+lazygit 0.44.1
 leptonica 1.84.1
 lesspipe 2.14
-libarchive 3.7.4
+libarchive 3.7.6 3.7.4
 libass 0.17.3
-libassuan 3.0.1 2.5.7
+libassuan 3.0.1
 libassuan@2 2.5.7
 libb2 0.98.1
 libbluray 1.3.4
@@ -92,23 +92,23 @@ libevent 2.1.12_1
 libgcrypt 1.10.3
 libgit2 1.7.1
 libgit2@1.7 1.7.2
-libgpg-error 1.47 1.49 1.50
-libheif 1.18.1
+libgpg-error 1.50
+libheif 1.18.1 1.18.2
 libidn 1.42
 libidn2 2.3.7
-libksba 1.6.5 1.6.6 1.6.7
-liblqr 0.4.2_1
+libksba 1.6.7
+liblqr 0.4.2_1 0.4.3
 libmediainfo 24.06
 libmicrohttpd 1.0.1
 libmms 0.6.4
-libnghttp2 1.61.0
+libnghttp2 1.63.0 1.61.0
 libnotify 0.8.3
 libogg 1.3.5
-libomp 17.0.6 18.1.8 18.1.6
+libomp 17.0.6 19.1.0 18.1.8 18.1.6
 libpaper 2.2.5
-libpipeline 1.5.7
-libpng 1.6.43
-libpq 16.4
+libpipeline 1.5.8 1.5.7
+libpng 1.6.43 1.6.44
+libpq 17.0
 libraw 0.21.2
 librist 0.2.10_1
 libsamplerate 0.2.2
@@ -116,10 +116,10 @@ libsass 3.6.5
 libsndfile 1.2.2
 libsodium 1.0.20
 libsoxr 0.1.3
-libssh 0.10.6
+libssh 0.11.1 0.10.6
 libssh2 1.11.0_1
 libtasn1 4.19.0
-libtiff 4.6.0
+libtiff 4.7.0 4.6.0
 libtool 2.4.7
 libunibreak 6.1
 libunistring 1.2
@@ -130,7 +130,7 @@ libvmaf 3.0.0
 libvorbis 1.3.7
 libvpx 1.13.1
 libvterm 0.3.3
-libx11 1.8.9 1.8.7
+libx11 1.8.10 1.8.9 1.8.7
 libxau 1.0.11
 libxcb 1.17.0
 libxdmcp 1.1.5
@@ -142,41 +142,41 @@ libyaml 0.2.5
 libzen 0.4.41_1
 little-cms2 2.16
 lpeg 1.1.0
-lua 5.4.7 5.4.6
+lua 5.4.7
 luajit 2.1.1716656478 2.1.1703358377 2.1.1720049189
 luv 1.48.0-2
-lz4 1.9.4
+lz4 1.9.4 1.10.0
 lzo 2.10
 m4 1.4.19
-man-db 2.12.1
-mbedtls 3.6.0
+man-db 2.13.0
+mbedtls 3.6.0 3.6.1
 media-info 24.06
 moreutils 0.69
 mpdecimal 4.0.0
 mpfr 4.2.1
-mpg123 1.32.6
+mpg123 1.32.7 1.32.6
 msgpack 6.0.0 6.0.1 6.0.2
 ncurses 6.5
 neovim HEAD-88fe467 0.10.1
 neovim-remote 2.5.1_2
 netpbm 11.02.09
-nettle 3.10 3.9.1
-node 22.6.0
+nettle 3.10
+node 22.9.0
 npth 1.7
 oniguruma 6.9.9
 opencore-amr 0.1.6
 openexr 3.2.4
-openjdk 22.0.2
+openjdk 23
 openjdk@11 11.0.24
 openjpeg 2.5.2
 openldap 2.6.7
 openssl@1.1 1.1.1w
-openssl@3 3.3.1
+openssl@3 3.3.2
 opus 1.5.2
-p11-kit 0.25.5 0.25.3
-pandoc 3.3
+p11-kit 0.25.5
+pandoc 3.4
 pango 1.54.0
-parallel 20240722
+parallel 20240922
 pass 1.7.4
 pcre 8.45
 pcre2 10.44
@@ -189,52 +189,53 @@ pkg-config 0.29.2_3
 popt 1.19
 powerlevel10k 1.20.0
 pstree 2.40
-psutils 3.3.4
+psutils 3.3.5 3.3.4
 pycparser 2.22
+python-packaging 24.1
 python@3.11 3.11.7_1 3.11.9_1 3.11.9
-python@3.12 3.12.5
+python@3.12 3.12.5 3.12.6
 qrencode 4.1.1
 qt@5 5.15.13_1
 rav1e 0.7.1
 rbenv 1.3.0
-rclone 1.67.0
+rclone 1.68.1
 readline 8.2.13
-ripgrep 14.1.0
+ripgrep 14.1.1
 rsync 3.3.0
 rubberband 3.3.0
-ruby 3.3.1 3.3.0 3.3.3 3.3.4
-ruby-build 20240727
-ruff 0.6.0
+ruby 3.3.1 3.3.0 3.3.5 3.3.3 3.3.4
+ruby-build 20240917
+ruff 0.6.8
 s3cmd 2.4.0_1
 sassc 3.6.2
-sdl2 2.30.3 2.28.5 2.30.6
+sdl2 2.30.3 2.28.5 2.30.6 2.30.7
 shared-mime-info 2.4
 shellcheck 0.10.0
-shfmt 3.8.0
+shfmt 3.9.0
 sipcalc 1.1.6
 snappy 1.2.1
-socat 1.8.0.0
-spacectl 1.2.1
+socat 1.8.0.1
+spacectl 1.5.0
 speedtest-cli 2.1.3_1
 speex 1.2.1
-sqlite 3.46.0 3.46.1
+sqlite 3.46.1
 srt 1.5.3
-stow 2.4.0
-svt-av1 2.1.2 2.1.0 1.8.0
+stow 2.4.1
+svt-av1 2.1.2 2.1.0 2.2.1 1.8.0
 switchaudio-osx 1.2.2
 terraform 1.5.7
 tesseract 5.4.1
-tflint 0.52.0
+tflint 0.53.0
 the_silver_searcher 2.2.0
 theora 1.1.1
-tmux 3.4_1
+tmux 3.5
 tree 2.1.3
 tree-sitter 0.22.6
 uchardet 0.0.8
-unbound 1.20.0
+unbound 1.20.0 1.21.0
 unibilium 2.1.1
 utf8proc 2.9.0
-vim 9.1.0650
+vim 9.1.0750
 watch 4.0.4
 webp 1.4.0
 wget 1.24.5
@@ -244,7 +245,7 @@ xorgproto 2024.1
 xpdf 4.05
 xvid 1.3.7
 xxhash 0.8.2
-xz 5.4.6 5.6.2 5.4.5
+xz 5.6.2
 yarn 1.22.22
 yq 4.44.3
 zeromq 4.3.5_1
@@ -260,4 +261,5 @@ font-hack-nerd-font 3.2.1
 font-meslo-lg-nerd-font 3.2.1
 font-source-sans-3 latest
 google-cloud-sdk 440.0.0
+neovide 0.13.3
 wkhtmltopdf 0.12.6-2

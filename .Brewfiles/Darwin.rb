@@ -26,6 +26,7 @@ cask 'font-meslo-lg-nerd-font'
 cask 'font-hack-nerd-font'
 cask 'font-source-sans-3'
 cask 'wkhtmltopdf'
+cask 'neovide'
 
 instance_eval(File.read('common.rb'))
 
