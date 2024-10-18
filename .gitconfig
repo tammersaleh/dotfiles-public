@@ -135,3 +135,5 @@
     format = ssh
 [log]
     date = iso
+[http]
+	postBuffer = 157286400
