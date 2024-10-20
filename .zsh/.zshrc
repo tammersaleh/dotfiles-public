@@ -372,6 +372,6 @@ zstyle ':completion:*' verbose yes
 ################# }}}
 __source_if_exists "$HOME/.zsh/fzf.zsh"
 # This must come at the end of the .zshrc file 🤷
-__source_if_exists $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+__source_if_exists $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # vim: foldmethod=marker ft=zsh
