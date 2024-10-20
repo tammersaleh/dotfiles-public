@@ -355,21 +355,23 @@ DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
 __source_if_exists "$DOCKER_ETC/docker.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
+__source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
 __has aws_completer && complete -C aws_completer aws
 __has kubectl       && source <(kubectl completion zsh)
-__has kubectl       && compdef k=kubectl
 __has helm          && source <(helm completion zsh)
 __has stern         && source <(stern --completion zsh)
 __has aws-vault     && source <(aws-vault --completion-script-zsh)
 __has fly           && source <(fly completion zsh)
 
 compdef g=git
-compdef av=exec
+compdef k=kubectl
 
 zstyle ':completion:*' verbose yes
 
 ################# }}}
 __source_if_exists "$HOME/.zsh/fzf.zsh"
+# This must come at the end of the .zshrc file 🤷
+__source_if_exists $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # vim: foldmethod=marker ft=zsh
