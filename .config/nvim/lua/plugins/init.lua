@@ -73,6 +73,8 @@ return {
   },
 
   -- "gc" to comment visual regions/lines
+  -- Neovim 0.10 has this builtin, but Comment.nvim is better
+  -- https://github.com/numToStr/Comment.nvim/issues/453
   { 'numToStr/Comment.nvim', opts = {}, lazy = false, },
 
 }
