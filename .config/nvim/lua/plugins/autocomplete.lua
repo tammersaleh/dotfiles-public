@@ -17,12 +17,6 @@ return {
     {'hrsh7th/cmp-nvim-lsp'},
   },
   config = function ()
-    local function only_whitespace_before_cursor()
-      local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
-      local text_before_cursor = vim.api.nvim_get_current_line():sub(1, cursor_pos)
-      return text_before_cursor:match("^%s*$") ~= nil
-    end
-
     local function character_just_before_cursor()
       local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
       local line = vim.api.nvim_get_current_line()
@@ -59,7 +53,13 @@ return {
           { name = "nvim_lsp" },
           { name = "nvim_lua" },
         }, {
-          { name = "buffer" },
+          { name = "buffer",
+            option = {
+              get_bufnrs = function()
+                return vim.api.nvim_list_bufs()
+              end
+            }
+          },
           { name = "path" },
         }),
       completion = { completeopt = 'menu,menuone,longest,noselect' },
