@@ -5,14 +5,12 @@ return {
   dependencies = {
     'L3MON4D3/LuaSnip',
     'onsails/lspkind.nvim',
-    -- 'SergioRibera/cmp-dotenv',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp', -- Adds LSP completion capabilities
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-path',
     'saadparwaiz1/cmp_luasnip',
-    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
     {'neovim/nvim-lspconfig'},
     {'hrsh7th/cmp-nvim-lsp'},
   },
@@ -29,11 +27,12 @@ return {
       return not char_before_cursor:match("%s")
     end
 
-    local cmp = require 'cmp'
+    local cmp = require('cmp')
+    local luasnip = require("luasnip")
     cmp.setup {
       snippet = {
         expand = function(args)
-          require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+          luasnip.lsp_expand(args.body)
         end,
       },
       window = {
@@ -85,6 +84,17 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
+        ['<CR>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            if luasnip.expandable() then
+              luasnip.expand()
+            else
+              cmp.confirm({ select = true })
+            end
+          else
+            fallback()
+          end
+        end),
       },
       formatting = {
         format = require('lspkind').cmp_format({
