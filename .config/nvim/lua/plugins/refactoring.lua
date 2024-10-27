@@ -5,6 +5,7 @@ return {
     'nvim-telescope/telescope.nvim',
     'nvim-treesitter/nvim-treesitter',
   },
+  cmd = 'Refactor',
   keys = {
     {
       "<leader>rr",
