@@ -10,7 +10,7 @@ main() {
     nvr -o "${files[@]}"
     
   else
-    nvim --listen "$(mktemp)" -o "${files[@]}"
+    nvim --listen "$(mktemp)" -o -- "${files[@]}"
   fi
 }
 
