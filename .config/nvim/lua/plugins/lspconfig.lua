@@ -72,7 +72,6 @@ return {
       stylelint_lsp = {},
       -- terraformls = {},
       tflint = {},
-      typos_lsp = {},
       yamlls = {
         yaml = {
           schemas = {
