@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 brew 'curl'                          # Get a file from an HTTP, HTTPS or FTP server
 brew 'dateutils'                     # Tools to manipulate dates with a focus on financial data
 brew 'dep'                           # Go dependency management tool

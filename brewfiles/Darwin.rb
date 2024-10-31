@@ -1,4 +1,5 @@
-tap 'homebrew/cask'
+# frozen_string_literal: true
+
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
 
@@ -17,7 +18,7 @@ brew 'libnotify'                  # Library that sends desktop notifications to 
 brew 'pinentry-mac'
 brew 'readline'                   # Library for command-line editing
 brew 'rsync'
-brew 'switchaudio-osx'            # Used in ~/bin/audio to switch between mics 
+brew 'switchaudio-osx'            # Used in ~/bin/audio to switch between mics
 
 cask '1password-cli'
 cask 'aws-vault'

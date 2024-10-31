@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 tap 'dopplerhq/cli'
 tap 'github/gh'
 tap 'heroku/brew'
@@ -85,7 +87,7 @@ brew 'yarn'
 brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
-brew 'man-db'                        # Avoid "This manpage is not compatible with mandoc(1) and might display incorrectly" errors
+brew 'man-db'                        # Avoid "This manpage is not compatible with mandoc(1)" errors
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
 
 cask 'font-codicon'                  # VSCode font icons
