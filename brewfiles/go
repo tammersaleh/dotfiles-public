@@ -13,7 +13,7 @@ export HOMEBREW_BUNDLE_NO_LOCK=true
 
 brew update
 brew bundle install --cleanup --force
-brew list --versions > "installed-$(uname -s).txt"
+brew list --versions > "installed-$(hostname -s).txt"
 
 echo Updating gcloud components
 gcloud --quiet components update
