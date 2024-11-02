@@ -1,32 +1,39 @@
-local function MoveAndFoldLeft()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-
-    if col == 0 and vim.fn.foldlevel(line) ~= 0 then
-        vim.cmd.foldclose()
-    else
-        vim.cmd.normal({ 'h', bang = true })
-    end
-end
-
-local function MoveAndFoldRight()
-    local line = vim.api.nvim_win_get_cursor(0)[1]
-
-    if vim.fn.foldlevel(line) ~= 0 and vim.fn.foldclosed(line) ~= -1 then
-        vim.cmd.foldopen()
-    else
-        vim.cmd.normal({'l', bang = true})
-    end
-end
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'RRethy/nvim-treesitter-endwise',
       'folke/which-key.nvim',
+      { 'windwp/nvim-ts-autotag',
+        lazy = false,
+        config = function()
+          require('nvim-ts-autotag').setup()
+        end,
+      },
     },
     build = ':TSUpdate',
     config = function ()
+      local function MoveAndFoldLeft()
+          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+          if col == 0 and vim.fn.foldlevel(line) ~= 0 then
+              vim.cmd.foldclose()
+          else
+              vim.cmd.normal({ 'h', bang = true })
+          end
+      end
+
+      local function MoveAndFoldRight()
+          local line = vim.api.nvim_win_get_cursor(0)[1]
+
+          if vim.fn.foldlevel(line) ~= 0 and vim.fn.foldclosed(line) ~= -1 then
+              vim.cmd.foldopen()
+          else
+              vim.cmd.normal({'l', bang = true})
+          end
+      end
+
       require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
@@ -88,6 +95,9 @@ return {
               ['<leader>A'] = '@parameter.inner',
             },
           },
+        },
+        endwise = {
+          enable = true,
         },
       }
       vim.opt.foldmethod = 'expr'
