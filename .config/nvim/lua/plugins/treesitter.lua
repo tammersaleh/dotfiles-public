@@ -107,28 +107,28 @@ return {
       -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
       vim.opt.foldnestmax = 2
 
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode',      _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument',  _ = 'which_key_ignore' },
-        ['<leader>g'] = { name = '[G]it',       _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch',    _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle',    _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>c', desc = '[C]ode' },
+        { '<leader>d', desc = '[D]ocument' },
+        { '<leader>g', desc = '[G]it' },
+        { '<leader>s', desc = '[S]earch' },
+        { '<leader>t', desc = '[T]oggle' },
+        { '<leader>w', desc = '[W]orkspace' },
+        {
+          -- register which-key VISUAL mode
+          -- required for visual <leader>hs (hunk stage) to work
+          mode = 'v',
+          { '<leader>', desc = 'VISUAL <leader>' },
+        }
       }
-      -- register which-key VISUAL mode
-      -- required for visual <leader>hs (hunk stage) to work
-      require('which-key').register({
-        ['<leader>'] = { name = 'VISUAL <leader>' },
-      }, { mode = 'v' })
 
-      vim.keymap.set('n', '<Left>', MoveAndFoldLeft, {desc = "Move left, possibly closing folds."})
-      vim.keymap.set('n', 'h',      MoveAndFoldLeft, {desc = "Move left, possibly closing folds."})
+      vim.keymap.set('n', '<Left>',  MoveAndFoldLeft,  {desc = "Move left, possibly closing folds."})
+      vim.keymap.set('n', 'h',       MoveAndFoldLeft,  {desc = "Move left, possibly closing folds."})
       vim.keymap.set('n', '<Right>', MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
-      vim.keymap.set('n', 'l',      MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
+      vim.keymap.set('n', 'l',       MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
 
       -- Treesitter for Ruby for some reason re-indents incorrectly every time you type '.'
       vim.api.nvim_create_autocmd("FileType", { pattern = "ruby", callback = function() vim.opt_local.indentkeys:remove('.') end })
-
     end
   }
 }
