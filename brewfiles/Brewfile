@@ -22,6 +22,7 @@ cask 'neovide'
 cask 'wkhtmltopdf'
 
 brew 'aspell'                        # Spell checker with better logic than ispell
+brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
 brew 'autoconf'                      # Automatic configure script builder
 brew 'automake'                      # Tool for generating GNU Standards-compliant Makefiles
 brew 'awscli'                        # Official Amazon AWS command-line interface
@@ -108,6 +109,7 @@ brew 'tflint'                        # Terraform linter
 brew 'the_silver_searcher'           # Code-search similar to ack
 brew 'tmux'                          # Terminal multiplexer
 brew 'tree'                          # Display directories as trees (with optional color/HTML output)
+brew 'uv'                            # Python package and project manager
 brew 'vim'                           # Vi 'workalike' with many additional features
 brew 'watch'                         # Executes a program periodically, showing output fullscreen
 brew 'wget'                          # Internet file retriever
@@ -118,5 +120,6 @@ brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
+brew 'zsh-vi-mode'                   # Better zsh vi zsh vi-mode
 
 # vim: ft=ruby
