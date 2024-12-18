@@ -256,12 +256,16 @@ if [[ -x ~/.dropbox-dist/dropboxd ]] && ! __running dropbox; then
 fi
 # }}}
 ### Vim Mode {{{
+
+# https://github.com/jeffreytse/zsh-vi-mode
+__source_if_exists $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
 # https://dougblack.io/words/zsh-vi-mode.html
 # Better searching in command mode
 bindkey -v
-bindkey -M vicmd '?' history-incremental-search-backward
-bindkey -M vicmd '/' history-incremental-search-forward
+bindkey -M vicmd '?' history-incremental-search-forward
+bindkey -M vicmd '/' history-incremental-search-backward
 
 # Beginning search with j/k
 autoload -U up-line-or-beginning-search
@@ -293,7 +297,7 @@ for m in visual viopp; do
   done
 done
 
-# surround
+# cs ds ys S
 autoload -Uz surround
 zle -N delete-surround surround
 zle -N add-surround surround
@@ -357,12 +361,13 @@ __source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 __source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
-__has aws_completer && complete -C aws_completer aws
-__has kubectl       && source <(kubectl completion zsh)
-__has helm          && source <(helm completion zsh)
-__has stern         && source <(stern --completion zsh)
 __has aws-vault     && source <(aws-vault --completion-script-zsh)
+__has aws_completer && complete -C aws_completer aws
 __has fly           && source <(fly completion zsh)
+__has helm          && source <(helm completion zsh)
+__has kubectl       && source <(kubectl completion zsh)
+__has sg            && source <(sg completions zsh)
+__has stern         && source <(stern --completion zsh)
 
 compdef g=git
 compdef k=kubectl
