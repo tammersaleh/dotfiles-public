@@ -120,6 +120,5 @@ brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
-brew 'zsh-vi-mode'                   # Better zsh vi zsh vi-mode
 
 # vim: ft=ruby

@@ -257,9 +257,6 @@ fi
 # }}}
 ### Vim Mode {{{
 
-# https://github.com/jeffreytse/zsh-vi-mode
-__source_if_exists $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
 # http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
 # https://dougblack.io/words/zsh-vi-mode.html
 # Better searching in command mode
@@ -306,6 +303,14 @@ bindkey -a cs change-surround
 bindkey -a ds delete-surround
 bindkey -a ys add-surround
 bindkey -M visual S add-surround
+
+# Fix bug when typing <Shift-Enter> through the neovim :terminal
+# which deletes the current commandline
+noop() { }
+zle -N noop
+bindkey '^[[13;2u' noop
+bindkey -M vicmd '^[[13;2u' noop
+
 #}}}
 ### Local Config {{{
 __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
