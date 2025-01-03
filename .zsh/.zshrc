@@ -30,6 +30,9 @@ __source_if_exists() {
 }
 
 ### }}}
+### Ghostty shell integration {{{
+__source_if_exists "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+### }}}
 ### PATH and MANPATH {{{
 
 for package in man-db coreutils findutils gnu-tar gawk gnu-getopt ruby; do

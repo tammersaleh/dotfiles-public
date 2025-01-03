@@ -17,6 +17,7 @@ cask 'font-fira-code-nerd-font'
 cask 'font-hack-nerd-font'
 cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
+cask 'ghostty'
 cask 'google-cloud-sdk'
 cask 'neovide'
 cask 'wkhtmltopdf'
