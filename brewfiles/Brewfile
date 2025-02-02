@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+tap 'charmbracelet/tap'
 tap 'dopplerhq/cli'
 tap 'github/gh'
 tap 'heroku/brew'
@@ -8,7 +9,7 @@ tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
 tap 'romkatv/powerlevel10k'
 tap 'spacelift-io/spacelift'
-tap 'superfly/tap'
+tap 'superfly/tap'                   # for mods
 
 cask '1password-cli'
 cask 'aws-vault'
@@ -73,6 +74,7 @@ brew 'libpq', force: true            # Used to get libpq and force linked to get
 brew 'libxslt'                       # C XSLT library for GNOME
 brew 'man-db'                        # Avoid "This manpage is not compatible with mandoc(1)" errors
 brew 'mediainfo'                     # For lesspipe
+brew 'mods'                          # AI on the CLI
 brew 'moreutils'
 brew 'neovim', args: ['HEAD']
 brew 'neovim-remote'
@@ -80,7 +82,6 @@ brew 'node'                          # Platform built on V8 to build network app
 brew 'openssl'                       # SSL/TLS cryptography library
 brew 'openssl@1.1'                   # Cryptography and SSL/TLS Toolkit
 brew 'pandoc'                        # Swiss-army knife of markup format conversion
-brew 'parallel'                      # GNU Parallel
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
 brew 'pinentry-mac'
