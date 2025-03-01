@@ -1,12 +1,32 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -Eeuo pipefail
 shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
 
-# We move to the top of the repo, so that clean -df deletes all files
-d=$(git rev-parse --show-cdup) 
-[[ -n "$d" ]] 
-cd "$d"
+main() {
+  [[ $# -eq 0 ]] || usage "Expected no arguments"
+  git rev-parse --is-inside-work-tree > /dev/null 2>&1 || usage "Not in a git repo."
 
-git clean -df 
-git reset --hard
+  # We move to the top of the repo, so that clean -df deletes all files
+  d=$(git rev-parse --show-cdup) 
+  [[ -n "$d" ]] && cd "$d"
+
+  git clean -df 
+  git reset --hard
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me
+
+  REMOVES ALL LOCAL CHANGES.
+	EOF
+  exit 1
+}
+
+main "$@"
