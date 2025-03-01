@@ -122,5 +122,6 @@ brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
+brew 'mise'                          # asdf alternative https://mise.jdx.dev/
 
 # vim: ft=ruby
