@@ -224,4 +224,8 @@ defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
 
+# Enable v2 extensions for another year
+defaults write com.google.Chrome.plist ExtensionManifestV2Availability -int 2
+
+
 killall Finder
