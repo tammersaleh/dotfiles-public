@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+main() {
+  [[ $# -eq 1 ]] || usage "Expected 1 argument, got $#"
+  
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me ARGUMENT
+
+  Explanation
+
+  Examples:
+
+    $me foo
+	EOF
+  exit 1
+}
+
+main "$@"
+# cursor: 10 4 del

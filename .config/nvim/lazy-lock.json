@@ -65,6 +65,7 @@
   "vim-smartword": { "branch": "master", "commit": "608d4883bb1eff4131f44857a21119220e55886d" },
   "vim-stay": { "branch": "master", "commit": "f1c494a688faa932603d18ec7d41196e9c117391" },
   "vim-systemd-syntax": { "branch": "trunk", "commit": "44262a519d7fe5515f1464aeb78a8eaf0294e36e" },
+  "vim-templates": { "branch": "master", "commit": "0caaee5c66026b6baaaf4e1164daa8d145cbb4d0" },
   "vim-terraform": { "branch": "master", "commit": "24de93afb05078bac6a2e966402cc1f672277708" },
   "vim-toml": { "branch": "main", "commit": "d36caa6b1cf508a4df1c691f915572fc02143258" },
   "which-key.nvim": { "branch": "main", "commit": "8badb359f7ab8711e2575ef75dfe6fbbd87e4821" }
