@@ -4,7 +4,7 @@ aspell 0.60.8.1_1
 ast-grep 0.35.0
 autoconf 2.72
 automake 1.17
-awscli 2.24.15
+awscli 2.24.20
 bash 5.2.37
 bash-completion@2 2.16.0
 bat 0.25.0_1
@@ -19,9 +19,9 @@ cffi 1.17.1_1
 cjson 1.7.18
 cmake 3.31.6
 coreutils 9.6
-cryptography 44.0.1
+cryptography 44.0.2
 ctags 5.8_2
-dav1d 1.5.0
+dav1d 1.5.1
 diff-so-fancy 1.4.4
 diffutils 3.11
 direnv 2.35.0
@@ -32,36 +32,36 @@ entr 5.6
 exa 0.10.1_2
 exiftool 13.10
 fd 10.2.0
-ffmpeg 7.1_4
-flac 1.4.3
-fontconfig 2.16.0 2.15.0
+ffmpeg 7.1.1_1
+flac 1.5.0
+fontconfig 2.16.0
 freetype 2.13.3
 frei0r 2.3.3
 fribidi 1.0.16
-fzf 0.60.2
+fzf 0.60.3
 gawk 5.3.1
 gdk-pixbuf 2.42.12
 gettext 0.24
-gh 2.67.0
+gh 2.68.1
 ghostscript 10.04.0
 giflib 5.2.2
 git 2.48.1
 git-crypt 0.7.0_1
 git-delta 0.18.2_3
 git-lfs 3.6.1
-glib 2.82.4
+glib 2.82.5
 gmp 6.3.0
 gnu-getopt 2.39.1
 gnu-sed 4.9
 gnu-tar 1.35
 gnupg 2.4.7
 gnutls 3.8.4
-go 1.24.0
+go 1.24.1
 gomplate 4.3.0
 graphite2 1.3.14
 groff 1.23.0_1
 gron 0.7.1
-harfbuzz 10.3.0
+harfbuzz 10.3.0 10.4.0
 heroku 9.5.0
 highway 1.2.0
 hub 2.14.2
@@ -78,7 +78,7 @@ jpeg-xl 0.11.1
 jq 1.7.1
 krb5 1.21.3
 lame 3.100
-lazygit 0.47.2
+lazygit 0.48.0
 leptonica 1.85.0
 lesspipe 2.18
 libarchive 3.7.7
@@ -90,7 +90,7 @@ libde265 1.0.15
 libdeflate 1.23
 libevent 2.1.12_1
 libgcrypt 1.10.3
-libgit2 1.9.0 1.8.4
+libgit2 1.9.0
 libgit2@1.8 1.8.4
 libgpg-error 1.51
 libheif 1.19.5 1.19.5_1
@@ -101,36 +101,36 @@ liblqr 0.4.3
 libmediainfo 24.12
 libmicrohttpd 1.0.1
 libmms 0.6.4
-libnghttp2 1.64.0
+libnghttp2 1.64.0 1.65.0
 libnotify 0.8.4
 libogg 1.3.5
 libomp 19.1.4 19.1.7 19.1.6
 libpaper 2.2.5
 libpipeline 1.5.8
-libpng 1.6.47 1.6.46 1.6.44
+libpng 1.6.47
 libpq 17.4
 libraw 0.21.3
 librist 0.2.11
 libsamplerate 0.2.2
 libsass 3.6.5
-libsndfile 1.2.2
+libsndfile 1.2.2_1 1.2.2
 libsodium 1.0.20
 libsoxr 0.1.3
 libssh 0.11.1
 libssh2 1.11.1
-libtasn1 4.19.0
+libtasn1 4.19.0 4.20.0
 libtiff 4.7.0
 libtool 2.5.4
 libunibreak 6.1
 libunistring 1.3
 libusb 1.0.27
-libuv 1.49.2 1.50.0
+libuv 1.50.0
 libvidstab 1.1.1
 libvmaf 3.0.0
 libvorbis 1.3.7
 libvpx 1.15.0
 libvterm 0.3.3
-libx11 1.8.11 1.8.10
+libx11 1.8.11
 libxau 1.0.12
 libxcb 1.17.0
 libxdmcp 1.1.5
@@ -140,12 +140,12 @@ libxrender 0.9.12
 libxslt 1.1.42_1
 libyaml 0.2.5
 libzen 0.4.41_1
-little-cms2 2.16 2.17
+little-cms2 2.17
 llvm 19.1.7
 lpeg 1.1.0
 lua 5.4.7
-luajit 2.1.1734355927 2.1.1727870382 2.1.1736781742
-luv 1.50.0-1 1.50.0-0 1.48.0-2
+luajit 2.1.1736781742
+luv 1.50.0-1
 lz4 1.10.0
 lzo 2.10
 m4 1.4.19
@@ -153,7 +153,7 @@ man-db 2.13.0
 mbedtls 3.6.2
 md4c 0.5.2
 media-info 24.12
-mise 2025.2.9
+mise 2025.3.2
 mods 1.7.0
 moreutils 0.70
 mpdecimal 4.0.0
@@ -164,10 +164,10 @@ ncurses 6.5
 neovim HEAD-88fe467 0.10.4_1
 neovim-remote 2.5.1_2
 netpbm 11.02.09 11.02.11
-nettle 3.10
-node 23.7.0
+nettle 3.10 3.10.1
+node 23.9.0
 npth 1.8
-oniguruma 6.9.9 6.9.10
+oniguruma 6.9.10
 opencore-amr 0.1.6
 openexr 3.3.2
 openjdk 23.0.2
@@ -175,7 +175,7 @@ openjdk@11 11.0.26
 openjpeg 2.5.3
 openldap 2.6.7
 openssl@1.1 1.1.1w
-openssl@3 3.4.0 3.4.1
+openssl@3 3.4.1
 opus 1.5.2
 p11-kit 0.25.5
 pandoc 3.6.3
@@ -195,8 +195,8 @@ psutils 3.3.5
 pycparser 2.22_1
 python-packaging 24.2
 python@3.11 3.11.7_1 3.11.9_1 3.11.9
-python@3.12 3.12.8 3.12.9
-python@3.13 3.13.1 3.13.2
+python@3.12 3.12.9
+python@3.13 3.13.2
 qrencode 4.1.1
 qt@5 5.15.15
 rav1e 0.7.1
@@ -206,26 +206,26 @@ readline 8.2.13
 ripgrep 14.1.1
 rsync 3.4.1
 rubberband 4.0.0
-ruby 3.4.1 3.4.2
+ruby 3.4.2
 ruby-build 20250215
-ruff 0.9.9
+ruff 0.9.10
 rust 1.84.1
 s3cmd 2.4.0_1
 sassc 3.6.2
-sdl2 2.30.11 2.30.8
+sdl2 2.30.11 2.30.8 2.32.2
 shared-mime-info 2.4
 shellcheck 0.10.0
-shfmt 3.10.0
+shfmt 3.11.0
 sipcalc 1.1.6
 snappy 1.2.1
 socat 1.8.0.3
 spacectl 1.10.0
 speedtest-cli 2.1.3_1
 speex 1.2.1
-sqlite 3.49.1 3.48.0 3.47.2
+sqlite 3.49.1
 srt 1.5.4
 stow 2.4.1
-svt-av1 2.3.0 2.2.1
+svt-av1 2.3.0 3.0.0 2.2.1
 switchaudio-osx 1.2.2
 terraform 1.5.7
 tesseract 5.5.0
@@ -240,7 +240,7 @@ unbound 1.22.0
 unibilium 2.1.2
 usage 2.0.5
 utf8proc 2.9.0
-uv 0.6.3
+uv 0.6.5
 vim 9.1.1150
 watch 4.0.5
 webp 1.5.0
@@ -250,8 +250,8 @@ x265 4.1
 xorgproto 2024.1
 xpdf 4.05
 xvid 1.3.7
-xxhash 0.8.3 0.8.2
-xz 5.6.4 5.6.3
+xxhash 0.8.3
+xz 5.6.4
 yarn 1.22.22
 yq 4.45.1
 z3 4.13.4 4.13.3
@@ -260,7 +260,7 @@ zimg 3.0.5
 zlib 1.3.1
 zsh 5.9
 zsh-fast-syntax-highlighting 1.55
-zstd 1.5.6 1.5.7
+zstd 1.5.7
 1password-cli 2.30.3
 aws-vault 7.2.0
 font-codicon 0.0.36
