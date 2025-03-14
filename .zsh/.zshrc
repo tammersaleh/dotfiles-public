@@ -51,6 +51,8 @@ __prependpath    /opt/homebrew/bin
 __prependpath    /opt/homebrew/sbin
 __prependmanpath /opt/homebrew/share/man
 __prependpath    /opt/homebrew/share/npm/bin
+__prependpath    $HOME/.npm-global/bin
+__prependmanpath $HOME/.npm-global/share/man
 
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
