@@ -2,6 +2,8 @@
     path = ~/.gitconfig-private
 [include]
     path = ~/.gitconfig-local
+[column]
+    ui = auto
 [user]
     name = Tammer Saleh
     email = tammer@superorbital.io
@@ -38,10 +40,12 @@
     # summary = true
     conflictstyle = zdiff3
 [diff]
-    wordRegex = [^[:space:]]
-    submodule = log
-    colorMoved = default
     algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+    submodule = log
+    wordRegex = [^[:space:]]
 [core]
     excludesfile = ~/.gitglobalignore
     whitespace = trailing-space,space-before-tab,tab-in-indent
@@ -62,6 +66,7 @@
 [rebase]
     autosquash = true
     autostash = true
+    updateRefs = true
 [gc]
     auto = 256
 [pull]
@@ -107,8 +112,9 @@
 [push]
     # https://twitter.com/JI/status/1546948817462800384
     autoSetupRemote = true
-    default = current
-    autoSetupMerge = always
+    default = simple
+    autoSetupMerge = true
+    followTags = true
 [commit]
     verbose = true
 [credential]
@@ -125,12 +131,15 @@
     fsckobjects = true
     prune = true
     prunetags = true
+    all = true
 [receive]
     fsckobjects = true
 [submodule]
     recurse = true
 [branch]
     sort = -committerdate
+[tag]
+    sort = version:refname
 [gpg]
     format = ssh
 [log]
