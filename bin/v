@@ -6,6 +6,10 @@ main() {
   local files=("$@")
   if [[ $# -eq 0 ]]; then files=("."); fi 
 
+  # If given only one directory, then cd to it and start nvim with the CWD.
+  if [[ ${#files[@]} -eq 1 ]] && [[ -d ${files[0]} ]]; then cd "${files[0]}"; files=("."); fi
+
+
   if [[ -v NVIM ]]; then
     nvr -o "${files[@]}"
     
