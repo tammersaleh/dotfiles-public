@@ -3,18 +3,28 @@
 set -euo pipefail
 
 main() {
+  [ -v DEBUG ] && set -x
+
   local files=("$@")
   if [[ $# -eq 0 ]]; then files=("."); fi 
+  [ -v DEBUG ] && echo "Files: ${files[*]}"
+  [ -v DEBUG ] && echo "Working dir: $PWD"
 
   # If given only one directory, then cd to it and start nvim with the CWD.
   if [[ ${#files[@]} -eq 1 ]] && [[ -d ${files[0]} ]]; then cd "${files[0]}"; files=("."); fi
 
+  [ -v DEBUG ] && echo "Files: ${files[*]}"
+  [ -v DEBUG ] && echo "Working dir: $PWD"
 
   if [[ -v NVIM ]]; then
+    [ -v DEBUG ] && echo "In nvim already"
     nvr -o "${files[@]}"
     
   else
-    nvim --listen "$(mktemp)" -o -- "${files[@]}"
+    tmpdir=$(mktemp -d)
+    pipe=$(mkfifo -m 600 "$tmpdir/pipe")
+    [ -v DEBUG ] && echo "Launching nvim"
+    nvim --listen "$pipe" -o -- "${files[@]}"
   fi
 }
 
