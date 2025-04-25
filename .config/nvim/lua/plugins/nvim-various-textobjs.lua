@@ -11,10 +11,6 @@ return {
       mode = {'o','x'},
     },
     {
-      'I', '<cmd>lua require("various-textobjs").restOfIndentation()<CR>',
-      mode = {'o','x'},
-    },
-    {
       's', '<cmd>lua require("various-textobjs").subword()<CR>',
       mode = {'o','x'},
     },
