@@ -62,6 +62,7 @@ brew 'gnupg'                         # GNU Pretty Good Privacy (PGP) package
 brew 'go'                            # Open source programming language to build simple/reliable/efficient software
 brew 'gomplate'                      # For https://github.com/superorbital/infrastructure/blob/main/students/generate
 brew 'gron'                          # Make JSON greppable
+brew 'hadolint'                      # Amazing dockerfile linter
 brew 'heroku'                        # Add GitHub support to git on the command-line
 brew 'hub'                           # Used for campus
 brew 'id3v2'                         # For lesspipe
@@ -74,6 +75,7 @@ brew 'libpq', force: true            # Used to get libpq and force linked to get
 brew 'libxslt'                       # C XSLT library for GNOME
 brew 'man-db'                        # Avoid "This manpage is not compatible with mandoc(1)" errors
 brew 'mediainfo'                     # For lesspipe
+brew 'mise'                          # asdf alternative https://mise.jdx.dev/
 brew 'mods'                          # AI on the CLI
 brew 'moreutils'
 brew 'neovim', args: ['HEAD']
@@ -122,6 +124,5 @@ brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
-brew 'mise'                          # asdf alternative https://mise.jdx.dev/
 
 # vim: ft=ruby
