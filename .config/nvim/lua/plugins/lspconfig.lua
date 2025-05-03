@@ -86,6 +86,7 @@ return {
           diagnostics = { disable = { 'missing-fields' } },
         },
       },
+      rust_analyzer = {},
     }
 
     -- Setup neovim lua configuration

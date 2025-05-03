@@ -190,6 +190,8 @@ alias k=kubectl
 
 alias :q=exit
 
+alias cr="cargo run -q"
+
 gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
@@ -358,12 +360,8 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 ### Completions {{{
 
-# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 fpath=(~/.zsh/completions $(brew --prefix)/share/zsh/site-functions $fpath)
-autoload -Uz compinit bashcompinit
-# The below isn't working for some reason, so gitignored the .zcompdump file.
-compinit -d "$HOME/.local/share/zsh/compdump"
-bashcompinit
+autoload -Uz compinit && compinit
 
 DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
 __source_if_exists "$DOCKER_ETC/docker.zsh-completion"

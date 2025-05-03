@@ -259,3 +259,4 @@ if tty -s; then
   fi
   # }}}
 fi
+. "$HOME/.cargo/env"

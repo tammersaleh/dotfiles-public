@@ -4,7 +4,7 @@ aspell 0.60.8.1_1
 ast-grep 0.37.0
 autoconf 2.72
 automake 1.17
-awscli 2.27.0
+awscli 2.27.7
 bash 5.2.37
 bash-completion@2 2.16.0
 bat 0.25.0_1
@@ -42,8 +42,8 @@ fzf 0.61.3
 gawk 5.3.1
 gdk-pixbuf 2.42.12_1
 gettext 0.24
-gh 2.71.1
-ghostscript 10.05.0_1
+gh 2.72.0
+ghostscript 10.05.1 10.05.0_1
 giflib 5.2.2
 git 2.49.0
 git-crypt 0.7.0_1
@@ -62,7 +62,7 @@ graphite2 1.3.14
 groff 1.23.0_1
 gron 0.7.1
 hadolint 2.12.0
-harfbuzz 10.3.0 11.0.1 10.4.0
+harfbuzz 11.2.0 10.3.0 11.0.1 10.4.0
 heroku 9.5.0
 highway 1.2.0
 hub 2.14.2
@@ -94,20 +94,20 @@ libgcrypt 1.11.0 1.10.3
 libgit2 1.9.0
 libgpg-error 1.51
 libheif 1.19.5 1.19.5_1 1.19.7
-libidn 1.42
+libidn 1.42 1.43
 libidn2 2.3.8 2.3.7
 libksba 1.6.7
 liblqr 0.4.3
-libmediainfo 25.03
+libmediainfo 25.03 25.04
 libmicrohttpd 1.0.1
 libmms 0.6.4
 libnghttp2 1.65.0
 libnotify 0.8.6
 libogg 1.3.5
 libomp 20.1.3 19.1.4 19.1.7 19.1.6
-libpaper 2.2.5
+libpaper 2.2.5 2.2.6
 libpipeline 1.5.8
-libpng 1.6.47
+libpng 1.6.47 1.6.48
 libpq 17.4_1
 libraw 0.21.4
 librist 0.2.11
@@ -124,7 +124,7 @@ libtool 2.5.4
 libunibreak 6.1
 libunistring 1.3
 libusb 1.0.27
-libuv 1.50.0
+libuv 1.51.0 1.50.0
 libvidstab 1.1.1
 libvmaf 3.0.0
 libvorbis 1.3.7
@@ -141,7 +141,6 @@ libxslt 1.1.43
 libyaml 0.2.5
 libzen 0.4.41_1
 little-cms2 2.17
-llvm@19 19.1.7
 lpeg 1.1.0
 lua 5.4.7
 luajit 2.1.1744318430 2.1.1736781742
@@ -149,11 +148,11 @@ luv 1.50.0-1
 lz4 1.10.0
 lzo 2.10
 m4 1.4.19
-man-db 2.13.0
+man-db 2.13.1
 mbedtls 3.6.3 3.6.2
 md4c 0.5.2
-media-info 25.03
-mise 2025.4.8
+media-info 25.04
+mise 2025.4.12
 mods 1.7.0
 moreutils 0.70
 mpdecimal 4.0.0
@@ -161,9 +160,9 @@ mpfr 4.2.1
 mpg123 1.32.10
 msgpack 6.1.0
 ncurses 6.5
-neovim 0.11.0 HEAD-88fe467
+neovim 0.11.1 HEAD-88fe467
 neovim-remote 2.5.1_2
-netpbm 11.02.15
+netpbm 11.02.15 11.02.16
 nettle 3.10.1
 node 23.11.0
 npth 1.8
@@ -175,7 +174,7 @@ openjdk@11 11.0.27
 openjpeg 2.5.3
 openldap 2.6.7
 openssl@1.1 1.1.1w
-openssl@3 3.4.1
+openssl@3 3.4.1 3.5.0
 opus 1.5.2
 p11-kit 0.25.5
 pandoc 3.6.4
@@ -186,12 +185,12 @@ pcre2 10.44 10.45
 pdftk-java 3.3.3
 pinentry 1.3.1_1
 pinentry-mac 1.3.1.1
-pixman 0.44.2
+pixman 0.44.2 0.46.0
 pkgconf 2.3.0_1 2.4.3
 popt 1.19
 powerlevel10k 1.20.0
 pstree 2.40
-psutils 3.3.5
+psutils 3.3.9 3.3.5
 pycparser 2.22_1
 python-packaging 24.2
 python@3.11 3.11.7_1 3.11.9_1 3.11.9
@@ -201,15 +200,14 @@ qrencode 4.1.1
 qt@5 5.15.16_1
 rav1e 0.7.1
 rbenv 1.3.2
-rclone 1.69.1
+rclone 1.69.2
 readline 8.2.13
 ripgrep 14.1.1
 rsync 3.4.1
 rubberband 4.0.0
-ruby 3.4.2
-ruby-build 20250418
-ruff 0.11.6
-rust 1.86.0
+ruby 3.4.3 3.4.2
+ruby-build 20250430
+ruff 0.11.8
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.30.11 2.30.8 2.32.2 2.32.4
@@ -238,10 +236,10 @@ tree-sitter 0.24.6 0.24.7 0.25.2 0.25.3 0.24.3
 uchardet 0.0.8
 unbound 1.22.0
 unibilium 2.1.2
-usage 2.0.7 2.0.5
+usage 2.0.7 2.1.1 2.0.5
 utf8proc 2.10.0 2.9.0
-uv 0.6.16
-vim 9.1.1300
+uv 0.7.2
+vim 9.1.1350
 watch 4.0.5
 webp 1.5.0
 wget 1.25.0
@@ -263,9 +261,9 @@ zstd 1.5.7
 1password-cli 2.30.3
 aws-vault 7.2.0
 font-codicon 0.0.36
-font-fira-code-nerd-font 3.3.0
-font-hack-nerd-font 3.3.0
-font-meslo-lg-nerd-font 3.3.0
+font-fira-code-nerd-font 3.4.0
+font-hack-nerd-font 3.4.0
+font-meslo-lg-nerd-font 3.4.0
 font-source-sans-3 latest
 ghostty 1.0.1
 google-cloud-sdk 440.0.0
