@@ -5,15 +5,12 @@ return {
   "OXY2DEV/helpview.nvim",
   lazy = false,
   dependencies = {
-    "nvim-treesitter/nvim-treesitter"
+    "nvim-treesitter/nvim-treesitter",
+    'nvim-tree/nvim-web-devicons',
   },
   opts = {
-    vimdoc = {
-      arguments = {
-        default = {
-          enabled = false
-        }
-      }
-    }
+    preview = {
+        icon_provider = "devicons", -- Uses nvim-web-devicons
+    },
   }
 }
