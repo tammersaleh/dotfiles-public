@@ -8,6 +8,12 @@ return {
     "nvim-treesitter/nvim-treesitter"
   },
   opts = {
-    arguments = { enabled = false }
+    vimdoc = {
+      arguments = {
+        default = {
+          enabled = false
+        }
+      }
+    }
   }
 }
