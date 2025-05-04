@@ -194,6 +194,7 @@ vim.keymap.set('n', '<Tab>',   '>>_', { silent = true, desc = "Indent line" })
 vim.keymap.set('n', '<S-Tab>', '<<_', { silent = true, desc = "Dendent line" })
 
 vim.keymap.set('n', 'gb', '<C-t>', {silent = true, desc = "[G]o [b]ack in tag stack"})
+
 -- Better tab-completion
 
 local function only_whitespace_before_cursor()
@@ -222,8 +223,6 @@ end
 vim.keymap.set('i', '<Tab>',   supertab_forward,  {silent = true, expr = true})
 vim.keymap.set('i', '<S-Tab>', supertab_backward, {silent = true, expr = true})
 
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
@@ -237,6 +236,18 @@ vim.keymap.set('i', '<c-s-down>', "<Esc>:m .+1<CR>==gi", {silent = true})
 vim.keymap.set('i', '<c-s-up>',   "<Esc>:m .-2<CR>==gi", {silent = true})
 vim.keymap.set('v', '<c-s-down>', ":m '>+1<CR>gv=gv",    {silent = true})
 vim.keymap.set('v', '<c-s-up>',   ":m '<-2<CR>gv=gv",    {silent = true})
+
+vim.keymap.set('n', ';', ':', {silent = true, desc = "Command (replaces :)"})
+
+-- Only in :help buffers:
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "help",
+  callback = function()
+    -- Map 'K' or Enter to jump to tag under cursor.  `gb` already replaces Ctrl-O for going back up the stack.
+    vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<C-]>', {noremap = true, silent = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', '<Enter>', '<C-]>', {noremap = true, silent = true})
+  end
+})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
