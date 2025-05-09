@@ -21,14 +21,19 @@ main() {
 
   git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-public.git" public
   git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-private.git" private
+  
   cd public 
+  git lfs install
   git lfs fetch 
   git lfs checkout
   cd -
+  rm ~/.gitconfig
+
   cd private 
   git crypt unlock "$keypath"
-  ./public/bin/dotfiles install
   cd -
+
+  ./public/bin/dotfiles install
 }
 
 usage() {
