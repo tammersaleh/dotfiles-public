@@ -3,7 +3,6 @@
 set -Eeuo pipefail
 
 HOMEBREW_PREFIX=/opt/homebrew/
-HBBIN=$HOMEBREW_PREFIX/bin
 PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
   
 main() {
@@ -14,19 +13,20 @@ main() {
   [[ -f $keypath ]] || usage "Can't read $keypath"
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  $HBBIN/brew install stow git git-lfs git-crypt
+  eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+  NONINTERACTIVE=1 brew install stow git git-lfs git-crypt
 
   mkdir -p ~/dotfiles
   cd ~/dotfiles
 
-  $HBBIN/git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-public.git" public
-  $HBBIN/git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-private.git" private
+  git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-public.git" public
+  git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-private.git" private
   cd public 
-  $HBBIN/git lfs fetch 
-  $HBBIN/git lfs checkout
+  git lfs fetch 
+  git lfs checkout
   cd -
   cd private 
-  $HBBIN/git crypt unlock "$keypath"
+  git crypt unlock "$keypath"
   ./public/bin/dotfiles install
   cd -
 }
