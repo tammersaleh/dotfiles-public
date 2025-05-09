@@ -4,7 +4,6 @@ set -Eeuo pipefail
 
 HOMEBREW_PREFIX=/opt/homebrew/
 HBBIN=$HOMEBREW_PREFIX/bin
-PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
   
 main() {
   [[ $# -eq 3 ]] || usage "Expected 3 arguments, got $#"
@@ -13,8 +12,11 @@ main() {
   keypath=$3
   [[ -f $keypath ]] || usage "Can't read $keypath"
 
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+  if [[ ! -d $HOMEBREW_PREFIX ]]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+  fi
+  PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
   brew install stow git git-lfs git-crypt bash
 
   mkdir -p ~/dotfiles
@@ -23,18 +25,26 @@ main() {
   [[ -d public ]] || git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-public.git" public
   [[ -d private ]] || git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-private.git" private
   
-  cd public 
-  git lfs install
-  git lfs fetch 
-  git lfs checkout
-  cd -
-  rm ~/.gitconfig
+  (
+    cd public 
+    git lfs install
+    git lfs fetch 
+    git lfs checkout
+    cd -
+  )
 
-  cd private 
-  git crypt unlock "$keypath"
-  cd -
+  (
+    cd private 
+    git crypt unlock "$keypath"
+    cd -
+  )
+  rm -f ~/.gitconfig # Was only used by git lfs, and conflicts with dotfiles
 
   ./public/bin/dotfiles install
+
+  ~/brewfiles/go
+
+  echo "All done!  Start a new shell and check it out!"
 }
 
 usage() {
