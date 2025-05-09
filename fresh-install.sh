@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 set -Eeuo pipefail
-trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
-[[ -v DEBUG ]] && set -x
 
 HOMEBREW_PREFIX=/opt/homebrew/
 HBBIN=$HOMEBREW_PREFIX/bin
