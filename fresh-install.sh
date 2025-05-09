@@ -3,6 +3,7 @@
 set -Eeuo pipefail
 
 HOMEBREW_PREFIX=/opt/homebrew/
+HBBIN=$HOMEBREW_PREFIX/bin
 PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
   
 main() {
@@ -14,13 +15,13 @@ main() {
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-  brew install stow git git-lfs git-crypt
+  brew install stow git git-lfs git-crypt bash
 
   mkdir -p ~/dotfiles
   cd ~/dotfiles
 
-  git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-public.git" public
-  git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-private.git" private
+  [[ -d public ]] || git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-public.git" public
+  [[ -d private ]] || git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-private.git" private
   
   cd public 
   git lfs install

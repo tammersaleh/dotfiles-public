@@ -3,10 +3,10 @@
 ## Fresh Install
 
 1. Download the git-crypt key from 1Password and store in ~/key
-2. Download the fresh-install script:
+2. Download the fresh-install script (to `/tmp`, _not_ your home directory):
     
     ```
-    curl -O https://raw.githubusercontent.com/tammersaleh/dotfiles-public/master/fresh-install.sh
+    curl -o /tmp/fresh-install.sh https://raw.githubusercontent.com/tammersaleh/dotfiles-public/master/fresh-install.sh
     ```
 3. Generate a new Github fine-grained access token here: https://github.com/settings/personal-access-tokens/new
 
@@ -19,7 +19,7 @@
     
     ```
     chmod +x fresh-install.sh
-    ./fresh-install.sh tammersaleh gh_token_string ~/key
+    /tmp/fresh-install.sh tammersaleh gh_token_string ~/key
     ```
 6. Remove the git crypt key: `rm ~/key`
 
