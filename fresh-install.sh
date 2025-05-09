@@ -14,7 +14,7 @@ main() {
   [[ -f $keypath ]] || usage "Can't read $keypath"
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew install stow git git-lfs git-crypt
+  $HBBIN/brew install stow git git-lfs git-crypt
 
   mkdir -p ~/dotfiles
   cd ~/dotfiles
