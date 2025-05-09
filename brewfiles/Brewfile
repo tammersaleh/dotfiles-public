@@ -98,7 +98,6 @@ brew 'shellcheck'                    # Static analysis and lint tool, for bash s
 brew 'shfmt'                         # Shell fmt
 brew 'sipcalc'                       # Advanced console-based IP subnet calculator
 brew 'socat'                         # netcat on steroids
-brew 'spacectl'
 brew 'speedtest-cli'                 # Command-line interface for https://speedtest.net bandwidth tests
 brew 'sqlite'                        # Command-line interface for SQLite
 brew 'stow'                          # Used by ~/dotfiles
