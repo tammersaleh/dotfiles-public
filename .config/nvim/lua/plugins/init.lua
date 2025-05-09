@@ -42,7 +42,6 @@ return {
   { 'dkarter/bullets.vim' },
   { 'raimon49/requirements.txt.vim' },
   { 'vim-ruby/vim-ruby' },
-  { 'vim-scripts/jQuery' },
   { 'tpope/vim-rails' },
   { 'tpope/vim-git' },
   { 'aliou/bats.vim' },
