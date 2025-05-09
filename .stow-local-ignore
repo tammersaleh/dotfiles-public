@@ -6,4 +6,4 @@ tags.*
 \.envrc
 README\.md
 post-pull.sh
-new-machine-install.sh
+fresh-install.sh

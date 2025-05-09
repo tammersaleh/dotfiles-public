@@ -211,7 +211,7 @@ rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.3
 ruby-build 20250507
-ruff 0.11.8
+ruff 0.11.9
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.6
