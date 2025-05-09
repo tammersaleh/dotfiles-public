@@ -18,7 +18,6 @@ cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
 cask 'google-cloud-sdk'
 cask 'neovide'
-cask 'wkhtmltopdf'
 
 brew 'aspell'                        # Spell checker with better logic than ispell
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
@@ -39,9 +38,8 @@ brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
 brew 'doppler'                       # doppler.com
 brew 'efm-langserver'                # Trying this out with vim
-brew 'elinks'                        # For lesspipe
+brew 'felinks'                       # For lesspipe
 brew 'entr'                          # Run arbitrary commands when files change
-brew 'exa'
 brew 'exiftool'                      # Perl lib for reading and writing EXIF metadata
 brew 'fd'                            # Used by nvim treesitter
 brew 'ffmpeg'                        # Play, record, convert, and stream audio and video
