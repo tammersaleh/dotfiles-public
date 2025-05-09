@@ -12,9 +12,9 @@ main() {
   keypath=$3
   [[ -f $keypath ]] || usage "Can't read $keypath"
 
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-  NONINTERACTIVE=1 brew install stow git git-lfs git-crypt
+  brew install stow git git-lfs git-crypt
 
   mkdir -p ~/dotfiles
   cd ~/dotfiles
