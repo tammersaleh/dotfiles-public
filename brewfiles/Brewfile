@@ -38,10 +38,10 @@ brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
 brew 'doppler'                       # doppler.com
 brew 'efm-langserver'                # Trying this out with vim
-brew 'felinks'                       # For lesspipe
 brew 'entr'                          # Run arbitrary commands when files change
 brew 'exiftool'                      # Perl lib for reading and writing EXIF metadata
 brew 'fd'                            # Used by nvim treesitter
+brew 'felinks'                       # For lesspipe
 brew 'ffmpeg'                        # Play, record, convert, and stream audio and video
 brew 'fzf'                           # used by vim finder
 brew 'gawk'
@@ -63,6 +63,7 @@ brew 'hub'                           # Used for campus
 brew 'id3v2'                         # For lesspipe
 brew 'imagemagick'                   # Tools and libraries to manipulate images in many formats
 brew 'jq'                            # Lightweight and flexible command-line JSON processor
+brew 'kubernetes-cli'                # kubectl
 brew 'lazygit'
 brew 'lesspipe'                      # Input filter for the pager less
 brew 'libnotify'                     # Library that sends desktop notifications to a notification daemon
