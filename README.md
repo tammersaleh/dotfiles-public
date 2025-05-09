@@ -1,30 +1,24 @@
 # Public Dotfiles
 
-## Install
+## Fresh Install
 
-Prep
-
-``` console
-$ brew install stow git git-lfs git-crypt
-$ mkdir -p ~/dotfiles
-$ cd dotfiles
-$ USER=tammersaleh # or whatever
-$ TOKEN=OMGSEKRIT # from https://github.com/settings/tokens
-```
-
-Install the public repo (this one):
-
-``` console
-$ git clone https://${USER}:${TOKEN}@github.com/tammersaleh/dotfiles-public.git public
-$ (cd public && git-lfs fetch && git-lfs checkout)
-```
-
-Copy the private key from "somewhere", and install the private repo:
-
-``` console
-$ git clone https://${USER}:${TOKEN}@github.com/tammersaleh/dotfiles-private.git private
-$ (cd private && git crypt unlock /path/to/key)
-$ ./public/bin/dotfiles install
-```
+1. Download the git-crypt key from 1Password and store in ~/key
+2. Download the fresh-install script:
+    
+    ```
+    curl -O https://raw.githubusercontent.com/tammersaleh/dotfiles-public/master/fresh-install.sh
+    ```
+3. Generate a new Github fine-grained access token here: https://github.com/settings/personal-access-tokens/new
+    a. Named `Temporary dotfiles token`
+    b. Select 7d expiration
+    c. `repo` scope
+    d. MAKE SURE YOU COPY IT
+4. Run the script:
+    
+    ```
+    chmod +x fresh-install.sh
+    ./fresh-install.sh tammersaleh gh_token_string ~/key
+    ```
+5. Remove the git crypt key: `rm ~/key`
 
 Reboot and pray.
