@@ -9,16 +9,18 @@
     curl -O https://raw.githubusercontent.com/tammersaleh/dotfiles-public/master/fresh-install.sh
     ```
 3. Generate a new Github fine-grained access token here: https://github.com/settings/personal-access-tokens/new
-    a. Named `Temporary dotfiles token`
-    b. Select 7d expiration
-    c. `repo` scope
-    d. MAKE SURE YOU COPY IT
-4. Run the script:
+
+    1. Named `Temporary dotfiles token`
+    2. Select 7d expiration
+    3. `repo` scope
+    4. MAKE SURE YOU COPY IT
+    
+5. Run the script:
     
     ```
     chmod +x fresh-install.sh
     ./fresh-install.sh tammersaleh gh_token_string ~/key
     ```
-5. Remove the git crypt key: `rm ~/key`
+6. Remove the git crypt key: `rm ~/key`
 
 Reboot and pray.

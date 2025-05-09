@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 set -Eeuo pipefail
-shopt -s inherit_errexit
 trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 [[ -v DEBUG ]] && set -x
 
-HBBIN="/opt/homebrew/bin"
+HOMEBREW_PREFIX=/opt/homebrew/
+HBBIN=$HOMEBREW_PREFIX/bin
+PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
   
 main() {
   [[ $# -eq 3 ]] || usage "Expected 3 arguments, got $#"
@@ -22,16 +23,14 @@ main() {
 
   $HBBIN/git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-public.git" public
   $HBBIN/git clone "https://${username}:${token}@github.com/tammersaleh/dotfiles-private.git" private
-  (
-    cd public 
-    $HBBIN/git lfs fetch 
-    $HBBIN/git lfs checkout
-  )
-  (
-    cd private 
-    $HBBIN/git crypt unlock "$keypath"
-  )
+  cd public 
+  $HBBIN/git lfs fetch 
+  $HBBIN/git lfs checkout
+  cd -
+  cd private 
+  $HBBIN/git crypt unlock "$keypath"
   ./public/bin/dotfiles install
+  cd -
 }
 
 usage() {
