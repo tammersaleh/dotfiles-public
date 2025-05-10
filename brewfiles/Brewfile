@@ -79,6 +79,7 @@ brew 'neovim-remote'
 brew 'node'                          # Platform built on V8 to build network applications
 brew 'openssl'                       # SSL/TLS cryptography library
 brew 'openssl@1.1'                   # Cryptography and SSL/TLS Toolkit
+brew 'orbstack'
 brew 'pandoc'                        # Swiss-army knife of markup format conversion
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
