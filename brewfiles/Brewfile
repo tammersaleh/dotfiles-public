@@ -18,6 +18,7 @@ cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
 cask 'google-cloud-sdk'
 cask 'neovide'
+cask 'orbstack'
 
 brew 'aspell'                        # Spell checker with better logic than ispell
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
@@ -79,7 +80,6 @@ brew 'neovim-remote'
 brew 'node'                          # Platform built on V8 to build network applications
 brew 'openssl'                       # SSL/TLS cryptography library
 brew 'openssl@1.1'                   # Cryptography and SSL/TLS Toolkit
-brew 'orbstack'
 brew 'pandoc'                        # Swiss-army knife of markup format conversion
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
