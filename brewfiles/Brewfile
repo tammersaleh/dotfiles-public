@@ -18,7 +18,7 @@ cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
 cask 'google-cloud-sdk'
 cask 'neovide'
-cask 'orbstack'
+cask 'orbstack', greedy: true
 
 brew 'aspell'                        # Spell checker with better logic than ispell
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
