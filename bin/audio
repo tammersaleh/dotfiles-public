@@ -9,15 +9,12 @@ main() {
   [[ $# -eq 1 ]] || usage "Expected one argument"
 
   case $1 in
-
     toggle)
       toggle
       ;;
-
     current)
       current
       ;;
-
     *)
       choose "$1"
       ;;
@@ -26,11 +23,9 @@ main() {
 
 toggle() {
   case $(current) in
-
     headphones) choose shure ;;
-    shure)    choose headphones ;;
+    shure)      choose headphones ;;
     *)          choose headphones ;;
-
   esac
 }
 
@@ -64,7 +59,7 @@ choose() {
 
     shure)
       SwitchAudioSource -t input  -s 'Shure MV7+'
-      SwitchAudioSource -t output -s 'MacBook Air Speakers'
+      SwitchAudioSource -t output -u 'BuiltInSpeakerDevice'
       SwitchAudioSource -m unmute
       echo "Shure"
       ;;
