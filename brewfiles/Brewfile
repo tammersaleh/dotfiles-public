@@ -20,6 +20,9 @@ cask 'google-cloud-sdk'
 cask 'neovide'
 cask 'orbstack', greedy: true
 
+brew 'jsonnet'
+brew 'jsonnet-bundler'
+brew 'tanka'
 brew 'aspell'                        # Spell checker with better logic than ispell
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
 brew 'autoconf'                      # Automatic configure script builder
