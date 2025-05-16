@@ -145,9 +145,6 @@ export LDFLAGS="-L$(brew --prefix libpq)/lib"
 export CPPFLAGS="-I$(brew --prefix libpq)/include"
 
 
-# don't append failed command to ~/.zsh_history
-zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
-
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 export GPG_TTY=$(tty)
 
