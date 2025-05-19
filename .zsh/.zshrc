@@ -155,6 +155,7 @@ __source_if_exists "$HOME/.cargo/env"
 ### Settings {{{
 stty -ixon -ixoff < $TTY
 umask 027
+ulimit -n 10000
 ############# }}}
 ### Aliases & Functions {{{
 
@@ -184,6 +185,7 @@ alias pip=pip3
 alias dush=dust # Better du -sh
 
 alias k=kubectl
+alias s=switch
 
 alias :q=exit
 
@@ -373,9 +375,12 @@ __has helm          && source <(helm completion zsh)
 __has kubectl       && source <(kubectl completion zsh)
 __has sg            && source <(sg completions zsh)
 __has stern         && source <(stern --completion zsh)
+__has switcher      && source <(switcher init zsh)
+__has switcher      && source <(switch completion zsh)
 
 compdef g=git
 compdef k=kubectl
+compdef s=switch
 
 zstyle ':completion:*' verbose yes
 
