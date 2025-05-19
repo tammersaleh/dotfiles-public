@@ -1,2 +1,5 @@
 .package-cache
 registry
+.global-cache
+.package-cache-mutate
+git
