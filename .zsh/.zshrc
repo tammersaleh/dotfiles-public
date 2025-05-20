@@ -69,8 +69,8 @@ export LS_COLORS
 # shellcheck disable=SC2046
 eval $(dircolors ~/.dircolors)
 
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export PAGER=less
 export BLOCKSIZE=K
 export PARINIT='w72jrT4bgqR B=.,?_A_a Q=_s>|'
@@ -369,6 +369,8 @@ __source_if_exists "$DOCKER_ETC/docker.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 __source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
+compdef g=git
 
 zstyle ':completion:*' verbose yes
 
