@@ -8,6 +8,7 @@ tap 'heroku/brew'
 tap 'romkatv/powerlevel10k'
 tap 'spacelift-io/spacelift'
 tap 'superfly/tap'                   # for mods
+tap 'gabrie30/utils'
 
 cask '1password-cli'
 cask 'aws-vault'
@@ -22,7 +23,6 @@ cask 'neovide'
 cask 'orbstack', greedy: true
 
 brew 'aspell'                        # Spell checker with better logic than ispell
-brew 'llvm'
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
 brew 'autoconf'                      # Automatic configure script builder
 brew 'automake'                      # Tool for generating GNU Standards-compliant Makefiles
@@ -50,6 +50,7 @@ brew 'fzf'                           # used by vim finder
 brew 'gawk'
 brew 'gettext', link: true           # GNU internationalization (i18n) and localization (l10n) library
 brew 'gh'                            # GitHub command-line tool
+brew 'ghorg'                         # quickly clone all of an orgs, or users repos into a single directory
 brew 'git'                           # Distributed revision control system
 brew 'git-crypt'                     # Enable transparent encryption/decryption of files in a git repo
 brew 'git-delta'
@@ -81,6 +82,7 @@ brew 'lesspipe'                      # Input filter for the pager less
 brew 'libnotify'                     # Library that sends desktop notifications to a notification daemon
 brew 'libpq', force: true            # Used to get libpq and force linked to get psql cli in PATH
 brew 'libxslt'                       # C XSLT library for GNOME
+brew 'llvm'
 brew 'man-db'                        # Avoid "This manpage is not compatible with mandoc(1)" errors
 brew 'mediainfo'                     # For lesspipe
 brew 'mise'                          # asdf alternative https://mise.jdx.dev/
