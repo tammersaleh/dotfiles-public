@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 tap 'charmbracelet/tap'
-tap 'danielfoehrkn/switch'
 tap 'derailed/k9s'
 tap 'dopplerhq/cli'
 tap 'github/gh'
@@ -73,6 +72,7 @@ brew 'jsonnet-bundler'
 brew 'k9s'
 brew 'kind'
 brew 'kubectl'
+brew 'kubectx'                       # kubens and kubectx
 brew 'kubelogin'
 brew 'kubernetes-cli'                # kubectl
 brew 'lazygit'
@@ -115,7 +115,6 @@ brew 'socat'                         # netcat on steroids
 brew 'speedtest-cli'                 # Command-line interface for https://speedtest.net bandwidth tests
 brew 'sqlite'                        # Command-line interface for SQLite
 brew 'stow'                          # Used by ~/dotfiles
-brew 'switch'                        # kubeswitch: kubectx for operators https://github.com/danielfoehrKn/kubeswitch
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'tanka'
 brew 'terraform'

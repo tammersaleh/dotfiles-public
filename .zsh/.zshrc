@@ -144,6 +144,7 @@ export PATH="$(brew --prefix libpq)/bin:$PATH"
 export LDFLAGS="-L$(brew --prefix libpq)/lib"
 export CPPFLAGS="-I$(brew --prefix libpq)/include"
 
+eval "$(brew shellenv)"
 
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 export GPG_TTY=$(tty)
@@ -185,7 +186,8 @@ alias pip=pip3
 alias dush=dust # Better du -sh
 
 alias k=kubectl
-alias s=switch
+alias kns=kubens
+alias kctx=kubectx
 
 alias :q=exit
 
@@ -359,7 +361,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 ### Completions {{{
 
-fpath=(~/.zsh/completions $(brew --prefix)/share/zsh/site-functions $fpath)
+fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
 
 DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
@@ -368,19 +370,10 @@ __source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 __source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
-__has aws-vault     && source <(aws-vault --completion-script-zsh)
-__has aws_completer && complete -C aws_completer aws
-__has fly           && source <(fly completion zsh)
-__has helm          && source <(helm completion zsh)
-__has kubectl       && source <(kubectl completion zsh)
-__has sg            && source <(sg completions zsh)
-__has stern         && source <(stern --completion zsh)
-__has switcher      && source <(switcher init zsh)
-__has switcher      && source <(switch completion zsh)
-
-compdef g=git
-compdef k=kubectl
-compdef s=switch
+# compdef g=git
+# compdef k=kubectl
+# compdef kns=kubens
+# compdef kctx=kubectx
 
 zstyle ':completion:*' verbose yes
 
