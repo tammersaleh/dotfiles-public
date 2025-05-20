@@ -22,6 +22,7 @@ cask 'neovide'
 cask 'orbstack', greedy: true
 
 brew 'aspell'                        # Spell checker with better logic than ispell
+brew 'llvm'
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
 brew 'autoconf'                      # Automatic configure script builder
 brew 'automake'                      # Tool for generating GNU Standards-compliant Makefiles
@@ -110,10 +111,10 @@ brew 'sassc'                         # Wrapper around libsass that helps to crea
 brew 'shellcheck'                    # Static analysis and lint tool, for bash scripts
 brew 'shfmt'                         # Shell fmt
 brew 'sipcalc'                       # Advanced console-based IP subnet calculator
-brew 'skaffold'
 brew 'socat'                         # netcat on steroids
 brew 'speedtest-cli'                 # Command-line interface for https://speedtest.net bandwidth tests
 brew 'sqlite'                        # Command-line interface for SQLite
+brew 'stern'
 brew 'stow'                          # Used by ~/dotfiles
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'tanka'

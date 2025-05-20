@@ -158,6 +158,7 @@ libxslt 1.1.43
 libyaml 0.2.5
 libzen 0.4.41_1
 little-cms2 2.17
+llvm 20.1.5
 lpeg 1.1.0
 lua 5.4.7
 luajit 2.1.1744318430
@@ -228,13 +229,13 @@ shared-mime-info 2.4
 shellcheck 0.10.0
 shfmt 3.11.0
 sipcalc 1.1.6
-skaffold 2.16.0
 snappy 1.2.1
 socat 1.8.0.3
 speedtest-cli 2.1.3_1
 speex 1.2.1
 sqlite 3.49.1 3.49.2
 srt 1.5.4
+stern 1.32.0
 stow 2.4.1
 svt-av1 3.0.2
 switchaudio-osx 1.2.2
@@ -268,6 +269,7 @@ xxhash 0.8.3
 xz 5.8.1
 yarn 1.22.22
 yq 4.45.4
+z3 4.15.0
 zeromq 4.3.5_1
 zimg 3.0.5
 zlib 1.3.1
