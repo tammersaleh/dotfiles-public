@@ -370,11 +370,6 @@ __source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
 __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 __source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
-# compdef g=git
-# compdef k=kubectl
-# compdef kns=kubens
-# compdef kctx=kubectx
-
 zstyle ':completion:*' verbose yes
 
 ################# }}}
