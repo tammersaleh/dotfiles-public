@@ -5,7 +5,7 @@ assimp 5.4.3
 ast-grep 0.38.2
 autoconf 2.72
 automake 1.17
-awscli 2.27.22
+awscli 2.27.18
 bash 5.2.37
 bash-completion@2 2.16.0
 bat 0.25.0_1
@@ -14,7 +14,7 @@ bfg 1.15.0
 brotli 1.1.0
 bzip2 1.0.8
 c-ares 1.34.5
-ca-certificates 2025-05-20
+ca-certificates 2025-02-25
 cairo 1.18.4
 cffi 1.17.1_1
 cjson 1.7.18
@@ -67,7 +67,7 @@ gron 0.7.1
 hadolint 2.12.0
 harfbuzz 11.2.0
 helm 3.18.0
-heroku 10.8.0
+heroku 10.7.0
 highway 1.2.0
 htop 3.4.1
 hub 2.14.2
@@ -85,13 +85,13 @@ jq 1.7.1
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
 k9s 0.50.6
-kind 0.29.0
+kind 0.28.0
 krb5 1.21.3
 kubectx 0.9.5
 kubelogin 1.32.4
 kubernetes-cli 1.33.1
 lame 3.100
-lazygit 0.51.1
+lazygit 0.50.0
 leptonica 1.85.0
 lesspipe 2.18
 libarchive 3.7.9
@@ -171,7 +171,7 @@ man-db 2.13.1
 mbedtls 3.6.3
 md4c 0.5.2
 media-info 25.04
-mise 2025.5.11
+mise 2025.5.8
 mods 1.7.0
 moreutils 0.70
 mpdecimal 4.0.1
@@ -210,19 +210,19 @@ pstree 2.40
 psutils 3.3.10
 pycparser 2.22_1
 python@3.12 3.12.10
-python@3.13 3.13.3_1 3.13.3
+python@3.13 3.13.3
 qrencode 4.1.1
 qt 6.9.0
 rav1e 0.7.1
 rbenv 1.3.2
-rclone 1.69.3
+rclone 1.69.2
 readline 8.2.13
 ripgrep 14.1.1
 rsync 3.4.1
 rubberband 4.0.0
-ruby 3.4.3 3.4.4
+ruby 3.4.3
 ruby-build 20250516
-ruff 0.11.11
+ruff 0.11.10
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.6
@@ -236,7 +236,6 @@ speedtest-cli 2.1.3_1
 speex 1.2.1
 sqlite 3.49.1 3.49.2
 srt 1.5.4
-starship 1.23.0
 stern 1.32.0
 stow 2.4.1
 svt-av1 3.0.2
@@ -245,7 +244,7 @@ tanka 0.32.0
 terminal-notifier 2.0.0
 terraform 1.5.7
 tesseract 5.5.0_1
-tflint 0.58.0
+tflint 0.57.0
 the_silver_searcher 2.2.0
 theora 1.1.1
 tmux 3.5a
@@ -257,8 +256,8 @@ unbound 1.23.0
 unibilium 2.1.2
 usage 2.1.1
 utf8proc 2.10.0
-uv 0.7.8
-vim 9.1.1400
+uv 0.7.6
+vim 9.1.1350
 watch 4.0.5
 webp 1.5.0
 wget 1.25.0

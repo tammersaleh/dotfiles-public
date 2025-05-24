@@ -116,7 +116,6 @@ brew 'sipcalc'                       # Advanced console-based IP subnet calculat
 brew 'socat'                         # netcat on steroids
 brew 'speedtest-cli'                 # Command-line interface for https://speedtest.net bandwidth tests
 brew 'sqlite'                        # Command-line interface for SQLite
-brew 'starship'                      # Replacement for powershell 10k prompt utility
 brew 'stern'
 brew 'stow'                          # Used by ~/dotfiles
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
