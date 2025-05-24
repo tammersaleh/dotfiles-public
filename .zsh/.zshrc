@@ -1,11 +1,3 @@
-### Powerlevel10k Start {{{
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-############ }}}
 ### Helpers {{{
 
 __has() { whence $1 > /dev/null; }
@@ -255,8 +247,9 @@ g() {
 
 ############### }}}
 ### Hooks & Daemons {{{
-__has rbenv  && eval "$(rbenv init -)"
-__has direnv && eval "$(direnv hook zsh)"
+__has rbenv    && eval "$(rbenv init -)"
+__has direnv   && eval "$(direnv hook zsh)"
+__has starship && eval "$(starship init zsh)"
 
 if [[ -x ~/.dropbox-dist/dropboxd ]] && ! __running dropbox; then
   echo "Restarting Dropbox..."
@@ -323,42 +316,6 @@ bindkey -M vicmd '^[[13;2u' noop
 ### Local Config {{{
 __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
 #}}}
-### Powerlevel10k Finish {{{
-p10ktheme=$(brew --prefix powerlevel10k)/share/powerlevel10k/powerlevel10k.zsh-theme
-[[ -f $p10ktheme ]] && source $p10ktheme
-
-# To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
-[[ -f ~/.zsh/.p10k.zsh ]] && source ~/.zsh/.p10k.zsh
-
-function prompt_aws_vault() {
-  [[ ! -v AWS_VAULT ]] && return
-  local name=${AWS_VAULT:u}
-  p10k segment -f yellow -b blue -t ${name//[-_]/ }
-}
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS="${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS#context}"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=("context" "aws_vault")
-typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-  context
-  dir                     # current directory
-  aws_vault
-  vcs                     # git status
-  prompt_char             # prompt symbol
-)
-# Context color when running with privileges.
-typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=red
-# typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=red
-# Context color in SSH without privileges.
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=white
-# typeset -g POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND=yellow
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
-# typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_BACKGROUND=red
-# Default context color (no privileges, no SSH).
-typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
-# typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-#}}}
-
 ### Completions {{{
 
 fpath=(~/.zsh/completions $fpath)
