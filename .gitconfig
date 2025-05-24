@@ -6,12 +6,18 @@
     ui = auto
 [user]
     name = Tammer Saleh
-    email = tammer@superorbital.io
+    email = me@tammersaleh.com
     signingkey = 6EFD49B64C131F81
+[includeIf "hasconfig:remote.*.url:https://github.com/getditto/**"]
+    path = ~/.gitconfig-ditto
+[includeIf "hasconfig:remote.*.url:git@github.com:getditto/**"]
+    path = ~/.gitconfig-ditto
+[includeIf "hasconfig:remote.*.url:https://github.com/superorbital/**"]
+    path = ~/.gitconfig-superorbital
+[includeIf "hasconfig:remote.*.url:git@github.com:superorbital/**"]
+    path = ~/.gitconfig-superorbital
 [alias]
     aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
-    a               = add -A
-    current-branch  = rev-parse --abbrev-ref HEAD
     last            = log @{1}.. --decorate --reverse --stat -C --no-merges
     bl              = blame -wMC
 
@@ -19,21 +25,24 @@
     append          = commit --amend --no-edit
     fixup           = commit --fixup
     br              = branch -av --sort=-committerdate --format='%(HEAD) %(align:1,40)%(color:yellow)%(refname:short)%(color:reset)%(end) %(color:green)%(committerdate:relative)%(color:reset) - %(contents:subject) - %(authorname)'
-    my-branches     = br --list '*tsaleh*'
-    latest-branches = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
+    mine            = br --list 'tammersaleh*'
+    br-latest       = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
 
-    suir            = submodule update --init --recursive --jobs=4
+    uncommit        = reset --soft HEAD^
+    unstage         = reset
 
-    uncommit  = reset --soft HEAD^
-    unstage   = reset
-
-    files-in-commit = diff-tree --no-commit-id --name-only -r
-    modified        = ls-files -m
-    staged          = diff --name-only --cached
-    untracked       = ls-files --others
-    files           = ls-files -mo --exclude-standard
+    ls                 = ls-files -mo --exclude-standard
+    ls-modified        = ls-files -m
+    ls-files-in-commit = diff-tree --no-commit-id --name-only -r
+    ls-staged          = diff --name-only --cached
+    ls-untracked       = ls-files --others
 
     url = browse -u
+
+    ; a               = add -A ; Encouraged laziness.
+    ; current-branch  = rev-parse --abbrev-ref HEAD
+    ; suir            = submodule update --init --recursive --jobs=4
+
 
 [merge]
     # tool = opendiff
@@ -145,4 +154,4 @@
 [log]
     date = iso
 [http]
-	postBuffer = 157286400
+    postBuffer = 157286400
