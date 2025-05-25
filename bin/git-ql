@@ -5,7 +5,7 @@ shopt -s inherit_errexit
 
 log() {
   git log \
-    -n 5 \
+    -n 10 \
     --abbrev-commit \
     --decorate \
     --pretty=format:'%Cred%h%Creset: %Cred%an%Creset %Cgreen%ar%Creset %s' \
@@ -13,9 +13,10 @@ log() {
     "$@"
 }
 
-main_branch=$(sed -e 's/^.*\///' < .git/refs/remotes/origin/HEAD)
+main_branch=$(git symbolic-ref --short HEAD)
+current_branch="$(git branch --show-current)" 
 
-if [[ main_branch == "$(git branch --show-current)" ]]; then
+if [[ $main_branch == "$current_branch" ]]; then
   log "$@"
 else
   echo "Compared to $main_branch..."
