@@ -5,7 +5,7 @@
 1. Download the git-crypt key from 1Password as `~/key`
 2. Download the fresh-install script (to `/tmp`, _not_ your home directory):
     
-    ```
+    ``` bash
     curl -o /tmp/fresh-install.sh https://raw.githubusercontent.com/tammersaleh/dotfiles-public/master/fresh-install.sh
     ```
 3. Generate a [new Github fine-grained access token here](https://github.com/settings/personal-access-tokens/new).  Set:
@@ -17,7 +17,7 @@
     
 5. Run the script:
     
-    ```
+    ``` bash
     chmod +x fresh-install.sh
     /tmp/fresh-install.sh tammersaleh ghp_token ~/key
     ```
