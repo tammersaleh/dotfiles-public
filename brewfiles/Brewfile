@@ -123,6 +123,7 @@ brew 'tanka'
 brew 'terraform'
 brew 'tflint'                        # Terraform linter
 brew 'the_silver_searcher'           # Code-search similar to ack
+brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/
 brew 'tmux'                          # Terminal multiplexer
 brew 'tree'                          # Display directories as trees (with optional color/HTML output)
 brew 'uv'                            # Python package and project manager
