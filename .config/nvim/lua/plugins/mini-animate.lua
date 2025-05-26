@@ -20,7 +20,8 @@ return {
         timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
       },
       scroll = {
-        timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
+        -- https://github.com/echasnovski/mini.nvim/issues/242#issuecomment-1446046151
+        timing = function(_, n) return math.min(250 / n, 5) end,
         subscroll = animate.gen_subscroll.equal({
           predicate = function(total_scroll)
             if mouse_scrolled then
