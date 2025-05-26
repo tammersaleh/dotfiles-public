@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+main() {
+  [[ $# -eq 1 ]] || usage "Expected 1 argument, got $#"
+  if [[ -v NVIM ]]; then
+    nvr -cc split -c 'set bufhidden=delete' --remote-wait -- "$1"
+    # When exiting the split, the terminal is left in vim-command mode.
+    nvr -c 'startinsert'
+  else
+    v "$@"
+  fi
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me file
+
+  Edits a file in nvim.  If run from within an nvim :terminal,
+  then opens the file in a split and waits for the edited buffer
+  to be closed.
+
+  Examples:
+
+    $me ./README.md
+	EOF
+  exit 1
+}
+
+main "$@"

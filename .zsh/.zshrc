@@ -69,8 +69,8 @@ export LS_COLORS
 # shellcheck disable=SC2046
 eval $(dircolors ~/.dircolors)
 
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="blocking-v"
+export VISUAL="blocking-v"
 export PAGER=less
 export BLOCKSIZE=K
 export PARINIT='w72jrT4bgqR B=.,?_A_a Q=_s>|'
