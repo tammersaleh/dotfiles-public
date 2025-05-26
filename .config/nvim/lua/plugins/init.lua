@@ -1,7 +1,7 @@
 return {
   -- Git related plugins
   { 'tpope/vim-fugitive',
-    config = function() 
+    config = function()
       vim.api.nvim_create_user_command(
         'Browse',
         function (opts) vim.fn.system { 'open', opts.fargs[1] } end,
@@ -38,7 +38,6 @@ return {
   { 'hail2u/vim-css3-syntax' },
   { 'hashivim/vim-terraform' },
   { 'pangloss/vim-javascript' },
-  { 'plasticboy/vim-markdown' },
   { 'dkarter/bullets.vim' },
   { 'raimon49/requirements.txt.vim' },
   { 'vim-ruby/vim-ruby' },
