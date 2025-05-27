@@ -124,20 +124,20 @@ export UID
 export GID=$(id -g)
 export DOCKER_BUILDKIT=1
 
+# Stop tar from creating ._ files
+export COPYFILE_DISABLE=1
+
 export HISTFILE="$HOME/.local/share/zsh/history"
 mkdir -p "$(dirname $HISTFILE)"
 export HISTSIZE=10000000
 export SAVEHIST=10000000
-
-# Stop tar from creating ._ files
-export COPYFILE_DISABLE=1
-
-setopt appendhistory
+setopt INC_APPEND_HISTORY        # Write to file immediately when cmds entered
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt SHARE_HISTORY             # Share history with new shells
 
 # To make psql work and to allow bundler to find libpq
 export PATH="$(brew --prefix libpq)/bin:$PATH"
@@ -373,6 +373,8 @@ __source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 compdef g=git
 
 zstyle ':completion:*' verbose yes
+zstyle ':completion:*' history-search-backward yes
+zstyle ':completion:*' history-search-forward yes
 
 ################# }}}
 __source_if_exists "$HOME/.zsh/fzf.zsh"
