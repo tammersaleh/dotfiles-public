@@ -9,6 +9,7 @@ tap 'romkatv/powerlevel10k'
 tap 'spacelift-io/spacelift'
 tap 'superfly/tap'                   # for mods
 tap 'gabrie30/utils'
+tap 'danielfoehrkn/switch'
 
 cask '1password-cli'
 cask 'aws-vault'
@@ -118,6 +119,7 @@ brew 'speedtest-cli'                 # Command-line interface for https://speedt
 brew 'sqlite'                        # Command-line interface for SQLite
 brew 'stern'
 brew 'stow'                          # Used by ~/dotfiles
+brew 'switch'
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'tanka'
 brew 'terraform'
