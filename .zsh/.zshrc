@@ -13,19 +13,19 @@ __has() { whence $1 > /dev/null; }
 __running() { pgrep -x "$1" > /dev/null; }
 
 __prependmanpath() {
-  [[ -d $1 ]] || return
+  [[ -d "$1" ]] || return
   echo "$MANPATH" | grep -Eq "(^|:)$1($|:)" && return
   export MANPATH="$1:$MANPATH"
 }
 
 __prependpath() {
-  [[ -d $1 ]] || return
+  [[ -d "$1" ]] || return
   echo "$PATH" | grep -Eq "(^|:)$1($|:)" && return
   export PATH="$1:$PATH"
 }
 
 __source_if_exists() {
-  [[ -f $1 ]] || return
+  [[ -f "$1" ]] || return
   source "$1"
 }
 
@@ -44,6 +44,7 @@ for package in man-db coreutils findutils gnu-tar gawk gnu-getopt ruby; do
   __prependmanpath /opt/homebrew/opt/$package/man
 done
 
+__prependpath   '/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/'
 __prependpath    /Applications/Postgres.app/Contents/Versions/9.4/bin
 __prependpath    /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
 __prependpath    /opt/homebrew/opt/macvim/MacVim.app/Contents/MacOS/
