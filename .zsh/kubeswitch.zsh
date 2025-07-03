@@ -1,7 +1,7 @@
 # kubeswitch
 __has switch
 source <(switcher init zsh)
-alias s=switch
+alias ks=switch
 source <(switch completion zsh)
 
 k() {
