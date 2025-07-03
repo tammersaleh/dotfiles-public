@@ -4,3 +4,8 @@ source <(switcher init zsh)
 alias s=switch
 source <(switch completion zsh)
 
+k() {
+  [[ -v KUBECONFIG ]] || switch
+  kubectl "$@"
+}
+

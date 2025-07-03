@@ -160,7 +160,6 @@ umask 027
 ulimit -n 10000
 ############# }}}
 ### Aliases & Functions {{{
-
 alias chmod='chmod -v'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -185,10 +184,6 @@ alias pyconsole="pipenv run ptpython"
 alias pip=pip3
 
 alias dush=dust # Better du -sh
-
-alias k=kubectl
-alias kns=kubens
-alias kctx=kubectx
 
 alias :q=exit
 
@@ -337,26 +332,16 @@ function prompt_aws_vault() {
   p10k segment -f yellow -b blue -t ${name//[-_]/ }
 }
 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS="${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS#context}"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=("context" "aws_vault")
 typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-  context
   dir                     # current directory
   aws_vault
   vcs                     # git status
   prompt_char             # prompt symbol
 )
-# Context color when running with privileges.
 typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=red
-# typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=red
-# Context color in SSH without privileges.
 typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=white
-# typeset -g POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND=yellow
 typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
-# typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_BACKGROUND=red
-# Default context color (no privileges, no SSH).
 typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
-# typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=yellow
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #}}}
 
@@ -372,6 +357,7 @@ __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 __source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
 compdef g=git
+compdef k=kubectl
 
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' history-search-backward yes
