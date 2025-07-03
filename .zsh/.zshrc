@@ -124,6 +124,7 @@ export GH_NO_UPDATE_NOTIFIER="this is set to stop gh from letting us know about 
 export UID
 export GID=$(id -g)
 export DOCKER_BUILDKIT=1
+export DOCKER_HOST="unix:///$HOME/.orbstack/run/docker.sock"  # Tilt gets confused without this.
 
 # Stop tar from creating ._ files
 export COPYFILE_DISABLE=1
