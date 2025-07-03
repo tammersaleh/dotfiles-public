@@ -27,6 +27,7 @@
     br              = branch -av --sort=-committerdate --format='%(HEAD) %(align:1,40)%(color:yellow)%(refname:short)%(color:reset)%(end) %(color:green)%(committerdate:relative)%(color:reset) - %(contents:subject) - %(authorname)'
     mine            = br --list 'tammersaleh*'
     br-latest       = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
+    a               = add
 
     uncommit        = reset --soft HEAD^
     unstage         = reset
