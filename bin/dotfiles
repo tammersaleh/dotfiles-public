@@ -81,7 +81,7 @@ function ignore {
 
 function install {
   if ! command -v stow > /dev/null 2>&1; then
-    usage "can't find GNU stow"
+    usage "Can't find GNU stow."
   fi
   stow --dir="$ROOT" --target="$TARGET" --restow public private
 }
@@ -100,9 +100,8 @@ function pull-dir {
 }
 
 function pull {
-  for dir in $PUBLIC $PRIVATE; do
-    pull-dir "$dir"
-  done
+  pull-dir "$PUBLIC"
+  pull-dir "$PRIVATE"
   install
   [[ -x "$PUBLIC/post-pull.sh" ]] && "$PUBLIC/post-pull.sh"
   [[ -x "$PRIVATE/post-pull.sh" ]] && "$PRIVATE/post-pull.sh"
