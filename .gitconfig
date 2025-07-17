@@ -7,7 +7,7 @@
 [user]
     name = Tammer Saleh
     email = me@tammersaleh.com
-	signingkey = 6EFD49B64C131F81
+    signingkey = 6EFD49B64C131F81
 [includeIf "hasconfig:remote.*.url:https://github.com/getditto/**"]
     path = ~/.gitconfig-ditto
 [includeIf "hasconfig:remote.*.url:git@github.com:getditto/**"]
