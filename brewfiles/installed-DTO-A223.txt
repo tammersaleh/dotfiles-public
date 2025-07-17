@@ -208,6 +208,7 @@ powerlevel10k 1.20.0
 pre-commit 4.2.0
 pstree 2.40
 psutils 3.3.10
+python@3.12 3.12.11
 python@3.13 3.13.3_1 3.13.5 3.13.3
 qrencode 4.1.1
 qt 6.9.1
@@ -279,12 +280,11 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7
 1password-cli 2.31.1
-aws-vault-binary 7.2.0
 font-codicon 0.0.37-1
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
 font-meslo-lg-nerd-font 3.4.0
 font-source-sans-3 latest
+gcloud-cli 530.0.0
 ghostty 1.1.3
-neovide-app 0.15.0
 orbstack 1.11.3,19358

@@ -5,14 +5,12 @@ tap 'derailed/k9s'
 tap 'dopplerhq/cli'
 tap 'github/gh'
 tap 'heroku/brew'
-tap 'romkatv/powerlevel10k'
 tap 'spacelift-io/spacelift'
 tap 'superfly/tap'                   # for mods
 tap 'gabrie30/utils'
 tap 'danielfoehrkn/switch'
 
 cask '1password-cli'
-cask 'aws-vault'
 cask 'font-codicon'                  # VSCode font icons
 cask 'font-fira-code-nerd-font'
 cask 'font-hack-nerd-font'
@@ -20,7 +18,6 @@ cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
 cask "google-cloud-sdk", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
-cask 'neovide'
 cask 'orbstack', greedy: true
 
 brew 'aspell'                        # Spell checker with better logic than ispell
@@ -99,7 +96,6 @@ brew 'pandoc'                        # Swiss-army knife of markup format convers
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
 brew 'pinentry-mac'
-brew 'powerlevel10k'
 brew 'pre-commit'                    # git pre-commit hook runner
 brew 'pstree'                        # Show ps output as a tree
 brew 'python'                        # Interpreted, interactive, object-oriented programming language
