@@ -19,7 +19,7 @@ cask 'font-hack-nerd-font'
 cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
-cask 'google-cloud-sdk'
+cask "google-cloud-sdk", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask 'neovide'
 cask 'orbstack', greedy: true
 
@@ -27,6 +27,7 @@ brew 'aspell'                        # Spell checker with better logic than ispe
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
 brew 'autoconf'                      # Automatic configure script builder
 brew 'automake'                      # Tool for generating GNU Standards-compliant Makefiles
+brew 'aws-sso-cli'                   # https://synfinatic.github.io/aws-sso-cli/
 brew 'awscli'                        # Official Amazon AWS command-line interface
 brew 'bash'                          # Bourne-Again SHell, a UNIX command interpreter
 brew 'bash-completion@2'             # Common bash-completion libraries

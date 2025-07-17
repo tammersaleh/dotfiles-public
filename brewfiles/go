@@ -7,13 +7,10 @@ trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 
 cd "$(dirname "$0")"
 
-export HOMEBREW_NO_AUTO_UPDATE=1
 # https://github.com/Homebrew/homebrew-bundle/pull/552
 export HOMEBREW_BUNDLE_NO_LOCK=true
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 brew update
-brew bundle install --cleanup --force
+brew bundle install --upgrade --cleanup --force
 brew list --versions > "installed-$(hostname -s).txt"
-
-echo Updating gcloud components
-gcloud --quiet components update
