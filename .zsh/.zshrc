@@ -351,6 +351,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
+autoload -Uz +X bashcompinit && bashcompinit
 
 DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
 __source_if_exists "$DOCKER_ETC/docker.zsh-completion"
@@ -368,6 +369,7 @@ zstyle ':completion:*' history-search-forward yes
 ################# }}}
 __source_if_exists "$HOME/.zsh/kubeswitch.zsh"
 __source_if_exists "$HOME/.zsh/fzf.zsh"
+__source_if_exists "$HOME/.zsh/aws-sso-cli.zsh"
 # This must come at the end of the .zshrc file 🤷
 __source_if_exists $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
