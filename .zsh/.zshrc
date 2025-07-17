@@ -171,6 +171,7 @@ alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 __has gsed && alias sed=gsed
 __has bat && alias cat="bat --pager=never"
+__has claude && alias cl=claude
 
 alias cg='d=$(git rev-parse --show-cdup) && [[ -n "$d" ]] && cd "$d"'
 
