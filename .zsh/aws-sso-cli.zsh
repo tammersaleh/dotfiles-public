@@ -27,6 +27,7 @@ aws-sso-profile() {
         return 1
     fi
 
+    aws-sso login
     eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -p "$1")
     if [ "$AWS_SSO_PROFILE" != "$1" ]; then
         return 1
