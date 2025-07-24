@@ -19,6 +19,7 @@ cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
 cask "google-cloud-sdk", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask 'orbstack', greedy: true
+cask 'iterm2'
 
 brew 'aspell'                        # Spell checker with better logic than ispell
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
@@ -116,7 +117,8 @@ brew 'speedtest-cli'                 # Command-line interface for https://speedt
 brew 'sqlite'                        # Command-line interface for SQLite
 brew 'stern'
 brew 'stow'                          # Used by ~/dotfiles
-brew 'switch'
+brew 'switch'                        # kubeswitch
+brew 'switcher'                      # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'tanka'
 brew 'terraform'
