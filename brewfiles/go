@@ -10,6 +10,7 @@ cd "$(dirname "$0")"
 # https://github.com/Homebrew/homebrew-bundle/pull/552
 export HOMEBREW_BUNDLE_NO_LOCK=true
 export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_DOWNLOAD_CONCURRENCY=auto # https://brew.sh/2025/08/05/homebrew-4.6.0/
 
 brew update
 brew bundle install --upgrade 
