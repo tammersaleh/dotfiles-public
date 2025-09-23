@@ -359,17 +359,21 @@ __source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
 __source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
 compdef g=git
-compdef k=kubectl
 
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' history-search-backward yes
 zstyle ':completion:*' history-search-forward yes
+# <tab> to expand aliases
+zstyle ':completion:*' completer _expand_alias _complete _ignored 
+
 
 ################# }}}
 __source_if_exists "$HOME/.zsh/kubeswitch.zsh"
 __source_if_exists "$HOME/.zsh/fzf.zsh"
 __source_if_exists "$HOME/.zsh/aws-sso-cli.zsh"
 __source_if_exists "$HOME/.zsh/iterm2_shell_integration.zsh"
+for file in $HOME/.zsh/d/*; do source "$file"; done
+
 # This must come at the end of the .zshrc file 🤷
 __source_if_exists $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
