@@ -45,7 +45,6 @@ return {
   { 'tpope/vim-git' },
   { 'aliou/bats.vim' },
   { 'kevinoid/vim-jsonc' },
-  { 'rust-lang/rust.vim' },
   { 'echasnovski/mini.splitjoin', version = '*', opts = {} },
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
