@@ -29,6 +29,9 @@
     br-latest       = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'
     a               = add
 
+    br-delete-local-orphans = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+
+
     uncommit        = reset --soft HEAD^
     unstage         = reset
 
