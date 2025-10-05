@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+watchexec \
+  --clear \
+  --filter '*.rb' \
+  --filter Gemfile.lock \
+  -- \
+  tests

@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 ruby file: ".ruby-version"
 
-gem "command_kit"
+gem "command_kit" # https://github.com/postmodern/command_kit.rb#readme
 
 group :development do
   gem "better_errors"

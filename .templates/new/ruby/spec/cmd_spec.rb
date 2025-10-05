@@ -21,7 +21,7 @@ RSpec.describe Cmd do
   # testing with raw options/arguments
   describe "#main" do
     context "when executed with no arguments" do
-      it "must exit with -1" do
+      it "must exit with error" do
         expect(subject.main([])).to eq(-1)
       end
     end
