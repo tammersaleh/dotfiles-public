@@ -88,6 +88,7 @@ brew 'mediainfo'                     # For lesspipe
 brew 'mise'                          # asdf alternative https://mise.jdx.dev/
 brew 'mods'                          # AI on the CLI
 brew 'moreutils'
+brew 'mprocs'                        # TUI for running multiple interactive processes in parallel. 
 brew 'neovim', args: ['HEAD']
 brew 'neovim-remote'
 brew 'node'                          # Platform built on V8 to build network applications
@@ -118,8 +119,8 @@ brew 'sqlite'                        # Command-line interface for SQLite
 brew 'stern'
 brew 'stow'                          # Used by ~/dotfiles
 brew 'switch'                        # kubeswitch
-brew 'switcher'                      # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
+brew 'switcher'                      # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'tanka'
 brew 'terraform'
 brew 'tflint'                        # Terraform linter
