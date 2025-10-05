@@ -1,0 +1,72 @@
+# require:
+#   - rubocop-rails
+#   - rubocop-rspec
+#   - rubocop-capybara
+
+# RSpec/Focus:
+#   AutoCorrect: false
+#
+# RSpec/ExampleLength:
+#   Enabled: false
+#
+# RSpec/DescribeClass:
+#   IgnoredMetadata:
+#     type:
+#       - system
+#
+# RSpec/MultipleMemoizedHelpers:
+#   Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Layout/LineLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+# RSpec/EmptyExampleGroup:
+#   Enabled: false
+#
+# RSpec/NestedGroups:
+#   Enabled: false
+#
+# RSpec/MultipleExpectations:
+#   Enabled: false
+#
+# RSpec/DescribedClass:
+#   Enabled: false
+#
+# RSpec/VerifiedDoubles:
+#   Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: required
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "db/**/*"
+    # - 'config/**/*'
+    - "script/**/*"
+    - "bin/{rails,rake}"

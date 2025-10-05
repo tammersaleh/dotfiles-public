@@ -1,0 +1,90 @@
+
+# Created by https://www.toptal.com/developers/gitignore/api/rails
+# Edit at https://www.toptal.com/developers/gitignore?templates=rails
+
+### Rails ###
+.rspec
+/coverage
+/app/assets/builds
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-[0-9]*
+/public/system
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+/tmp/pids/*
+/tmp/storage/*
+
+# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
+config/initializers/secret_token.rb
+config/master.key
+
+# dotenv, dotenv-rails
+.env
+.env.*
+
+## Environment normalization:
+/.bundle
+/vendor/bundle
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+# Ignore pow environment settings
+.powenv
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore node_modules
+node_modules/
+
+# Ignore precompiled javascript packs
+/public/packs
+/public/packs-test
+/public/assets
+
+# Ignore yarn files
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+# Ignore uploaded files in development
+/storage/*
+
+# End of https://www.toptal.com/developers/gitignore/api/rails
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+!/tmp/storage
+!/tmp/pids
+!/tmp/storage/.keep
+!/tmp/pids/.keep
+!.keep
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+/config/credentials/production.key
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
+./standalone-react-for-testing/.env
+
+
+# Sentry Config File
+.env.sentry-build-plugin
+
+mise*

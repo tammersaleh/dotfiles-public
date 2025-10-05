@@ -1,10 +1,11 @@
 return {
   -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
+  lazy = false,
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
-    { 'williamboman/mason.nvim', config = true },
-    { 'williamboman/mason-lspconfig.nvim' },
+    { 'williamboman/mason.nvim', config = true, lazy = false },
+    { 'williamboman/mason-lspconfig.nvim', lazy = false },
 
     -- Useful status updates for LSP
     { 'j-hui/fidget.nvim', opts = {} }, -- `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -12,6 +13,23 @@ return {
     -- Additional lua configuration, makes nvim stuff amazing!
     { 'folke/neodev.nvim' },
     { 'nvim-telescope/telescope.nvim' },
+    {
+      'nvimtools/none-ls.nvim',
+      dependencies = { 'nvim-lua/plenary.nvim' },
+      config = function()
+        local null_ls = require 'null-ls'
+        null_ls.setup {
+          sources = {
+            null_ls.builtins.formatting.stylua,
+            null_ls.builtins.formatting.prettier,
+            null_ls.builtins.formatting.black,
+            null_ls.builtins.diagnostics.erb_lint,
+            null_ls.builtins.diagnostics.rubocop,
+            null_ls.builtins.formatting.rubocop,
+          },
+        }
+      end,
+    },
   },
   config = function()
     local on_attach = function(_, bufnr)
@@ -36,17 +54,14 @@ return {
       -- Lesser used LSP functionality
       nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-      -- Create a command `:Format` local to the LSP buffer
-      vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
-      end, { desc = 'Format current buffer with LSP' })
+      nmap('<leader>gf', vim.lsp.buf.format, '[F]ormat current file')
     end
 
     -- mason-lspconfig requires that these setup functions are called in this order before setting up the servers.
     require('mason').setup()
     require('mason-lspconfig').setup()
 
-    local lspconfig = require('lspconfig')
+    local lspconfig = require 'lspconfig'
     local servers = {
       bashls = {},
       cmake = {},
@@ -68,14 +83,14 @@ return {
           },
         },
       },
-      html = { filetypes = { 'html', 'twig', 'hbs'} },
+      html = { filetypes = { 'html', 'twig', 'hbs' } },
       stylelint_lsp = {},
       -- terraformls = {},
       tflint = {},
       yamlls = {
         yaml = {
           schemas = {
-            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+            ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
           },
         },
       },
@@ -85,7 +100,7 @@ return {
           telemetry = { enable = false },
           diagnostics = { disable = { 'missing-fields' } },
         },
-      }
+      },
     }
 
     -- Setup neovim lua configuration
@@ -114,8 +129,8 @@ return {
     -- installed outside of Mason for rbenv compatibility
     lspconfig.solargraph.setup {
       -- This requires that solargraph is added to the Gemfile for every project
-      cmd = {"bundle", "exec", "solargraph", 'stdio' },
-      root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+      cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
+      root_dir = lspconfig.util.root_pattern('Gemfile', '.git', '.'),
       settings = {
         solargraph = {
           autoformat = true,
@@ -128,6 +143,22 @@ return {
         },
       },
     }
-  end
-}
 
+    lspconfig.rubocop.setup {
+      -- See: https://docs.rubocop.org/rubocop/usage/lsp.html
+      cmd = { 'bundle', 'exec', 'rubocop', '--lsp' },
+      root_dir = lspconfig.util.root_pattern('Gemfile', '.git', '.'),
+      settings = {
+        rubocop = {},
+      },
+    }
+
+    lspconfig.ruby_lsp.setup {
+      cmd = { 'bundle', 'exec', 'ruby-lsp' },
+      root_dir = lspconfig.util.root_pattern('Gemfile', '.git', '.'),
+      settings = {
+        ruby_lsp = {},
+      },
+    }
+  end,
+}

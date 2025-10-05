@@ -5,11 +5,11 @@ return {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'RRethy/nvim-treesitter-endwise',
       'folke/which-key.nvim',
-      { 'windwp/nvim-ts-autotag',
+      {
+        -- auto-close html tags
+        'windwp/nvim-ts-autotag',
         lazy = false,
-        config = function()
-          require('nvim-ts-autotag').setup()
-        end,
+        config = function() require('nvim-ts-autotag').setup() end,
       },
     },
     build = ':TSUpdate',
@@ -49,13 +49,16 @@ return {
             init_selection = '<c-space>',
             node_incremental = '<c-space>',
             scope_incremental = '<c-s>',
-            node_decremental = '<M-space>',
+            -- tried binding <c-shift-space> to this escape code in iTerm2, 
+            -- but vim doesn't pick it up.
+            -- node_decremental = '<Esc>[27;6;32~',
           },
         },
         textobjects = {
           select = {
             enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
               ['aa'] = '@parameter.outer',

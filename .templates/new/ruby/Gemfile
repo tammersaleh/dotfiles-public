@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+ruby file: ".ruby-version"
+
+gem "command_kit"
+
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "rubocop", require: false
+  gem "rubocop-rspec", require: false
+  gem "ruby-lsp", require: false
+  gem "solargraph", require: false
+end
+
+group :test do
+  gem "rspec"
+  gem "rspec-mocks"
+  gem "webmock"
+end
+

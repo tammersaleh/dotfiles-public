@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+TEMPLATES=~/.templates/new/
+
+main() {
+  [[ $# -eq 2 ]] || usage "Expected 2 arguments, got $#"
+
+  lang=$1; shift;
+  [[ $lang == "ruby" ]] || usage "Sorry, I only know ruby for now 🤷‍♂️"
+
+  proj_path=$1; shift;
+  [[ -d $proj_path ]] && usage "Cowardly refusing to overwrite $proj_path"
+
+  mkdir "$proj_path"
+  cd "$proj_path"
+  git init
+  rsync -av "$TEMPLATES/$lang/" ./
+  [ -x post-create ] && ./post-create
+  git add -A .
+  git commit -m "First commit"
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me LANGUAGE PATH
+
+  Initializes a new project at PATH for LANGUAGE.
+
+  For LANGUAGE "ruby", it:
+    - git init
+    - Creates a stock Gempfile
+    - CLAUDE.md (and AGENT.md) files
+    - first commit
+    - runs tests
+
+  Add support for new languages by creating subdirectories under 
+  $TEMPLATES and throwing files in them.  
+  A special file named post-create will be run after copy if found and
+  executable.
+
+  Examples:
+
+    $me ruby hello-world
+	EOF
+  exit 1
+}
+
+main "$@"
