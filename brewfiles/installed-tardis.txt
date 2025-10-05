@@ -80,6 +80,7 @@ jpeg-xl 0.11.1_1 0.11.1_3 0.11.1_2
 jq 1.8.1
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
+just 1.43.0
 k9s 0.50.13
 kind 0.30.0
 krb5 1.22.1
@@ -264,6 +265,7 @@ uv 0.8.23
 uvwasi 0.0.21 0.0.23
 vim 9.1.1800
 watch 4.0.5
+watchexec 2.3.2
 webp 1.5.0 1.6.0
 wget 1.25.0
 x264 r3222 r3108

@@ -71,6 +71,7 @@ brew 'imagemagick'                   # Tools and libraries to manipulate images 
 brew 'jq'                            # Lightweight and flexible command-line JSON processor
 brew 'jsonnet'
 brew 'jsonnet-bundler'
+brew 'just'
 brew 'k9s'
 brew 'kind'
 brew 'kubectl'
@@ -131,6 +132,7 @@ brew 'tree'                          # Display directories as trees (with option
 brew 'uv'                            # Python package and project manager
 brew 'vim'                           # Vi 'workalike' with many additional features
 brew 'watch'                         # Executes a program periodically, showing output fullscreen
+brew 'watchexec'                     # Watch files and run commands on changep
 brew 'wget'                          # Internet file retriever
 brew 'xpdf'                          # For lesspipe
 brew 'xz'                            # General-purpose data compression with high compression ratio
