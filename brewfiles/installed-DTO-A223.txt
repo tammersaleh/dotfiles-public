@@ -90,7 +90,7 @@ jq 1.8.1
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
 just 1.43.0
-k9s 0.50.14
+k9s 0.50.15
 kind 0.30.0
 krb5 1.21.3 1.22.1
 kubectx 0.9.5
