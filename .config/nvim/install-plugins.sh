@@ -13,6 +13,9 @@ main() {
 
   echo "Updating plugins to locked versions"
   nvim --headless "+Lazy! install" +qa
+
+  git add lazy-lock.json
+  git commit -m "Automated: Updated neovim plugin versions."
 }
 
 usage() {
@@ -21,6 +24,7 @@ usage() {
   cat <<EOF
 
   Syncs Lazy.nvim plugins to locked versions, uninstalling unreferenced ones.
+  Commits result to git.
 
   USAGE: $me
 
