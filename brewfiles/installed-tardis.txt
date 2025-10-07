@@ -5,12 +5,14 @@ ast-grep 0.39.6
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.8
+awscli 2.31.9
 bash 5.3.3
 bash-completion@2 2.16.0
+bash-language-server 5.6.0
 bat 0.25.0_1
 bat-extras 2024.08.24
 bfg 1.15.0
+black 25.9.0
 brotli 1.1.0
 bzip2 1.0.8
 c-ares 1.34.5
@@ -18,14 +20,17 @@ ca-certificates 2025-07-15 2025-09-09 2025-08-12
 cairo 1.18.4
 cjson 1.7.18 1.7.19
 cmake 4.1.2
+cmake-language-server 0.1.11
 coreutils 9.8
 ctags 5.8_2
 dav1d 1.5.1
 diff-so-fancy 1.4.4
 diffutils 3.12
 direnv 2.37.1
+docker-compose-langserver 0.4.0
+dockerfile-language-server 0.14.1
 doppler 3.75.1
-efm-langserver 0.0.54
+dotnet@8 8.0.120
 entr 5.7
 exiftool 13.36
 fd 10.3.0
@@ -56,14 +61,14 @@ gnu-tar 1.35
 gnupg 2.4.8
 gnutls 3.8.10 3.8.9
 go 1.25.1
-gomplate 4.3.3
+golangci-lint 2.5.0
+gopls 0.20.0
 graphite2 1.3.14
 groff 1.23.0_1
 gron 0.7.1
 hadolint 2.14.0
 harfbuzz 12.1.0 11.4.3 11.2.1
 helm 3.19.0
-heroku 9.5.0
 highway 1.3.0 1.2.0
 htop 3.4.1
 hub 2.14.2
@@ -71,7 +76,7 @@ icu4c@76 76.1_1
 icu4c@77 77.1
 id3lib 3.8.3_1
 id3v2 0.1.12
-imagemagick 7.1.2-3_1
+imagemagick 7.1.2-5
 imath 3.1.12 3.2.1
 jasper 4.2.5 4.2.8
 jbig2dec 0.20
@@ -161,17 +166,18 @@ little-cms2 2.17
 llvm 21.1.2
 lpeg 1.1.0
 lua 5.4.8
+lua-language-server 3.15.0
 luajit 2.1.1753364724 2.1.1744318430 2.1.1748459687
 luv 1.51.0-1
 lz4 1.10.0
 lzo 2.10
 m4 1.4.20
 man-db 2.13.1
+marksman 2024-12-18
 mbedtls 3.6.4 3.6.3.1
 md4c 0.5.2
 media-info 25.09
-mise 2025.10.2
-mods 1.8.1
+mise 2025.10.4
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.1
@@ -196,7 +202,7 @@ openssl@1.1 1.1.1w
 openssl@3 3.6.0
 opus 1.5.2
 p11-kit 0.25.5 0.25.10
-pandoc 3.8.1
+pandoc 3.8.2
 pango 1.57.0 1.56.4 1.56.3
 pass 1.7.4
 pcre 8.45
@@ -210,6 +216,7 @@ popt 1.19
 pre-commit 4.3.0
 pstree 2.40
 psutils 3.3.11_1
+pyright 1.1.406
 python-packaging 24.2
 python@3.12 3.12.11
 python@3.13 3.13.7
@@ -241,6 +248,8 @@ sqlite 3.50.4
 srt 1.5.4
 stern 1.33.0
 stow 2.4.1
+stylelint 16.25.0
+stylua 2.3.0
 svt-av1 3.1.2 3.0.2
 switch 0.9.3
 switchaudio-osx 1.2.2
@@ -264,6 +273,7 @@ utf8proc 2.10.0 2.11.0
 uv 0.8.23
 uvwasi 0.0.21 0.0.23
 vim 9.1.1800
+vscode-langservers-extracted 4.10.0
 watch 4.0.5
 watchexec 2.3.2
 webp 1.5.0 1.6.0
@@ -275,6 +285,7 @@ xpdf 4.05
 xvid 1.3.7
 xxhash 0.8.3
 xz 5.8.1
+yaml-language-server 1.19.1
 yarn 1.22.22
 yq 4.47.2
 z3 4.15.3 4.15.2 4.15.0

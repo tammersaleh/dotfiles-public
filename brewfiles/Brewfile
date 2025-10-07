@@ -21,6 +21,24 @@ cask "google-cloud-sdk", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet com
 cask 'orbstack', greedy: true
 cask 'iterm2'
 
+brew 'bash-language-server'
+brew 'black'
+brew 'cmake-language-server'
+brew 'docker-compose-langserver'
+brew 'dockerfile-language-server'
+brew 'golangci-lint'
+brew 'gopls'
+brew 'lua-language-server'
+brew 'marksman'
+brew 'pyright'
+brew 'stylelint'
+brew 'stylua'
+brew 'vscode-langservers-extracted'
+brew 'yaml-language-server'
+brew 'hadolint'
+brew 'shellcheck'                    # Static analysis and lint tool, for bash scripts
+brew 'shfmt'                         # Shell fmt
+
 brew 'aspell'                        # Spell checker with better logic than ispell
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
 brew 'autoconf'                      # Automatic configure script builder
@@ -33,14 +51,13 @@ brew 'bat'                           # Clone of cat(1) with syntax highlighting 
 brew 'bat-extras'
 brew 'bfg'
 brew 'bzip2'                         # Freely available high-quality data compressor
-brew 'cmake'                         # Cross-platform make
+brew 'cmake'
 brew 'coreutils'                     # GNU File, Shell, and Text utilities
 brew 'ctags'                         # Reimplementation of ctags(1)
 brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
 brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
 brew 'doppler'                       # doppler.com
-brew 'efm-langserver'                # Trying this out with vim
 brew 'entr'                          # Run arbitrary commands when files change
 brew 'exiftool'                      # Perl lib for reading and writing EXIF metadata
 brew 'fd'                            # Used by nvim treesitter
@@ -58,17 +75,14 @@ brew 'git-lfs'                       # Git extension for versioning large files
 brew 'gnu-sed'
 brew 'gnu-tar'                       # GNU version of the tar archiving utility
 brew 'gnupg'                         # GNU Pretty Good Privacy (PGP) package
-brew 'go'                            # Open source programming language to build simple/reliable/efficient software
-brew 'gomplate'                      # For https://github.com/superorbital/infrastructure/blob/main/students/generate
+brew 'go'                            # golang
 brew 'gron'                          # Make JSON greppable
-brew 'hadolint'                      # Amazing dockerfile linter
 brew 'helm'
-brew 'heroku'                        # Add GitHub support to git on the command-line
 brew 'htop'
-brew 'hub'                           # Used for campus
+brew 'hub'
 brew 'id3v2'                         # For lesspipe
-brew 'imagemagick'                   # Tools and libraries to manipulate images in many formats
-brew 'jq'                            # Lightweight and flexible command-line JSON processor
+brew 'imagemagick'
+brew 'jq'
 brew 'jsonnet'
 brew 'jsonnet-bundler'
 brew 'just'
@@ -87,7 +101,6 @@ brew 'llvm'
 brew 'man-db'                        # Avoid "This manpage is not compatible with mandoc(1)" errors
 brew 'mediainfo'                     # For lesspipe
 brew 'mise'                          # asdf alternative https://mise.jdx.dev/
-brew 'mods'                          # AI on the CLI
 brew 'moreutils'
 brew 'mprocs'                        # TUI for running multiple interactive processes in parallel. 
 brew 'neovim', args: ['HEAD']
@@ -111,8 +124,6 @@ brew 'ruby-build'                    # Install various Ruby versions and impleme
 brew 'ruff'                          # Python linting
 brew 's3cmd'                         # Command-line tool for the Amazon S3 service
 brew 'sassc'                         # Wrapper around libsass that helps to create command-line apps
-brew 'shellcheck'                    # Static analysis and lint tool, for bash scripts
-brew 'shfmt'                         # Shell fmt
 brew 'sipcalc'                       # Advanced console-based IP subnet calculator
 brew 'socat'                         # netcat on steroids
 brew 'speedtest-cli'                 # Command-line interface for https://speedtest.net bandwidth tests
