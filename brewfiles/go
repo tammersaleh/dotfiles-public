@@ -13,6 +13,6 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_DOWNLOAD_CONCURRENCY=auto # https://brew.sh/2025/08/05/homebrew-4.6.0/
 
 brew update
-brew bundle install --upgrade 
+brew bundle install --upgrade  | grep -Ev '^Using '
 brew bundle cleanup --force
 brew list --versions > "installed-$(hostname -s).txt"
