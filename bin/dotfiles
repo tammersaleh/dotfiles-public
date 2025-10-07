@@ -88,7 +88,8 @@ function install {
 
 function pull-dir {
   (
-    echo "Pulling $1..."
+    name=$(basename "$1")
+    echo "Pulling $name..."
     cd "$1"
     touch .force-stash
     git stash push -u --quiet -m "In dotfiles pull"
