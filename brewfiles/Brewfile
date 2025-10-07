@@ -17,7 +17,7 @@ cask 'font-hack-nerd-font'
 cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
-cask "google-cloud-sdk", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
+cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask 'orbstack', greedy: true
 cask 'iterm2'
 
