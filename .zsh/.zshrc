@@ -310,6 +310,9 @@ bindkey -a ds delete-surround
 bindkey -a ys add-surround
 bindkey -M visual S add-surround
 
+# Don't highlight pasted text
+zle_highlight=('paste:none')
+
 # Fix bug when typing <Shift-Enter> through the neovim :terminal
 # which deletes the current commandline
 noop() { }
