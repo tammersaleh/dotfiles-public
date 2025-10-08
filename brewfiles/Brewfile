@@ -4,11 +4,10 @@ tap 'charmbracelet/tap'
 tap 'derailed/k9s'
 tap 'dopplerhq/cli'
 tap 'github/gh'
-tap 'heroku/brew'
-tap 'spacelift-io/spacelift'
 tap 'superfly/tap'                   # for mods
 tap 'gabrie30/utils'
 tap 'danielfoehrkn/switch'
+tap 'hashicorp/tap'
 
 cask '1password-cli'
 cask 'font-codicon'                  # VSCode font icons
@@ -134,7 +133,7 @@ brew 'switch'                        # kubeswitch
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'switcher'                      # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'tanka'
-brew 'terraform'
+brew 'hashicorp/tap/terraform'
 brew 'tflint'                        # Terraform linter
 brew 'the_silver_searcher'           # Code-search similar to ack
 brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/
