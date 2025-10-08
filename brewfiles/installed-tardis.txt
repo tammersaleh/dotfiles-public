@@ -255,6 +255,7 @@ switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
 tanka 0.35.0
+terraform 1.13.3
 tesseract 5.5.1
 tflint 0.59.1
 the_silver_searcher 2.2.0
@@ -295,7 +296,7 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7
 1password-cli 2.32.0
-font-codicon 0.0.40
+font-codicon 0.0.41
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
 font-meslo-lg-nerd-font 3.4.0
