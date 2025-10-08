@@ -11,7 +11,9 @@ main() {
   [[ $# -eq 2 ]] || usage "Expected 2 arguments, got $#"
 
   lang=$1; shift;
-  [[ $lang == "ruby" ]] || usage "Sorry, I only know ruby for now 🤷‍♂️"
+  lang_dir="$TEMPLATES/$lang"
+  
+  [[ -d "$lang_dir" ]] || usage "Don't know $lang. To add support, create files in $lang_dir"
 
   proj_path=$1; shift;
   [[ -d $proj_path ]] && usage "Cowardly refusing to overwrite $proj_path"
@@ -19,8 +21,8 @@ main() {
   mkdir "$proj_path"
   cd "$proj_path"
   git init
-  rsync -av "$TEMPLATES/$lang/" ./
-  [ -x post-create ] && ./post-create
+  rsync -av "$lang_dir/" ./
+  [ -x post-create ] && ./post-create $(basename $proj_path)
   git add -A .
   git commit -m "First commit"
 }

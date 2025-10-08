@@ -5,7 +5,9 @@ shopt -s inherit_errexit
 trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 [[ -v DEBUG ]] && set -x
 
-bundle install --quiet
+name=$1
+
+go mod init github.com/tammersaleh/$name
 
 # delete myself
-rm "$0"
+rm $0
