@@ -48,4 +48,8 @@ complete -C /opt/homebrew/bin/aws-sso aws-sso
 
 # END_AWS_SSO_CLI
 
-alias as=aws-sso-profile
+# https://github.com/synfinatic/aws-sso-cli/issues/800
+function as() {
+    local aws_profile=$(aws-sso list | tail -n +5 | fzf --bind 'enter:execute(echo {7})+abort')
+    [ ! -z "$aws_profile" ] && eval $(aws-sso eval -p $aws_profile)
+}

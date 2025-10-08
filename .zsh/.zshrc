@@ -348,7 +348,6 @@ typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
 typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #}}}
-
 ### Completions {{{
 
 fpath=(~/.zsh/completions $fpath)
@@ -371,10 +370,6 @@ zstyle ':completion:*' completer _expand_alias _complete _ignored
 
 
 ################# }}}
-__source_if_exists "$HOME/.zsh/kubeswitch.zsh"
-__source_if_exists "$HOME/.zsh/fzf.zsh"
-__source_if_exists "$HOME/.zsh/aws-sso-cli.zsh"
-__source_if_exists "$HOME/.zsh/iterm2_shell_integration.zsh"
 for file in $HOME/.zsh/d/*; do source "$file"; done
 
 # This must come at the end of the .zshrc file 🤷
