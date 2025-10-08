@@ -258,7 +258,7 @@ switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
 tanka 0.35.0
-terraform 1.5.7
+terraform 1.13.3
 tesseract 5.5.1
 tflint 0.59.1
 the_silver_searcher 2.2.0
