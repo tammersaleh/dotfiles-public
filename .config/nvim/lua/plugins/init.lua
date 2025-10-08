@@ -34,7 +34,6 @@ return {
   { 'cakebaker/scss-syntax.vim' },
   { 'cespare/vim-toml' },
   { 'elzr/vim-json' },
-  { 'fatih/vim-go' },
   { 'hail2u/vim-css3-syntax' },
   { 'hashivim/vim-terraform' },
   { 'pangloss/vim-javascript' },

@@ -4,16 +4,16 @@ vim.lsp.config('*', {
       vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
     end
 
-    local telescope = require('telescope.builtin')
+    local telescope = require 'telescope.builtin'
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-    nmap('gd',         telescope.lsp_definitions, '[G]oto [D]efinition')
-    nmap('gr',         telescope.lsp_references, '[G]oto [R]eferences')
-    nmap('gI',         telescope.lsp_implementations, '[G]oto [I]mplementation')
-    nmap('<leader>D',  telescope.lsp_type_definitions, 'Type [D]efinition')
+    nmap('gd', telescope.lsp_definitions, '[G]oto [D]efinition')
+    nmap('gr', telescope.lsp_references, '[G]oto [R]eferences')
+    nmap('gI', telescope.lsp_implementations, '[G]oto [I]mplementation')
+    nmap('<leader>D', telescope.lsp_type_definitions, 'Type [D]efinition')
     nmap('<leader>ds', telescope.lsp_document_symbols, '[D]ocument [S]ymbols')
     nmap('<leader>ws', telescope.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-    nmap('gD',         vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+    nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('<leader>gf', vim.lsp.buf.format, '[F]ormat current file')
   end,
 })
@@ -23,10 +23,10 @@ vim.lsp.config('lua_ls', {
     Lua = {
       workspace = {
         checkThirdParty = false,
-        library = { vim.env.VIMRUNTIME }
+        library = { vim.env.VIMRUNTIME },
       },
     },
-  }
+  },
 })
 
 vim.lsp.config('solargraph', {
@@ -63,11 +63,10 @@ vim.lsp.config('pyright', {
         ignore = { '*' }, -- Ignore all files for analysis to exclusively use Ruff for linting
       },
     },
-
-  }
+  },
 })
 
-vim.lsp.enable({
+vim.lsp.enable {
   'bashls',
   'cmake',
   'cssls',
@@ -81,7 +80,4 @@ vim.lsp.enable({
   'ruff',
   'tflint',
   'yamlls',
-  'gopls',
-  'golangci-lint',
-})
-
+}
