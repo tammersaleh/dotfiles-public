@@ -8,6 +8,8 @@ trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 main() {
   [[ $# -eq 0 ]] || usage "Expected no arguments, got $#"
 
+  cd "$(dirname "$0")"
+
   echo "Removing unreferenced plugins"
   nvim --headless "+Lazy! clean" +qa
 
