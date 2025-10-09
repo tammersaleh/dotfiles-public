@@ -207,41 +207,6 @@ if __has bat; then
   chpwd_functions=(${chpwd_functions[@]} "head_readme")
 fi
 
-journal() {
-  local day=today
-  if [[ $1 == "yesterday" ]]; then
-    shift
-    day=yesterday
-  fi
-  local file="$HOME/Dropbox/journal/$(date -d $day +%F).md"
-
-  if [[ ! -f "$file" ]]; then
-    echo "# $(date +'%A, %B %-d, %Y')" > "$file"
-  fi
-
-  if [[ $# -eq 0 ]]; then
-    v "$file"
-  else
-    echo       >> "$file"
-    echo "$*"  >> "$file"
-  fi
-}
-alias j=journal
-
-fixssh() {
-  # shellcheck disable=SC2046
-  eval $(tmux show-env -s | grep '^SSH_')
-}
-
-tmux-detach() {
-  my_id="$(echo "$TMUX_PANE" | cut -c 2-)"
-  for id in $(tmux "ls" -F '#{session_name}' | grep -vx "$my_id"); do
-    echo "detaching $id"
-    tmux detach-client -s "$id"
-  done
-  exit
-}
-
 # https://stackoverflow.com/questions/30542491/push-force-with-lease-by-default
 g() {
   if [[ $1 == 'push' && ( $@ == *'--force'* || $@ == *' -f'*) && $@ != *'-with-lease'* ]]; then
@@ -255,11 +220,7 @@ g() {
 ### Hooks & Daemons {{{
 __has rbenv  && eval "$(rbenv init -)"
 __has direnv && eval "$(direnv hook zsh)"
-
-if [[ -x ~/.dropbox-dist/dropboxd ]] && ! __running dropbox; then
-  echo "Restarting Dropbox..."
-  nohup ~/.dropbox-dist/dropboxd >> ~/.dropbox-dist/dropboxd.log &
-fi
+__has mise   && eval "$(mise activate zsh)"
 # }}}
 ### Vim Mode {{{
 
