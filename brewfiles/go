@@ -16,5 +16,7 @@ brew update
 brew bundle install --upgrade  | grep -Ev '^Using '
 brew bundle cleanup --force
 brew list --versions > "installed-$(hostname -s).txt"
-git add installed-*.txt
-git commit -m "Automated: record new brew formula versions."
+if ! git diff --quiet HEAD -- installed-*.txt; then
+  git add installed-*.txt
+  git commit -m "Automated: record new brew formula versions."
+fi
