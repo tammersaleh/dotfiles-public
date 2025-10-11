@@ -25,6 +25,8 @@ vim.lsp.config('lua_ls', {
         checkThirdParty = false,
         library = { vim.env.VIMRUNTIME },
       },
+      telemetry = { enable = false },
+      diagnostics = { disable = { 'missing-fields' } },
     },
   },
 })
