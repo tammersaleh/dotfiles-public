@@ -66,13 +66,15 @@ return {
     map('g', function() builtin.live_grep({cwd = gcwd()}) end, '[g]rep')
     map('G', function() builtin.live_grep({cwd = git()})  end, '[G]rep from Git root')
 
+    map('k', function() builtin.keymaps() end, 'Find [k]eymaps')
+
     map('w', function() builtin.live_grep({cwd = gcwd(), default_text = vim.fn.expand('<cword>')}) end, 'current [W]ord')
 
     map('b', find_in_current_buffer_fn(), 'in current [b]uffer')
 
-    map('d', builtin.diagnostics, '[D]iagnostics')
-    map('h', builtin.help_tags,   '[H]elp')
-    map('a', builtin.builtin,     '[A]ll Telescope')
-    map('r', builtin.resume,      '[R]esume')
+    map('d', builtin.diagnostics, '[d]iagnostics')
+    map('h', builtin.help_tags,   '[h]elp')
+    map('a', builtin.builtin,     '[a]ll Telescope')
+    map('r', builtin.resume,      '[r]esume')
   end
 }

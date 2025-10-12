@@ -1,14 +1,17 @@
 return {
   'saghen/blink.cmp',
-  -- optional: provides snippets for the snippet source
-  dependencies = { 'rafamadriz/friendly-snippets' },
-
-  -- use a release tag to download pre-built binaries
   version = '1.*',
-  -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  -- build = 'cargo build --release',
-  -- If you use nix, you can build from source using latest nightly rust with:
-  -- build = 'nix run .#build-plugin',
+
+  dependencies = {
+    { 'rafamadriz/friendly-snippets',
+      dependencies = {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        -- install jsregexp (optional!).
+        build = 'make install_jsregexp',
+      }
+    },
+  },
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -25,41 +28,22 @@ return {
     -- C-k: Toggle signature help (if signature.enabled = true)
     --
     -- See :h blink-cmp-config-keymap for defining your own keymap
-    keymap = { preset = 'super-tab' },
-
-    appearance = {
-      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'normal'
+    keymap = {
+      preset = 'super-tab',
     },
 
-    -- (Default) Only show the documentation popup when manually triggered
+    appearance = { nerd_font_variant = 'normal' },
+
     completion = {
       ghost_text = { enabled = true },
+      trigger = { show_in_snippet = false },
     },
 
-    -- Default list of enabled providers defined so that you can extend it
-    -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
 
-    -- https://github.com/folke/lazydev.nvim
-    -- providers = {
-    --   lazydev = {
-    --     name = "LazyDev",
-    --     module = "lazydev.integrations.blink",
-    --     -- make lazydev completions top priority (see `:h blink.cmp`)
-    --     score_offset = 100,
-    --   },
-    -- },
-
-    -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-    -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-    -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-    --
-    -- See the fuzzy documentation for more information
-    fuzzy = { implementation = "prefer_rust_with_warning" }
+    fuzzy = { implementation = 'prefer_rust_with_warning' },
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { 'sources.default' },
 }

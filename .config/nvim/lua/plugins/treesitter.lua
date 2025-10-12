@@ -118,21 +118,6 @@ return {
       -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
       vim.opt.foldnestmax = 2
 
-      require('which-key').add {
-        { '<leader>c', desc = '[C]ode' },
-        { '<leader>d', desc = '[D]ocument' },
-        { '<leader>g', desc = '[G]it' },
-        { '<leader>s', desc = '[S]earch' },
-        { '<leader>t', desc = '[T]oggle' },
-        { '<leader>w', desc = '[W]orkspace' },
-        {
-          -- register which-key VISUAL mode
-          -- required for visual <leader>hs (hunk stage) to work
-          mode = 'v',
-          { '<leader>', desc = 'VISUAL <leader>' },
-        },
-      }
-
       vim.keymap.set('n', '<Left>', MoveAndFoldLeft, { desc = 'Move left, possibly closing folds.' })
       vim.keymap.set('n', 'h', MoveAndFoldLeft, { desc = 'Move left, possibly closing folds.' })
       vim.keymap.set('n', '<Right>', MoveAndFoldRight, { desc = 'Move right, possibly opening folds.' })

@@ -10,9 +10,6 @@ vim.lsp.config('*', {
     nmap('gd', telescope.lsp_definitions, '[G]oto [D]efinition')
     nmap('gr', telescope.lsp_references, '[G]oto [R]eferences')
     nmap('gI', telescope.lsp_implementations, '[G]oto [I]mplementation')
-    nmap('<leader>D', telescope.lsp_type_definitions, 'Type [D]efinition')
-    nmap('<leader>ds', telescope.lsp_document_symbols, '[D]ocument [S]ymbols')
-    nmap('<leader>ws', telescope.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('<leader>gf', vim.lsp.buf.format, '[F]ormat current file')
   end,
@@ -29,30 +26,6 @@ vim.lsp.config('lua_ls', {
       diagnostics = { disable = { 'missing-fields' } },
     },
   },
-})
-
-vim.lsp.config('solargraph', {
-  -- This requires that solargraph is added to the Gemfile for every project
-  cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
-  settings = {
-    solargraph = {
-      autoformat = true,
-      completion = true,
-      diagnostic = true,
-      folding = true,
-      references = true,
-      rename = true,
-      symbols = true,
-    },
-  },
-})
-
-vim.lsp.config('rubocop', {
-  cmd = { 'bundle', 'exec', 'rubocop', '--lsp' },
-})
-
-vim.lsp.config('ruby_lsp', {
-  cmd = { 'bundle', 'exec', 'ruby-lsp' },
 })
 
 vim.lsp.config('pyright', {
