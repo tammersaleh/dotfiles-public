@@ -50,6 +50,7 @@ complete -C /opt/homebrew/bin/aws-sso aws-sso
 
 # https://github.com/synfinatic/aws-sso-cli/issues/800
 function as() {
-    local aws_profile=$(aws-sso list | tail -n +5 | fzf --bind 'enter:execute(echo {7})+abort')
-    [ ! -z "$aws_profile" ] && eval $(aws-sso eval -p $aws_profile)
+    local aws_profile=$(aws-sso list | tail -n +5 | fzf | cut -d '|' -f4 | tr -d '[:space:]')
+    aws-sso login
+    eval $(aws-sso eval -p $aws_profile)
 }
