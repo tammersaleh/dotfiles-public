@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby file: ".ruby-version"
+ruby file: ".tool-versions"
 
 gem "command_kit" # https://github.com/postmodern/command_kit.rb#readme
 
