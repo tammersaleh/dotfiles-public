@@ -2,7 +2,7 @@
 
 ## Running
 
-Run `./bin/main` (or if you have [Mise](https://mise.jdx.dev/) installed, just `main`)
+Run `./bin/cmd` (or if you have [Mise](https://mise.jdx.dev/) installed, just `cmd`)
 
 ## Development
 
