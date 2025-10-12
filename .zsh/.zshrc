@@ -214,6 +214,7 @@ g() {
 ############### }}}
 ### Hooks & Daemons {{{
 __has mise   && eval "$(mise activate zsh)"
+alias mt="mise trust"
 # }}}
 ### Vim Mode {{{
 
