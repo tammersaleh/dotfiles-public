@@ -1,16 +1,12 @@
 # frozen_string_literal: true
+
 require "cmd"
-require 'spec_helper'
-require 'stringio'
+require "spec_helper"
+require "stringio"
 
 RSpec.describe Cmd do
   subject do
-    described_class.new(
-      stdin:   stdin,
-      stdout:  stdout,
-      stderr:  stderr,
-      env:     env
-    )
+    described_class.new(stdin: stdin, stdout: stdout, stderr: stderr, env: env)
   end
 
   let(:stdin)  { StringIO.new }
@@ -33,7 +29,7 @@ RSpec.describe Cmd do
       before { subject.main(["-o", output, file]) }
 
       # it "must create the output file" do
-      #   
+      #
       # end
     end
   end
