@@ -1,12 +1,10 @@
 # Starter Ruby Project
 
+> Note: [Mise](https://mise.jdx.dev/) is required for development.
+
 ## Running
 
-Run `./bin/cmd` (or if you have [Mise](https://mise.jdx.dev/) installed, just `cmd`)
-
-## Development
-
-[Mise](https://mise.jdx.dev/) is required for development.
+Run `cmd`
 
 ## Testing
 
