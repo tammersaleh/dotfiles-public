@@ -114,7 +114,6 @@ brew 'pinentry-mac'
 brew 'pre-commit'                    # git pre-commit hook runner
 brew 'pstree'                        # Show ps output as a tree
 brew 'python'                        # Interpreted, interactive, object-oriented programming language
-brew 'rbenv'                         # Ruby version manager
 brew 'rclone'
 brew 'readline'                      # Library for command-line editing
 brew 'ripgrep'                       # Needed by vim treesitter

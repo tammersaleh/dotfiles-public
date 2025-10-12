@@ -62,7 +62,6 @@ __prependpath "$HOME/bin"
 ### Variables {{{
 
 export XDG_DATA_HOME=$HOME/.local/share
-#tty -s && export DIRENV_LOG_FORMAT="$(tput setaf 010)$(tput dim)%s$(tput sgr0)"
 export BOTO_CONFIG=/dev/null
 
 export CLICOLOR=1
@@ -176,9 +175,6 @@ alias cg='d=$(git rev-parse --show-cdup) && [[ -n "$d" ]] && cd "$d"'
 
 alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
 
-#alias da="direnv allow"
-#alias de="vi .envrc && direnv allow"
-
 alias dr="doppler run --"
 
 alias pyconsole="pipenv run ptpython"
@@ -217,8 +213,6 @@ g() {
 
 ############### }}}
 ### Hooks & Daemons {{{
-# __has rbenv  && eval "$(rbenv init -)"
-# __has direnv && eval "$(direnv hook zsh)"
 __has mise   && eval "$(mise activate zsh)"
 # }}}
 ### Vim Mode {{{
