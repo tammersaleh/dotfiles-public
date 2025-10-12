@@ -25,6 +25,7 @@ main() {
   [ -x post-create ] && ./post-create $(basename $proj_path)
   git add -A .
   git commit -m "First commit"
+  v
 }
 
 usage() {
