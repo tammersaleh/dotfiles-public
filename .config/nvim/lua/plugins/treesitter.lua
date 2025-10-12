@@ -9,30 +9,38 @@ return {
         -- auto-close html tags
         'windwp/nvim-ts-autotag',
         lazy = false,
-        config = function() require('nvim-ts-autotag').setup() end,
+        config = function()
+          require('nvim-ts-autotag').setup()
+        end,
       },
     },
     build = ':TSUpdate',
-    config = function ()
+    config = function()
       local function MoveAndFoldLeft()
-          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 
-          if col == 0 and vim.fn.foldlevel(line) ~= 0 then
-              vim.cmd.foldclose()
-          else
-              vim.cmd.normal({ 'h', bang = true })
-          end
+        if col == 0 and vim.fn.foldlevel(line) ~= 0 then
+          vim.cmd.foldclose()
+        else
+          vim.cmd.normal { 'h', bang = true }
+        end
       end
 
       local function MoveAndFoldRight()
-          local line = vim.api.nvim_win_get_cursor(0)[1]
+        local line = vim.api.nvim_win_get_cursor(0)[1]
 
-          if vim.fn.foldlevel(line) ~= 0 and vim.fn.foldclosed(line) ~= -1 then
-              vim.cmd.foldopen()
-          else
-              vim.cmd.normal({'l', bang = true})
-          end
+        if vim.fn.foldlevel(line) ~= 0 and vim.fn.foldclosed(line) ~= -1 then
+          vim.cmd.foldopen()
+        else
+          vim.cmd.normal { 'l', bang = true }
+        end
       end
+
+      require('vim.treesitter.query').add_predicate('is-mise?', function(_, _, bufnr, _)
+        local filepath = vim.api.nvim_buf_get_name(tonumber(bufnr) or 0)
+        local filename = vim.fn.fnamemodify(filepath, ':t')
+        return string.match(filename, '.*mise.*%.toml$') ~= nil
+      end, { force = true, all = false })
 
       require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
@@ -49,7 +57,7 @@ return {
             init_selection = '<c-space>',
             node_incremental = '<c-space>',
             scope_incremental = '<c-s>',
-            -- tried binding <c-shift-space> to this escape code in iTerm2, 
+            -- tried binding <c-shift-space> to this escape code in iTerm2,
             -- but vim doesn't pick it up.
             -- node_decremental = '<Esc>[27;6;32~',
           },
@@ -104,7 +112,7 @@ return {
         },
       }
       vim.opt.foldmethod = 'expr'
-      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
       -- This doesn't work.  Prints:
       -- 0................
       -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
@@ -122,17 +130,21 @@ return {
           -- required for visual <leader>hs (hunk stage) to work
           mode = 'v',
           { '<leader>', desc = 'VISUAL <leader>' },
-        }
+        },
       }
 
-      vim.keymap.set('n', '<Left>',  MoveAndFoldLeft,  {desc = "Move left, possibly closing folds."})
-      vim.keymap.set('n', 'h',       MoveAndFoldLeft,  {desc = "Move left, possibly closing folds."})
-      vim.keymap.set('n', '<Right>', MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
-      vim.keymap.set('n', 'l',       MoveAndFoldRight, {desc = "Move right, possibly opening folds."})
+      vim.keymap.set('n', '<Left>', MoveAndFoldLeft, { desc = 'Move left, possibly closing folds.' })
+      vim.keymap.set('n', 'h', MoveAndFoldLeft, { desc = 'Move left, possibly closing folds.' })
+      vim.keymap.set('n', '<Right>', MoveAndFoldRight, { desc = 'Move right, possibly opening folds.' })
+      vim.keymap.set('n', 'l', MoveAndFoldRight, { desc = 'Move right, possibly opening folds.' })
 
       -- Treesitter for Ruby for some reason re-indents incorrectly every time you type '.'
-      vim.api.nvim_create_autocmd("FileType", { pattern = "ruby", callback = function() vim.opt_local.indentkeys:remove('.') end })
-    end
-  }
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'ruby',
+        callback = function()
+          vim.opt_local.indentkeys:remove '.'
+        end,
+      })
+    end,
+  },
 }
-
