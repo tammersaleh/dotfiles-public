@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 require "cmd"
-r:q
-:q:equire 'spec_helper'
+require 'spec_helper'
 require 'stringio'
 
 RSpec.describe Cmd do

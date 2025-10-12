@@ -2,9 +2,13 @@
 
 ## Running
 
-Run `./bin/main` (or if you have [direnv](direnv.net) installed, just `main`)
+Run `./bin/main` (or if you have [Mise](https://mise.jdx.dev/) installed, just `main`)
+
+## Development
+
+[Mise](https://mise.jdx.dev/) is required for development.
 
 ## Testing
 
-Run `./bin/tests` or `./bin/watch-tests`
+Run `mise specs` or `./bin/watch-specs`
 
