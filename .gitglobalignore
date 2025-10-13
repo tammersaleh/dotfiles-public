@@ -16,6 +16,8 @@ do-not-commit/
 do_not_commit/
 .netlify
 .venv
+.claude
+coverage.out
 
 !.keep
 !.keepme
