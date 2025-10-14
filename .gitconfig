@@ -130,15 +130,15 @@
     followTags = true
 [commit]
     verbose = true
-	gpgsign = true
+    gpgsign = true
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [credential "https://github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+    helper = 
+    helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+    helper = 
+    helper = !/opt/homebrew/bin/gh auth git-credential
 [transfer]
     fsckobjects = true
 [fetch]
@@ -154,7 +154,7 @@
     sort = -committerdate
 [tag]
     sort = version:refname
-	gpgSign = true
+    gpgSign = true
 [log]
     date = iso
 [http]
