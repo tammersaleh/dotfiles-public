@@ -7,11 +7,11 @@ ast-grep 0.39.6
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.17
+awscli 2.31.18
 bash 5.3.3
 bash-completion@2 2.16.0
 bash-language-server 5.6.0
-bat 0.25.0_1
+bat 0.26.0
 bat-extras 2024.08.24
 bfg 1.15.0
 black 25.9.0
@@ -91,11 +91,12 @@ jq 1.8.1
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
 just 1.43.0
-k9s 0.50.15
+k9s 0.50.16
 kind 0.30.0
 krb5 1.21.3 1.22.1
+kubecolor 0.5.2
 kubectx 0.9.5
-kubelogin 1.34.1
+kubelogin 1.34.2
 kubernetes-cli 1.34.1
 lame 3.100
 lazygit 0.55.1
@@ -112,7 +113,7 @@ libdeflate 1.24
 libdom 0.4.2
 libevent 2.1.12_1
 libgcrypt 1.11.1
-libgit2 1.9.0
+libgit2 1.9.0 1.9.1
 libgpg-error 1.55
 libheif 1.20.1 1.20.2
 libhubbub 0.3.8
@@ -170,7 +171,7 @@ libyaml 0.2.5
 libzen 0.4.41_1
 libzip 1.11.4
 little-cms2 2.17
-llvm 21.1.3
+llvm 21.1.3_1
 lpeg 1.1.0
 lua 5.4.8
 lua-language-server 3.15.0
@@ -184,7 +185,7 @@ marksman 2024-12-18
 mbedtls 3.6.4 3.6.3 3.6.3.1
 md4c 0.5.2
 media-info 25.09
-mise 2025.10.10
+mise 2025.10.12
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -207,7 +208,7 @@ openssl@1.1 1.1.1w
 openssl@3 3.6.0
 opus 1.5.2
 p11-kit 0.25.5 0.25.10
-pandoc 3.8.2
+pandoc 3.8.2.1
 pango 1.57.0 1.56.3
 pass 1.7.4
 pcre 8.45
@@ -228,7 +229,7 @@ python@3.14 3.14.0
 qrencode 4.1.1
 qt 6.9.1
 rav1e 0.8.1
-rclone 1.71.1
+rclone 1.71.2
 readline 8.3.1
 ripgrep 15.0.0
 rsync 3.4.1
@@ -274,7 +275,7 @@ unbound 1.24.0 1.23.0
 unibilium 2.1.2
 usage 2.2.2 2.3.2
 utf8proc 2.10.0
-uv 0.9.3
+uv 0.9.4
 uvwasi 0.0.23
 vim 9.1.1850
 vscode-langservers-extracted 4.10.0
