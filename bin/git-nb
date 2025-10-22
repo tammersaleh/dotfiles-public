@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+main() {
+  [[ $# -ge 1 ]] || usage "Expected branch name"
+  name=$(echo "$*" | tr '[:upper:]' '[:lower:]' | tr -cs '[:alnum:]' '-' | sed 's/^-*//;s/-*$//')
+  git checkout -b "tammersaleh/$name"
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me=$(basename "$1")
+  cat <<-EOF
+
+  USAGE: $me SOME LONG NAME
+
+  Creates a branch named tammersaleh/NAME ready for pushing.
+
+  Examples:
+
+    $me How about some lunch?   # Creates a branch named tammersaleh/how-about-some-lunch
+
+	EOF
+  exit 1
+}
+
+main "$@"
+# cursor: 10 4 del

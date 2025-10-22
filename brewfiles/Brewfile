@@ -88,9 +88,8 @@ brew 'just'
 brew 'k9s'
 brew 'kind'
 brew 'kubectl'
-brew 'kubectx'                       # kubens and kubectx
 brew 'kubelogin'
-brew 'kubernetes-cli'                # kubectl
+brew 'kubecolor'
 brew 'lazygit'
 brew 'lesspipe'                      # Input filter for the pager less
 brew 'libnotify'                     # Library that sends desktop notifications to a notification daemon
@@ -134,6 +133,7 @@ brew 'switcher'                      # Used by kubeswitch.  `brew cleanup` gets 
 brew 'tanka'
 brew 'hashicorp/tap/terraform'
 brew 'tflint'                        # Terraform linter
+brew 'hl'                            # Superfast local JSON compatible log file viewer. 
 brew 'the_silver_searcher'           # Code-search similar to ack
 brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/
 brew 'tmux'                          # Terminal multiplexer

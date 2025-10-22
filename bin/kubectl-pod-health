@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+exec kubecolor get pods -o go-template='{{printf "NAME\tCONTAINERS\tSTATUS\tREADY\tINIT\tSCHED\n"}}{{range .items}}{{.metadata.name}}{{"\t"}}{{len .spec.containers}}{{"\t"}}{{.status.phase}}{{"\t"}}{{range .status.conditions}}{{if eq .type "Ready"}}{{.status}}{{end}}{{end}}{{"\t"}}{{range .status.conditions}}{{if eq .type "Initialized"}}{{.status}}{{end}}{{end}}{{"\t"}}{{range .status.conditions}}{{if eq .type "PodScheduled"}}{{.status}}{{end}}{{end}}{{"\n"}}{{end}}' "$@" | column -t
+
