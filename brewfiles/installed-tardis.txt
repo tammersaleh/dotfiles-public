@@ -5,7 +5,7 @@ ast-grep 0.39.6
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.18
+awscli 2.31.21
 bash 5.3.3
 bash-completion@2 2.16.0
 bash-language-server 5.6.0
@@ -45,7 +45,7 @@ fzf 0.66.0
 gawk 5.3.1
 gdk-pixbuf 2.42.12_1 2.44.3
 gettext 0.26
-gh 2.82.0
+gh 2.82.1
 ghorg 1.11.4
 ghostscript 10.05.1
 giflib 5.2.2
@@ -70,6 +70,7 @@ hadolint 2.14.0
 harfbuzz 12.1.0 11.4.3 11.2.1
 helm 3.19.0
 highway 1.3.0 1.2.0
+hl 0.32.1
 htop 3.4.1
 hub 2.14.2
 icu4c@76 76.1_1
@@ -89,7 +90,7 @@ just 1.43.0
 k9s 0.50.16
 kind 0.30.0
 krb5 1.22.1
-kubectx 0.9.5
+kubecolor 0.5.2
 kubelogin 1.34.2
 kubernetes-cli 1.34.1
 lame 3.100
@@ -163,7 +164,7 @@ libyaml 0.2.5
 libzen 0.4.41_1
 libzip 1.11.4
 little-cms2 2.17
-llvm 21.1.3_1
+llvm 21.1.4
 lpeg 1.1.0
 lua 5.4.8
 lua-language-server 3.15.0
@@ -177,7 +178,7 @@ marksman 2024-12-18
 mbedtls 3.6.4 3.6.3.1
 md4c 0.5.2
 media-info 25.09
-mise 2025.10.12
+mise 2025.10.16
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.1
@@ -206,7 +207,7 @@ pandoc 3.8.2.1
 pango 1.57.0 1.56.4 1.56.3
 pass 1.7.4
 pcre 8.45
-pcre2 10.45 10.46
+pcre2 10.45 10.47 10.46
 pdftk-java 3.3.3
 pinentry 1.3.1_1
 pinentry-mac 1.3.1.1
@@ -216,7 +217,7 @@ popt 1.19
 pre-commit 4.3.0
 pstree 2.40
 psutils 3.3.11_1
-pyright 1.1.406
+pyright 1.1.407
 python-packaging 24.2
 python@3.12 3.12.11
 python@3.13 3.13.8 3.13.7 3.13.9
@@ -226,12 +227,12 @@ qt@5 5.15.17
 rav1e 0.8.0 0.8.1
 rclone 1.71.2
 readline 8.3.1
-ripgrep 15.0.0
+ripgrep 15.1.0
 rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7 3.4.6 3.4.4 3.4.5
-ruby-build 20251008
-ruff 0.14.1
+ruby-build 20251023
+ruff 0.14.2
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.10 2.32.8 2.32.6 2.30.11 2.30.8 2.32.2 2.32.4
@@ -268,9 +269,9 @@ tree-sitter 0.24.6 0.24.7 0.25.2 0.25.4 0.25.3 0.24.3 0.25.8 0.25.6 0.25.10
 uchardet 0.0.8
 unbound 1.24.0 1.23.1 1.23.0
 unibilium 2.1.2
-usage 2.2.2 2.3.2
+usage 2.2.2 2.4.0 2.3.2
 utf8proc 2.10.0 2.11.0
-uv 0.9.4
+uv 0.9.5
 uvwasi 0.0.21 0.0.23
 vim 9.1.1850
 vscode-langservers-extracted 4.10.0
