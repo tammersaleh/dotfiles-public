@@ -7,7 +7,7 @@ ast-grep 0.39.6
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.19
+awscli 2.31.21
 bash 5.3.3
 bash-completion@2 2.16.0
 bash-language-server 5.6.0
@@ -127,7 +127,7 @@ libmms 0.6.4
 libmng 2.0.3_1
 libnghttp2 1.67.1 1.66.0
 libnghttp3 1.12.0
-libngtcp2 1.16.0
+libngtcp2 1.16.0 1.17.0
 libnotify 0.8.7
 libogg 1.3.6 1.3.5
 libomp 21.1.2 21.1.3 20.1.8
@@ -170,7 +170,7 @@ libyaml 0.2.5
 libzen 0.4.41_1
 libzip 1.11.4
 little-cms2 2.17
-llvm 21.1.3_1
+llvm 21.1.4
 lpeg 1.1.0
 lua 5.4.8
 lua-language-server 3.15.0
@@ -184,7 +184,7 @@ marksman 2024-12-18
 mbedtls 3.6.4 3.6.3 3.6.3.1
 md4c 0.5.2
 media-info 25.09
-mise 2025.10.14
+mise 2025.10.16
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -211,7 +211,7 @@ pandoc 3.8.2.1
 pango 1.57.0 1.56.3
 pass 1.7.4
 pcre 8.45
-pcre2 10.45 10.46
+pcre2 10.45 10.47 10.46
 pdftk-java 3.3.3
 pinentry 1.3.1_1
 pinentry-mac 1.3.1.1
@@ -221,7 +221,7 @@ popt 1.19
 pre-commit 4.3.0
 pstree 2.40
 psutils 3.3.11
-pyright 1.1.406
+pyright 1.1.407
 python@3.12 3.12.11
 python@3.13 3.13.8 3.13.7 3.13.9
 python@3.14 3.14.0
@@ -230,12 +230,12 @@ qt 6.9.1
 rav1e 0.8.1
 rclone 1.71.2
 readline 8.3.1
-ripgrep 15.0.0
+ripgrep 15.1.0
 rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7 3.4.6 3.4.4
-ruby-build 20251008
-ruff 0.14.1
+ruby-build 20251023
+ruff 0.14.2
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.10 2.32.6
@@ -308,4 +308,4 @@ font-source-sans-3 latest
 gcloud-cli 532.0.0
 ghostty 1.1.3
 iterm2 3.5.14
-orbstack 2.0.3,19876
+orbstack 2.0.4,19887
