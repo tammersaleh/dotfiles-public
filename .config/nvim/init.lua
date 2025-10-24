@@ -195,34 +195,6 @@ vim.keymap.set('n', '<S-Tab>', '<<_', { silent = true, desc = "Dendent line" })
 
 vim.keymap.set('n', 'gb', '<C-t>', {silent = true, desc = "[G]o [b]ack in tag stack"})
 
--- Better tab-completion
-
-local function only_whitespace_before_cursor()
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
-  local text_before_cursor = vim.api.nvim_get_current_line():sub(1, cursor_pos)
-  return text_before_cursor:match("^%s*$") ~= nil
-end
-
-local function supertab(forward)
-  -- Hit <tab> after a word in a line like such:
-  -- Hello darling! <tab>
-  -- ...and the entire line indents.
-  local tab_key = forward and "<Tab>" or "<S-Tab>"
-  local indent_key = forward and "<C-t>" or "<C-d>"
-  return only_whitespace_before_cursor() and tab_key or indent_key
-end
-
-local function supertab_forward()
-  return supertab(true)
-end
-
-local function supertab_backward()
-  return supertab(false)
-end
-
-vim.keymap.set('i', '<Tab>',   supertab_forward,  {silent = true, expr = true})
-vim.keymap.set('i', '<S-Tab>', supertab_backward, {silent = true, expr = true})
-
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
