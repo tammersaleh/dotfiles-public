@@ -16,15 +16,23 @@ main() {
   [[ -d "$lang_dir" ]] || usage "Don't know $lang. To add support, create files in $lang_dir"
 
   proj_path=$1; shift;
-  [[ -d $proj_path ]] && usage "Cowardly refusing to overwrite $proj_path"
 
-  mkdir "$proj_path"
-  cd "$proj_path"
-  git init
+  if [[ -d $proj_path ]]; then
+    cd "$proj_path"
+    [[ -d .git ]] || usage "Cowardly refusing to overwrite files in non-git-backed $proj_path"
+
+    echo "Updating files in $proj_path"
+  else
+    echo "Generating files in $proj_path"
+    mkdir "$proj_path"
+    cd "$proj_path"
+    git init
+  fi
+
   rsync -av "$lang_dir/" ./
   [ -x post-create ] && ./post-create $(basename $proj_path)
   git add -A .
-  git commit -m "First commit"
+  git commit -m "$0 $*"
   v
 }
 

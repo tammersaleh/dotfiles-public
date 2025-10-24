@@ -41,6 +41,7 @@ class Cmd < CommandKit::Command
   end
 
   def run(file)
+    # Your logic here.
     puts "count=#{options[:count].inspect}"
     puts "output=#{options[:output].inspect}"
     puts "file=#{file.inspect}"

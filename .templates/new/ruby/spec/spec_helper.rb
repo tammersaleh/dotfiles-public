@@ -4,6 +4,7 @@ RSpec.configure do |config|
   # config.full_backtrace = true
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+    expectations.on_potential_false_positives = :nothing
   end
 
   config.mock_with :rspec do |mocks|

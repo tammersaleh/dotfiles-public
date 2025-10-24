@@ -14,23 +14,18 @@ RSpec.describe Cmd do
   let(:stderr) { StringIO.new }
   let(:env)    { ENV }
 
-  # testing with raw options/arguments
-  describe "#main" do
-    context "when executed with no arguments" do
-      it "must exit with error" do
-        expect(subject.main([])).to eq(-1)
-      end
+  context "run with no arguments" do
+    it "must exit with error" do
+      expect(subject.main([])).to eq(1)
     end
+  end
 
-    context "when executed with -o OUTPUT" do
-      # let(:file)   { ... }
-      # let(:output) { ... }
+  context "run with -o output file" do
+    let(:file)   { "myfile" }
+    let(:output) { "myoutput" }
 
-      before { subject.main(["-o", output, file]) }
-
-      # it "must create the output file" do
-      #
-      # end
+    it "must exit clean" do
+      expect(subject.main(["-o", output, file])).to eq(0)
     end
   end
 end

@@ -8,5 +8,5 @@ Run `cmd`
 
 ## Testing
 
-Run `mise specs` or `./bin/watch-specs`
+Run `mise specs` or `watch-specs`
 
