@@ -20,9 +20,9 @@ end
 local function tab_backward()
   return tab(false)
 end
-
-vim.keymap.set('i', '<Tab>',   tab_forward,  {silent = true, expr = true})
-vim.keymap.set('i', '<S-Tab>', tab_backward, {silent = true, expr = true})
+--
+-- vim.keymap.set('i', '<Tab>',   tab_forward,  {silent = true, expr = true})
+-- vim.keymap.set('i', '<S-Tab>', tab_backward, {silent = true, expr = true})
 
 return {
   'saghen/blink.cmp',
@@ -37,7 +37,11 @@ return {
       keymap = {
         preset = 'none',
         ['<Tab>'] = {
-          'select_next',
+          function(cmp)
+            if only_whitespace_before_cursor() then return false end
+            cmp.show_and_insert()
+          end,
+          function(cmp) if cmp.is_visible() then cmp.select_next() end end,
           'fallback'
         },
         ['<S-Tab>'] = {
@@ -48,12 +52,14 @@ return {
         ['<Down>'] = { 'select_next', 'fallback' },
         ['<Esc>'] = {
           function(cmp)
-            cmp.cancel()
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+            cmp.cancel({ callback = function() vim.cmd('stopinsert') end })
           end,
           'fallback'
         },
-        ['<Enter>'] = { 'select_and_accept', 'fallback' },
+        ['<Enter>'] = {
+          function(cmp) if cmp.is_visible() then cmp.accept() end end,
+          'fallback'
+        },
       },
       appearance = {
         nerd_font_variant = 'normal'
@@ -63,14 +69,20 @@ return {
         ghost_text = {
           enabled = true
         },
+        menu = {
+          auto_show = false,
+        },
         list = {
           selection = {
-            auto_insert = false,
+            auto_insert = true,
             preselect = true,
           }
         }
       },
-
+      cmdline = {
+        keymap = { preset = 'inherit' },
+        completion = { menu = {auto_show = false} },
+      },
       sources = {
         default = { 'lsp', 'path', 'buffer' },
       },
