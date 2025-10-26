@@ -28,59 +28,41 @@ return {
   'saghen/blink.cmp',
   version = '1.*',
 
-  dependencies = {
-    { 'rafamadriz/friendly-snippets',
-      dependencies = {
-        'L3MON4D3/LuaSnip',
-        version = 'v2.*',
-        -- install jsregexp (optional!).
-        build = 'make install_jsregexp',
-      }
-    },
-  },
 
   config = function()
-    local cmp = require('blink-cmp')
+    local blink = require('blink-cmp')
 
-    -- local function select_and_accent_and_insert(char)
-    --   return cmp.select_and_accept({
-    --     callback = function()
-    --       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(char, true, false, true), 'n', false)
-    --     end,
-    --   })
-    -- end
 
-    cmp.setup({
+    blink.setup({
       keymap = {
-        -- preset = 'super-tab',
+        preset = 'none',
         ['<Tab>'] = {
-          'show',
           'select_next',
-          'snippet_forward',
           'fallback'
         },
-        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        ['<S-Tab>'] = {
+          'select_prev',
+          'fallback'
+        },
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },
-        ['<Esc>'] = { 'cancel', 'fallback' },
+        ['<Esc>'] = {
+          function(cmp)
+            cmp.cancel()
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+          end,
+          'fallback'
+        },
         ['<Enter>'] = { 'select_and_accept', 'fallback' },
-        -- ['.'] = { function(_) return select_and_accent_and_insert('.') end, 'fallback' },
-        -- [','] = { function(_) return select_and_accent_and_insert(',') end, 'fallback' },
-        -- [' '] = { function(_) return select_and_accent_and_insert(' ') end, 'fallback' },
-        -- [':'] = { function(_) return select_and_accent_and_insert(':') end, 'fallback' },
-        -- [';'] = { function(_) return select_and_accent_and_insert(';') end, 'fallback' },
-        -- ['('] = { function(_) return select_and_accent_and_insert('(') end, 'fallback' },
-        -- [')'] = { function(_) return select_and_accent_and_insert(')') end, 'fallback' },
-        -- ['}'] = { function(_) return select_and_accent_and_insert('}') end, 'fallback' },
-        -- ['{'] = { function(_) return select_and_accent_and_insert('{') end, 'fallback' },
-        -- ['|'] = { function(_) return select_and_accent_and_insert('|') end, 'fallback' },
+      },
+      appearance = {
+        nerd_font_variant = 'normal'
       },
 
-      appearance = { nerd_font_variant = 'normal' },
-
       completion = {
-        ghost_text = { enabled = true },
-        trigger = { show_in_snippet = false },
+        ghost_text = {
+          enabled = true
+        },
         list = {
           selection = {
             auto_insert = false,
@@ -90,7 +72,7 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'buffer' },
       },
 
       fuzzy = { implementation = 'prefer_rust_with_warning' },
