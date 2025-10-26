@@ -162,7 +162,6 @@ ulimit -n 10000
 alias chmod='chmod -v'
 alias cp='cp -i'
 alias mv='mv -i'
-alias c="cd .."
 alias ls="gls -ohF  --color=auto"
 alias la="gls -ohFa --color=auto"
 alias diff="diff --color=auto"
@@ -170,8 +169,6 @@ alias grep="grep --color=auto"
 __has gsed && alias sed=gsed
 __has bat && alias cat="bat --pager=never"
 __has claude && alias cl=claude
-
-alias cg='d=$(git rev-parse --show-cdup) && [[ -n "$d" ]] && cd "$d"'
 
 alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
 
@@ -190,17 +187,6 @@ gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
-
-if __has bat; then
-  # https://stackoverflow.com/a/3964198/9932792
-  function head_readme() {
-      emulate -L zsh
-      if [[ -f README.md ]]; then
-        bat --style=grid --line-range=:9 --italic-text=always --paging=never README.md
-      fi
-  }
-  chpwd_functions=(${chpwd_functions[@]} "head_readme")
-fi
 
 # https://stackoverflow.com/questions/30542491/push-force-with-lease-by-default
 g() {
