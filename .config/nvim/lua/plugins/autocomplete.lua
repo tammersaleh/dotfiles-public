@@ -22,39 +22,38 @@ return {
 
     cmp.setup({
       mapping = cmp.mapping.preset.insert({
-        -- Tab: Open menu and select first item, or cycle through items if already open
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
           elseif only_whitespace_before_cursor() then
             fallback()
           else
             cmp.complete()
-            cmp.select_next_item()
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
           end
         end, { 'i', 's' }),
 
-        -- Shift-Tab: Cycle backwards through completion items
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item()
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
           else
             fallback()
           end
         end, { 'i', 's' }),
 
-        -- Escape: Close the completion menu
-        ['<Esc>'] = cmp.mapping(function(fallback)
+        ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.abort()
-            vim.cmd('stopinsert')
+            local entry = cmp.get_selected_entry()
+            if entry then
+              cmp.confirm({ select = false })
+            else
+              cmp.abort()
+              fallback()
+            end
           else
             fallback()
           end
-        end, { 'i' }),
-
-        -- Enter: Confirm the selected item
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        end, { 'i', 's' }),
       }),
 
       -- Enable ghost text to show the top completion while typing
@@ -67,7 +66,13 @@ return {
       -- Your sources configuration
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'buffer' },
+        { name = 'buffer',
+          option = {
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end
+          }
+        },
         -- Add other sources as needed
       }),
     })
