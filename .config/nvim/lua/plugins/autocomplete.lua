@@ -45,7 +45,7 @@ return {
           if cmp.visible() then
             local entry = cmp.get_selected_entry()
             if entry then
-              cmp.confirm({ select = false })
+              cmp.confirm({ select = true })
             else
               cmp.abort()
               fallback()
