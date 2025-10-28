@@ -24,18 +24,18 @@ return {
       mapping = cmp.mapping.preset.insert({
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
           elseif only_whitespace_before_cursor() then
             fallback()
           else
             cmp.complete()
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
           end
         end, { 'i', 's' }),
 
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
           else
             fallback()
           end
@@ -43,13 +43,7 @@ return {
 
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            local entry = cmp.get_selected_entry()
-            if entry then
-              cmp.confirm({ select = true })
-            else
-              cmp.abort()
-              fallback()
-            end
+            cmp.confirm({ select = true })
           else
             fallback()
           end
@@ -62,6 +56,12 @@ return {
           hl_group = "CmpGhostText",
         },
       },
+
+      completion = {
+        -- completeopt = 'noinsert,noselect', -- Excludes 'menu' and 'menuone'
+        autocomplete = false,
+      },
+      preselect = 'item',
 
       -- Your sources configuration
       sources = cmp.config.sources({
