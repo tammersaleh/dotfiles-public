@@ -3,6 +3,7 @@
 require "command_kit"
 
 class Cmd < CommandKit::Command
+  # AGENT: feel free to replace all of this content.
   usage "[OPTIONS] [-o OUTPUT] FILE"
 
   option :count, short: "-c",
@@ -40,6 +41,7 @@ class Cmd < CommandKit::Command
     @verbose = 0
   end
 
+  # AGENT: here is where we should implement our business logic.  run is called with any positional arguments such as `file`. If you remove the positional arguments, be sure to update the arguments here as well.
   def run(file)
     # Your logic here.
     puts "count=#{options[:count].inspect}"
