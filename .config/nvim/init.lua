@@ -211,6 +211,8 @@ vim.keymap.set('v', '<c-s-up>',   ":m '<-2<CR>gv=gv",    {silent = true})
 
 vim.keymap.set('n', ';', ':', {silent = true, desc = "Command (replaces :)"})
 
+vim.keymap.set('n', 'gp', '`[v`]', { noremap = true, silent = true, desc = 'Select last pasted text' })
+
 -- Only in :help buffers:
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "help",
