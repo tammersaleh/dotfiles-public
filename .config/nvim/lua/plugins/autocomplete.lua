@@ -8,6 +8,7 @@ return {
     "hrsh7th/cmp-cmdline",   -- command-line completions
     -- "L3MON4D3/LuaSnip",      -- snippet engine
     -- "saadparwaiz1/cmp_luasnip", -- snippet completions
+    {"onsails/lspkind.nvim", opts = {preset = 'codicons'}},
   },
   config = function()
 
@@ -61,9 +62,16 @@ return {
         -- completeopt = 'noinsert,noselect', -- Excludes 'menu' and 'menuone'
         autocomplete = false,
       },
+
       preselect = 'item',
 
-      -- Your sources configuration
+      formatting = {
+        format = require('lspkind').cmp_format({
+          show_labelDetails = true,
+          mode = 'symbol', -- only show symbol
+        }),
+      },
+
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'buffer',
@@ -73,7 +81,6 @@ return {
             end
           }
         },
-        -- Add other sources as needed
       }),
     })
   end,
