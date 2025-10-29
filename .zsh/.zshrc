@@ -183,6 +183,9 @@ alias :q=exit
 
 alias cr="cargo run -q"
 
+alias lines="wc -l"
+alias chars="wc -c"
+
 gpip(){
   # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
