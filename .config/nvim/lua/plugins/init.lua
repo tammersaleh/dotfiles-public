@@ -34,25 +34,10 @@ return {
       {'ge', '<Plug>(smartword-ge)', mode = {'n', 'o', 'v'}},
     },
   },
-  { "sontungexpt/stcursorword", event = "VeryLazy", config = true, },
+  { "sontungexpt/stcursorword", event = "VeryLazy", config = true, }, --  highlight matching words under cursor
   { 'zhimsel/vim-stay' },
-  { 'RRethy/vim-illuminate' },
-  { 'Matt-Deacalion/vim-systemd-syntax' },
-  { 'cakebaker/scss-syntax.vim' },
-  { 'cespare/vim-toml' },
-  { 'elzr/vim-json' },
-  { 'hail2u/vim-css3-syntax' },
-  { 'hashivim/vim-terraform' },
-  { 'pangloss/vim-javascript' },
   { 'dkarter/bullets.vim' },
-  { 'raimon49/requirements.txt.vim' },
-  { 'vim-ruby/vim-ruby' },
-  { 'tpope/vim-rails' },
-  { 'tpope/vim-git' },
-  { 'aliou/bats.vim' },
-  { 'kevinoid/vim-jsonc' },
   { 'echasnovski/mini.splitjoin', version = '*', opts = {} },
-  -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {
     plugins = {
       presets = {
