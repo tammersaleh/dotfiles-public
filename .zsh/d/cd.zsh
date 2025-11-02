@@ -1,7 +1,7 @@
 alias c="cd .."
 alias cg='d=$(git rev-parse --show-cdup) && [[ -n "$d" ]] && cd "$d"'
 
-function cmk() {
+function mcd() {
     mkdir -p $1 && cd $1
 }
 
