@@ -34,7 +34,6 @@ return {
       {'ge', '<Plug>(smartword-ge)', mode = {'n', 'o', 'v'}},
     },
   },
-  { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "sontungexpt/stcursorword", event = "VeryLazy", config = true, },
   { 'zhimsel/vim-stay' },
   { 'RRethy/vim-illuminate' },
