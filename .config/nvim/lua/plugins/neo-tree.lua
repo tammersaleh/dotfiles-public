@@ -1,26 +1,12 @@
--- Run with nvim --
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- https://www.reddit.com/r/neovim/comments/1cv1sc5/netrw_hijack_behavior_for_neotree/
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-
-require("lazy").setup(
-{
+return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
+    lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
@@ -58,6 +44,22 @@ require("lazy").setup(
           end
         end, { remap = false, silent = true, desc = "Move window to the " .. direction.desc })
       end
+
+      local function open_terminal_split(vertical)
+        return function()
+          local was_visible = neotree_is_visible()
+          if was_visible then
+            vim.cmd.Neotree('close')
+          end
+          vim.cmd((vertical and 'vsplit' or 'split') .. ' | terminal')
+          vim.cmd.wincmd('=')
+          if was_visible then
+            vim.cmd.Neotree('show', 'last')
+          end
+        end
+      end
+      vim.keymap.set({'n', 't'}, '<C-Right>', open_terminal_split(true),  {silent = true, desc = "Open terminal in a split to the right"})
+      vim.keymap.set({'n', 't'}, '<C-Down>',  open_terminal_split(false), {silent = true, desc = "Open terminal in a split below"})
 
       require("neo-tree").setup({
         -- log_level = "trace", -- TODO: remove these
@@ -202,19 +204,17 @@ require("lazy").setup(
         hint = 'floating-big-letter',
         filter_rules = {
           include_current_win = false,
-          autoselect_one = true,
+          autoselect_one = false,
           -- filter using buffer options
           bo = {
             -- if the file type is one of following, the window will be ignored
             filetype = { "neo-tree", "neo-tree-popup", "notify" },
             -- if the buffer type is one of following, the window will be ignored
-            buftype = { "terminal", "quickfix" },
+            -- buftype = { "terminal", "quickfix" },
+            buftype = { "quickfix" },
           },
         },
       })
     end,
   },
 }
-)
-
-

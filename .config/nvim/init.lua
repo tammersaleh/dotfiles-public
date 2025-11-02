@@ -1,4 +1,3 @@
--- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -91,19 +90,6 @@ vim.keymap.set({'n', 't'}, '<C-j>', fn_to_save_mode_and_move("j"), {desc = "Move
 vim.keymap.set({'n', 't'}, '<C-k>', fn_to_save_mode_and_move("k"), {desc = "Move to window above."})
 vim.keymap.set({'n', 't'}, '<C-l>', fn_to_save_mode_and_move("l"), {desc = "Move to window to the right."})
 
-local function dirvish_vsplit()
-  vim.cmd('vsplit')
-  vim.cmd('Dirvish %')
-end
-
-local function dirvish_split()
-  vim.cmd('split')
-  vim.cmd('Dirvish %')
-end
-
-vim.keymap.set({'n', 't'}, '<C-Right>', dirvish_vsplit, {desc = "Open dirvish in a split to the right"})
-vim.keymap.set({'n', 't'}, '<C-Down>',  dirvish_split, {desc = "Open dirvish in a split below"})
-
 -- Terminal
 
 vim.keymap.set('n', '<Leader>t', function()
@@ -158,6 +144,7 @@ vim.api.nvim_create_autocmd('WinEnter', {
   group = vim_term
 })
 
+-- exit insert mode via ctrl-u
 vim.keymap.set('t', "<c-u>", "<c-\\><c-n>")
 
 -- Autocommands

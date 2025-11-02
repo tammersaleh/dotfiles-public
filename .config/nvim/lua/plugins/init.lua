@@ -14,7 +14,7 @@ return {
   -- Detect tabstop and shiftwidth automatically
   { 'tpope/vim-sleuth' },
 
-  { 'justinmk/vim-dirvish' },
+  -- { 'justinmk/vim-dirvish' },
   { 'kristijanhusak/vim-dirvish-git' },
   { 'kana/vim-smartword',
     keys = {
