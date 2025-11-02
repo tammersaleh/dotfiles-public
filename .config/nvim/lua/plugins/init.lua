@@ -1,5 +1,15 @@
 return {
-  -- Git related plugins
+  {
+    "chrishrb/gx.nvim",
+    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+    cmd = { "Browse" },
+    init = function ()
+      vim.g.netrw_nogx = 1 -- disable netrw gx
+    end,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
+    submodules = false,
+  },
   { 'tpope/vim-fugitive',
     config = function()
       vim.api.nvim_create_user_command(
@@ -14,8 +24,6 @@ return {
   -- Detect tabstop and shiftwidth automatically
   { 'tpope/vim-sleuth' },
 
-  -- { 'justinmk/vim-dirvish' },
-  { 'kristijanhusak/vim-dirvish-git' },
   { 'kana/vim-smartword',
     keys = {
       {'cw', 'c<Plug>(smartword-basic-w)', desc = '[C]hange [w]ord (using smartword)'},
@@ -27,7 +35,7 @@ return {
     },
   },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
-
+  { "sontungexpt/stcursorword", event = "VeryLazy", config = true, },
   { 'zhimsel/vim-stay' },
   { 'RRethy/vim-illuminate' },
   { 'Matt-Deacalion/vim-systemd-syntax' },
@@ -59,18 +67,6 @@ return {
       },
     },
   } },
-
-  { 'sainnhe/gruvbox-material',
-    init = function()
-      vim.g.gruvbox_material_dim_inactive_windows = true
-      vim.g.gruvbox_material_background = 'hard'
-      vim.g.gruvbox_material_foreground = 'hard'
-      vim.g.gruvbox_material_visual = 'reverse'
-      vim.cmd.colorscheme("gruvbox-material")
-    end,
-    priority = 1000
-  },
-
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -79,7 +75,6 @@ return {
     main = 'ibl',
     opts = {},
   },
-
   -- "gc" to comment visual regions/lines
   -- Neovim 0.10 has this builtin, but Comment.nvim is better
   -- https://github.com/numToStr/Comment.nvim/issues/453
