@@ -6,25 +6,40 @@ main() {
   [ -v DEBUG ] && set -x
 
   local files=("$@")
-  if [[ $# -eq 0 ]]; then files=("."); fi 
+  local use_terminal=false
+
+  if [[ $# -eq 0 ]]; then
+    use_terminal=true
+  fi
   [ -v DEBUG ] && echo "Files: ${files[*]}"
   [ -v DEBUG ] && echo "Working dir: $PWD"
 
-  # If given only one directory, then cd to it and start nvim with the CWD.
-  if [[ ${#files[@]} -eq 1 ]] && [[ -d ${files[0]} ]]; then cd "${files[0]}"; files=("."); fi
+  # If given only one directory, then cd to it and start nvim with terminal.
+  if [[ ${#files[@]} -eq 1 ]] && [[ -d ${files[0]} ]]; then
+    cd "${files[0]}"
+    use_terminal=true
+  fi
 
-  [ -v DEBUG ] && echo "Files: ${files[*]}"
+  [ -v DEBUG ] && echo "Use terminal: $use_terminal"
   [ -v DEBUG ] && echo "Working dir: $PWD"
 
   if [[ -v NVIM ]]; then
     [ -v DEBUG ] && echo "In nvim already"
+    if [[ $# -eq 0 ]]; then
+      echo "You're already in a terminal in vim.  Whadaywant?"
+      exit 1
+    fi
     nvr -o "${files[@]}"
-    
+
   else
     tmpdir=$(mktemp -d)
     pipe=$(mkfifo -m 600 "$tmpdir/pipe")
     [ -v DEBUG ] && echo "Launching nvim"
-    nvim --listen "$pipe" -o -- "${files[@]}"
+    if [[ $use_terminal == true ]]; then
+      nvim --listen "$pipe" -c :terminal
+    else
+      nvim --listen "$pipe" -o -- "${files[@]}"
+    fi
   fi
 }
 
