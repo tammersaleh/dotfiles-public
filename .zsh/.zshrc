@@ -1,12 +1,9 @@
-### Powerlevel10k Start {{{
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh/.zshrc.
+# Enable Powerlevel10k instant prompt. Must stay close to the top of ~/.zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-############ }}}
-### Helpers {{{
 
 __has() { whence $1 > /dev/null; }
 
@@ -29,293 +26,30 @@ __source_if_exists() {
   source "$1"
 }
 
-### }}}
-### Ghostty shell integration {{{
-__source_if_exists "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
-### }}}
-### PATH and MANPATH {{{
-
-for package in man-db coreutils findutils gnu-tar gawk gnu-getopt ruby; do
-  __prependpath    /opt/homebrew/opt/$package/libexec/gnubin
-  __prependmanpath /opt/homebrew/opt/$package/libexec/gnuman
-  __prependpath    /opt/homebrew/opt/$package/libexec/bin
-  __prependmanpath /opt/homebrew/opt/$package/libexec/man
-  __prependpath    /opt/homebrew/opt/$package/bin
-  __prependmanpath /opt/homebrew/opt/$package/man
-done
-
-__prependpath   '/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/'
-__prependpath    /Applications/Postgres.app/Contents/Versions/9.4/bin
-__prependpath    /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/
-__prependpath    /opt/homebrew/opt/macvim/MacVim.app/Contents/MacOS/
-__prependpath    /opt/homebrew/bin
-__prependpath    /opt/homebrew/sbin
-__prependmanpath /opt/homebrew/share/man
-__prependpath    /opt/homebrew/share/npm/bin
-__prependpath    $HOME/.npm-global/bin
-__prependmanpath $HOME/.npm-global/share/man
-
-__prependpath "$HOME/bin/$(uname)"
-__prependpath "$HOME/bin"
-
-### }}}
-### Variables {{{
-
-export XDG_DATA_HOME=$HOME/.local/share
-export BOTO_CONFIG=/dev/null
-
-export CLICOLOR=1
-export LS_COLORS
-# shellcheck disable=SC2046
-eval $(dircolors ~/.dircolors)
-
-export EDITOR="blocking-v"
-export VISUAL="blocking-v"
-export PAGER=less
-export BLOCKSIZE=K
-export PARINIT='w72jrT4bgqR B=.,?_A_a Q=_s>|'
-export LC_CTYPE=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export VIM_APP_DIR=/Applications
-
-export LESS="-FRMX --tabs 4"
-export LESSOPEN="|lesspipe.sh %s"
-export LESS_ADVANCED_PREPROCESSOR=1
-
-if __has bat; then
-  export BAT_CONFIG_FILE=~/.config/bat/config
-  export MANPAGER="sh -c 'col -b | bat -l man -p'"
-  export MANROFFOPT="-c"
-  export HOMEBREW_BAT=true
-fi
-
-export PS4="\n$ "
-
-export RUBY_HEAP_SLOTS_INCREMENT=1000000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_HEAP_FREE_MIN=500000
-export RACK_ENV=development
-
-export SHELLCHECK_OPTS='-e SC2155 -e SC1090'
-
-export VAGRANT_VMWARE_CLONE_DIRECTORY=/tmp/vagrant_machines/
-export VAGRANT_DEFAULT_PROVIDER=virtualbox
-
-export GOPATH=$HOME
-export GOBIN="$GOPATH/bin/$(uname -s)"
-
-export PIP_CONFIG_FILE=$HOME/.config/pip/pip.conf
-export PYTEST_ADDOPTS="--color=yes"
-export PYTHONDONTWRITEBYTECODE=1
-export CLOUDSDK_PYTHON=$(which python3)
-
-export AWS_VAULT_BACKEND=pass
-export AWS_VAULT_PASS_PREFIX=aws-vault
-
-export HUB_PROTOCOL=ssh
-export MOSH_TITLE_NOPREFIX=true
-
-export GH_NO_UPDATE_NOTIFIER="this is set to stop gh from letting us know about new version."
-
-# For the Dockers!
-export UID
-export GID=$(id -g)
-export DOCKER_BUILDKIT=1
-export DOCKER_HOST="unix:///$HOME/.orbstack/run/docker.sock"  # Tilt gets confused without this.
-
-# Stop tar from creating ._ files
-export COPYFILE_DISABLE=1
-
-export HISTFILE="$HOME/.local/share/zsh/history"
-mkdir -p "$(dirname $HISTFILE)"
-export HISTSIZE=10000000
-export SAVEHIST=10000000
-setopt INC_APPEND_HISTORY        # Write to file immediately when cmds entered
-setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
-setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
-
-# To make psql work and to allow bundler to find libpq
-export PATH="$(brew --prefix libpq)/bin:$PATH"
-export LDFLAGS="-L$(brew --prefix libpq)/lib"
-export CPPFLAGS="-I$(brew --prefix libpq)/include"
-
-eval "$(brew shellenv)"
-
-# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
-export GPG_TTY=$(tty)
-
-__source_if_exists "$HOME/.secret_vars_and_aliases"
-__source_if_exists "$HOME/.cargo/env"
-
-####################### }}}
-### Settings {{{
-stty -ixon -ixoff < $TTY
-umask 027
-ulimit -n 10000
-############# }}}
-### Aliases & Functions {{{
-alias chmod='chmod -v'
-alias cp='cp -i'
-alias mv='mv -i'
-alias ls="gls -ohF  --color=auto"
-alias la="gls -ohFa --color=auto"
-alias diff="diff --color=auto"
-alias grep="grep --color=auto"
-__has gsed && alias sed=gsed
-__has bat && alias cat="bat --pager=never"
-__has claude && alias cl=claude
-
-alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
-
-alias dr="doppler run --"
-
-alias pyconsole="pipenv run ptpython"
-alias pip=pip3
-
-alias dush=dust # Better du -sh
-
-alias :q=exit
-
-alias cr="cargo run -q"
-
-alias lines="wc -l"
-alias chars="wc -c"
-
-gpip(){
-  # https://hackercodex.com/guide/python-development-environment-on-mac-osx/
-  PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
-}
-
-# https://stackoverflow.com/questions/30542491/push-force-with-lease-by-default
-g() {
-  if [[ $1 == 'push' && ( $@ == *'--force'* || $@ == *' -f'*) && $@ != *'-with-lease'* ]]; then
-    echo 'Hey stupid, use --force-with-lease instead'
-  else
-    command hub "$@"
-  fi
-}
-
-############### }}}
-### Hooks & Daemons {{{
-__has mise   && eval "$(mise activate zsh)"
-alias mt="mise trust"
-alias m="mise"
-# }}}
-### Vim Mode {{{
-
-# http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
-# https://dougblack.io/words/zsh-vi-mode.html
-# Better searching in command mode
-bindkey -v
-bindkey -M vicmd '?' history-incremental-search-forward
-bindkey -M vicmd '/' history-incremental-search-backward
-
-# Beginning search with j/k
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
-
-# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-export KEYTIMEOUT=1
-
-# https://www.reddit.com/r/vim/comments/7wj81e/you_can_get_vim_bindings_in_zsh_and_bash/du3tx3z/
-# ci"
-autoload -U select-quoted
-zle -N select-quoted
-for m in visual viopp; do
-  for c in {a,i}{\',\",\`}; do
-    bindkey -M $m $c select-quoted
-  done
-done
-
-# ci{, ci(
-autoload -U select-bracketed
-zle -N select-bracketed
-for m in visual viopp; do
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-    bindkey -M $m $c select-bracketed
-  done
-done
-
-# cs ds ys S
-autoload -Uz surround
-zle -N delete-surround surround
-zle -N add-surround surround
-zle -N change-surround surround
-bindkey -a cs change-surround
-bindkey -a ds delete-surround
-bindkey -a ys add-surround
-bindkey -M visual S add-surround
-
-# Don't highlight pasted text
-zle_highlight=('paste:none')
-
-# Fix bug when typing <Shift-Enter> through the neovim :terminal
-# which deletes the current commandline
-noop() { }
-zle -N noop
-bindkey '^[[13;2u' noop
-bindkey -M vicmd '^[[13;2u' noop
-
-#}}}
-### Local Config {{{
 __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
-#}}}
-### Powerlevel10k Finish {{{
-__source_if_exists $HOME/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
-[[ -f ~/.zsh/.p10k.zsh ]] && source ~/.zsh/.p10k.zsh
+# Track which d/* files have been sourced to avoid duplicates
+typeset -a D_FILES_SOURCED
 
-function prompt_aws_vault() {
-  [[ ! -v AWS_VAULT ]] && return
-  local name=${AWS_VAULT:u}
-  p10k segment -f yellow -b blue -t ${name//[-_]/ }
+source_d_file() {
+  local pattern="$1"
+
+  # Expand glob if needed
+  for filepath in $~pattern; do
+    [[ -f "$filepath" ]] || continue
+
+    # Skip if already sourced
+    (( ${D_FILES_SOURCED[(I)$filepath]} )) && continue
+
+    source "$filepath"
+    D_FILES_SOURCED+=("$filepath")
+  done
 }
 
-typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-  dir                     # current directory
-  aws_vault
-  vcs                     # git status
-  prompt_char             # prompt symbol
-)
-typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=red
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=white
-typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
-typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-#}}}
-### Completions {{{
-
-fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit && compinit
-autoload -Uz +X bashcompinit && bashcompinit
-
-DOCKER_ETC=/Applications/Docker.app/Contents/Resources/etc
-__source_if_exists "$DOCKER_ETC/docker.zsh-completion"
-__source_if_exists "$DOCKER_ETC/docker-machine.zsh-completion"
-__source_if_exists "$DOCKER_ETC/docker-compose.zsh-completion"
-__source_if_exists "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
-
-compdef g=git
-
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*' history-search-backward yes
-zstyle ':completion:*' history-search-forward yes
-# <tab> to expand aliases
-zstyle ':completion:*' completer _expand_alias _complete _ignored 
-
-
-################# }}}
-for file in $HOME/.zsh/d/*; do source "$file"; done
+# Load files in specific order to handle dependencies
+source_d_file "$HOME/.zsh/d/homebrew.zsh"    # Must be first (sets up PATH for brew and GNU tools)
+source_d_file "$HOME/.zsh/d/completions.zsh" # Must be before any compdef/complete usage
+source_d_file "$HOME/.zsh/d/*"               # Load remaining files
 
 # This must come at the end of the .zshrc file 🤷
 __source_if_exists $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh

@@ -1,5 +1,3 @@
-# BEGIN_AWS_SSO_CLI
-
 # AWS SSO requires `bashcompinit` which needs to be enabled once and
 # only once in your shell.  Hence we do not include the two lines:
 #
@@ -54,3 +52,7 @@ function as() {
     aws-sso login
     eval $(aws-sso eval -p $aws_profile)
 }
+
+# Not sure if I still need this?
+export AWS_VAULT_BACKEND=pass
+export AWS_VAULT_PASS_PREFIX=aws-vault
