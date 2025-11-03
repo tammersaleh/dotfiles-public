@@ -16,7 +16,7 @@ do-not-commit/
 do_not_commit/
 .netlify
 .venv
-.claude
+.claude/settings.local.json
 coverage.out
 shit/
 

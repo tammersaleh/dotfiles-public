@@ -7,9 +7,9 @@ ast-grep 0.39.7
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.24
+awscli 2.31.27
 bash 5.3.3
-bash-completion@2 2.16.0
+bash-completion@2 2.17.0
 bash-language-server 5.6.0
 bat 0.26.0
 bat-extras 2024.08.24
@@ -50,7 +50,7 @@ gawk 5.3.1
 gdk-pixbuf 2.44.4
 gettext 0.26
 gh 2.82.1
-ghorg 1.11.4
+ghorg 1.11.5
 ghostscript 10.06.0
 giflib 5.2.2
 git 2.51.2
@@ -65,7 +65,7 @@ gnu-tar 1.35
 gnupg 2.4.8
 gnutls 3.8.10
 go 1.25.3
-golangci-lint 2.5.0
+golangci-lint 2.6.0
 gopls 0.20.0
 graphite2 1.3.14
 groff 1.23.0_1
@@ -99,7 +99,7 @@ kubecolor 0.5.2
 kubelogin 1.34.2
 kubernetes-cli 1.34.1
 lame 3.100
-lazygit 0.55.1
+lazygit 0.56.0
 leptonica 1.86.0
 lesspipe 2.20
 libarchive 3.8.2
@@ -176,7 +176,7 @@ llvm 21.1.4
 lpeg 1.1.0
 lua 5.4.8
 lua-language-server 3.15.0
-luajit 2.1.1761623958
+luajit 2.1.1761623958 2.1.1761727121
 luv 1.51.0-1
 lz4 1.10.0
 lzo 2.10
@@ -186,18 +186,18 @@ marksman 2024-12-18
 mbedtls 3.6.4
 md4c 0.5.2
 media-info 25.09
-mise 2025.10.19
+mise 2025.11.1
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
 mpg123 1.33.3
 mprocs 0.7.3
 ncurses 6.5
-neovim 0.11.4
+neovim 0.11.5
 neovim-remote 2.5.1_3
 netpbm 11.02.19
 nettle 3.10.2
-node 24.10.0_1
+node 25.1.0
 npth 1.8
 oniguruma 6.9.10
 opencore-amr 0.1.6
@@ -225,7 +225,6 @@ protobuf 33.0
 pstree 2.40
 psutils 3.3.14_1
 pyright 1.1.407
-python@3.12 3.12.12
 python@3.13 3.13.9_1
 python@3.14 3.14.0_1
 qrencode 4.1.1
@@ -274,7 +273,7 @@ rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7
 ruby-build 20251023
-ruff 0.14.2
+ruff 0.14.3
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.10
@@ -292,7 +291,7 @@ srt 1.5.4
 stern 1.33.0
 stow 2.4.1
 stylelint 16.25.0
-stylua 2.3.0
+stylua 2.3.1
 svt-av1 3.1.2
 switch 0.9.3
 switchaudio-osx 1.2.2
@@ -311,9 +310,9 @@ tree-sitter 0.25.10
 uchardet 0.0.8
 unbound 1.24.1
 unibilium 2.1.2
-usage 2.5.1
+usage 2.5.1 2.6.0
 utf8proc 2.11.0
-uv 0.9.5
+uv 0.9.7
 uvwasi 0.0.23
 vim 9.1.1850
 vscode-langservers-extracted 4.10.0
