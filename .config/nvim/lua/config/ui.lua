@@ -33,6 +33,11 @@ vim.api.nvim_create_autocmd({'VimEnter', 'WinEnter', 'BufWinEnter'}, {
   group = vim_group
 })
 vim.api.nvim_create_autocmd('WinLeave', {
-  command = 'setlocal nocursorline',
+  callback = function()
+    -- Don't hide cursorline when leaving neo-tree
+    if vim.bo.filetype ~= 'neo-tree' then
+      vim.wo.cursorline = false
+    end
+  end,
   group = vim_group
 })

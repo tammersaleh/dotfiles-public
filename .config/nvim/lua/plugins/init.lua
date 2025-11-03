@@ -10,15 +10,7 @@ return {
     config = true,
     submodules = false,
   },
-  { 'tpope/vim-fugitive',
-    config = function()
-      vim.api.nvim_create_user_command(
-        'Browse',
-        function (opts) vim.fn.system { 'open', opts.fargs[1] } end,
-        { nargs = 1 }
-      )
-    end
-  },
+  -- { 'tpope/vim-fugitive' }, -- used just for Gblame
   { 'tpope/vim-rhubarb' },
 
   -- Detect tabstop and shiftwidth automatically
@@ -34,7 +26,6 @@ return {
       {'ge', '<Plug>(smartword-ge)', mode = {'n', 'o', 'v'}},
     },
   },
-  { "sontungexpt/stcursorword", event = "VeryLazy", config = true, }, --  highlight matching words under cursor
   { 'zhimsel/vim-stay' },
   { 'dkarter/bullets.vim' },
   { 'echasnovski/mini.splitjoin', version = '*', opts = {} },
@@ -51,14 +42,14 @@ return {
       },
     },
   } },
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
-  },
+  -- {
+  --   -- Add indentation guides even on blank lines
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   -- Enable `lukas-reineke/indent-blankline.nvim`
+  --   -- See `:help ibl`
+  --   main = 'ibl',
+  --   opts = {},
+  -- },
   -- "gc" to comment visual regions/lines
   -- Neovim 0.10 has this builtin, but Comment.nvim is better
   -- https://github.com/numToStr/Comment.nvim/issues/453
