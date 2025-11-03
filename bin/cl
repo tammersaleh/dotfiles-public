@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+main() {
+  [ -v DEBUG ] && set -x
+
+  if [[ -v NVIM ]]; then
+    # Already in a neovim terminal, just run claude directly
+    [ -v DEBUG ] && echo "In nvim already, running claude"
+    exec claude "$@"
+  else
+    # Not in nvim, launch nvim with terminal and run claude
+    [ -v DEBUG ] && echo "Launching nvim with claude"
+    exec nvim -c 'terminal' -c 'call chansend(b:terminal_job_id, "exec claude\n")'
+  fi
+}
+
+main "$@"

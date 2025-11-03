@@ -54,3 +54,6 @@ noop() { }
 zle -N noop
 bindkey '^[[13;2u' noop
 bindkey -M vicmd '^[[13;2u' noop
+
+alias :q=exit
+

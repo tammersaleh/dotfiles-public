@@ -14,7 +14,5 @@ alias dr="doppler run --"
 
 alias dush=dust # Better du -sh
 
-alias :q=exit
-
 alias lines="wc -l"
 alias chars="wc -c"
