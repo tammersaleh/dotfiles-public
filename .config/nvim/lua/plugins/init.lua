@@ -29,30 +29,38 @@ return {
   { 'zhimsel/vim-stay' },
   { 'dkarter/bullets.vim' },
   { 'echasnovski/mini.splitjoin', version = '*', opts = {} },
-  { 'folke/which-key.nvim', opts = {
-    plugins = {
-      presets = {
-        operators = true, -- adds help for operators like d, y, ...
-        motions = true, -- adds help for motions
-        text_objects = true, -- help for text objects triggered after entering an operator
-        windows = true, -- default bindings on <c-w>
-        nav = true, -- misc bindings to work with windows
-        z = true, -- bindings for folds, spelling and others prefixed with z
-        g = true, -- bindings for prefixed with g
+  { 'folke/which-key.nvim',
+    opts = {
+      plugins = {
+        presets = {
+          operators = true, -- adds help for operators like d, y, ...
+          motions = true, -- adds help for motions
+          text_objects = true, -- help for text objects triggered after entering an operator
+          windows = true, -- default bindings on <c-w>
+          nav = true, -- misc bindings to work with windows
+          z = true, -- bindings for folds, spelling and others prefixed with z
+          g = true, -- bindings for prefixed with g
+        },
       },
     },
-  } },
-  -- {
-  --   -- Add indentation guides even on blank lines
-  --   'lukas-reineke/indent-blankline.nvim',
-  --   -- Enable `lukas-reineke/indent-blankline.nvim`
-  --   -- See `:help ibl`
-  --   main = 'ibl',
-  --   opts = {},
-  -- },
+  },
   -- "gc" to comment visual regions/lines
   -- Neovim 0.10 has this builtin, but Comment.nvim is better
   -- https://github.com/numToStr/Comment.nvim/issues/453
   { 'numToStr/Comment.nvim', opts = {}, lazy = false, },
-
+  {
+    "zenbones-theme/zenbones.nvim",
+    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+    -- In Vim, compat mode is turned on as Lush only works in Neovim.
+    dependencies = "rktjmp/lush.nvim",
+    lazy = false,
+    priority = 1000,
+    -- you can set set configuration options here
+    config = function()
+      vim.g.zenbones_lighten_comments = 100
+      vim.g.zenbones_lighten_noncurrent_window = true
+      vim.cmd.colorscheme('zenbones')
+    end
+  },
 }
