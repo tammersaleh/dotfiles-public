@@ -1,11 +1,11 @@
 aom 3.13.1
 aribb24 1.0.4
 aspell 0.60.8.1_1
-ast-grep 0.39.7
+ast-grep 0.39.9
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.30
+awscli 2.31.31
 bash 5.3.3
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -46,7 +46,7 @@ gawk 5.3.1
 gdk-pixbuf 2.44.4
 gettext 0.26_1
 gh 2.83.0
-ghorg 1.11.5
+ghorg 1.11.6
 ghostscript 10.06.0
 giflib 5.2.2
 git 2.51.2
@@ -232,7 +232,7 @@ rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7
 ruby-build 20251023
-ruff 0.14.3
+ruff 0.14.4
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.10
