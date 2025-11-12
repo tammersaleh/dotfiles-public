@@ -146,6 +146,7 @@
     prune = true
     prunetags = true
     all = true
+    parallel = 0; reasonable level of parallelization
 [receive]
     fsckobjects = true
 [submodule]
@@ -159,3 +160,6 @@
     date = iso
 [http]
     postBuffer = 157286400
+[checkout]
+    workers = -1; use all cores to checkout
+
