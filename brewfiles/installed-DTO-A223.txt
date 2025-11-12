@@ -3,29 +3,29 @@ aom 3.13.1
 aribb24 1.0.4
 aspell 0.60.8.1_1
 assimp 6.0.2
-ast-grep 0.39.7
+ast-grep 0.39.9
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.28
+awscli 2.31.34
 bash 5.3.3
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
 bat 0.26.0
 bat-extras 2024.08.24
 bfg 1.15.0
-black 25.9.0
+black 25.11.0
 brotli 1.2.0
 bzip2 1.0.8
 c-ares 1.34.5
-ca-certificates 2025-09-09
+ca-certificates 2025-11-04
 cairo 1.18.4
 cjson 1.7.19
 cmake 4.1.2
 cmake-language-server 0.1.11
-coreutils 9.8
+coreutils 9.9
 ctags 5.8_2
-dav1d 1.5.1
+dav1d 1.5.2
 dbus 1.16.2_1
 diff-so-fancy 1.4.4
 diffutils 3.12
@@ -39,7 +39,7 @@ entr 5.7
 exiftool 13.36
 fd 10.3.0
 felinks 0.18.0
-ffmpeg 8.0_1
+ffmpeg 8.0_2
 flac 1.5.0
 fontconfig 2.17.1
 freetype 2.14.1_1
@@ -48,9 +48,9 @@ fribidi 1.0.16
 fzf 0.66.1
 gawk 5.3.1
 gdk-pixbuf 2.44.4
-gettext 0.26
-gh 2.82.1
-ghorg 1.11.5
+gettext 0.26_1
+gh 2.83.0
+ghorg 1.11.6
 ghostscript 10.06.0
 giflib 5.2.2
 git 2.51.2
@@ -64,7 +64,7 @@ gnu-sed 4.9
 gnu-tar 1.35
 gnupg 2.4.8
 gnutls 3.8.10
-go 1.25.3
+go 1.25.4
 golangci-lint 2.6.1
 gopls 0.20.0
 graphite2 1.3.14
@@ -73,16 +73,16 @@ gron 0.7.1
 gumbo-parser 0.13.2
 hadolint 2.14.0
 harfbuzz 12.1.0
-helm 3.19.0
+helm 3.19.1
 highway 1.3.0
-hl 0.32.1
+hl 0.32.2
 htop 3.4.1
 hub 2.14.2
 hunspell 1.7.2
 icu4c@77 77.1
 id3lib 3.8.3_1
 id3v2 0.1.12
-imagemagick 7.1.2-8
+imagemagick 7.1.2-8_1
 imath 3.2.2
 jasper 4.2.8
 jbig2dec 0.20
@@ -97,7 +97,7 @@ kind 0.30.0
 krb5 1.22.1
 kubecolor 0.5.3
 kubelogin 1.34.2
-kubernetes-cli 1.34.1
+kubernetes-cli 1.34.2
 lame 3.100
 lazygit 0.56.0
 leptonica 1.86.0
@@ -106,10 +106,10 @@ libarchive 3.8.2
 libass 0.17.4
 libassuan 3.0.2
 libb2 0.98.1
-libbluray 1.4.0
+libbluray 1.4.0 1.4.0_1
 libcss 0.9.2
 libde265 1.0.16
-libdeflate 1.24
+libdeflate 1.25
 libdom 0.4.2
 libevent 2.1.12_1
 libgcrypt 1.11.2
@@ -122,7 +122,7 @@ libidn2 2.3.8
 libksba 1.6.7
 liblqr 0.4.3
 libmagic 5.46
-libmediainfo 25.09
+libmediainfo 25.10 25.09
 libmicrohttpd 1.0.2
 libmms 0.6.4
 libmng 2.0.3_1
@@ -164,19 +164,19 @@ libxau 1.0.12
 libxcb 1.17.0
 libxdmcp 1.1.5
 libxext 1.3.6
-libxml2 2.13.8_1
+libxml2 2.13.8_1 2.15.1
 libxrender 0.9.12
-libxslt 1.1.43
+libxslt 1.1.43_1
 libyaml 0.2.5
 libzen 0.4.41_1
 libzip 1.11.4
 litehtml 0.9
 little-cms2 2.17
-llvm 21.1.4
+llvm 21.1.5
 lpeg 1.1.0
 lua 5.4.8
 lua-language-server 3.15.0
-luajit 2.1.1761623958 2.1.1761727121
+luajit 2.1.1761727121
 luv 1.51.0-1
 lz4 1.10.0
 lzo 2.10
@@ -185,8 +185,8 @@ man-db 2.13.1
 marksman 2024-12-18
 mbedtls 3.6.4
 md4c 0.5.2
-media-info 25.09
-mise 2025.11.2
+media-info 25.10
+mise 2025.11.3
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -201,10 +201,10 @@ node 25.1.0_1
 npth 1.8
 oniguruma 6.9.10
 opencore-amr 0.1.6
-openexr 3.4.2
+openexr 3.4.2_1
 openjdk 25.0.1
 openjpeg 2.5.4
-openjph 0.24.3
+openjph 0.25.0
 openssl@1.1 1.1.1w
 openssl@3 3.6.0
 opus 1.5.2
@@ -220,7 +220,7 @@ pinentry-mac 1.3.1.1
 pixman 0.46.4
 pkgconf 2.5.1
 popt 1.19
-pre-commit 4.3.0
+pre-commit 4.4.0
 protobuf 33.0
 pstree 2.40
 psutils 3.3.14_1
@@ -273,20 +273,20 @@ rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7
 ruby-build 20251023
-ruff 0.14.3
+ruff 0.14.4
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.10
-shared-mime-info 2.4
+shared-mime-info 2.4_1 2.4
 shellcheck 0.11.0
 shfmt 3.12.0
-simdjson 4.1.0 4.2.1
+simdjson 4.2.1
 sipcalc 1.1.6
 snappy 1.2.2
 socat 1.8.0.3
 speedtest-cli 2.1.3_2
 speex 1.2.1
-sqlite 3.50.4
+sqlite 3.50.4 3.51.0
 srt 1.5.4
 stern 1.33.1
 stow 2.4.1
@@ -296,7 +296,7 @@ svt-av1 3.1.2
 switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
-tanka 0.35.0
+tanka 0.36.0
 terraform 1.13.4
 tesseract 5.5.1
 tflint 0.59.1
@@ -310,11 +310,11 @@ tree-sitter 0.25.10
 uchardet 0.0.8
 unbound 1.24.1
 unibilium 2.1.2
-usage 2.5.1 2.6.0
+usage 2.6.0
 utf8proc 2.11.0
-uv 0.9.7
+uv 0.9.8
 uvwasi 0.0.23
-vim 9.1.1850
+vim 9.1.1900
 vscode-langservers-extracted 4.10.0
 watch 4.0.5
 watchexec 2.3.2
@@ -330,7 +330,7 @@ xz 5.8.1
 yaml-language-server 1.19.2
 yarn 1.22.22
 yq 4.48.1
-z3 4.15.3
+z3 4.15.4
 zeromq 4.3.5_2
 zimg 3.0.6
 zlib 1.3.1
@@ -338,7 +338,7 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7
 1password-cli 2.32.0
-font-codicon 0.0.41
+font-codicon 0.0.42
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
 font-meslo-lg-nerd-font 3.4.0
