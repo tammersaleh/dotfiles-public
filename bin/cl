@@ -12,7 +12,7 @@ main() {
   else
     # Not in nvim, launch nvim with terminal and run claude
     [ -v DEBUG ] && echo "Launching nvim with claude"
-    exec nvim -c 'terminal' -c 'call chansend(b:terminal_job_id, "exec claude\n")'
+    exec nvim -c 'terminal claude'
   fi
 }
 
