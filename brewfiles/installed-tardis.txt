@@ -5,23 +5,23 @@ ast-grep 0.39.9
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.31
+awscli 2.31.35
 bash 5.3.3
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
 bat 0.26.0
 bat-extras 2024.08.24
 bfg 1.15.0
-black 25.9.0
+black 25.11.0
 brotli 1.2.0
 bzip2 1.0.8
 c-ares 1.34.5
-ca-certificates 2025-09-09 2025-11-04
+ca-certificates 2025-11-04
 cairo 1.18.4
 cjson 1.7.19
 cmake 4.1.2
 cmake-language-server 0.1.11
-coreutils 9.8
+coreutils 9.9
 ctags 5.8_2
 dav1d 1.5.2
 diff-so-fancy 1.4.4
@@ -68,13 +68,14 @@ groff 1.23.0_1
 gron 0.7.1
 hadolint 2.14.0
 harfbuzz 12.2.0
-helm 3.19.0
+helm 3.19.1
 highway 1.3.0
-hl 0.32.1
+hl 0.32.2
 htop 3.4.1
 hub 2.14.2
 icu4c@76 76.1_2
 icu4c@77 77.1
+icu4c@78 78.1
 id3lib 3.8.3_1
 id3v2 0.1.12
 imagemagick 7.1.2-8_1
@@ -86,13 +87,13 @@ jpeg-xl 0.11.1_3
 jq 1.8.1
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
-just 1.43.0
+just 1.43.1
 k9s 0.50.16
 kind 0.30.0
 krb5 1.22.1
 kubecolor 0.5.3
 kubelogin 1.34.2
-kubernetes-cli 1.34.1
+kubernetes-cli 1.34.2
 lame 3.100
 lazygit 0.56.0
 leptonica 1.86.0
@@ -124,12 +125,12 @@ libnghttp3 1.12.0
 libngtcp2 1.17.0
 libnotify 0.8.7
 libogg 1.3.6
-libomp 21.1.4
+libomp 21.1.5
 libpaper 2.2.6
 libparserutils 0.2.5
 libpipeline 1.5.8
 libpng 1.6.50
-libpq 18.0
+libpq 18.0_1
 libraw 0.21.4
 librist 0.2.11
 libsamplerate 0.2.2
@@ -168,7 +169,7 @@ llvm 21.1.5
 lpeg 1.1.0
 lua 5.4.8
 lua-language-server 3.15.0
-luajit 2.1.1761727121
+luajit 2.1.1762386122
 luv 1.51.0-1
 lz4 1.10.0
 lzo 2.10
@@ -178,7 +179,7 @@ marksman 2024-12-18
 mbedtls 3.6.4
 md4c 0.5.2
 media-info 25.10
-mise 2025.11.2
+mise 2025.11.4
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -187,17 +188,17 @@ mprocs 0.7.3
 ncurses 6.5
 neovim HEAD-88fe467 0.11.5
 neovim-remote 2.5.1_3
-netpbm 11.02.19
+netpbm 11.02.19_1
 nettle 3.10.2
-node 25.1.0_1
+node 25.1.0_2
 npth 1.8
 oniguruma 6.9.10
 opencore-amr 0.1.6
-openexr 3.4.3 3.4.2
+openexr 3.4.3
 openjdk 25.0.1
 openjdk@11 11.0.29
 openjpeg 2.5.4
-openjph 0.24.5 0.25.0
+openjph 0.25.0
 openldap 2.6.10_1
 openssl@1.1 1.1.1w
 openssl@3 3.6.0
@@ -214,7 +215,7 @@ pinentry-mac 1.3.1.1
 pixman 0.46.4
 pkgconf 2.5.1
 popt 1.19
-pre-commit 4.3.0
+pre-commit 4.4.0
 pstree 2.40
 psutils 3.3.14_1
 pyright 1.1.407
@@ -239,7 +240,7 @@ sdl2 2.32.10
 shared-mime-info 2.4_1
 shellcheck 0.11.0
 shfmt 3.12.0
-simdjson 4.1.0 4.2.0
+simdjson 4.2.1
 sipcalc 1.1.6
 snappy 1.2.2
 socat 1.8.0.3
@@ -255,8 +256,8 @@ svt-av1 3.1.2
 switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
-tanka 0.35.0
-terraform 1.13.4
+tanka 0.36.0
+terraform 1.13.5
 tesseract 5.5.1
 tflint 0.59.1
 the_silver_searcher 2.2.0
@@ -269,11 +270,11 @@ tree-sitter 0.25.10
 uchardet 0.0.8
 unbound 1.24.1
 unibilium 2.1.2
-usage 2.5.2 2.6.0
+usage 2.6.0 2.8.0
 utf8proc 2.11.0
-uv 0.9.7
+uv 0.9.9
 uvwasi 0.0.23
-vim 9.1.1850
+vim 9.1.1900
 vscode-langservers-extracted 4.10.0
 watch 4.0.5
 watchexec 2.3.2
@@ -297,7 +298,7 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7
 1password-cli 2.32.0
-font-codicon 0.0.41
+font-codicon 0.0.42
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
 font-meslo-lg-nerd-font 3.4.0
