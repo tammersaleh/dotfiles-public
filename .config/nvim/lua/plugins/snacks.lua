@@ -9,10 +9,36 @@ return {
     -- bigfile = { enabled = true },
     indent = {
       enabled = true,
-      only_scope = false, -- only show indent guides of the scope
-      only_current = false, -- only show indent guides in the current window
+      only_scope = true, -- only show indent guides of the scope
+      only_current = true, -- only show indent guides in the current window
       scope = {
-        enabled = true
+        enabled = false,
+        only_current = true,
+        char = "│",
+      },
+      chunk = {
+        enabled = true,
+        only_current = true,
+        char = {
+          horizontal = "─",
+          corner_top = "╭",
+          vertical = "│",
+          corner_bottom = "╰",
+          arrow = "─",
+          -- horizontal = "═",
+          -- corner_top = "╒",
+          -- vertical = "│",
+          -- corner_bottom = "╘",
+          -- arrow = "═",
+        },
+      },
+      animate = {
+        style = "out",
+        easing = "outExpo",
+        duration = {
+          step = 20, -- ms per step
+          total = 500, -- maximum duration
+        },
       },
     },
     -- notifier = { enabled = true },
