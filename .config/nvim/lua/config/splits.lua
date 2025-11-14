@@ -3,7 +3,7 @@
 -- Split behavior options
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.equalalways = false
+vim.o.equalalways = true
 
 -- Window navigation with mode preservation
 local function save_last_mode()

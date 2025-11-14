@@ -20,7 +20,7 @@ return {
         return vim.iter({"filesystem", "buffers", "git_status", "document_symbols"})
           :any(function(s) return renderer.window_exists(manager.get_state(s)) end)
       end
-      
+
       vim.keymap.set("n", "-", function() vim.cmd.Neotree("toggle", "reveal") end)
 
       -- Replace CTRL-W K, etc, with mappings that hide and restore Neotree
@@ -37,7 +37,6 @@ return {
           end
 
           vim.cmd.wincmd(direction.key)
-          vim.cmd.wincmd("=")
 
           if was_visible then
             vim.cmd.Neotree('show', 'last')
@@ -47,14 +46,18 @@ return {
 
       local function open_terminal_split(vertical)
         return function()
-          local was_visible = neotree_is_visible()
-          if was_visible then
-            vim.cmd.Neotree('close')
-          end
-          vim.cmd((vertical and 'vsplit' or 'split') .. ' | terminal')
-          vim.cmd.wincmd('=')
-          if was_visible then
-            vim.cmd.Neotree('show', 'last')
+          if vertical then
+            vim.cmd('vsplit | terminal')
+          else
+            local was_visible = neotree_is_visible()
+            if was_visible then
+              vim.cmd.Neotree('close')
+            end
+            vim.cmd('split | terminal')
+            if was_visible then
+              vim.cmd.Neotree('show', 'last')
+              vim.cmd.wincmd("=")
+            end
           end
         end
       end
