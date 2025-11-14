@@ -88,7 +88,7 @@ return {
             end
           },
         },
-        use_default_mappings = false,
+        -- use_default_mappings = false,
         sources = {
           "filesystem",
           "buffers",
@@ -136,9 +136,9 @@ return {
 
             ['<S-Tab>'] = 'prev_source',
             ['<Tab>'] = 'next_source',
-            ['f'] = function() vim.cmd.Neotree('filesystem') end,
-            ['b'] = function() vim.cmd.Neotree('buffers') end,
-            ['g'] = function() vim.cmd.Neotree('git_status') end,
+            ['1'] = function() vim.cmd.Neotree('filesystem') end,
+            ['2'] = function() vim.cmd.Neotree('buffers') end,
+            ['3'] = function() vim.cmd.Neotree('git_status') end,
             ["r"] = function() vim.cmd.Neotree('filesystem', 'show', 'reveal') end,
             ["dd"] = "delete",
             ["R"] = "rename",
