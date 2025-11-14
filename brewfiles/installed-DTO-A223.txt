@@ -7,7 +7,7 @@ ast-grep 0.39.9
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.35
+awscli 2.31.36
 bash 5.3.3
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -49,7 +49,7 @@ fzf 0.66.1
 gawk 5.3.1
 gdk-pixbuf 2.44.4
 gettext 0.26_1
-gh 2.83.0
+gh 2.83.1
 ghorg 1.11.6
 ghostscript 10.06.0
 giflib 5.2.2
@@ -65,7 +65,7 @@ gnu-tar 1.35
 gnupg 2.4.8
 gnutls 3.8.10
 go 1.25.4
-golangci-lint 2.6.1
+golangci-lint 2.6.2
 gopls 0.20.0
 graphite2 1.3.14
 groff 1.23.0_1
@@ -73,7 +73,7 @@ gron 0.7.1
 gumbo-parser 0.13.2
 hadolint 2.14.0
 harfbuzz 12.2.0
-helm 3.19.1
+helm 4.0.0
 highway 1.3.0
 hl 0.32.2
 htop 3.4.1
@@ -137,7 +137,7 @@ libpaper 2.2.6
 libparserutils 0.2.5
 libpipeline 1.5.8
 libpng 1.6.50
-libpq 18.0_1
+libpq 18.1
 libraw 0.21.4
 librist 0.2.11
 libsamplerate 0.2.2
@@ -198,7 +198,7 @@ neovim 0.11.5
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
 nettle 3.10.2
-node 25.1.0_2
+node 25.2.0
 npth 1.8
 oniguruma 6.9.10
 opencore-amr 0.1.6
@@ -274,7 +274,7 @@ rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7
 ruby-build 20251023
-ruff 0.14.4
+ruff 0.14.5
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.10
