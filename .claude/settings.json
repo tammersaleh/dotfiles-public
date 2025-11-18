@@ -7,7 +7,6 @@
       "Bash(git:*)"
     ]
   },
-  "alwaysThinkingEnabled": false,
   "hooks": {
     "Notification": [
       {
@@ -31,7 +30,6 @@
         ]
       }
     ]
-  }
-
+  },
+  "alwaysThinkingEnabled": false
 }
-
