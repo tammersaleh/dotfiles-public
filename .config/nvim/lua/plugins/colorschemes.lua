@@ -31,6 +31,7 @@ return {
       vim.api.nvim_set_hl(0, 'TerminalWin', { bg = 'black' }) -- Also for the terminal window itself
       vim.api.nvim_set_hl(0, 'Comment', { fg = 'white' })
       vim.api.nvim_set_hl(0, 'TSString', { fg = 'white' })
+      vim.api.nvim_set_hl(0, 'String', { fg = 'white' })
     end,
   },
 }
