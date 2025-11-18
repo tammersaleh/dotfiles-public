@@ -5,7 +5,7 @@ ast-grep 0.40.0
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.37
+awscli 2.31.38
 bash 5.3.3
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -51,7 +51,7 @@ gh 2.83.1
 ghorg 1.11.6
 ghostscript 10.06.0
 giflib 5.2.2
-git 2.51.2
+git 2.52.0
 git-crypt 0.8.0
 git-delta 0.18.2_3
 git-lfs 3.7.1
@@ -181,7 +181,7 @@ marksman 2024-12-18
 mbedtls 3.6.4
 md4c 0.5.2
 media-info 25.10
-mise 2025.11.5
+mise 2025.11.6
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -192,7 +192,7 @@ neovim 0.11.5
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
 nettle 3.10.2
-node 25.2.0
+node 25.2.1
 npth 1.8
 oniguruma 6.9.10
 opencore-amr 0.1.6
@@ -255,7 +255,8 @@ svt-av1 3.1.2
 switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
-tanka 0.36.0
+tanka 0.36.1
+terminal-notifier 2.0.0
 terraform 1.13.5
 tesseract 5.5.1
 tflint 0.60.0
@@ -271,7 +272,7 @@ unbound 1.24.1
 unibilium 2.1.2
 usage 2.7.0 2.8.0
 utf8proc 2.11.0
-uv 0.9.9
+uv 0.9.10
 uvwasi 0.0.23
 vim 9.1.1900
 vscode-langservers-extracted 4.10.0
