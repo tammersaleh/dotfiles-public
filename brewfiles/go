@@ -15,6 +15,7 @@ export HOMEBREW_DOWNLOAD_CONCURRENCY=auto # https://brew.sh/2025/08/05/homebrew-
 brew update
 brew bundle install --upgrade  | grep -Ev '^Using '
 brew bundle cleanup --force
+brew bundle upgrade
 brew list --versions > "installed-$(hostname -s).txt"
 if ! git diff --quiet HEAD -- installed-*.txt; then
   git add installed-*.txt
