@@ -67,12 +67,12 @@ return {
       require("neo-tree").setup({
         -- log_level = "trace", -- TODO: remove these
         -- log_to_file = true,  -- TODO: remove these
-        -- Replace cursor with full line highlight
         event_handlers = {
+          -- Replace cursor with full line highlight
           {
             event = "neo_tree_buffer_enter",
             handler = function()
-              local hl = vim.api.nvim_get_hl_by_name('Cursor', true)
+              local hl = vim.api.nvim_get_hl(0, { name = 'Cursor' })
               hl.blend = 100
               vim.api.nvim_set_hl(0, 'Cursor', hl)
               vim.opt.guicursor:append('a:Cursor/lCursor')
@@ -81,10 +81,23 @@ return {
           {
             event = "neo_tree_buffer_leave",
             handler = function()
-              local hl = vim.api.nvim_get_hl_by_name('Cursor', true)
+              local hl = vim.api.nvim_get_hl(0, { name = 'Cursor' })
               hl.blend = 0
               vim.api.nvim_set_hl(0, 'Cursor', hl)
               vim.opt.guicursor:remove('a:Cursor/lCursor')
+            end
+          },
+          -- rebalance windows on open/close
+          {
+            event = "neo_tree_window_after_open",
+            handler = function()
+              vim.cmd.wincmd('=')
+            end
+          },
+          {
+            event = "neo_tree_window_after_close",
+            handler = function()
+              vim.cmd.wincmd('=')
             end
           },
         },
@@ -99,7 +112,7 @@ return {
         source_selector = { winbar = true, },
         window = {
           position = "left",
-          width = 40,
+          width = 35,
           mapping_options = {
             noremap = true,
             nowait = true,
