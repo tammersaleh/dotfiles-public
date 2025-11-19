@@ -1,11 +1,11 @@
 aom 3.13.1
 aribb24 1.0.4
 aspell 0.60.8.1_1
-ast-grep 0.39.9
+ast-grep 0.40.0
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.31.35
+awscli 2.31.39
 bash 5.3.3
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -24,6 +24,7 @@ cmake-language-server 0.1.11
 coreutils 9.9
 ctags 5.8_2
 dav1d 1.5.2
+dbus 1.16.2_1
 diff-so-fancy 1.4.4
 diffutils 3.12
 direnv 2.37.1
@@ -31,6 +32,7 @@ docker-compose-langserver 0.4.0
 dockerfile-language-server 0.15.0
 doppler 3.75.1
 dotnet@8 8.0.121
+double-conversion 3.3.1
 entr 5.7
 exiftool 13.36
 fd 10.3.0
@@ -41,15 +43,15 @@ fontconfig 2.17.1
 freetype 2.14.1_1
 frei0r 2.5.0
 fribidi 1.0.16
-fzf 0.66.1
+fzf 0.67.0
 gawk 5.3.1
 gdk-pixbuf 2.44.4
 gettext 0.26_1
-gh 2.83.0
+gh 2.83.1
 ghorg 1.11.6
 ghostscript 10.06.0
 giflib 5.2.2
-git 2.51.2
+git 2.52.0
 git-crypt 0.8.0
 git-delta 0.18.2_3
 git-lfs 3.7.1
@@ -61,14 +63,14 @@ gnu-tar 1.35
 gnupg 2.4.8
 gnutls 3.8.10
 go 1.25.4
-golangci-lint 2.6.1
+golangci-lint 2.6.2
 gopls 0.20.0
 graphite2 1.3.14
 groff 1.23.0_1
 gron 0.7.1
 hadolint 2.14.0
-harfbuzz 12.2.0
-helm 3.19.1
+harfbuzz 12.2.0_1 12.2.0
+helm 4.0.0
 highway 1.3.0
 hl 0.32.2
 htop 3.4.1
@@ -130,7 +132,7 @@ libpaper 2.2.6
 libparserutils 0.2.5
 libpipeline 1.5.8
 libpng 1.6.50
-libpq 18.0_1
+libpq 18.1
 libraw 0.21.4
 librist 0.2.11
 libsamplerate 0.2.2
@@ -179,7 +181,7 @@ marksman 2024-12-18
 mbedtls 3.6.4
 md4c 0.5.2
 media-info 25.10
-mise 2025.11.4
+mise 2025.11.6
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -190,7 +192,7 @@ neovim HEAD-88fe467 0.11.5
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
 nettle 3.10.2
-node 25.1.0_2
+node 25.2.1
 npth 1.8
 oniguruma 6.9.10
 opencore-amr 0.1.6
@@ -224,7 +226,8 @@ python@3.12 3.12.12
 python@3.13 3.13.9_1
 python@3.14 3.14.0_1
 qrencode 4.1.1
-qt@5 5.15.17_1
+qtbase 6.9.3_1
+qtsvg 6.9.3
 rav1e 0.8.1
 rclone 1.71.2
 readline 8.3.1
@@ -232,15 +235,15 @@ ripgrep 15.1.0
 rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7
-ruby-build 20251023
-ruff 0.14.4
+ruby-build 20251117
+ruff 0.14.5
 s3cmd 2.4.0_1
 sassc 3.6.2
 sdl2 2.32.10
 shared-mime-info 2.4_1
 shellcheck 0.11.0
 shfmt 3.12.0
-simdjson 4.2.1
+simdjson 4.2.2 4.2.1
 sipcalc 1.1.6
 snappy 1.2.2
 socat 1.8.0.3
@@ -256,10 +259,11 @@ svt-av1 3.1.2
 switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
-tanka 0.36.0
+tanka 0.36.1
+terminal-notifier 2.0.0
 terraform 1.13.5
 tesseract 5.5.1
-tflint 0.59.1
+tflint 0.60.0
 the_silver_searcher 2.2.0
 theora 1.2.0
 tig 2.6.0
@@ -272,7 +276,7 @@ unbound 1.24.1
 unibilium 2.1.2
 usage 2.6.0 2.8.0
 utf8proc 2.11.0
-uv 0.9.9
+uv 0.9.10
 uvwasi 0.0.23
 vim 9.1.1900
 vscode-langservers-extracted 4.10.0
@@ -283,13 +287,13 @@ wget 1.25.0
 x264 r3222
 x265 4.1
 xorgproto 2024.1
-xpdf 4.05
+xpdf 4.06
 xvid 1.3.7
 xxhash 0.8.3
 xz 5.8.1
 yaml-language-server 1.19.2
 yarn 1.22.22
-yq 4.48.1
+yq 4.48.2
 z3 4.15.4
 zeromq 4.3.5_2
 zimg 3.0.6
