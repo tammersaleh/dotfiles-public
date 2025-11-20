@@ -38,6 +38,7 @@ brew 'hadolint'
 brew 'shellcheck'                    # Static analysis and lint tool, for bash scripts
 brew 'shfmt'                         # Shell fmt
 
+brew 'argocd'
 brew 'aspell'                        # Spell checker with better logic than ispell
 brew 'ast-grep'                      # language aware grep (sg) https://ast-grep.github.io/
 brew 'autoconf'                      # Automatic configure script builder
