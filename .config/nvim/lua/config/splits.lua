@@ -5,6 +5,14 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.equalalways = true
 
+-- resize splits when terminal resized
+local vim_resized = vim.api.nvim_create_augroup('vim_resized', { clear = true })
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = "*",
+  command = "wincmd =",
+  group = vim_resized,
+})
+
 -- Window navigation with mode preservation
 local function save_last_mode()
   vim.b._last_mode = vim.api.nvim_get_mode().mode
