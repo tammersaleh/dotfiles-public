@@ -1,10 +1,41 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch"
+      "Bash(aws iam get:*)",
+      "Bash(aws iam list:*)",
+      "Bash(aws secretsmanager list:*)",
+      "Bash(aws secretsmanager get:*)",
+      "Bash(aws secretsmanager describe:*)",
+      "Bash(aws sts get-caller-identity:*)",
+      "Bash(find:*)",
+      "Bash(git commit --show-current:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git status:*)",
+      "Glob",
+      "Grep",
+      "LS",
+      "Read",
+      "Task",
+      "WebFetch",
+      "WebSearch",
+      "pbcopy",
+      "pbpaste",
     ],
     "deny": [
-      "Bash(git:*)"
+      "Bash(git add:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git checkout -b:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git merge:*)",
+      "Bash(git mv:*)",
+      "Bash(git push:*)",
+      "Bash(git rebase:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git reset:*)",
+      "Bash(git tag -d:*)",
     ]
   },
   "hooks": {
