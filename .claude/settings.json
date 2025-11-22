@@ -8,7 +8,7 @@
       "Bash(aws secretsmanager list:*)",
       "Bash(aws sts get-caller-identity:*)",
       "Bash(find:*)",
-      "Bash(git commit --show-current:*)",
+      "Bash(git branch --show-current:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git show:*)",
@@ -35,7 +35,7 @@
       "WebFetch",
       "WebSearch",
       "pbcopy",
-      "pbpaste",
+      "pbpaste"
     ],
     "deny": [
       "Bash(git add:*)",
@@ -70,7 +70,7 @@
       "Bash(kubectl rollout:*)",
       "Bash(kubectl scale:*)",
       "Bash(kubectl taint:*)",
-      "Bash(kubectl uncordon:*)",
+      "Bash(kubectl uncordon:*)"
     ]
   },
   "hooks": {
