@@ -60,4 +60,11 @@ return {
       vim.cmd.colorscheme('zenbones')
     end
   },
+  {
+    "cajames/copy-reference.nvim",
+    opts = {}, -- optional configuration
+    keys = {
+      { "ycc", "<cmd>CopyReference line<cr>", mode = { "n", "v" }, desc = "Copy file:line reference" },
+    },
+  },
 }
