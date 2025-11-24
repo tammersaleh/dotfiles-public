@@ -3,7 +3,7 @@
 [include]
     path = ~/.gitconfig-local
 [column]
-    ui = auto
+	ui = auto
 [user]
     name = Tammer Saleh
     email = me@tammersaleh.com
@@ -53,10 +53,10 @@
     # summary = true
     conflictstyle = zdiff3
 [diff]
-    algorithm = histogram
-    colorMoved = plain
-    mnemonicPrefix = true
-    renames = true
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
     submodule = log
     wordRegex = [^[:space:]]
 [core]
@@ -77,9 +77,9 @@
 [hub]
     protocol = https
 [rebase]
-    autosquash = true
-    autostash = true
-    updateRefs = true
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
 [gc]
     auto = 256
 [pull]
@@ -95,7 +95,7 @@
     process = git-lfs filter-process 
     clean = git-lfs clean -- %f
 [init]
-    defaultBranch = main
+	defaultBranch = main
 [delta]
     features = decorations navigation
     light = false
@@ -129,7 +129,7 @@
     autoSetupMerge = true
     followTags = true
 [commit]
-    verbose = true
+	verbose = true
     gpgsign = true
 [credential]
     helper = osxkeychain
@@ -152,9 +152,9 @@
 [submodule]
     recurse = true
 [branch]
-    sort = -committerdate
+	sort = -committerdate
 [tag]
-    sort = version:refname
+	sort = version:refname
     gpgSign = true
 [log]
     date = iso
