@@ -62,7 +62,7 @@ return {
       -- end,
     },
     gitbrowse = {
-      enabled = true,
+      enabled = false,
       open = function(url) require("lazy.util").open(url, { system = true }) end,
       ---@type "repo" | "branch" | "file" | "commit" | "permalink"
       what = "branch",

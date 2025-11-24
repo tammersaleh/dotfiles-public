@@ -47,6 +47,7 @@
   "tree-sitter-html": { "branch": "master", "commit": "73a3947324f6efddf9e17c0ea58d454843590cc0" },
   "tree-sitter-markdown": { "branch": "split_parser", "commit": "2dfd57f547f06ca5631a80f601e129d73fc8e9f0" },
   "trouble.nvim": { "branch": "main", "commit": "f176232e7759c4f8abd923c21e3e5a5c76cd6837" },
+  "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
   "vim-rhubarb": { "branch": "master", "commit": "5496d7c94581c4c9ad7430357449bb57fc59f501" },
   "vim-sleuth": { "branch": "master", "commit": "be69bff86754b1aa5adcbb527d7fcd1635a84080" },
   "vim-smartword": { "branch": "master", "commit": "608d4883bb1eff4131f44857a21119220e55886d" },

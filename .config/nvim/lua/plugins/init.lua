@@ -10,7 +10,7 @@ return {
     config = true,
     submodules = false,
   },
-  -- { 'tpope/vim-fugitive' }, -- used just for Gblame
+  { 'tpope/vim-fugitive' },
   { 'tpope/vim-rhubarb' },
 
   -- Detect tabstop and shiftwidth automatically
