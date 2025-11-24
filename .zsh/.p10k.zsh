@@ -144,9 +144,9 @@
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=true
 
   # Add an empty line before each prompt.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+  # typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
   # https://github.com/romkatv/powerlevel10k/issues/2163#issuecomment-1397243389
-  # p10k-on-pre-prompt() p10k display empty_line=print
+  p10k-on-pre-prompt() p10k display empty_line=print
 
   # Connect left prompt lines with these symbols.
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=
