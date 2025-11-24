@@ -109,7 +109,16 @@ return {
           "document_symbols",
         },
         close_if_last_window = true,
-        source_selector = { winbar = true, },
+        source_selector = {
+          winbar = true,
+          sources = {
+            { source = "filesystem" },
+            { source = "buffers" },
+            { source = "git_status" },
+            { source = "document_symbols" },
+          },
+
+        },
         window = {
           position = "left",
           width = 35,
@@ -152,6 +161,7 @@ return {
             ['1'] = function() vim.cmd.Neotree('filesystem') end,
             ['2'] = function() vim.cmd.Neotree('buffers') end,
             ['3'] = function() vim.cmd.Neotree('git_status') end,
+            ['4'] = function() vim.cmd.Neotree('document_symbols') end,
             ["r"] = function() vim.cmd.Neotree('filesystem', 'show', 'reveal') end,
             ["dd"] = "delete",
             ["R"] = "rename",
