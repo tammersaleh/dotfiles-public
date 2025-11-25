@@ -65,15 +65,14 @@ return {
       vim.keymap.set({'n', 't'}, '<C-Down>',  open_terminal_split(false), {silent = true, desc = "Open terminal in a split below"})
 
       require("neo-tree").setup({
-        -- log_level = "trace", -- TODO: remove these
-        -- log_to_file = true,  -- TODO: remove these
+        -- log_level = "trace", -- For debuging
+        -- log_to_file = true,  -- For debuging
         event_handlers = {
           -- Replace cursor with full line highlight
           {
             event = "neo_tree_buffer_enter",
             handler = function()
               local hl = vim.api.nvim_get_hl(0, { name = 'Cursor' })
-              hl.blend = 100
               vim.api.nvim_set_hl(0, 'Cursor', hl)
               vim.opt.guicursor:append('a:Cursor/lCursor')
             end
@@ -82,7 +81,6 @@ return {
             event = "neo_tree_buffer_leave",
             handler = function()
               local hl = vim.api.nvim_get_hl(0, { name = 'Cursor' })
-              hl.blend = 0
               vim.api.nvim_set_hl(0, 'Cursor', hl)
               vim.opt.guicursor:remove('a:Cursor/lCursor')
             end
@@ -111,13 +109,21 @@ return {
         close_if_last_window = true,
         source_selector = {
           winbar = true,
+          show_scrolled_off_parent_node = true,
           sources = {
-            { source = "filesystem" },
-            { source = "buffers" },
-            { source = "git_status" },
-            { source = "document_symbols" },
+            {
+              source = "filesystem",
+              display_name = " 󰉓 Files "
+            },
+            {
+              source = "git_status",
+              display_name = " 󰊢 Git "
+            },
+            {
+              source = "document_symbols",
+              display_name = " 󰈚 Syms "
+            },
           },
-
         },
         window = {
           position = "left",
@@ -150,18 +156,16 @@ return {
                 else
                   renderer.focus_node(state, node:get_child_ids()[1])
                 end
-              else
-                -- open the file
-                -- require('neo-tree.sources.filesystem.commands').open(state)
               end
             end,
 
             ['<S-Tab>'] = 'prev_source',
             ['<Tab>'] = 'next_source',
+
             ['1'] = function() vim.cmd.Neotree('filesystem') end,
-            ['2'] = function() vim.cmd.Neotree('buffers') end,
-            ['3'] = function() vim.cmd.Neotree('git_status') end,
-            ['4'] = function() vim.cmd.Neotree('document_symbols') end,
+            ['2'] = function() vim.cmd.Neotree('git_status') end,
+            ['3'] = function() vim.cmd.Neotree('document_symbols') end,
+
             ["r"] = function() vim.cmd.Neotree('filesystem', 'show', 'reveal') end,
             ["dd"] = "delete",
             ["R"] = "rename",
@@ -236,7 +240,6 @@ return {
             -- if the file type is one of following, the window will be ignored
             filetype = { "neo-tree", "neo-tree-popup", "notify" },
             -- if the buffer type is one of following, the window will be ignored
-            -- buftype = { "terminal", "quickfix" },
             buftype = { "quickfix" },
           },
         },
