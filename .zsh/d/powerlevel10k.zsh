@@ -9,12 +9,12 @@ function prompt_aws_vault() {
   p10k segment -f yellow -b blue -t ${name//[-_]/ }
 }
 
-typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-  dir                     # current directory
-  aws_vault
-  vcs                     # git status
-  prompt_char             # prompt symbol
-)
+# typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+#   dir                     # current directory
+#   aws_vault
+#   vcs                     # git status
+#   prompt_char             # prompt symbol
+# )
 typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=red
 typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=white
 typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
