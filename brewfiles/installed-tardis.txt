@@ -6,7 +6,7 @@ ast-grep 0.40.0
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.32.3
+awscli 2.32.4
 bash 5.3.3
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -71,7 +71,7 @@ groff 1.23.0_1
 gron 0.7.1
 hadolint 2.14.0
 harfbuzz 12.2.0_1 12.2.0
-helm 4.0.0
+helm 4.0.1
 highway 1.3.0
 hl 0.32.3
 htop 3.4.1
@@ -100,7 +100,7 @@ kubernetes-cli 1.34.2
 lame 3.100
 lazygit 0.56.0
 leptonica 1.86.0
-lesspipe 2.20
+lesspipe 2.21
 libarchive 3.8.2
 libass 0.17.4
 libassuan 3.0.2
