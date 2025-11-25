@@ -4,6 +4,8 @@ local config = function()
 
   vim.api.nvim_set_hl(0, 'Comment', { fg = 'white', bold = true })
   vim.api.nvim_set_hl(0, 'String', { fg = 'white' })
+  vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'black' })
+  vim.api.nvim_set_hl(0, 'Visual', { bg = '#3a3a0a' })
 
   -- Set terminal background to black
   vim.api.nvim_set_hl(0, 'Terminal', { bg = '#000000', fg = '#d3c6aa' })
