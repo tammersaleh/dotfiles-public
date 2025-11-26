@@ -13,6 +13,7 @@
       "Bash(git log:*)",
       "Bash(git show:*)",
       "Bash(git status:*)",
+      "Bash(git rev-parse:*)",
       "Bash(kubectl describe:*)",
       "Bash(kubectl get:*)",
       "Bash(kubectl logs:*)",
