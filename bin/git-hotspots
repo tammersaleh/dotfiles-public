@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# git-hotspots - Shows recent git file activity
+#
+# Usage:
+#   git hotspots freq   - Most Frequently Changed Files (by commit count)
+#   git hotspots wide   - Most Widely Changed Files (by number of committers)
+#   git hotspots heavy  - Most Heavily Changed Files (by line count)
+#
+# Flags:
+#   --since/-s <date|timespan>  - Filter commits (default: 30d)
+#   --limit/-l <num>            - Limit number of files shown (default: 10)
+#
+# Examples:
+#   git hotspots freq
+#   git hotspots wide --since 90d
+#   git hotspots heavy -s 2024-01-01 -l 20
+
+set -euo pipefail
+
+# Defaults
+MODE=""
+SINCE="30d"
+LIMIT=10
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    freq|wide|heavy)
+      MODE="$1"
+      shift
+      ;;
+    -s|--since)
+      SINCE="$2"
+      shift 2
+      ;;
+    -l|--limit)
+      LIMIT="$2"
+      shift 2
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      echo "Usage: git hotspots {freq|wide|heavy} [--since/-s <date>] [--limit/-l <num>]" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [[ -z "$MODE" ]]; then
+  echo "Error: Mode required (freq, wide, or heavy)" >&2
+  echo "Usage: git hotspots {freq|wide|heavy} [--since/-s <date>] [--limit/-l <num>]" >&2
+  exit 1
+fi
+
+# Convert shorthand date formats (e.g., "30d", "1y") to git-compatible format
+if [[ "$SINCE" =~ ^([0-9]+)([dmy])$ ]]; then
+  num="${BASH_REMATCH[1]}"
+  unit="${BASH_REMATCH[2]}"
+  case "$unit" in
+    d) SINCE="$num days ago" ;;
+    m) SINCE="$num months ago" ;;
+    y) SINCE="$num years ago" ;;
+  esac
+fi
+
+case "$MODE" in
+  freq)
+    # Count commits per file
+    git log --name-only --pretty=format: --since="$SINCE" \
+      | grep -v '^$' \
+      | sort \
+      | uniq -c \
+      | sort -rn \
+      | head -n "$LIMIT" \
+      | awk '{printf "%-50s %s commits\n", $2, $1}' \
+      || true
+    ;;
+
+  wide)
+    # Count unique committers per file
+    git log --name-only --pretty=format:"%an" --since="$SINCE" \
+      | awk 'NF > 0 {if (seen_empty || NR == 1) {author = $0; seen_empty = 0} else {print author "\t" $0}} NF == 0 {seen_empty = 1}' \
+      | sort -u \
+      | cut -f2 \
+      | sort \
+      | uniq -c \
+      | sort -rn \
+      | head -n "$LIMIT" \
+      | awk '{printf "%-50s %s committers\n", $2, $1}' \
+      || true
+    ;;
+
+  heavy)
+    # Sum line changes per file
+    git log --numstat --pretty=format: --since="$SINCE" \
+      | grep -v '^$' \
+      | awk '{file=$3; add=$1; del=$2; if (add != "-" && del != "-") changes[file] += add + del} END {for (f in changes) print changes[f], f}' \
+      | sort -rn \
+      | head -n "$LIMIT" \
+      | awk '{printf "%-50s %s lines changed\n", $2, $1}' \
+      || true
+    ;;
+esac
