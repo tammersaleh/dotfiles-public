@@ -77,6 +77,7 @@ brew 'gnu-tar'                       # GNU version of the tar archiving utility
 brew 'gnupg'                         # GNU Pretty Good Privacy (PGP) package
 brew 'go'                            # golang
 brew 'gron'                          # Make JSON greppable
+brew 'gum'                           # Great interactive bash shell scripts
 brew 'hashicorp/tap/terraform'
 brew 'helm'
 brew 'hl'                            # Superfast local JSON compatible log file viewer. 
@@ -134,7 +135,6 @@ brew 'switch'                        # kubeswitch
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'switcher'                      # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'tanka'
-brew 'terminal-notifier'
 brew 'tflint'                        # Terraform linter
 brew 'the_silver_searcher'           # Code-search similar to ack
 brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/
