@@ -28,7 +28,7 @@ brew 'dockerfile-language-server'
 brew 'golangci-lint'
 brew 'gopls'
 brew 'lua-language-server'
-brew 'marksman'
+# brew 'marksman' # Markdown LSP https://github.com/artempyanykh/marksman recently broke
 brew 'pyright'
 brew 'stylelint'
 brew 'stylua'
