@@ -33,7 +33,7 @@ main() {
 
   mkdir -p "$SRC_BASE/$org"
   cd "$SRC_BASE/$org"
-  git clone "https://github.com/${tuple}.git"
+  git clone "git@github.com:${tuple}.git"
 }
 
 is_url() {
@@ -67,6 +67,7 @@ usage() {
 
   Example: git grab superorbital/foo
            git grab https://github.com/superorbital/foo
+           git grab git@github.com/superorbital/foo
            cd ~/src/github.com/superorbital; git grab foo
 
 EOF
