@@ -2,12 +2,12 @@ aom 3.13.1
 argocd 3.2.1
 aribb24 1.0.4
 aspell 0.60.8.1_1
-ast-grep 0.40.0
+ast-grep 0.40.1
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.32.13
-bash 5.3.8
+awscli 2.32.15
+bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
 bat 0.26.1
@@ -20,7 +20,7 @@ c-ares 1.34.5
 ca-certificates 2025-11-04 2025-12-02
 cairo 1.18.4
 cjson 1.7.19
-cmake 4.2.0
+cmake 4.2.1
 cmake-language-server 0.1.11
 coreutils 9.9
 ctags 5.8_2
@@ -51,7 +51,7 @@ gh 2.83.2
 ghorg 1.11.7
 ghostscript 10.06.0
 giflib 5.2.2
-git 2.52.0
+git 2.52.0_1
 git-crypt 0.8.0
 git-delta 0.18.2_3
 git-lfs 3.7.1
@@ -71,9 +71,9 @@ gron 0.7.1
 gum 0.17.0
 hadolint 2.14.0
 harfbuzz 12.2.0_1
-helm 4.0.1
+helm 4.0.2
 highway 1.3.0
-hl 0.32.3
+hl 0.33.0
 htop 3.4.1
 hub 2.14.2
 icu4c@78 78.1
@@ -88,7 +88,7 @@ jpeg-xl 0.11.1_3
 jq 1.8.1
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
-just 1.44.1
+just 1.45.0
 k9s 0.50.16
 kind 0.30.0
 krb5 1.22.1
@@ -181,7 +181,7 @@ man-db 2.13.1
 mbedtls@3 3.6.5
 md4c 0.5.2
 media-info 25.10
-mise 2025.12.1
+mise 2025.12.2
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -226,14 +226,15 @@ qtbase 6.9.3_1
 qtsvg 6.9.3
 rav1e 0.8.1
 rclone 1.72.1
-readline 8.3.1
+readline 8.3.3
 ripgrep 15.1.0
 rsync 3.4.1
 rubberband 4.0.0
 ruby 3.4.7
 ruby-build 20251203
-ruff 0.14.8
+ruff 0.14.9
 s3cmd 2.4.0_1
+s5cmd 2.3.0
 sassc 3.6.2
 sdl2 2.32.10
 shared-mime-info 2.4_1
@@ -297,8 +298,8 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7
 1password-cli 2.32.0
-claude-code 2.0.64
-font-codicon 0.0.43
+claude-code 2.0.67
+font-codicon 0.0.44
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
 font-meslo-lg-nerd-font 3.4.0
