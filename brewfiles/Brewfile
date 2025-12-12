@@ -8,6 +8,7 @@ tap 'superfly/tap'                   # for mods
 tap 'gabrie30/utils'
 tap 'danielfoehrkn/switch'
 tap 'hashicorp/tap'
+tap 'peak/tap'
 
 cask '1password-cli'
 cask 'font-codicon'                  # VSCode font icons
@@ -21,6 +22,7 @@ cask 'orbstack', greedy: true
 cask 'iterm2'
 cask 'claude-code'
 
+brew 's5cmd'
 brew 'bash-language-server'
 brew 'black'
 brew 'cmake-language-server'
