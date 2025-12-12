@@ -171,6 +171,7 @@ return {
             ["R"] = "rename",
             ["a"] = { "add", config = { show_path = "relative" } },
             ["s"] = "open_split",
+            ["f"] = "open_split",
             ["v"] = "open_vsplit",
             ["?"] = "show_help",
             ["<esc>"] = "cancel",
