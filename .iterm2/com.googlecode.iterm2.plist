@@ -40,16 +40,16 @@
 	<true/>
 	<key>GlobalKeyMap</key>
 	<dict>
-		<key>0xd-0x100000-0x24</key>
+		<key>0x6b-0x100000-0x28</key>
 		<dict>
 			<key>Action</key>
-			<integer>11</integer>
+			<integer>13</integer>
 			<key>Apply Mode</key>
 			<integer>0</integer>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>0x0D</string>
+			<string></string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
@@ -77,6 +77,8 @@
 	<true/>
 	<key>IRMemory</key>
 	<integer>4</integer>
+	<key>NeverBlockSystemShutdown</key>
+	<false/>
 	<key>NeverWarnAboutShortLivedSessions_7384C20A-F858-40AC-97B1-A7141EA6F135</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_7384C20A-F858-40AC-97B1-A7141EA6F135_selection</key>
@@ -87,6 +89,10 @@
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>ASCII Ligatures</key>
+			<true/>
+			<key>Allow Change Cursor Blink</key>
+			<true/>
+			<key>Allow Title Reporting</key>
 			<true/>
 			<key>Ambiguous Double Width</key>
 			<false/>
@@ -892,16 +898,16 @@
 			</array>
 			<key>Keyboard Map</key>
 			<dict>
-				<key>0x6b-0x100000-0x28</key>
+				<key>0x20-0x60000-0x31</key>
 				<dict>
 					<key>Action</key>
-					<integer>13</integer>
+					<integer>10</integer>
 					<key>Apply Mode</key>
 					<integer>0</integer>
 					<key>Escaping</key>
 					<integer>2</integer>
 					<key>Text</key>
-					<string></string>
+					<string>[27;6;32~</string>
 					<key>Version</key>
 					<integer>2</integer>
 				</dict>
@@ -989,8 +995,6 @@
 			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
-			<key>Place Prompt at First Column</key>
-			<false/>
 			<key>Prompt Before Closing 2</key>
 			<integer>2</integer>
 			<key>Right Option Key Sends</key>
@@ -1071,8 +1075,6 @@
 			<false/>
 			<key>Shortcut</key>
 			<string></string>
-			<key>Show Mark Indicators</key>
-			<false/>
 			<key>Show Status Bar</key>
 			<false/>
 			<key>Show Timestamps</key>
@@ -1315,6 +1317,12 @@
 			<string>/Users/tammersaleh</string>
 		</dict>
 	</array>
+	<key>OnlyWhenMoreTabs</key>
+	<false/>
+	<key>OpenArrangementAtStartup</key>
+	<false/>
+	<key>OpenNoWindowsAtStartup</key>
+	<true/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1348,10 +1356,12 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
-	<true/>
+	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
