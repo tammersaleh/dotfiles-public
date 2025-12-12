@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+message=""
+title="Terminal"
+subtitle=""
+sound=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -message)
+      message="$2"
+      shift 2
+      ;;
+    -title)
+      title="$2"
+      shift 2
+      ;;
+    -subtitle)
+      subtitle="$2"
+      shift 2
+      ;;
+    -sound)
+      sound="$2"
+      shift 2
+      ;;
+    -group|-remove|-list|-activate|-sender|-appIcon|-contentImage|-open|-execute|-ignoreDnD)
+      # Silently ignore unsupported options
+      shift
+      if [[ $# -gt 0 && ! "$1" =~ ^- ]]; then
+        shift
+      fi
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+# If no message provided, read from stdin
+if [[ -z "$message" ]]; then
+  if [[ -p /dev/stdin ]]; then
+    message=$(cat)
+  else
+    echo "Error: No message provided" >&2
+    exit 1
+  fi
+fi
+
+# Build AppleScript command
+script="display notification \"${message//\"/\\\"}\""
+
+if [[ -n "$title" ]]; then
+  script="$script with title \"${title//\"/\\\"}\""
+fi
+
+if [[ -n "$subtitle" ]]; then
+  script="$script subtitle \"${subtitle//\"/\\\"}\""
+fi
+
+if [[ -n "$sound" ]]; then
+  script="$script sound name \"${sound//\"/\\\"}\""
+fi
+
+osascript -e "$script"
