@@ -8,3 +8,5 @@ setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming 
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks from commands before saving.
+setopt HIST_FCNTL_LOCK           # Use proper file locking for history file.

@@ -16,3 +16,18 @@ alias dush=dust # Better du -sh
 
 alias lines="wc -l"
 alias chars="wc -c"
+
+boop () {
+  local last="$?"
+  if [[ "$last" == '0' ]]; then
+    sfx good
+  else
+    sfx bad
+  fi
+  $(exit "$last")
+}
+
+git-cdwt () {
+  cd "$(git worktree list | fzf | awk '{print $1}')"
+}
+
