@@ -28,15 +28,15 @@
       "Bash(kubectl top:*)",
       "Bash(kubectl version:*)",
       "Bash(kubectl wait:*)",
+      "Bash(pbcopy)",
+      "Bash(pbpaste)",
       "Glob",
       "Grep",
       "LS",
       "Read",
       "Task",
       "WebFetch",
-      "WebSearch",
-      "pbcopy",
-      "pbpaste"
+      "WebSearch"
     ],
     "deny": [
       "Bash(git add:*)",
@@ -81,7 +81,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title '🔔 Claude Code' -message 'Claude needs your input'"
+            "command": "notify --title '🔔 Claude Code' --message 'Claude needs your input'"
           }
         ]
       }
@@ -92,7 +92,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title '✅ Claude Code' -message 'The task has been completed'"
+            "command": "notify --title '✅ Claude Code' --message 'The task has been completed'"
           }
         ]
       }
