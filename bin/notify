@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+exec /Applications/Utilities/Notifier.app/Contents/MacOS/Notifier "$@"
+
