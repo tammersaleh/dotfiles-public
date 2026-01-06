@@ -1,23 +1,23 @@
 aom 3.13.1
-argocd 3.2.1
+argocd 3.2.3
 aribb24 1.0.4
 aspell 0.60.8.1_1
-ast-grep 0.40.1
+ast-grep 0.40.4
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.32.15
+awscli 2.32.29
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
 bat 0.26.1
 bat-extras 2024.08.24
 bfg 1.15.0
-black 25.12.0
+black 25.12.0_1
 brotli 1.2.0
 bzip2 1.0.8
 c-ares 1.34.5
-ca-certificates 2025-11-04 2025-12-02
+ca-certificates 2025-12-02
 cairo 1.18.4
 cjson 1.7.19
 cmake 4.2.1
@@ -34,9 +34,9 @@ dockerfile-language-server 0.15.0
 doppler 3.75.1
 double-conversion 3.3.1
 entr 5.7
-exiftool 13.36
+exiftool 13.44_1
 fd 10.3.0
-felinks 0.18.0
+felinks 0.19.0
 ffmpeg 8.0.1
 flac 1.5.0
 fontconfig 2.17.1
@@ -55,63 +55,65 @@ git 2.52.0_1
 git-crypt 0.8.0
 git-delta 0.18.2_3
 git-lfs 3.7.1
-glib 2.86.2
+glib 2.86.2 2.86.3
 gmp 6.3.0
 gnu-getopt 2.41.2
 gnu-sed 4.9
 gnu-tar 1.35
-gnupg 2.4.8
+gnupg 2.4.9
 gnutls 3.8.11
-go 1.25.4 1.25.5
+go 1.25.5
 golangci-lint 2.7.2
-gopls 0.20.0
+gopls 0.21.0
 graphite2 1.3.14
 groff 1.23.0_1
 gron 0.7.1
 gum 0.17.0
 hadolint 2.14.0
 harfbuzz 12.2.0_1
-helm 4.0.2
+helm 4.0.4
 highway 1.3.0
-hl 0.33.0
+hl 0.34.1
 htop 3.4.1
 hub 2.14.2
 icu4c@78 78.1
 id3lib 3.8.3_1
 id3v2 0.1.12
-imagemagick 7.1.2-10
+imagemagick 7.1.2-12
 imath 3.2.2
 jasper 4.2.8
 jbig2dec 0.20
-jpeg-turbo 3.1.2
+jpeg-turbo 3.1.2 3.1.3
 jpeg-xl 0.11.1_3
 jq 1.8.1
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
-just 1.45.0
+just 1.46.0
 k9s 0.50.16
-kind 0.30.0
+kind 0.31.0
 krb5 1.22.1
 kubecolor 0.5.3
 kubelogin 1.35.0
-kubernetes-cli 1.34.3
+kubernetes-cli 1.35.0
 lame 3.100
-lazygit 0.57.0
+lazygit 0.58.0
 leptonica 1.86.0
-lesspipe 2.21
+lesspipe 2.22
 libarchive 3.8.3
 libass 0.17.4
 libassuan 3.0.2
 libb2 0.98.1
 libbluray 1.4.0_1
+libcbor 0.13.0
 libcss 0.9.2
 libde265 1.0.16
 libdeflate 1.25
 libdom 0.4.2
 libevent 2.1.12_1
+libfido2 1.16.0_1
 libgcrypt 1.11.2
 libgit2 1.9.1
-libgpg-error 1.56
+libgpg-error 1.58 1.56
 libheif 1.20.2
 libhubbub 0.3.8
 libidn 1.43
@@ -127,14 +129,15 @@ libnghttp3 1.13.1
 libngtcp2 1.18.0
 libnotify 0.8.7
 libogg 1.3.6
-libomp 21.1.6 21.1.7
+libomp 21.1.8 21.1.6 21.1.7
 libpaper 2.2.6
 libparserutils 0.2.5
 libpipeline 1.5.8
-libpng 1.6.53 1.6.51
+libpng 1.6.53
 libpq 18.1
-libraw 0.21.4
+libraw 0.21.4 0.21.5
 librist 0.2.11_1
+librsvg 2.61.3_1
 libsamplerate 0.2.2
 libsass 3.6.6
 libsndfile 1.2.2_1
@@ -168,10 +171,10 @@ libyaml 0.2.5
 libzen 0.4.41_1
 libzip 1.11.4
 little-cms2 2.17
-llvm 21.1.7
+llvm 21.1.8
 lpeg 1.1.0
 lua 5.4.8
-lua-language-server 3.15.0
+lua-language-server 3.16.4
 luajit 2.1.1763318511
 luv 1.51.0-1
 lz4 1.10.0
@@ -181,13 +184,13 @@ man-db 2.13.1
 mbedtls@3 3.6.5
 md4c 0.5.2
 media-info 25.10
-mise 2025.12.2
+mise 2025.12.13
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
 mpg123 1.33.3
-mprocs 0.7.3
-ncurses 6.5
+mprocs 0.8.2
+ncurses 6.6 6.5
 neovim HEAD-a4b2192
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
@@ -196,10 +199,10 @@ node 25.2.1
 npth 1.8
 oniguruma 6.9.10
 opencore-amr 0.1.6
-openexr 3.4.4
+openexr 3.4.4_1 3.4.4
 openjdk 25.0.1
 openjpeg 2.5.4
-openjph 0.25.3
+openjph 0.25.3 0.26.0
 openssl@1.1 1.1.1w
 openssl@3 3.6.0
 opus 1.5.2
@@ -215,12 +218,12 @@ pinentry-mac 1.3.1.1
 pixman 0.46.4
 pkgconf 2.5.1
 popt 1.19
-pre-commit 4.5.0
+pre-commit 4.5.1
 pstree 2.40
 psutils 3.3.14_2
 pyright 1.1.407
-python@3.13 3.13.9_1 3.13.11
-python@3.14 3.14.0_1 3.14.2
+python@3.13 3.13.11
+python@3.14 3.14.2
 qrencode 4.1.1
 qtbase 6.9.3_1
 qtsvg 6.9.3
@@ -230,9 +233,9 @@ readline 8.3.3
 ripgrep 15.1.0
 rsync 3.4.1
 rubberband 4.0.0
-ruby 3.4.7
-ruby-build 20251203
-ruff 0.14.9
+ruby 4.0.0 3.4.7
+ruby-build 20251225
+ruff 0.14.10
 s3cmd 2.4.0_1
 s5cmd 2.3.0
 sassc 3.6.2
@@ -257,6 +260,7 @@ switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
 tanka 0.36.2
+teleport 18.6.1
 terraform 1.14.0
 tesseract 5.5.1_1
 tflint 0.60.0
@@ -270,11 +274,11 @@ tree-sitter 0.25.10
 uchardet 0.0.8
 unbound 1.24.2
 unibilium 2.1.2
-usage 2.9.0 2.8.0
+usage 2.9.0 2.11.0 2.8.0
 utf8proc 2.11.2
-uv 0.9.17
+uv 0.9.22
 uvwasi 0.0.23
-vim 9.1.1950
+vim 9.1.2050
 vscode-langservers-extracted 4.10.0
 watch 4.0.5
 watchexec 2.3.2
@@ -282,14 +286,14 @@ webp 1.6.0
 wget 1.25.0
 x264 r3222
 x265 4.1
-xorgproto 2024.1
+xorgproto 2024.1 2025.1
 xpdf 4.06
 xvid 1.3.7
 xxhash 0.8.3
-xz 5.8.1
+xz 5.8.2 5.8.1
 yaml-language-server 1.19.2
 yarn 1.22.22
-yq 4.49.2
+yq 4.50.1
 z3 4.15.4
 zeromq 4.3.5_2
 zimg 3.0.6
@@ -298,7 +302,7 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7
 1password-cli 2.32.0
-claude-code 2.0.67
+claude-code 2.0.76
 font-codicon 0.0.44
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
