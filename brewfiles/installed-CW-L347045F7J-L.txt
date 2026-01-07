@@ -6,7 +6,7 @@ ast-grep 0.40.4
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.32.29
+awscli 2.32.30
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -19,6 +19,7 @@ bzip2 1.0.8
 c-ares 1.34.5
 ca-certificates 2025-12-02
 cairo 1.18.4
+cilium-cli 0.18.9
 cjson 1.7.19
 cmake 4.2.1
 cmake-language-server 0.1.11
@@ -182,7 +183,7 @@ man-db 2.13.1
 mbedtls@3 3.6.5
 md4c 0.5.2
 media-info 25.10
-mise 2025.12.13
+mise 2026.1.0
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -299,7 +300,7 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7
 1password-cli 2.32.0
-claude-code 2.0.76
+claude-code 2.1.1
 font-codicon 0.0.44
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
