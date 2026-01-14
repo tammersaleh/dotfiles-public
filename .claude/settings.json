@@ -1,4 +1,9 @@
 {
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.py",
+    "padding": 0
+  },
   "permissions": {
     "allow": [
       "Bash(aws iam get:*)",
