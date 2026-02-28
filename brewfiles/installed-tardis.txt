@@ -280,7 +280,6 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7 1.5.7_1
 1password-cli 2.32.1
-claude-code 2.1.63
 font-codicon 0.0.44
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
