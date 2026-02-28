@@ -28,10 +28,10 @@ __source_if_exists() {
 
 __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
 
-# Track which d/* files have been sourced to avoid duplicates
-typeset -a D_FILES_SOURCED
+# Track which files have been sourced to avoid duplicates
+typeset -a SOURCED_FILES
 
-source_d_file() {
+__source_file_once() {
   local pattern="$1"
 
   # Expand glob if needed
@@ -39,17 +39,18 @@ source_d_file() {
     [[ -f "$filepath" ]] || continue
 
     # Skip if already sourced
-    (( ${D_FILES_SOURCED[(I)$filepath]} )) && continue
+    (( ${SOURCED_FILES[(I)$filepath]} )) && continue
 
     source "$filepath"
-    D_FILES_SOURCED+=("$filepath")
+    SOURCED_FILES+=("$filepath")
   done
 }
 
 # Load files in specific order to handle dependencies
-source_d_file "$HOME/.zsh/d/homebrew.zsh"    # Must be first (sets up PATH for brew and GNU tools)
-source_d_file "$HOME/.zsh/d/completions.zsh" # Must be before any compdef/complete usage
-source_d_file "$HOME/.zsh/d/*"               # Load remaining files
+__source_file_once "$HOME/.zsh/d/homebrew.zsh"    # Must be first (sets up PATH for brew and GNU tools)
+__source_file_once "$HOME/.zsh/d/completions.zsh" # Must be before any compdef/complete usage
+__source_file_once "$HOME/.zsh/d/*"               # Load remaining files
+__source_file_once "$HOME/.private-zsh/*"         # Load private files
 
 # This must come at the end of the .zshrc file 🤷
 __source_if_exists $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
