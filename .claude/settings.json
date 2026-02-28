@@ -1,9 +1,4 @@
 {
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.py",
-    "padding": 0
-  },
   "permissions": {
     "allow": [
       "Bash(aws iam get:*)",
@@ -12,65 +7,115 @@
       "Bash(aws secretsmanager get:*)",
       "Bash(aws secretsmanager list:*)",
       "Bash(aws sts get-caller-identity:*)",
+      "Bash(cat:*)",
+      "Bash(curl:*)",
+      "Bash(docker build *)",
+      "Bash(docker inspect *)",
+      "Bash(docker run *)",
+      "Bash(echo:*)",
       "Bash(find:*)",
+      "Bash(git add *)",
       "Bash(git branch --show-current:*)",
+      "Bash(git commit *)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git rm:*)",
       "Bash(git show:*)",
       "Bash(git status:*)",
-      "Bash(git rev-parse:*)",
-      "Bash(kubectl describe:*)",
-      "Bash(kubectl get:*)",
-      "Bash(kubectl logs:*)",
+      "Bash(go build *)",
+      "Bash(go doc *)",
+      "Bash(go install *)",
+      "Bash(go list *)",
+      "Bash(go mod tidy *)",
+      "Bash(go test *)",
+      "Bash(go vet *)",
+      "Bash(go:*)",
+      "Bash(gofmt *)",
+      "Bash(golangci-lint:*)",
+      "Bash(jq *)",
       "Bash(kubectl api-:*)",
       "Bash(kubectl cluster-info:*)",
       "Bash(kubectl debug:*)",
+      "Bash(kubectl describe *)",
       "Bash(kubectl diff:*)",
       "Bash(kubectl events:*)",
       "Bash(kubectl explain:*)",
+      "Bash(kubectl get *)",
       "Bash(kubectl help:*)",
       "Bash(kubectl kustomize:*)",
+      "Bash(kubectl logs *)",
       "Bash(kubectl top:*)",
       "Bash(kubectl version:*)",
       "Bash(kubectl wait:*)",
+      "Bash(ls *)",
+      "Bash(make *)",
+      "Bash(mise:*)",
+      "Bash(mkdir:*)",
       "Bash(pbcopy)",
       "Bash(pbpaste)",
+      "Bash(printenv:*)",
+      "Bash(sort:*)",
+      "Bash(touch:*)",
+      "Bash(tr:*)",
+      "Bash(tree:*)",
+      "Bash(unset:*)",
       "Glob",
       "Grep",
       "LS",
       "Read",
       "Task",
       "WebFetch",
-      "WebSearch"
+      "WebSearch",
+      "mcp__glean_default__search",
+      "mcp__glean_default__read_document",
+      "mcp__glean_default__chat",
+      "mcp__glean_default__code_search",
+      "mcp__glean_default__employee_search",
+      "mcp__atlassian__atlassianUserInfo",
+      "mcp__atlassian__fetch",
+      "mcp__atlassian__getAccessibleAtlassianResources",
+      "mcp__atlassian__getConfluencePage",
+      "mcp__atlassian__getConfluencePageDescendants",
+      "mcp__atlassian__getConfluenceSpaces",
+      "mcp__atlassian__getPagesInConfluenceSpace",
+      "mcp__atlassian__getVisibleJiraProjects",
+      "mcp__atlassian__search",
+      "mcp__atlassian__searchConfluenceUsingCql",
+      "mcp__sourcegraph__sg_keyword_search",
+      "mcp__sourcegraph__sg_nls_search",
+      "mcp__sourcegraph__sg_read_file",
+      "mcp__sourcegraph__sg_list_files",
+      "mcp__sourcegraph__sg_list_repos",
+      "mcp__sourcegraph__sg_diff_search",
+      "mcp__sourcegraph__sg_find_references",
+      "mcp__sourcegraph__sg_go_to_definition",
+      "mcp__sourcegraph__sg_deepsearch_read",
+      "mcp__sourcegraph__sg_commit_search"
     ],
     "deny": [
-      "Bash(git add:*)",
       "Bash(git branch -D:*)",
-      "Bash(git checkout -b:*)",
-      "Bash(git commit:*)",
       "Bash(git config:*)",
       "Bash(git merge:*)",
-      "Bash(git mv:*)",
-      "Bash(git push:*)",
       "Bash(git rebase:*)",
       "Bash(git remote set-url:*)",
       "Bash(git reset:*)",
       "Bash(git tag -d:*)",
-      "Bash(kubectl apply:*)",
-      "Bash(kubectl create:*)",
-      "Bash(kubectl delete:*)",
-      "Bash(kubectl edit:*)",
-      "Bash(kubectl label:*)",
       "Bash(kubectl annotate:*)",
-      "Bash(kubectl autoscale:*)",
+      "Bash(kubectl apply:*)",
       "Bash(kubectl attach:*)",
+      "Bash(kubectl autoscale:*)",
+      "Bash(kubectl config:*)",
       "Bash(kubectl config:*)",
       "Bash(kubectl cp:*)",
+      "Bash(kubectl create:*)",
       "Bash(kubectl ctx:*)",
-      "Bash(kubectl config:*)",
+      "Bash(kubectl delete:*)",
       "Bash(kubectl drain:*)",
-      "Bash(kubectl expose:*)",
+      "Bash(kubectl edit:*)",
       "Bash(kubectl exec:*)",
+      "Bash(kubectl expose:*)",
+      "Bash(kubectl label:*)",
       "Bash(kubectl patch:*)",
       "Bash(kubectl replace:*)",
       "Bash(kubectl rollout:*)",
@@ -79,28 +124,21 @@
       "Bash(kubectl uncordon:*)"
     ]
   },
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "notify --title '🔔 Claude Code' --message 'Claude needs your input'"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "notify --title '✅ Claude Code' --message 'The task has been completed'"
-          }
-        ]
-      }
-    ]
-  }
+  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.py",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest"
 }
