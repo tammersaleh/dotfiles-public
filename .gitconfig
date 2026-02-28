@@ -8,14 +8,14 @@
     name = Tammer Saleh
     email = me@tammersaleh.com
     signingkey = 6EFD49B64C131F81
-[includeIf "hasconfig:remote.*.url:https://github.com/getditto/**"]
-    path = ~/.gitconfig-ditto
-[includeIf "hasconfig:remote.*.url:git@github.com:getditto/**"]
-    path = ~/.gitconfig-ditto
 [includeIf "hasconfig:remote.*.url:https://github.com/superorbital/**"]
     path = ~/.gitconfig-superorbital
 [includeIf "hasconfig:remote.*.url:git@github.com:superorbital/**"]
     path = ~/.gitconfig-superorbital
+[includeIf "hasconfig:remote.*.url:https://github.com/coreweave/**"]
+    path = ~/.gitconfig-coreweave
+[includeIf "hasconfig:remote.*.url:git@github.com:coreweave/**"]
+    path = ~/.gitconfig-coreweave
 [alias]
     aliases         = !bash -c 'git config --get-regexp "alias.*" | cut -c 7-'
     last            = log @{1}.. --decorate --reverse --stat -C --no-merges
