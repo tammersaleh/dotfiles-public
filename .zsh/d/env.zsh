@@ -17,8 +17,9 @@ export SHELLCHECK_OPTS='-e SC2155 -e SC1090'
 # Stop tar from creating ._ files
 export COPYFILE_DISABLE=1
 
-__prependpath   '/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/'
-__prependpath    /Applications/Postgres.app/Contents/Versions/9.4/bin
+__prependpath "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/"
+__prependpath "/Applications/Postgres.app/Contents/Versions/9.4/bin"
+__prependpath "$HOME/.local/bin"
 
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"

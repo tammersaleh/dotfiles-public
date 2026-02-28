@@ -20,7 +20,6 @@ cask 'ghostty'
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask 'orbstack', greedy: true
 cask 'iterm2'
-cask 'claude-code'
 
 brew 's5cmd'
 brew 'bash-language-server'
