@@ -28,6 +28,12 @@ Always favor well-designed solutions over hacks, even if that requires extra pla
 
 For any change, ask yourself if there's an update to the local CLAUDE.md file that should happen at the same time.  If one doesn't exist, offer to create it.
 
+## Preferred tooling
+
+- Prefer Mise over Makefiles, but always default to whatever is already in place.
+- if there's a locally configured tool runner, use that instead of running the underlying commands. For example `mise tests` instead of `go test ./...`
+- when writing greenfield CLIs, prefer Golang, and prefer Kong over Cobra.
+
 # Git
 
 ## Github
@@ -77,3 +83,7 @@ This applies to writing README's, internal documentation, Git commits, etc.
 - Favor actual headings over bolded text.  ie `### Important` instead of `**important**`
 - Never use the emdash (`—`).  Always use regular dash (`-`) instead.
 - ALWAYS include a completely blank line between paragraphs/headings and bulleted lists.  Just like how it's done in this doc.
+
+# When doing research and investigations
+
+For simple searches, the web search tool or the existing MCPs are great. But if you find yourself in a situation where you have to gather lots of data from external systems, it might be advantageous to pause the investigation and implement a CLI that can gather the data more quickly and in an easy format for you to process. If that's the case, ask me first.
