@@ -122,7 +122,8 @@
       "Bash(kubectl scale:*)",
       "Bash(kubectl taint:*)",
       "Bash(kubectl uncordon:*)"
-    ]
+    ],
+    "defaultMode": "default"
   },
   "model": "opus",
   "statusLine": {
@@ -140,5 +141,7 @@
     "pyright-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "autoUpdatesChannel": "latest"
+  "promptSuggestionEnabled": false,
+  "autoUpdatesChannel": "latest",
+  "effortLevel": "high"
 }
