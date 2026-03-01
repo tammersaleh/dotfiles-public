@@ -997,6 +997,8 @@
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>2</integer>
+			<key>Prompt Path Click Opens Navigator</key>
+			<true/>
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
