@@ -21,7 +21,8 @@ cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet component
 cask 'orbstack', greedy: true
 cask 'iterm2'
 
-brew 's5cmd'
+### LSPs and formatters
+
 brew 'bash-language-server'
 brew 'black'
 brew 'cmake-language-server'
@@ -29,16 +30,18 @@ brew 'docker-compose-langserver'
 brew 'dockerfile-language-server'
 brew 'golangci-lint'
 brew 'gopls'
-brew 'lua-language-server'
-# brew 'marksman' # Markdown LSP https://github.com/artempyanykh/marksman recently broke
-brew 'pyright'
-brew 'stylelint'
-brew 'stylua'
-brew 'vscode-langservers-extracted'
-brew 'yaml-language-server'
 brew 'hadolint'
+brew 'lua-language-server'
+brew 'pyright'
 brew 'shellcheck'                    # Static analysis and lint tool, for bash scripts
 brew 'shfmt'                         # Shell fmt
+brew 'stylelint'
+brew 'stylua'
+brew 'typescript-language-server'
+brew 'vscode-langservers-extracted'
+brew 'yaml-language-server'
+
+### Packages
 
 brew 'argocd'
 brew 'aspell'                        # Spell checker with better logic than ispell
@@ -129,6 +132,7 @@ brew 'rsync'
 brew 'ruby-build'                    # Install various Ruby versions and implementations
 brew 'ruff'                          # Python linting
 brew 's3cmd'                         # Command-line tool for the Amazon S3 service
+brew 's5cmd'
 brew 'sassc'                         # Wrapper around libsass that helps to create command-line apps
 brew 'sipcalc'                       # Advanced console-based IP subnet calculator
 brew 'socat'                         # netcat on steroids
