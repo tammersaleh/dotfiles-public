@@ -6,7 +6,7 @@ ast-grep 0.41.0
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.33.29
+awscli 2.34.0
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -19,7 +19,7 @@ bzip2 1.0.8
 c-ares 1.34.6
 ca-certificates 2025-12-02
 cairo 1.18.4
-cilium-cli 0.19.1
+cilium-cli 0.19.2
 cmake 4.2.3
 cmake-language-server 0.1.11
 coreutils 9.10
@@ -40,9 +40,9 @@ felinks 0.19.1
 ffmpeg 8.0.1_4
 fmt 12.1.0
 fontconfig 2.17.1
-freetype 2.14.1_1
+freetype 2.14.2
 fribidi 1.0.16
-fzf 0.68.0
+fzf 0.70.0
 gawk 5.4.0
 gdk-pixbuf 2.44.5
 gettext 1.0
@@ -73,13 +73,13 @@ harfbuzz 12.3.2
 hdrhistogram_c 0.11.9
 helm 4.1.1
 highway 1.3.0
-hl 0.35.3
+hl 0.36.0
 htop 3.4.1
 hub 2.14.2
 icu4c@78 78.2
 id3lib 3.8.3_1
 id3v2 0.1.12
-imagemagick 7.1.2-15
+imagemagick 7.1.2-15_1
 imath 3.2.2
 jansson 2.15.0
 jasper 4.2.8
@@ -95,8 +95,8 @@ k9s 0.50.18
 kind 0.31.0
 krb5 1.22.2 1.22.1
 kubecolor 0.5.3
-kubelogin 1.35.2
-kubernetes-cli 1.35.1
+kubelogin 1.36.0
+kubernetes-cli 1.35.2
 lame 3.100
 lazygit 0.59.0
 leptonica 1.87.0
@@ -130,7 +130,7 @@ libpaper 2.2.6
 libparserutils 0.2.5
 libpipeline 1.5.8
 libpng 1.6.55 1.6.53 1.6.54
-libpq 18.2
+libpq 18.3
 libsass 3.6.6
 libsodium 1.0.21
 libssh2 1.11.1
@@ -138,7 +138,7 @@ libtasn1 4.20.0
 libthai 0.1.30
 libtiff 4.7.1_1 4.7.1
 libtool 2.5.4
-libunistring 1.4.1
+libunistring 1.4.1 1.4.2
 libusb 1.0.29
 libuv 1.51.0 1.52.0
 libvmaf 3.0.0
@@ -156,7 +156,7 @@ libyaml 0.2.5
 libzen 0.4.41_1
 little-cms2 2.18 2.17
 llhttp 9.3.0 9.3.1
-llvm 21.1.8_1
+llvm 22.1.0
 lpeg 1.1.0
 lua 5.4.8
 lua-language-server 3.17.1
@@ -168,7 +168,7 @@ m4 1.4.20 1.4.21
 man-db 2.13.1
 md4c 0.5.2
 media-info 26.01
-mise 2026.2.20
+mise 2026.3.0
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -179,7 +179,7 @@ neovim HEAD-a2b92a5
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
 nettle 3.10.2
-node 25.6.1_1 25.3.0 25.5.0
+node 25.7.0
 npth 1.8
 oniguruma 6.9.10
 openexr 3.4.4_1 3.4.4 3.4.5
@@ -216,7 +216,7 @@ ripgrep 15.1.0
 rsync 3.4.1
 ruby 4.0.1
 ruby-build 20260222
-ruff 0.15.2
+ruff 0.15.4
 s3cmd 2.4.0_1
 s5cmd 2.3.0
 sassc 3.6.2
@@ -248,12 +248,14 @@ todoist-cli 0.23.0
 tre 0.9.0
 tree 2.3.1
 tree-sitter 0.26.5
+typescript 5.9.3
+typescript-language-server 5.1.3
 uchardet 0.0.8
 unbound 1.24.2
 unibilium 2.1.2
-usage 2.9.0 2.16.1 2.18.0 2.18.1 2.11.0 2.8.0
+usage 2.18.2 2.9.0 2.16.1 2.18.0 2.18.1 2.11.0 2.8.0
 utf8proc 2.11.3
-uv 0.10.6
+uv 0.10.7
 uvwasi 0.0.23
 vim 9.2.0050
 vscode-langservers-extracted 4.10.0
@@ -267,7 +269,7 @@ xorgproto 2025.1
 xpdf 4.06
 xxhash 0.8.3
 xz 5.8.2
-yaml-language-server 1.20.0
+yaml-language-server 1.21.0
 yarn 1.22.22
 yq 4.52.4
 z3 4.15.4
@@ -276,7 +278,6 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7 1.5.7_1
 1password-cli 2.32.1
-claude-code 2.1.56
 font-codicon 0.0.44
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
