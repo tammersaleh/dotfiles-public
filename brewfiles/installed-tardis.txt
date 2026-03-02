@@ -73,7 +73,7 @@ harfbuzz 12.2.0_1
 hdrhistogram_c 0.11.9
 helm 4.1.1
 highway 1.3.0
-hl 0.35.4
+hl 0.36.0
 htop 3.4.1
 hub 2.14.2
 icu4c@76 76.1_2
@@ -97,7 +97,7 @@ k9s 0.50.18
 kind 0.31.0
 krb5 1.22.2 1.22.1
 kubecolor 0.5.3
-kubelogin 1.35.2
+kubelogin 1.36.0
 kubernetes-cli 1.35.2
 lame 3.100
 lazygit 0.59.0
@@ -167,7 +167,7 @@ m4 1.4.20 1.4.21
 man-db 2.13.1
 md4c 0.5.2
 media-info 26.01
-mise 2026.2.23
+mise 2026.2.24
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -178,7 +178,7 @@ neovim 0.11.6 HEAD-88fe467
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
 nettle 3.10.2
-node 25.6.1_1 25.2.1
+node 25.7.0
 npth 1.8
 oniguruma 6.9.10
 openexr 3.4.4_1 3.4.5
@@ -252,6 +252,8 @@ tre 0.9.0
 tree 2.3.1
 tree-sitter 0.25.10
 tree-sitter@0.25 0.25.10
+typescript 5.9.3
+typescript-language-server 5.1.3
 uchardet 0.0.8
 unbound 1.24.2
 unibilium 2.1.2
