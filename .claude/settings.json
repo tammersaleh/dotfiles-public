@@ -33,6 +33,8 @@
       "Bash(go:*)",
       "Bash(gofmt *)",
       "Bash(golangci-lint:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh issue list:*)",
       "Bash(jq *)",
       "Bash(kubectl api-:*)",
       "Bash(kubectl cluster-info:*)",
@@ -148,5 +150,6 @@
   "alwaysThinkingEnabled": true,
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true
 }
