@@ -55,4 +55,6 @@ __source_file_once "$HOME/.private-zsh/*"         # Load private files
 # This must come at the end of the .zshrc file 🤷
 __source_if_exists $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+__has direnv && eval "$(direnv hook zsh)"
+
 # vim: foldmethod=marker ft=zsh
