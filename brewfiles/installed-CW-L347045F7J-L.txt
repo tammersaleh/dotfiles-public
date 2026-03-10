@@ -1,19 +1,19 @@
 ada-url 3.4.3
 aom 3.13.1
-argocd 3.3.2
+argocd 3.3.3
 aspell 0.60.8.2
-ast-grep 0.41.0
+ast-grep 0.41.1
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.34.0
+awscli 2.34.5
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
 bat 0.26.1
 bat-extras 2024.08.24
 bfg 1.15.0
-black 26.1.0
+black 26.3.0_1
 brotli 1.2.0
 bzip2 1.0.8
 c-ares 1.34.6
@@ -33,9 +33,9 @@ docker-compose-langserver 0.5.0
 dockerfile-language-server 0.15.0
 doppler 3.75.3
 double-conversion 3.4.0
-entr 5.7
+entr 5.8
 exiftool 13.50
-fd 10.3.0
+fd 10.4.2
 felinks 0.19.1
 ffmpeg 8.0.1_4
 fmt 12.1.0
@@ -46,7 +46,7 @@ fzf 0.70.0
 gawk 5.4.0
 gdk-pixbuf 2.44.5
 gettext 1.0
-gh 2.87.3
+gh 2.88.0
 ghorg 1.11.9
 ghostscript 10.06.0
 giflib 5.2.2
@@ -61,8 +61,8 @@ gnu-sed 4.9
 gnu-tar 1.35
 gnupg 2.4.9
 gnutls 3.8.11
-go 1.26.0 1.25.6
-golangci-lint 2.10.1
+go 1.26.0 1.26.1 1.25.6
+golangci-lint 2.11.3
 gopls 0.21.1
 graphite2 1.3.14
 groff 1.23.0_1
@@ -79,7 +79,7 @@ hub 2.14.2
 icu4c@78 78.2
 id3lib 3.8.3_1
 id3v2 0.1.12
-imagemagick 7.1.2-15_1
+imagemagick 7.1.2-16
 imath 3.2.2
 jansson 2.15.0
 jasper 4.2.8
@@ -98,7 +98,7 @@ kubecolor 0.5.3
 kubelogin 1.36.0
 kubernetes-cli 1.35.2
 lame 3.100
-lazygit 0.59.0
+lazygit 0.60.0
 leptonica 1.87.0
 lesspipe 2.22
 libarchive 3.8.5 3.8.3
@@ -124,7 +124,7 @@ libmediainfo 26.01
 libmms 0.6.4
 libnghttp2 1.68.0
 libnghttp3 1.15.0
-libngtcp2 1.20.0
+libngtcp2 1.20.0 1.21.0
 libnotify 0.8.8
 libpaper 2.2.6
 libparserutils 0.2.5
@@ -158,7 +158,7 @@ little-cms2 2.18 2.17
 llhttp 9.3.0 9.3.1
 llvm 22.1.0
 lpeg 1.1.0
-lua 5.4.8
+lua 5.4.8 5.5.0
 lua-language-server 3.17.1
 luajit 2.1.1763318511 2.1.1767980792
 luv 1.51.0-2
@@ -168,7 +168,7 @@ m4 1.4.20 1.4.21
 man-db 2.13.1
 md4c 0.5.2
 media-info 26.01
-mise 2026.3.0
+mise 2026.3.7
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -179,10 +179,10 @@ neovim HEAD-a2b92a5
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
 nettle 3.10.2
-node 25.7.0
+node 25.8.0
 npth 1.8
 oniguruma 6.9.10
-openexr 3.4.4_1 3.4.4 3.4.5
+openexr 3.4.6 3.4.4_1 3.4.4 3.4.5
 openjdk 25.0.2
 openjpeg 2.5.4
 openjph 0.26.3 0.25.3 0.26.0
@@ -210,13 +210,13 @@ python@3.14 3.14.3_1 3.14.2_1
 qrencode 4.1.1
 qtbase 6.10.1
 qtsvg 6.10.1
-rclone 1.73.1
+rclone 1.73.2
 readline 8.3.3
 ripgrep 15.1.0
 rsync 3.4.1
 ruby 4.0.1
 ruby-build 20260222
-ruff 0.15.4
+ruff 0.15.5
 s3cmd 2.4.0_1
 s5cmd 2.3.0
 sassc 3.6.2
@@ -232,7 +232,7 @@ sqlite 3.51.2_1 3.51.2 3.51.1
 stern 1.33.1
 stow 2.4.1
 stylelint 17.4.0
-stylua 2.3.1
+stylua 2.4.0
 svt-av1 4.0.1
 switch 0.9.3
 switchaudio-osx 1.2.2
@@ -255,9 +255,9 @@ unbound 1.24.2
 unibilium 2.1.2
 usage 2.18.2 2.9.0 2.16.1 2.18.0 2.18.1 2.11.0 2.8.0
 utf8proc 2.11.3
-uv 0.10.7
+uv 0.10.9
 uvwasi 0.0.23
-vim 9.2.0050
+vim 9.2.0100_1
 vscode-langservers-extracted 4.10.0
 watch 4.0.6
 watchexec 2.5.0
@@ -286,4 +286,5 @@ font-source-sans-3 latest
 gcloud-cli 548.0.0
 ghostty 1.2.3
 iterm2 3.6.6
+mactex-no-gui 2026.0301
 orbstack 2.0.5,19905
