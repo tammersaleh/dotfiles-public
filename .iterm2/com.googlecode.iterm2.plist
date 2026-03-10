@@ -993,12 +993,14 @@
 			<string>FiraCodeNFM-Reg 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
+			<key>Open Password Manager Automatically</key>
+			<false/>
+			<key>Prompt Path Click Opens Navigator</key>
+			<true/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>2</integer>
-			<key>Prompt Path Click Opens Navigator</key>
-			<true/>
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
@@ -1092,7 +1094,7 @@
 				<key>advanced configuration</key>
 				<dict>
 					<key>algorithm</key>
-					<integer>0</integer>
+					<integer>1</integer>
 					<key>auto-rainbow style</key>
 					<integer>0</integer>
 					<key>font</key>
@@ -1136,7 +1138,7 @@
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
 								<key>algorithm</key>
-								<integer>0</integer>
+								<integer>1</integer>
 								<key>auto-rainbow style</key>
 								<integer>0</integer>
 								<key>font</key>
@@ -1180,7 +1182,7 @@
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
 								<key>algorithm</key>
-								<integer>0</integer>
+								<integer>1</integer>
 								<key>auto-rainbow style</key>
 								<integer>0</integer>
 								<key>font</key>
@@ -1224,7 +1226,7 @@
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
 								<key>algorithm</key>
-								<integer>0</integer>
+								<integer>1</integer>
 								<key>auto-rainbow style</key>
 								<integer>0</integer>
 								<key>font</key>
@@ -1251,7 +1253,7 @@
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
 								<key>algorithm</key>
-								<integer>0</integer>
+								<integer>1</integer>
 								<key>auto-rainbow style</key>
 								<integer>0</integer>
 								<key>font</key>
