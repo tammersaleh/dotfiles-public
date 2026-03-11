@@ -135,7 +135,7 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "slack@claude-plugins-official": true,
+    "slack@claude-plugins-official": false,
     "code-review@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
@@ -148,8 +148,8 @@
     "lua-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
-  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true
 }
