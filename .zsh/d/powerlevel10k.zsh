@@ -20,3 +20,10 @@ typeset -g POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND=white
 typeset -g POWERLEVEL9K_CONTEXT_REMOTE_SUDO_FOREGROUND=red
 typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=white
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# Set terminal title to current directory name
+function set_terminal_title() {
+  print -Pn "\e]0;%1~\a"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set_terminal_title
