@@ -135,6 +135,7 @@ brew 'ruff'                          # Python linting
 brew 's3cmd'                         # Command-line tool for the Amazon S3 service
 brew 's5cmd'
 brew 'sassc'                         # Wrapper around libsass that helps to create command-line apps
+brew 'sf'                            # Salesforce CLI
 brew 'sipcalc'                       # Advanced console-based IP subnet calculator
 brew 'socat'                         # netcat on steroids
 brew 'speedtest-cli'                 # Command-line interface for https://speedtest.net bandwidth tests
