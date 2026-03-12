@@ -27,6 +27,7 @@ This applies to writing README's, internal documentation, Git commits, etc.
 - Never use the emdash (`—`).  Always use regular dash (`-`) instead.
 - ALWAYS include a completely blank line between paragraphs/headings and bulleted lists.  Just like how it's done in this doc.
 - Add appropriate language tags to all code blocks.
+- When I ask to render the markdown, I want you to use the `mark` CLI to show it to me (`mark path/to/file.md`).
 
 # When doing research and investigations
 
