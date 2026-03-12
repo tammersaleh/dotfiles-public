@@ -6,14 +6,14 @@ ast-grep 0.41.1
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.34.5
+awscli 2.34.7
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
 bat 0.26.1
 bat-extras 2024.08.24
 bfg 1.15.0
-black 26.3.0_1
+black 26.3.1
 brotli 1.2.0
 bzip2 1.0.8
 c-ares 1.34.6
@@ -46,7 +46,7 @@ fzf 0.70.0
 gawk 5.4.0
 gdk-pixbuf 2.44.5
 gettext 1.0
-gh 2.88.0
+gh 2.88.1
 ghorg 1.11.9
 ghostscript 10.06.0
 giflib 5.2.2
@@ -71,7 +71,7 @@ gum 0.17.0
 hadolint 2.14.0
 harfbuzz 12.3.2
 hdrhistogram_c 0.11.9
-helm 4.1.1
+helm 4.1.3
 highway 1.3.0
 hl 0.36.0
 htop 3.4.1
@@ -140,7 +140,7 @@ libtiff 4.7.1_1 4.7.1
 libtool 2.5.4
 libunistring 1.4.1 1.4.2
 libusb 1.0.29
-libuv 1.51.0 1.52.0
+libuv 1.51.0 1.52.0 1.52.1
 libvmaf 3.0.0
 libvpx 1.16.0 1.15.2
 libwapcaplet 0.4.3
@@ -158,8 +158,8 @@ little-cms2 2.18 2.17
 llhttp 9.3.0 9.3.1
 llvm 22.1.0
 lpeg 1.1.0
-lua 5.4.8 5.5.0
 lua-language-server 3.17.1
+lua@5.4 5.4.8
 luajit 2.1.1763318511 2.1.1767980792
 luv 1.51.0-2
 lz4 1.10.0
@@ -168,7 +168,7 @@ m4 1.4.20 1.4.21
 man-db 2.13.1
 md4c 0.5.2
 media-info 26.01
-mise 2026.3.7
+mise 2026.3.8
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -179,7 +179,7 @@ neovim HEAD-a2b92a5
 neovim-remote 2.5.1_3
 netpbm 11.02.19_1
 nettle 3.10.2
-node 25.8.0
+node 25.8.1
 npth 1.8
 oniguruma 6.9.10
 openexr 3.4.6 3.4.4_1 3.4.4 3.4.5
@@ -215,15 +215,16 @@ readline 8.3.3
 ripgrep 15.1.0
 rsync 3.4.1
 ruby 4.0.1
-ruby-build 20260222
+ruby-build 20260311
 ruff 0.15.5
 s3cmd 2.4.0_1
 s5cmd 2.3.0
 sassc 3.6.2
 sdl2 2.32.10
+sf 2.126.4
 shared-mime-info 2.4_1
 shellcheck 0.11.0
-shfmt 3.12.0
+shfmt 3.13.0
 simdjson 4.3.0 4.2.2 4.2.4
 sipcalc 1.1.6
 socat 1.8.1.1
@@ -238,7 +239,7 @@ switch 0.9.3
 switchaudio-osx 1.2.2
 switcher 0.9.3
 tanka 0.36.3
-terraform 1.14.6
+terraform 1.14.7
 tesseract 5.5.2
 tflint 0.61.0
 the_silver_searcher 2.2.0
@@ -257,7 +258,7 @@ usage 2.18.2 2.9.0 2.16.1 2.18.0 2.18.1 2.11.0 2.8.0
 utf8proc 2.11.3
 uv 0.10.9
 uvwasi 0.0.23
-vim 9.2.0100_1
+vim 9.2.0100_2
 vscode-langservers-extracted 4.10.0
 watch 4.0.6
 watchexec 2.5.0
