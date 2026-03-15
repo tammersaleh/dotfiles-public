@@ -6,7 +6,7 @@ ast-grep 0.41.1
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.34.8
+awscli 2.34.9
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -59,8 +59,8 @@ gmp 6.3.0
 gnu-getopt 2.41.2
 gnu-sed 4.9
 gnu-tar 1.35
-gnupg 2.4.9
-gnutls 3.8.11
+gnupg 2.5.18
+gnutls 3.8.11 3.8.12
 go 1.25.4 1.25.5 1.26.0 1.26.1
 golangci-lint 2.11.3
 gopls 0.21.1
@@ -92,7 +92,7 @@ jq 1.8.1
 jsonlint 1.6.3
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
-just 1.46.0
+just 1.47.0
 k9s 0.50.18
 kind 0.31.0
 krb5 1.22.2 1.22.1
@@ -112,15 +112,15 @@ libde265 1.0.16
 libdeflate 1.25
 libdom 0.4.2
 libevent 2.1.12_1
-libgcrypt 1.11.2
+libgcrypt 1.12.1 1.11.2
 libgit2 1.9.1
-libgpg-error 1.58
+libgpg-error 1.59 1.58
 libheif 1.21.2 1.20.2
 libhubbub 0.3.8
 libiconv 1.18
 libidn 1.43
 libidn2 2.3.8
-libksba 1.6.7
+libksba 1.6.8 1.6.7
 libmediainfo 26.01 25.10
 libmms 0.6.4
 libnghttp2 1.68.0
@@ -135,7 +135,7 @@ libpq 18.3
 libsass 3.6.6
 libsodium 1.0.21 1.0.20
 libssh2 1.11.1
-libtasn1 4.20.0
+libtasn1 4.21.0 4.20.0
 libthai 0.1.30
 libtiff 4.7.1_1 4.7.1
 libtool 2.5.4
@@ -157,7 +157,7 @@ libyaml 0.2.5
 libzen 0.4.41_1
 little-cms2 2.18 2.17
 llhttp 9.3.1
-llvm 22.1.0
+llvm 22.1.1
 lpeg 1.1.0
 lua-language-server 3.17.1
 lua@5.4 5.4.8
@@ -169,7 +169,7 @@ m4 1.4.20 1.4.21
 man-db 2.13.1
 md4c 0.5.2
 media-info 26.01
-mise 2026.3.8
+mise 2026.3.9
 moreutils 0.70
 mpdecimal 4.0.1
 mpfr 4.2.2
@@ -180,7 +180,7 @@ neovim 0.11.6 HEAD-88fe467
 neovim-remote 2.5.1_3
 netpbm 11.02.22 11.02.19_1
 nettle 3.10.2
-node 25.8.1
+node 25.8.1_1
 npth 1.8
 oniguruma 6.9.10
 openexr 3.4.6 3.4.4_1 3.4.5
@@ -192,7 +192,7 @@ openldap 2.6.10_1
 openssl@1.1 1.1.1w
 openssl@3 3.6.0 3.6.1
 opus 1.5.2 1.6.1
-p11-kit 0.25.10
+p11-kit 0.26.2 0.25.10
 pandoc 3.9
 pango 1.57.0_2 1.57.0_1
 pass 1.7.4
@@ -230,7 +230,7 @@ sf 2.126.4
 shared-mime-info 2.4_1
 shellcheck 0.11.0
 shfmt 3.13.0
-simdjson 4.3.0 4.2.4
+simdjson 4.3.0 4.4.0 4.2.4
 sipcalc 1.1.6
 socat 1.8.1.1
 speedtest-cli 2.1.3_2
@@ -260,11 +260,11 @@ typescript-language-server 5.1.3
 uchardet 0.0.8
 unbound 1.24.2
 unibilium 2.1.2
-usage 2.18.2 2.9.0 2.18.1 2.11.0 2.6.0 2.8.0
+usage 2.18.2 2.9.0 3.0.0 2.18.1 2.11.0 2.6.0 2.8.0
 utf8proc 2.11.3 2.11.2
-uv 0.10.9
+uv 0.10.10
 uvwasi 0.0.23
-vim 9.2.0100_2
+vim 9.2.0150
 vscode-langservers-extracted 4.10.0
 watch 4.0.6
 watchexec 2.5.0
@@ -285,7 +285,7 @@ zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7 1.5.7_1
 1password-cli 2.32.1
-font-codicon 0.0.44
+font-codicon 0.0.45
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
 font-meslo-lg-nerd-font 3.4.0
