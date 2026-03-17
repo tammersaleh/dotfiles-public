@@ -6,7 +6,7 @@ ast-grep 0.42.0
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.34.9
+awscli 2.34.10
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -26,7 +26,7 @@ coreutils 9.10
 ctags 5.8_2
 dav1d 1.5.3
 dbus 1.16.2_1
-diff-so-fancy 1.4.4
+diff-so-fancy 1.4.6
 diffutils 3.12
 direnv 2.37.1
 docker-compose-langserver 0.5.0
@@ -90,7 +90,7 @@ jq 1.8.1
 jsonlint 1.6.3
 jsonnet 0.21.0
 jsonnet-bundler 0.6.0
-just 1.47.0
+just 1.47.1
 k9s 0.50.18
 kind 0.31.0
 krb5 1.22.2 1.22.1
@@ -215,7 +215,7 @@ readline 8.3.3
 ripgrep 15.1.0
 rsync 3.4.1
 ruby 4.0.1
-ruby-build 20260311
+ruby-build 20260317
 ruff 0.15.6
 s3cmd 2.4.0_1
 s5cmd 2.3.0
@@ -247,7 +247,7 @@ tig 2.6.0
 tmux 3.6a
 todoist-cli 0.23.0
 tre 0.9.0
-tree 2.3.1
+tree 2.3.2
 tree-sitter 0.26.5
 typescript 5.9.3
 typescript-language-server 5.1.3
@@ -256,7 +256,7 @@ unbound 1.24.2
 unibilium 2.1.2
 usage 2.18.2 2.9.0 3.0.0 2.16.1 2.18.0 2.18.1 2.11.0 2.8.0
 utf8proc 2.11.3
-uv 0.10.10
+uv 0.10.11
 uvwasi 0.0.23
 vim 9.2.0150
 vscode-langservers-extracted 4.10.0
