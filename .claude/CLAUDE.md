@@ -29,6 +29,14 @@ This applies to writing README's, internal documentation, Git commits, etc.
 - Add appropriate language tags to all code blocks.
 - When I ask to render the markdown, I want you to use the `mark` CLI to show it to me (`mark path/to/file.md`).
 
+### Slack Markdown
+
+Slack uses a lightweight formatting syntax called mrkdwn to style text.  Use this format whenever I ask you to produce something for me to paste into Slack: `*bold*`, `_italics_`, `~strikethrough~`, `inline code`, and ```code blocks```. You can create lists with `*` or `1.` and add links using `<url|text>`.
+
 # When doing research and investigations
 
+ALWAYS cite your references. If you got information from a conversation, include a link to the Slack thread. If you got it from a document, include a link there. Never provide information without links to the original sources.  This will help you double check the accuracy of your information as well.
+
 For simple searches, the web search tool or the existing MCPs are great. But if you find yourself in a situation where you have to gather lots of data from external systems, it might be advantageous to pause the investigation and implement a CLI that can gather the data more quickly and in an easy format for you to process. If that's the case, ask me first.
+
+
