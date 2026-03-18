@@ -6,7 +6,7 @@ ast-grep 0.42.0
 autoconf 2.72
 automake 1.18.1
 aws-sso-cli 2.1.0
-awscli 2.34.10
+awscli 2.34.12
 bash 5.3.9
 bash-completion@2 2.17.0
 bash-language-server 5.6.0
@@ -37,7 +37,7 @@ entr 5.8
 exiftool 13.50
 fd 10.4.2
 felinks 0.19.1
-ffmpeg 8.0.1_4
+ffmpeg 8.1
 fmt 12.1.0
 fontconfig 2.17.1
 freetype 2.14.2
@@ -76,7 +76,7 @@ highway 1.3.0
 hl 0.36.0
 htop 3.4.1
 hub 2.14.2
-icu4c@78 78.2
+icu4c@78 78.2 78.3
 id3lib 3.8.3_1
 id3v2 0.1.12
 imagemagick 7.1.2-17
@@ -221,7 +221,7 @@ s3cmd 2.4.0_1
 s5cmd 2.3.0
 sassc 3.6.2
 sdl2 2.32.10
-sf 2.126.4
+sf 2.127.2
 shared-mime-info 2.4_1
 shellcheck 0.11.0
 shfmt 3.13.0
@@ -245,7 +245,6 @@ tflint 0.61.0
 the_silver_searcher 2.2.0
 tig 2.6.0
 tmux 3.6a
-todoist-cli 0.23.0
 tre 0.9.0
 tree 2.3.2
 tree-sitter 0.26.5
@@ -278,7 +277,7 @@ zlib 1.3.2
 zsh 5.9
 zsh-fast-syntax-highlighting 1.56
 zstd 1.5.7 1.5.7_1
-1password-cli 2.32.1
+1password-cli 2.33.0
 font-codicon 0.0.45
 font-fira-code-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
