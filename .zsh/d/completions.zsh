@@ -10,3 +10,6 @@ zstyle ':completion:*' history-search-backward yes
 zstyle ':completion:*' history-search-forward yes
 # <tab> to expand aliases
 zstyle ':completion:*' completer _expand_alias _complete _ignored
+
+_mark_complete() { _files -g "*.md*"; }
+compdef _mark_complete mark
