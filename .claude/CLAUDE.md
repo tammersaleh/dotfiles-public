@@ -28,6 +28,7 @@ This applies to writing README's, internal documentation, Git commits, etc.
 - ALWAYS include a completely blank line between paragraphs/headings and bulleted lists.  Just like how it's done in this doc.
 - Add appropriate language tags to all code blocks.
 - When I ask to render the markdown, I want you to use the `mark` CLI to show it to me (`mark path/to/file.md`).
+- When generating PDF from Markdown, use `md-to-pdf` (installed via bun at `~/.bun/bin/md-to-pdf`). Requires `PUPPETEER_EXECUTABLE_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"` to be set.
 
 ### Slack Markdown
 
@@ -39,4 +40,4 @@ ALWAYS cite your references. If you got information from a conversation, include
 
 For simple searches, the web search tool or the existing MCPs are great. But if you find yourself in a situation where you have to gather lots of data from external systems, it might be advantageous to pause the investigation and implement a CLI that can gather the data more quickly and in an easy format for you to process. If that's the case, ask me first.
 
-
+If in the course of investigating you find other areas that you think might be useful to investigate, don't bother asking me. Just go ahead and do it.
