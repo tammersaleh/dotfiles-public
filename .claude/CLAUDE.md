@@ -41,3 +41,7 @@ ALWAYS cite your references. If you got information from a conversation, include
 For simple searches, the web search tool or the existing MCPs are great. But if you find yourself in a situation where you have to gather lots of data from external systems, it might be advantageous to pause the investigation and implement a CLI that can gather the data more quickly and in an easy format for you to process. If that's the case, ask me first.
 
 If in the course of investigating you find other areas that you think might be useful to investigate, don't bother asking me. Just go ahead and do it.
+
+# Dotfiles
+
+When editing dotfiles or config files in `$HOME`, invoke the `/dotfiles` skill first.

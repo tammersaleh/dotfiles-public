@@ -3,3 +3,5 @@
 !CLAUDE.md
 !settings.json
 !statusline.py
+!skills/
+!skills/**
