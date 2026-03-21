@@ -9,6 +9,20 @@ vim.keymap.set('v', '<S-Tab>', '<gv', { silent = true, desc = "Dedent selection"
 vim.keymap.set('n', '<Tab>',   '>>_', { silent = true, desc = "Indent line" })
 vim.keymap.set('n', '<S-Tab>', '<<_', { silent = true, desc = "Dedent line" })
 
+vim.keymap.set('i', '<Tab>', function()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local feed = function(keys)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
+  end
+  if col > 0 and vim.api.nvim_get_current_line():sub(col, col):match('%s') then
+    feed('<C-t>')
+  else
+    feed('<Tab>')
+  end
+end, { silent = true, desc = "Smart indent" })
+
+vim.keymap.set('i', '<S-Tab>', '<C-d>', { silent = true, desc = "Dedent line" })
+
 -- Go back in tag stack
 vim.keymap.set('n', 'gb', '<C-t>', {silent = true, desc = "[G]o [b]ack in tag stack"})
 

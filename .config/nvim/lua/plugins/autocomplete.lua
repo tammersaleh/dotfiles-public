@@ -12,10 +12,16 @@ return {
   },
   config = function()
 
-    local function only_whitespace_before_cursor()
-      local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
-      local text_before_cursor = vim.api.nvim_get_current_line():sub(1, cursor_pos)
-      return text_before_cursor:match("^%s*$") ~= nil
+    local function cursor_context()
+      local col = vim.api.nvim_win_get_cursor(0)[2]
+      if col == 0 then return 'bol' end
+      local char = vim.api.nvim_get_current_line():sub(col, col)
+      if char:match('%s') then return 'after_ws' end
+      return 'after_char'
+    end
+
+    local function feed(keys)
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
     end
 
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -26,19 +32,30 @@ return {
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          elseif only_whitespace_before_cursor() then
-            fallback()
-          else
+            return
+          end
+          local ctx = cursor_context()
+          if ctx == 'after_char' then
             cmp.complete()
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+          elseif ctx == 'after_ws' then
+            feed('<C-t>')
+          else
+            fallback()
           end
         end, { 'i', 's' }),
 
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+        ['<S-Tab>'] = cmp.mapping(function()
           if cmp.visible() then
             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+            return
+          end
+          local ctx = cursor_context()
+          if ctx == 'after_char' then
+            cmp.complete()
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
           else
-            fallback()
+            feed('<C-d>')
           end
         end, { 'i', 's' }),
 
