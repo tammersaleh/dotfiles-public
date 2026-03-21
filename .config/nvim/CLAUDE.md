@@ -2,6 +2,10 @@
 
 Lazy.nvim-based config. Plugin specs in `lua/plugins/`, config modules in `lua/config/`, filetype overrides in `after/ftplugin/`.
 
+## Directory structure
+
+This directory lives in the dotfiles repo at `~/dotfiles/public/.config/nvim/` and is symlinked to `~/.config/nvim/`. Your logical cwd (`pwd -L`) will show the symlink path, but the git repo is at the physical path. Run git commands from `~/dotfiles/public/`.
+
 ## Testing
 
 Run tests with `mise run test` (runs both suites). `mise run test:unit` and `mise run test:e2e` run individually.
