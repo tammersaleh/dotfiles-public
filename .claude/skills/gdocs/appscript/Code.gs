@@ -42,6 +42,14 @@ function doGet(e) {
       case 'listFolder':
         return handleListFolder(e.parameter);
 
+      // Spreadsheet operations
+      case 'getSpreadsheet':
+        return handleGetSpreadsheet(e.parameter);
+      case 'readRange':
+        return handleReadRange(e.parameter);
+      case 'writeRange':
+        return handleWriteRange(e.parameter);
+
       // Comment operations
       case 'getComments':
         return handleGetComments(e.parameter);
@@ -56,7 +64,7 @@ function doGet(e) {
         return jsonResponse({
           ok: false,
           error: 'unknown_action',
-          message: 'Valid actions: getDocument, getDocumentByUrl, createDocument, updateDocument, appendContent, listFolder, getComments, addComment, resolveComment, ping'
+          message: 'Valid actions: getDocument, getDocumentByUrl, createDocument, updateDocument, appendContent, listFolder, getSpreadsheet, readRange, writeRange, getComments, addComment, resolveComment, ping'
         });
     }
   } catch (err) {
@@ -204,6 +212,7 @@ function handleAppendContent(params) {
 // Force Drive scope so ScriptApp.getOAuthToken() includes it.
 // This function is never called — its presence triggers the scope request.
 function _forceDriveScope() { DriveApp.getRootFolder(); }
+function _forceSheetsScope() { SpreadsheetApp.getActive(); }
 
 /**
  * List comments on a document.
@@ -424,6 +433,155 @@ function handleListFolder(params) {
     files: files,
     folders: subfolders,
   });
+}
+
+// ---------------------------------------------------------------------------
+// Spreadsheet handlers
+// ---------------------------------------------------------------------------
+
+/**
+ * Get spreadsheet metadata and list of sheets.
+ * Params: id (spreadsheet ID, required)
+ */
+function handleGetSpreadsheet(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+
+  var ss = openSpreadsheetById(params.id);
+  var sheets = ss.getSheets().map(function(sheet) {
+    return {
+      name: sheet.getName(),
+      index: sheet.getIndex(),
+      rows: sheet.getLastRow(),
+      cols: sheet.getLastColumn(),
+    };
+  });
+
+  return jsonResponse({
+    ok: true,
+    id: params.id,
+    name: ss.getName(),
+    url: ss.getUrl(),
+    sheets: sheets,
+  });
+}
+
+/**
+ * Read a range from a spreadsheet.
+ * Params: id (required), sheet (sheet name, optional - defaults to first sheet),
+ *         range (A1 notation, optional - defaults to all data)
+ */
+function handleReadRange(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+
+  var ss = openSpreadsheetById(params.id);
+  var sheet = params.sheet ? ss.getSheetByName(params.sheet) : ss.getSheets()[0];
+
+  if (!sheet) {
+    return jsonResponse({ ok: false, error: 'not_found', message: 'Sheet not found: ' + params.sheet });
+  }
+
+  var range;
+  if (params.range) {
+    try {
+      range = sheet.getRange(params.range);
+    } catch (err) {
+      return jsonResponse({ ok: false, error: 'invalid_range', message: 'Invalid range: ' + params.range });
+    }
+  } else {
+    var lastRow = sheet.getLastRow();
+    var lastCol = sheet.getLastColumn();
+    if (lastRow === 0 || lastCol === 0) {
+      return jsonResponse({
+        ok: true,
+        id: params.id,
+        sheet: sheet.getName(),
+        range: 'A1',
+        values: [],
+      });
+    }
+    range = sheet.getRange(1, 1, lastRow, lastCol);
+  }
+
+  return jsonResponse({
+    ok: true,
+    id: params.id,
+    sheet: sheet.getName(),
+    range: range.getA1Notation(),
+    values: range.getValues(),
+  });
+}
+
+/**
+ * Write values to a range in a spreadsheet.
+ * Params: id (required), sheet (optional), range (A1 notation, required),
+ *         values (JSON 2D array, required)
+ */
+function handleWriteRange(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+  if (!params.range) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'range is required' });
+  }
+  if (!params.values) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'values is required (JSON 2D array)' });
+  }
+
+  var ss = openSpreadsheetById(params.id);
+  var sheet = params.sheet ? ss.getSheetByName(params.sheet) : ss.getSheets()[0];
+
+  if (!sheet) {
+    return jsonResponse({ ok: false, error: 'not_found', message: 'Sheet not found: ' + params.sheet });
+  }
+
+  var values;
+  try {
+    values = JSON.parse(params.values);
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'invalid_param', message: 'values must be a valid JSON 2D array' });
+  }
+
+  if (!Array.isArray(values) || !Array.isArray(values[0])) {
+    return jsonResponse({ ok: false, error: 'invalid_param', message: 'values must be a 2D array' });
+  }
+
+  try {
+    var range = sheet.getRange(params.range);
+    // Resize range to match values dimensions
+    range = sheet.getRange(range.getRow(), range.getColumn(), values.length, values[0].length);
+    range.setValues(values);
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'write_failed', message: 'Failed to write: ' + err.message });
+  }
+
+  return jsonResponse({
+    ok: true,
+    id: params.id,
+    sheet: sheet.getName(),
+    range: range.getA1Notation(),
+    message: 'Range updated',
+  });
+}
+
+/**
+ * Open a spreadsheet by ID with consistent error handling.
+ */
+function openSpreadsheetById(id) {
+  try {
+    return SpreadsheetApp.openById(id);
+  } catch (err) {
+    if (err.message.indexOf('not found') !== -1 || err.message.indexOf('is missing') !== -1) {
+      throw { isAppError: true, response: { ok: false, error: 'not_found', message: 'Spreadsheet not found: ' + id } };
+    }
+    if (err.message.indexOf('denied') !== -1 || err.message.indexOf('permission') !== -1 || err.message.indexOf('access') !== -1) {
+      throw { isAppError: true, response: { ok: false, error: 'permission_denied', message: 'No access to spreadsheet: ' + id } };
+    }
+    throw err;
+  }
 }
 
 // ---------------------------------------------------------------------------

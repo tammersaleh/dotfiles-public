@@ -1,7 +1,7 @@
 ---
 name: gdocs
-description: "Use for any Google Docs or Google Drive URL (docs.google.com/document/*, drive.google.com/drive/folders/*). Reads/writes documents, lists Drive folders, manages comments. Activate on any docs.google.com or drive.google.com link."
-allowed-tools: Bash(uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/*.py *), Bash(~/.claude/scripts/cdp-fetch.sh *)
+description: "Use for any Google Docs, Sheets, or Drive URL (docs.google.com/document/*, docs.google.com/spreadsheets/*, drive.google.com/drive/folders/*). Reads/writes documents and spreadsheets, lists Drive folders, manages comments. Activate on any docs.google.com or drive.google.com link."
+allowed-tools: Bash(uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/*.py *), Bash(~/.claude/scripts/cdp-fetch.sh *)
 requires-credentials:
   - GDOCS_APPSCRIPT_URL
   - GDOCS_APPSCRIPT_KEY
@@ -20,7 +20,7 @@ Apps Script editor: https://script.google.com/home/projects/1A_NY5VTc8G2W1py2wON
 - `GDOCS_APPSCRIPT_URL` and `GDOCS_APPSCRIPT_KEY` environment variables set (run `/gdocs-setup` if not done)
 - Chrome debug instance running: `~/.claude/scripts/chrome-debug.sh start`
 - Signed into Okta in the Chrome debug instance
-- Python dependencies installed: `cd .claude/skills/gdocs && uv sync`
+- Python dependencies installed: `cd ~/.claude/skills/gdocs && uv sync`
 - **For write operations**: Apps Script must be redeployed with the updated `Code.gs` that includes write handlers. Google may prompt for additional permissions on first write.
 
 ## Python Tools
@@ -29,7 +29,7 @@ All Python tools output JSON to stdout and errors to stderr. Use `--pretty` for 
 
 **Invocation pattern:**
 ```bash
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/<tool>.py <command> [options]
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/<tool>.py <command> [options]
 ```
 
 ### drive.py
@@ -41,10 +41,37 @@ List files and subfolders in Google Drive folders.
 
 ```bash
 # List by folder ID
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/drive.py ls --id 1qxNCV1dWSE80KeUaZKwxv7WIE8RjcCSL --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/drive.py ls --id 1qxNCV1dWSE80KeUaZKwxv7WIE8RjcCSL --pretty
 
 # List by folder URL
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/drive.py ls --url "https://drive.google.com/drive/folders/1qxNCV1dWSE80KeUaZKwxv7WIE8RjcCSL" --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/drive.py ls --url "https://drive.google.com/drive/folders/1qxNCV1dWSE80KeUaZKwxv7WIE8RjcCSL" --pretty
+```
+
+### sheets.py
+
+Read and write Google Sheets spreadsheets.
+
+**Subcommands:**
+
+- `info` - Get spreadsheet metadata (sheet names, row/column counts)
+- `read` - Read cells from a sheet (defaults to all data in first sheet)
+- `write` - Write a 2D array of values to a range
+
+```bash
+# Get spreadsheet info
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/sheets.py info --id SPREADSHEET_ID --pretty
+
+# Read all data from first sheet
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/sheets.py read --id ID --pretty
+
+# Read a specific range from a named sheet
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/sheets.py read --id ID --sheet "Sheet1" --range "A1:D10" --pretty
+
+# Read as CSV
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/sheets.py read --id ID --csv
+
+# Write values (JSON 2D array)
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/sheets.py write --id ID --range "A1" --values '[["Name","Score"],["Alice",95]]' --pretty
 ```
 
 ### documents.py
@@ -66,10 +93,10 @@ Read, create, update, and append to Google Docs documents.
 
 ```bash
 # Get a document by ID
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py get --id 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py get --id 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms --pretty
 
 # Get a document by URL
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py get --url "https://docs.google.com/document/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms/edit" --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py get --url "https://docs.google.com/document/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms/edit" --pretty
 ```
 
 ### Write Operations (Require Explicit User Confirmation)
@@ -82,24 +109,24 @@ Ask the user to confirm: document title, content summary, and format.
 
 ```bash
 # Create with plain text
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py create \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py create \
   --title "Meeting Notes — Jane Street 2026-02-21" \
   --content "Attendees: Fabian, John\n\nAgenda:\n- Delivery status\n- IB fabric update" \
   --pretty
 
 # Create with Markdown formatting
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py create \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py create \
   --title "Delivery Analysis" \
   --content "# DH2 Delivery Status\n\n**Target**: 541 B200 nodes\n\n## Timeline\n\n- Phase 1: 200 nodes\n- Phase 2: 341 nodes\n\n[Jira Epic](https://coreweave.atlassian.net/browse/TSM-105)" \
   --format markdown --pretty
 
 # Create with content from a file
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py create \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py create \
   --title "Technical Analysis" \
   --file /tmp/analysis.md --format markdown --pretty
 
 # Create title-only (empty document)
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py create \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py create \
   --title "Scratch Pad" --pretty
 ```
 
@@ -108,11 +135,11 @@ uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/docume
 **Warn the user that this REPLACES ALL existing content.** Fetch the document first with `get` to confirm the target.
 
 ```bash
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py update \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py update \
   --id DOC_ID --content "Completely new content." --pretty
 
 # Update with Markdown from a file
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py update \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py update \
   --id DOC_ID --file updated-notes.md --format markdown --pretty
 ```
 
@@ -120,16 +147,16 @@ uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/docume
 
 ```bash
 # Append text
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py append \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py append \
   --id DOC_ID --content "Additional notes from follow-up call." --pretty
 
 # Append with a horizontal rule separator
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py append \
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py append \
   --id DOC_ID --content "## Action Items\n\n- Follow up on IB flaps\n- Schedule QBR" \
   --format markdown --separator --pretty
 
 # Append from stdin
-echo "Appended via pipe" | uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py append \
+echo "Appended via pipe" | uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py append \
   --id DOC_ID --file - --pretty
 ```
 
@@ -137,16 +164,16 @@ echo "Appended via pipe" | uv run --project .claude/skills/gdocs python .claude/
 
 ```bash
 # List unresolved comments on a document
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py comments --id DOC_ID --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py comments --id DOC_ID --pretty
 
 # List all comments (including resolved)
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py comments --id DOC_ID --include-resolved --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py comments --id DOC_ID --include-resolved --pretty
 
 # Add a comment to a document
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py comment --id DOC_ID --content "This section needs updating" --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py comment --id DOC_ID --content "This section needs updating" --pretty
 
 # Resolve a comment
-uv run --project .claude/skills/gdocs python .claude/skills/gdocs/scripts/documents.py resolve-comment --id DOC_ID --comment-id COMMENT_ID --pretty
+uv run --project ~/.claude/skills/gdocs python ~/.claude/skills/gdocs/scripts/documents.py resolve-comment --id DOC_ID --comment-id COMMENT_ID --pretty
 ```
 
 Comments include the `quotedText` field showing what text the comment is anchored to (if any), the author, and any replies. Use `comments` to read feedback, then `resolve-comment` after addressing each one.
