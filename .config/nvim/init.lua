@@ -33,4 +33,11 @@ require('config.keymaps')
 
 require('lsp')
 
+-- Test support
+if #vim.api.nvim_list_uis() == 0 then
+  vim.o.swapfile = false
+  local config_dir = vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':h')
+  package.path = config_dir .. '/tests/?.lua;' .. package.path
+end
+
 -- vim: ts=2 sts=2 sw=2 et

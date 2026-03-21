@@ -1,3 +1,10 @@
 [tasks.test]
-description = "Run neovim config tests via plenary"
-run = "nvim --headless -c \"PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal_init.lua'}\""
+depends = ["test:unit", "test:e2e"]
+
+[tasks."test:unit"]
+description = "Run unit tests (no plugins)"
+run = "nvim --headless -c \"PlenaryBustedDirectory tests/unit/ {minimal_init = 'tests/unit/minimal_init.lua'}\""
+
+[tasks."test:e2e"]
+description = "Run e2e tests (full config with plugins)"
+run = "nvim --headless -c \"PlenaryBustedDirectory tests/e2e/ {init = 'init.lua'}\""

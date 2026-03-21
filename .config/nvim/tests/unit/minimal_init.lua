@@ -1,18 +1,22 @@
--- Minimal init for running plenary tests in headless mode.
--- Loads plenary from lazy's install path and puts this config on the rtp
--- so require('config.*') works in spec files.
+-- Minimal init for unit tests.
+-- Loads plenary and this config on the rtp, but no plugins.
 
 local this_dir = vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':h')
-local root_dir = vim.fn.fnamemodify(this_dir, ':h')
+local tests_dir = vim.fn.fnamemodify(this_dir, ':h')
+local root_dir = vim.fn.fnamemodify(tests_dir, ':h')
 
 vim.opt.rtp:prepend(root_dir)
 vim.opt.rtp:prepend(vim.fn.stdpath('data') .. '/lazy/plenary.nvim')
 
 -- Allow spec files to require('helpers')
-package.path = this_dir .. '/?.lua;' .. package.path
+package.path = tests_dir .. '/?.lua;' .. package.path
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+vim.o.swapfile = false
+
+vim.cmd('filetype plugin indent on')
 
 -- Predictable indent settings (vim-sleuth won't be loaded)
 vim.o.shiftwidth = 2
