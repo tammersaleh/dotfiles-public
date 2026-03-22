@@ -8,8 +8,4 @@ vim.filetype.add({
     ['Berksfile'] = 'ruby',
     ['.terraformrc'] = 'terraform',
   },
-  pattern = {
-    ['.*/%.aws/config'] = 'dosini',
-    ['.*/%.aws/credentials'] = 'dosini',
-  },
 })

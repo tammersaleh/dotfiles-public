@@ -35,13 +35,11 @@ describe("filetypes", function()
     assert.equals('terraform', detect('.terraformrc'))
   end)
 
-  -- BUG: nvim's built-in confini detection competes with the config's dosini
-  -- pattern non-deterministically. Both should be dosini.
-  pending("detects .aws/config as dosini", function()
-    assert.equals('dosini', detect('/home/user/.aws/config'))
+  it("detects .aws/config as confini", function()
+    assert.equals('confini', detect('/home/user/.aws/config'))
   end)
 
-  pending("detects .aws/credentials as dosini", function()
-    assert.equals('dosini', detect('/home/user/.aws/credentials'))
+  it("detects .aws/credentials as confini", function()
+    assert.equals('confini', detect('/home/user/.aws/credentials'))
   end)
 end)
