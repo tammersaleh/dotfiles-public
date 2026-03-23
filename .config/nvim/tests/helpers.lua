@@ -41,6 +41,32 @@ function M.ensure_normal()
   M.feed('<Esc>')
 end
 
+--- Assert a global keymap exists with the expected rhs.
+function M.assert_keymap(mode, lhs, expected_rhs)
+  for _, map in ipairs(vim.api.nvim_get_keymap(mode)) do
+    if map.lhs == lhs then
+      if expected_rhs then
+        assert.equals(expected_rhs, map.rhs)
+      end
+      return map
+    end
+  end
+  error("mapping " .. lhs .. " not found in mode " .. mode)
+end
+
+--- Assert a buffer-local keymap exists with the expected rhs.
+function M.assert_buf_keymap(mode, lhs, expected_rhs)
+  for _, map in ipairs(vim.api.nvim_buf_get_keymap(0, mode)) do
+    if map.lhs == lhs then
+      if expected_rhs then
+        assert.equals(expected_rhs, map.rhs)
+      end
+      return map
+    end
+  end
+  error("buffer-local mapping " .. lhs .. " not found in mode " .. mode)
+end
+
 --- Open a fresh empty buffer with predictable settings.
 function M.reset()
   vim.cmd('enew!')

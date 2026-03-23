@@ -7,28 +7,10 @@ describe("ftplugin/help", function()
   end)
 
   it("maps K to jump to tag", function()
-    local maps = vim.api.nvim_buf_get_keymap(0, 'n')
-    local found = false
-    for _, map in ipairs(maps) do
-      if map.lhs == 'K' then
-        found = true
-        assert.equals('<C-]>', map.rhs)
-        break
-      end
-    end
-    assert.is_true(found, "K mapping not found in help buffer")
+    h.assert_buf_keymap('n', 'K', '<C-]>')
   end)
 
   it("maps Enter to jump to tag", function()
-    local maps = vim.api.nvim_buf_get_keymap(0, 'n')
-    local found = false
-    for _, map in ipairs(maps) do
-      if map.lhs == '<CR>' then
-        found = true
-        assert.equals('<C-]>', map.rhs)
-        break
-      end
-    end
-    assert.is_true(found, "Enter mapping not found in help buffer")
+    h.assert_buf_keymap('n', '<CR>', '<C-]>')
   end)
 end)

@@ -11,7 +11,7 @@ vim.keymap.set('n', '<Leader>t', function()
     print("Buffer modified.  Save before replacing with a terminal")
     return nil
   end
-  if not vim.api.nvim_buf_get_name(0) == "" then
+  if vim.api.nvim_buf_get_name(0) ~= "" then
     vim.cmd('lcd %:h')
   end
 
@@ -19,7 +19,7 @@ vim.keymap.set('n', '<Leader>t', function()
   vim.cmd('terminal')
   local term_buf = vim.api.nvim_get_current_buf()
 
-  if not ( old_buf == term_buf ) then
+  if old_buf ~= term_buf then
     vim.api.nvim_buf_delete(old_buf, {})
   end
 end, {desc = "Open terminal in current buffer"})

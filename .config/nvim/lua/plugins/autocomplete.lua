@@ -76,7 +76,6 @@ return {
       },
 
       completion = {
-        -- completeopt = 'noinsert,noselect', -- Excludes 'menu' and 'menuone'
         autocomplete = false,
       },
 
