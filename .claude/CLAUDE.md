@@ -13,6 +13,7 @@ This applies to writing README's, internal documentation, Git commits, etc.
 - Use fewer words when possible.  Do not repeat yourself.  Be like Hemingway.
 - Assume your audience is highly technical and already understands the overall system.  Don't hold their hand.
 - Do not "sell".  Don't explain why something is so valuable or such a huge improvement.  No bulleted lists of selling points.  Only articulate the value when it's not already obvious.
+- "ask" is a verb, not a noun.  Never "the ask is", instead "the request is".
 
 ## For documents:
 
