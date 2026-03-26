@@ -10,10 +10,15 @@
  *
  * Read operations use doGet(). Write operations also use doGet() with
  * action names that distinguish intent (CDP routing is GET-only).
+ *
+ * SETUP: Enable the "Google Docs API" Advanced Service in the script
+ * editor (Services > + > Google Docs API > Add). This provides full
+ * smart chip support (person mentions, dates, rich links). Without it,
+ * reads fall back to DocumentApp which strips smart chip content.
  */
 
 // Replace this with a random key (e.g., run: openssl rand -hex 32)
-var API_KEY = 'REPLACE_WITH_YOUR_KEY';
+var API_KEY = 'ca0a27b4464c2333ce4ec74ac58159d74cb098825366f1ee86bdb6622ccd64fb';
 
 function doGet(e) {
   try {
@@ -88,8 +93,13 @@ function handleGetDocument(params) {
     return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
   }
 
-  var doc = openDocById(params.id);
-  return jsonResponse(formatDocument(doc));
+  try {
+    return jsonResponse(formatDocumentFromApi(params.id));
+  } catch (apiErr) {
+    // Fall back to DocumentApp if Advanced Docs Service is not enabled
+    var doc = openDocById(params.id);
+    return jsonResponse(formatDocument(doc));
+  }
 }
 
 /**
@@ -99,6 +109,16 @@ function handleGetDocument(params) {
 function handleGetDocumentByUrl(params) {
   if (!params.url) {
     return jsonResponse({ ok: false, error: 'missing_param', message: 'url is required' });
+  }
+
+  // Try REST API first for smart chip support
+  var docId = extractDocIdFromUrl(params.url);
+  if (docId) {
+    try {
+      return jsonResponse(formatDocumentFromApi(docId));
+    } catch (apiErr) {
+      // Fall through to DocumentApp
+    }
   }
 
   try {
@@ -736,6 +756,192 @@ function extractTable(table) {
   }
   return { type: 'table', rows: rows };
 }
+
+// ---------------------------------------------------------------------------
+// REST API-based extraction (Docs Advanced Service) - preserves smart chips
+// ---------------------------------------------------------------------------
+
+/**
+ * Extract doc ID from a Google Docs URL.
+ */
+function extractDocIdFromUrl(url) {
+  var match = url.match(/\/document\/d\/([a-zA-Z0-9_-]+)/);
+  return match ? match[1] : null;
+}
+
+/**
+ * Extract document content via the Docs REST API (Advanced Service).
+ * Unlike DocumentApp, this preserves smart chip content (person mentions,
+ * dates, rich links). Requires the "Google Docs API" Advanced Service.
+ */
+function formatDocumentFromApi(docId) {
+  var doc = Docs.Documents.get(docId);
+  var body = doc.body;
+  var elements = [];
+
+  if (!body || !body.content) {
+    return {
+      ok: true,
+      id: docId,
+      title: doc.title,
+      url: 'https://docs.google.com/document/d/' + docId + '/edit',
+      elements: [],
+    };
+  }
+
+  for (var i = 0; i < body.content.length; i++) {
+    var structural = body.content[i];
+
+    if (structural.paragraph) {
+      var para = structural.paragraph;
+      var runs = extractApiRuns(para.elements || []);
+      if (runs.length === 0) continue;
+
+      var element = { type: 'paragraph', runs: runs };
+
+      // Heading detection
+      if (para.paragraphStyle && para.paragraphStyle.namedStyleType) {
+        var style = para.paragraphStyle.namedStyleType;
+        if (style === 'TITLE') {
+          element.type = 'heading';
+          element.level = 0;
+        } else if (style.indexOf('HEADING_') === 0) {
+          element.type = 'heading';
+          element.level = parseInt(style.replace('HEADING_', ''), 10);
+        }
+      }
+
+      // List item detection
+      if (para.bullet) {
+        element.type = 'list_item';
+        element.nesting = para.bullet.nestingLevel || 0;
+        element.ordered = false;
+        if (para.bullet.listId && doc.lists && doc.lists[para.bullet.listId]) {
+          var listProps = doc.lists[para.bullet.listId].listProperties;
+          if (listProps && listProps.nestingLevels) {
+            var nest = listProps.nestingLevels[element.nesting];
+            if (nest && nest.glyphType &&
+                (nest.glyphType === 'DECIMAL' ||
+                 nest.glyphType === 'ALPHA' ||
+                 nest.glyphType === 'ROMAN' ||
+                 nest.glyphType === 'UPPER_ALPHA' ||
+                 nest.glyphType === 'UPPER_ROMAN')) {
+              element.ordered = true;
+            }
+          }
+        }
+      }
+
+      elements.push(element);
+
+    } else if (structural.table) {
+      elements.push(extractApiTable(structural.table));
+    }
+    // Skip sectionBreak, tableOfContents
+  }
+
+  return {
+    ok: true,
+    id: docId,
+    title: doc.title,
+    url: 'https://docs.google.com/document/d/' + docId + '/edit',
+    elements: elements,
+  };
+}
+
+/**
+ * Extract inline runs from REST API paragraph elements.
+ * Handles textRun, person (smart chip), richLink (smart chip),
+ * and horizontalRule.
+ */
+function extractApiRuns(elements) {
+  var runs = [];
+
+  for (var i = 0; i < elements.length; i++) {
+    var el = elements[i];
+
+    if (el.textRun) {
+      var text = el.textRun.content || '';
+      // Strip trailing newline (paragraphs always end with \n)
+      text = text.replace(/\n$/, '');
+      if (!text) continue;
+
+      var run = { text: text };
+      var ts = el.textRun.textStyle || {};
+      if (ts.bold) run.bold = true;
+      if (ts.italic) run.italic = true;
+      if (ts.link && ts.link.url) run.url = ts.link.url;
+      if (ts.weightedFontFamily &&
+          ts.weightedFontFamily.fontFamily &&
+          ts.weightedFontFamily.fontFamily.toLowerCase().indexOf('courier') !== -1) {
+        run.code = true;
+      }
+      runs.push(run);
+
+    } else if (el.person) {
+      var props = el.person.personProperties || {};
+      var name = props.name || props.email || 'Unknown';
+      runs.push({ text: name });
+
+    } else if (el.dateElement) {
+      var dateProps = el.dateElement.dateElementProperties || {};
+      var dateText = dateProps.displayText || dateProps.timestamp || 'Unknown date';
+      runs.push({ text: dateText });
+
+    } else if (el.richLink) {
+      var rlProps = el.richLink.richLinkProperties || {};
+      var title = rlProps.title || rlProps.uri || 'Link';
+      var uri = rlProps.uri || '';
+      var run = { text: title };
+      if (uri) run.url = uri;
+      runs.push(run);
+
+    } else if (el.horizontalRule) {
+      // Inline HR within a paragraph - rare but possible
+      runs.push({ text: '---' });
+
+    } else if (el.inlineObjectElement) {
+      runs.push({ text: '[image]' });
+    }
+    // Skip pageBreak, columnBreak, footnoteReference, equation, autoText
+  }
+
+  return runs;
+}
+
+/**
+ * Extract a table from the REST API response.
+ * Returns same format as extractTable(): {type:'table', rows:[['cell',...],...]}
+ */
+function extractApiTable(table) {
+  var rows = [];
+  if (!table.tableRows) return { type: 'table', rows: rows };
+
+  for (var r = 0; r < table.tableRows.length; r++) {
+    var row = [];
+    var cells = table.tableRows[r].tableCells || [];
+    for (var c = 0; c < cells.length; c++) {
+      var cellText = '';
+      var content = cells[c].content || [];
+      for (var p = 0; p < content.length; p++) {
+        if (content[p].paragraph) {
+          var cellRuns = extractApiRuns(content[p].paragraph.elements || []);
+          for (var ri = 0; ri < cellRuns.length; ri++) {
+            cellText += cellRuns[ri].text;
+          }
+          if (p < content.length - 1) cellText += '\n';
+        }
+      }
+      row.push(cellText);
+    }
+    rows.push(row);
+  }
+  return { type: 'table', rows: rows };
+}
+
+// ---------------------------------------------------------------------------
+// DocumentApp-based extraction (fallback when Advanced Service unavailable)
+// ---------------------------------------------------------------------------
 
 /**
  * Map Apps Script heading enum to numeric level.

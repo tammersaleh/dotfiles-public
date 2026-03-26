@@ -22,6 +22,13 @@ Apps Script editor: https://script.google.com/home/projects/1A_NY5VTc8G2W1py2wON
 - Signed into Okta in the Chrome debug instance
 - Python dependencies installed: `cd ~/.claude/skills/gdocs && uv sync`
 - **For write operations**: Apps Script must be redeployed with the updated `Code.gs` that includes write handlers. Google may prompt for additional permissions on first write.
+- **Google Docs API** Advanced Service enabled in the Apps Script editor (Services > + > Google Docs API > Add). Required for smart chip support (person mentions, dates, rich links).
+
+## Deploying Code.gs Changes
+
+The on-disk `Code.gs` contains the real API key from `$GDOCS_APPSCRIPT_KEY`. When copying to clipboard for deployment, **do not** replace the key with a placeholder. The file should always have the real key so it's ready to paste directly into the script editor.
+
+After pasting into the Apps Script editor: Save, then Deploy > Manage deployments > edit the active deployment > Deploy.
 
 ## Python Tools
 
