@@ -63,6 +63,24 @@ function doGet(e) {
       case 'resolveComment':
         return handleResolveComment(e.parameter);
 
+      // Raw API proxies - generic access without new handlers
+      case 'docsGet':
+        return handleDocsGet(e.parameter);
+      case 'docsBatchUpdate':
+        return handleDocsBatchUpdate(e.parameter);
+      case 'sheetsGet':
+        return handleSheetsGet(e.parameter);
+      case 'sheetsBatchUpdate':
+        return handleSheetsBatchUpdate(e.parameter);
+      case 'sheetsValuesGet':
+        return handleSheetsValuesGet(e.parameter);
+      case 'sheetsValuesUpdate':
+        return handleSheetsValuesUpdate(e.parameter);
+      case 'driveGet':
+        return handleDriveGet(e.parameter);
+      case 'driveList':
+        return handleDriveList(e.parameter);
+
       case 'ping':
         return jsonResponse({ ok: true, message: 'pong' });
       default:
@@ -81,7 +99,215 @@ function doGet(e) {
 }
 
 // ---------------------------------------------------------------------------
-// Read handlers
+// Raw Docs API proxy
+// ---------------------------------------------------------------------------
+
+/**
+ * Return the raw Docs REST API response for a document.
+ * Includes character indices for every element, enabling positional edits.
+ * Params: id (Google Doc ID)
+ */
+function handleDocsGet(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+  try {
+    var doc = Docs.Documents.get(params.id);
+
+    // Lightweight mode: return only heading positions with indices.
+    // Use for positional edits without transferring the full document.
+    if (params.headingsOnly === 'true') {
+      var headings = [];
+      var content = doc.body.content || [];
+      for (var i = 0; i < content.length; i++) {
+        var structural = content[i];
+        var para = structural.paragraph;
+        if (!para) continue;
+        var style = (para.paragraphStyle || {}).namedStyleType || '';
+        if (style.indexOf('HEADING') !== 0) continue;
+
+        var text = '';
+        var elements = para.elements || [];
+        for (var j = 0; j < elements.length; j++) {
+          var el = elements[j];
+          if (el.textRun) text += el.textRun.content || '';
+          else if (el.person) text += (el.person.personProperties || {}).name || '';
+          else if (el.richLink) text += (el.richLink.richLinkProperties || {}).title || '';
+          else if (el.dateElement) text += (el.dateElement.dateElementProperties || {}).displayText || '';
+        }
+        headings.push({
+          text: text.replace(/\n$/, ''),
+          level: parseInt(style.replace('HEADING_', ''), 10) || 0,
+          startIndex: structural.startIndex || 0,
+          endIndex: structural.endIndex || 0,
+        });
+      }
+      return jsonResponse({ ok: true, id: doc.documentId, title: doc.title, headings: headings });
+    }
+
+    return jsonResponse({ ok: true, doc: doc });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'docs_api', message: err.message });
+  }
+}
+
+/**
+ * Proxy arbitrary batchUpdate requests to the Docs REST API.
+ * Params: id (Google Doc ID), requests (JSON array of update requests)
+ *
+ * Example requests param (URL-encoded JSON):
+ *   [{"insertText":{"location":{"index":42},"text":"Hello\n"}}]
+ *
+ * See https://developers.google.com/docs/api/reference/rest/v1/documents/batchUpdate
+ */
+function handleDocsBatchUpdate(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+  if (!params.requests) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'requests is required (JSON array)' });
+  }
+  try {
+    var requests = JSON.parse(params.requests);
+    var result = Docs.Documents.batchUpdate({ requests: requests }, params.id);
+    return jsonResponse({ ok: true, result: result });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'docs_api', message: err.message });
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Raw Sheets API proxy
+// ---------------------------------------------------------------------------
+
+/**
+ * Return the raw Sheets REST API response for a spreadsheet.
+ * Params: id (Spreadsheet ID), ranges (optional, comma-separated A1 ranges),
+ *         includeGridData (optional, "true" to include cell data)
+ */
+function handleSheetsGet(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+  try {
+    var opts = {};
+    if (params.ranges) opts.ranges = params.ranges.split(',');
+    if (params.includeGridData === 'true') opts.includeGridData = true;
+    var sheet = Sheets.Spreadsheets.get(params.id, opts);
+    return jsonResponse({ ok: true, spreadsheet: sheet });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'sheets_api', message: err.message });
+  }
+}
+
+/**
+ * Proxy arbitrary batchUpdate requests to the Sheets REST API.
+ * Params: id (Spreadsheet ID), requests (JSON array of update requests)
+ */
+function handleSheetsBatchUpdate(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+  if (!params.requests) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'requests is required (JSON array)' });
+  }
+  try {
+    var requests = JSON.parse(params.requests);
+    var result = Sheets.Spreadsheets.batchUpdate({ requests: requests }, params.id);
+    return jsonResponse({ ok: true, result: result });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'sheets_api', message: err.message });
+  }
+}
+
+/**
+ * Read cell values from a spreadsheet range.
+ * Params: id (Spreadsheet ID), range (A1 notation, e.g. "Sheet1!A1:C10")
+ */
+function handleSheetsValuesGet(params) {
+  if (!params.id || !params.range) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id and range are required' });
+  }
+  try {
+    var result = Sheets.Spreadsheets.Values.get(params.id, params.range);
+    return jsonResponse({ ok: true, values: result.values, range: result.range });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'sheets_api', message: err.message });
+  }
+}
+
+/**
+ * Write cell values to a spreadsheet range.
+ * Params: id (Spreadsheet ID), range (A1 notation), values (JSON 2D array)
+ */
+function handleSheetsValuesUpdate(params) {
+  if (!params.id || !params.range || !params.values) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id, range, and values are required' });
+  }
+  try {
+    var values = JSON.parse(params.values);
+    var resource = { values: values };
+    var result = Sheets.Spreadsheets.Values.update(resource, params.id, params.range, {
+      valueInputOption: 'USER_ENTERED',
+    });
+    return jsonResponse({ ok: true, updatedCells: result.updatedCells, updatedRange: result.updatedRange });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'sheets_api', message: err.message });
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Raw Drive API proxy
+// ---------------------------------------------------------------------------
+
+/**
+ * Get file metadata from Drive.
+ * Params: id (File ID), fields (optional, comma-separated fields)
+ */
+function handleDriveGet(params) {
+  if (!params.id) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'id is required' });
+  }
+  try {
+    var opts = {};
+    if (params.fields) opts.fields = params.fields;
+    var file = Drive.Files.get(params.id, opts);
+    return jsonResponse({ ok: true, file: file });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'drive_api', message: err.message });
+  }
+}
+
+/**
+ * List files in a Drive folder.
+ * Params: folderId (Folder ID), q (optional, Drive query string),
+ *         pageSize (optional, default 100), pageToken (optional)
+ */
+function handleDriveList(params) {
+  if (!params.folderId) {
+    return jsonResponse({ ok: false, error: 'missing_param', message: 'folderId is required' });
+  }
+  try {
+    var q = params.q || ("'" + params.folderId + "' in parents and trashed = false");
+    var opts = {
+      q: q,
+      maxResults: parseInt(params.pageSize || '100', 10),
+      fields: 'items(id,title,mimeType,modifiedDate),nextPageToken',
+    };
+    if (params.pageToken) opts.pageToken = params.pageToken;
+    var result = Drive.Files.list(opts);
+    return jsonResponse({
+      ok: true,
+      files: result.items,
+      nextPageToken: result.nextPageToken || null,
+    });
+  } catch (err) {
+    return jsonResponse({ ok: false, error: 'drive_api', message: err.message });
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Read handlers (convenience wrappers - use docsGet for raw access)
 // ---------------------------------------------------------------------------
 
 /**
