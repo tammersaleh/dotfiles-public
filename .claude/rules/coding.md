@@ -1,38 +1,42 @@
-# Source code directory structure
+This is where I checkout and write source code.  
 
-All source code lives under `~/src/`, mirroring the Git repository URL. For example, the Terraform project lives at `~/src/github.com/hashicorp/terraform`.
+The directory structure mirrors the Git repository URL. The Terraform project, for example, would be found under ~/src/github.com/hashicorp/terraform.  This structure is made easy through [my `git grab` command](https://github.com/tammersaleh/dotfiles-public/tree/master/bin/git-grab).
 
-When cloning or creating new projects, use [`git grab`](https://github.com/tammersaleh/dotfiles-public/tree/master/bin/git-grab) to maintain this structure.
+# When writing code
 
-# Plan then implement
+## Plan then implement
 
-For any non-trivial code change, always present me with a plan before proceeding.
+For any non-trivial code change, always present me with a plan before proceeding.  
 
-For any non-trivial plan, always store that plan in a Markdown file locally so we can pick up where we left off. That Markdown file should not only include the steps to be taken, but the context and any other details you need as an agent to continue the work if restarted from scratch.
+For any non-trivial plan, always store that plan in a Markdown file locally so we can pick up where we left off.  That Markdown file should not only include the steps to be taken, but the context and any other details you need as an agent to continue the work if restarted from scratch.
 
-# Red, Green, Refactor
+## IMPORTANT: Red, Green, Refactor:
 
-If the repo has tests, ALWAYS write new tests to show the expected behavior, and watch those tests fail, BEFORE implementing the feature. Once the tests pass, you are not done. Look through the changes in the context of the existing code and find places to simplify and refactor.
+If the repo has tests, ALWAYS write new tests to show the expected behavior, and watch those tests fail, BEFORE implementing the feature.  
+
+Once the tests pass, YOU ARE NOT DONE. Look through the changes in the context of the existing code and find places to simplify and refactor.
 
 If there aren't any tests, think of ways you can test the code manually to show correctness.
 
-# Do things the right way
+## Do things the right way.
 
-Always favor well-designed solutions over hacks, even if that requires extra planning and a little more implementation. Instead of writing code to work around a poor design or misconfigured system, suggest to me how we can improve the surrounding design or configuration first.
+Always favor well-designed solutions over hacks, even if that requires extra planning and a little more implementation.  Instead of writing code to work around a poor design or misconfigured system, suggest to me how we can improve the surrounding design or configuration first.
 
-# Update CLAUDE.md
+## Update CLAUDE.md
 
-For any change, ask yourself if there's an update to the local CLAUDE.md file that should happen at the same time. If one doesn't exist, offer to create it.
+For any change, ask yourself if there's an update to the local CLAUDE.md file that should happen at the same time.  If one doesn't exist, offer to create it.
 
-# Preferred tooling
+## Preferred tooling
 
 - Prefer Mise over Makefiles, but always default to whatever is already in place.
 - If there's a locally configured tool runner, use that instead of running the underlying commands. For example `mise tests` instead of `go test ./...`
 - When writing greenfield CLIs, prefer Golang, and prefer Kong over Cobra.
+- Prefer `uv` for Python.
+- If writing a Python script makes use of the `uv` [shebang-with-dependencies pattern](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies)
 
-# Searching codebases
+## Searching codebases
 
-Prefer LSP over Grep/Read for code navigation - it's faster, precise, and avoids reading entire files:
+Prefer LSP over Grep/Read for code navigation — it's faster, precise, and avoids reading entire files:
 
 - `workspaceSymbol` to find where something is defined
 - `findReferences` to see all usages across the codebase
@@ -47,18 +51,18 @@ After writing or editing code, check LSP diagnostics and fix errors before proce
 
 ## Github
 
-If this is a shared project, I will want to do all pushes and remote actions myself. You will not be allowed.
+If this is a shared project, I will want to do all pushes and remote actions myself.  You will not be allowed.
 
-If this is a personal or green-field project, then you'll be allowed to push changes and make remote changes.
+If this is a personal or green-field project, then you'll be allowed to push changes make remote changes.
 
 Feel free to ask which situation this is.
 
 ## Commits
 
-- ALWAYS check the files that have been added (`git status`) before committing. Un-add any files that should not be pushed.
-- Keep commits small. Each small batch of useful functionality should be a separate commit, even if it's just a single character change.
+- ALWAYS ALWAYS check the files that have been added (`git status`) before committing.  Un-add any files that should not be pushed.
+- Keep commits small.  Each small batch of useful functionality should be a separate commit, even if it's just a single character change.
 - Use a light [conventional commit](http://conventionalcommits.org/en/v1.0.0/) format:
-
+    
     ```
     feat: allow provided config object to extend other configs
     chore!: drop support for Node 6
@@ -71,3 +75,4 @@ Feel free to ask which situation this is.
 - Keep the commit description (body) short and to the point.
     - Start with "what", then briefly explain "why"
     - Use bullets to explain any unrelated changes that are in the same commit. (even better, break those into separate commits)
+
