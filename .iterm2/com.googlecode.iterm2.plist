@@ -16,10 +16,12 @@
 	<integer>2</integer>
 	<key>AIVectorStore</key>
 	<integer>0</integer>
+	<key>AdjustWindowForFontSizeChange</key>
+	<false/>
 	<key>AiMaxTokens</key>
 	<integer>400000</integer>
 	<key>AiModel</key>
-	<string>gpt-5.1</string>
+	<string>gpt-5.2</string>
 	<key>AiResponseMaxTokens</key>
 	<integer>128000</integer>
 	<key>AitermURL</key>
@@ -30,6 +32,8 @@
 	<false/>
 	<key>CopyLastNewline</key>
 	<false/>
+	<key>CustomTabBarFontSize</key>
+	<real>18</real>
 	<key>Default Bookmark Guid</key>
 	<string>7384C20A-F858-40AC-97B1-A7141EA6F135</string>
 	<key>DimBackgroundWindows</key>
@@ -71,12 +75,20 @@
 	<true/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
+	<key>HideActivityIndicator</key>
+	<false/>
 	<key>HideScrollbar</key>
 	<false/>
+	<key>HideTab</key>
+	<false/>
+	<key>HideTabNumber</key>
+	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>IRMemory</key>
 	<integer>4</integer>
+	<key>LeftTabBarWidth</key>
+	<real>216</real>
 	<key>NeverBlockSystemShutdown</key>
 	<false/>
 	<key>NeverWarnAboutShortLivedSessions_7384C20A-F858-40AC-97B1-A7141EA6F135</key>
@@ -1270,7 +1282,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Title Components</key>
-			<integer>6</integer>
+			<integer>1</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Treat Option as Alt</key>
@@ -1363,6 +1375,8 @@
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
+	<true/>
+	<key>ShowNewOutputIndicator</key>
 	<false/>
 	<key>SoundForEsc</key>
 	<false/>
@@ -1380,6 +1394,8 @@
 	<false/>
 	<key>UseBorder</key>
 	<false/>
+	<key>UseCustomTabBarFontSize</key>
+	<true/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>disableMetalWhenUnplugged</key>
