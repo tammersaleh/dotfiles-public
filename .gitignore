@@ -10,5 +10,6 @@
 /.config/direnv/allow
 /.aws/cli/cache/*
 tags
+.claude/settings.local.json
 
 !.gitkeep
