@@ -16,11 +16,12 @@ cask 'font-fira-code-nerd-font'
 cask 'font-hack-nerd-font'
 cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
+cask 'codex'
 cask 'ghostty'
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask 'orbstack', greedy: true
 cask 'iterm2'
-cask 'mactex-no-gui'
+# cask 'mactex-no-gui'                # download link broken 2026-03-28
 
 ### LSPs and formatters
 

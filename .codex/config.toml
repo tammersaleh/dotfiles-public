@@ -1,0 +1,25 @@
+model = "gpt-5.4"
+model_provider = "openai-env-var"
+model_reasoning_effort = "xhigh"
+model_reasoning_summary = "detailed"
+model_context_window = 1000000
+model_auto_compact_token_limit = 600000
+model_verbosity = "high"
+file_opener = "none"
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
+personality = "pragmatic"
+web_search = "live"
+service_tier = "fast"
+model_instructions_file = "~/.codex/instructions.md"
+
+[model_providers.openai-env-var]
+name = "OpenAI (OPENAI_API_KEY)"
+base_url = "https://api.openai.com/v1"
+env_key = "OPENAI_API_KEY"
+wire_api = "responses"
+
+[shell_environment_policy]
+inherit = "all"
+ignore_default_excludes = true
+exclude = ["CODEX_HOME", "OPENAI_API_KEY"]
