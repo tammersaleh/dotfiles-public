@@ -46,3 +46,7 @@ If in the course of investigating you find other areas that you think might be u
 # Dotfiles
 
 When editing dotfiles or config files in `$HOME`, invoke the `/dotfiles` skill first.
+
+# Installing Software
+
+Prefer adding packages to `~/dotfiles/public/packages/`. Homebrew formulae go in `Brewfile`, Node/Bun packages go in `package.json`. Run `~/packages/go` to install everything. Never use `npm`.

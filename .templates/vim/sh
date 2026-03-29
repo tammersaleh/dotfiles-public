@@ -5,6 +5,8 @@ shopt -s inherit_errexit
 trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 [[ -v DEBUG ]] && set -x
 
+cd "$(dirname "$0")"
+
 main() {
   [[ $# -eq 1 ]] || usage "Wrong number of arguments"
   

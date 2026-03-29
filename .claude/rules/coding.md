@@ -26,6 +26,10 @@ Always favor well-designed solutions over hacks, even if that requires extra pla
 
 For any change, ask yourself if there's an update to the local CLAUDE.md file that should happen at the same time.  If one doesn't exist, offer to create it.
 
+## Shell scripts
+
+Follow the template in `~/dotfiles/public/.config/nvim/templates/sh` for all new bash scripts. It includes strict mode, error trapping, debug support, and `cd "$(dirname "$0")"` so scripts work from any directory.
+
 ## Preferred tooling
 
 - Prefer Mise over Makefiles, but always default to whatever is already in place.

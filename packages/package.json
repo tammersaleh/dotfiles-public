@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@doist/todoist-cli": "latest",
+    "md-to-pdf": "latest",
+    "puppeteer": "latest"
+  }
+}

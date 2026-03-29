@@ -42,7 +42,7 @@ main() {
 
   ./public/bin/dotfiles install
 
-  ~/brewfiles/go
+  ~/packages/go
 
   echo "All done!  Start a new shell and check it out!"
 }
