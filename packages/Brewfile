@@ -57,7 +57,6 @@ brew 'bash-completion@2'             # Common bash-completion libraries
 brew 'bat'                           # Clone of cat(1) with syntax highlighting and Git integration
 brew 'bat-extras'
 brew 'bfg'
-brew 'googleworkspace-cli'           # gws
 brew 'bzip2'                         # Freely available high-quality data compressor
 brew 'cilium-cli'
 brew 'cmake'
@@ -85,6 +84,7 @@ brew 'gnu-sed'
 brew 'gnu-tar'                       # GNU version of the tar archiving utility
 brew 'gnupg'                         # GNU Pretty Good Privacy (PGP) package
 brew 'go'                            # golang
+brew 'googleworkspace-cli'           # gws
 brew 'gron'                          # Make JSON greppable
 brew 'gum'                           # Great interactive bash shell scripts
 brew 'hashicorp/tap/terraform'
