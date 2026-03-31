@@ -2,7 +2,7 @@
 
 # Zsh completion script for Claude Code CLI
 # https://github.com/anthropics/claude-code
-# Auto-generated for Claude v2.1.76
+# Auto-generated for Claude v2.1.87
 
 local curcontext="$curcontext" state line
 typeset -A opt_args
@@ -11,6 +11,7 @@ local -a commands
 commands=(
   'agents:List configured agents'
   'auth:Manage authentication'
+  'auto-mode:Inspect auto mode classifier configuration'
   'doctor:Check the health of your Claude Code auto-updater'
   'install:Install Claude Code native build. Use [target] to specify version (stable, latest, or specific version)'
   'mcp:Configure and manage MCP servers'
@@ -67,7 +68,29 @@ marketplace_commands=(
   'update:Update marketplace(s) from their source - updates all if no name specified'
 )
 
-case $words[2] in
+# Find the subcommand position by scanning for the first non-flag argument after the command name.
+# This handles cases where flags appear before the subcommand (e.g., alias claude='claude --flag').
+local subcmd_pos=0
+local subcmd=""
+local -a known_commands=(agents auth auto-mode doctor install mcp plugin remote-control setup-token update upgrade)
+local i
+for (( i=2; i <= ${#words}; i++ )); do
+  # Skip flags and their values
+  [[ "$words[$i]" == -* ]] && continue
+  # Check if this word is a known subcommand
+  if (( ${known_commands[(Ie)$words[$i]]} )); then
+    subcmd_pos=$i
+    subcmd="$words[$i]"
+    break
+  fi
+done
+
+# If no subcommand found yet, fall through to main _arguments
+if [[ -n "$subcmd" ]]; then
+# Calculate positions relative to the subcommand
+local sub1=$(( subcmd_pos + 1 ))
+
+case $subcmd in
   agents)
     _arguments \
       '(-h --help)'{-h,--help}'[Display help for command]' \
@@ -75,12 +98,14 @@ case $words[2] in
     return
     ;;
   auth)
-    if (( CURRENT == 3 )); then
+    if (( CURRENT == sub1 )); then
       _describe 'auth command' auth_commands
     else
-      case $words[3] in
+      case $words[$sub1] in
         login)
           _arguments \
+            '--claudeai[Use Claude subscription (default)]' \
+            '--console[Use Anthropic Console (API usage billing) instead of Claude subscription]' \
             '--email[Pre-populate email address on the login page]:email:' \
             '(-h --help)'{-h,--help}'[Display help]' \
             '--sso[Force SSO login flow]'
@@ -103,10 +128,10 @@ case $words[2] in
     return
     ;;
   mcp)
-    if (( CURRENT == 3 )); then
+    if (( CURRENT == sub1 )); then
       _describe 'mcp command' mcp_commands
     else
-      case $words[3] in
+      case $words[$sub1] in
         serve)
           _arguments \
             '(-d --debug)'{-d,--debug}'[Enable debug mode]' \
@@ -163,20 +188,21 @@ case $words[2] in
     return
     ;;
   plugin)
-    if (( CURRENT == 3 )); then
+    if (( CURRENT == sub1 )); then
       _describe 'plugin command' plugin_commands
     else
-      case $words[3] in
+      case $words[$sub1] in
         validate)
           _arguments \
             '(-h --help)'{-h,--help}'[Display help]' \
             ':path:_files'
           ;;
         marketplace)
-          if (( CURRENT == 4 )); then
+          local sub2=$(( subcmd_pos + 2 ))
+          if (( CURRENT == sub2 )); then
             _describe 'marketplace command' marketplace_commands
           else
-            case $words[4] in
+            case $words[$sub2] in
               add)
                 _arguments \
                   '(-h --help)'{-h,--help}'[Display help]' \
@@ -214,6 +240,7 @@ case $words[2] in
         uninstall|remove)
           _arguments \
             '(-h --help)'{-h,--help}'[Display help]' \
+            '--keep-data[Preserve the plugin'\''s persistent data directory (~/.claude/plugins/data/{id}/)]' \
             '(-s --scope)'{-s,--scope}'[Uninstall from scope: user, project, or local (default: user)]:scope:(user project local)' \
             ':plugin:'
           ;;
@@ -249,6 +276,34 @@ case $words[2] in
     fi
     return
     ;;
+  auto-mode)
+    if (( CURRENT == sub1 )); then
+      local -a auto_mode_commands
+      auto_mode_commands=(
+        'config:Print the effective auto mode config as JSON: your settings where set, defaults otherwise'
+        'critique:Get AI feedback on your custom auto mode rules'
+        'defaults:Print the default auto mode environment, allow, and deny rules as JSON'
+        'help:Display help for command'
+      )
+      _describe 'auto-mode command' auto_mode_commands
+    else
+      case $words[$sub1] in
+        critique)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '--model[Override which model is used]:model:'
+          ;;
+        config|defaults)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]'
+          ;;
+        *)
+          _message 'no more arguments'
+          ;;
+      esac
+    fi
+    return
+    ;;
   install)
     _arguments \
       '--force[Force installation even if already installed]' \
@@ -270,6 +325,7 @@ case $words[2] in
     return
     ;;
 esac
+fi # end: if [[ -n "$subcmd" ]]
 
 # Only show global flags and commands if no subcommand matched
 _arguments -s \
@@ -280,6 +336,7 @@ _arguments -s \
   '*--allowedTools[Comma or space-separated list of tool names to allow (e.g. "Bash(git:*) Edit")]:tools:' \
   '*--allowed-tools[Comma or space-separated list of tool names to allow (e.g. "Bash(git:*) Edit")]:tools:' \
   '--append-system-prompt[Append a system prompt to the default system prompt]:prompt:' \
+  '--bare[Minimal mode: skip hooks, LSP, plugin sync, attribution, auto-memory, background prefetches, keychain reads, and CLAUDE.md auto-discovery. Sets CLAUDE_CODE_SIMPLE=1]' \
   '*--betas[Beta headers to include in API requests (API key users only)]:betas:' \
   '--brief[Enable SendUserMessage tool for agent-to-user communication]' \
   '--chrome[Enable Claude in Chrome integration]' \
@@ -323,5 +380,5 @@ _arguments -s \
   '--verbose[Override verbose mode setting from config]' \
   '(-v --version)'{-v,--version}'[Output the version number]' \
   '(-w --worktree)'{-w,--worktree}'[Create a new git worktree for this session (optionally specify a name)]::name:' \
-  '1:command:(agents auth doctor install mcp plugin remote-control setup-token update upgrade)' \
+  '1:command:(agents auth auto-mode doctor install mcp plugin remote-control setup-token update upgrade)' \
   '*:prompt:'
