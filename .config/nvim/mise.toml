@@ -3,8 +3,8 @@ depends = ["test:unit", "test:e2e"]
 
 [tasks."test:unit"]
 description = "Run unit tests (no plugins)"
-run = "nvim --headless -c \"PlenaryBustedDirectory tests/unit/ {minimal_init = 'tests/unit/minimal_init.lua'}\""
+run = "tests/run-tests --headless -c \"PlenaryBustedDirectory tests/unit/ {minimal_init = 'tests/unit/minimal_init.lua'}\""
 
 [tasks."test:e2e"]
 description = "Run e2e tests (full config with plugins)"
-run = "nvim --headless -c \"PlenaryBustedDirectory tests/e2e/ {init = 'init.lua'}\""
+run = "tests/run-tests --headless -c \"PlenaryBustedDirectory tests/e2e/ {init = 'init.lua'}\""

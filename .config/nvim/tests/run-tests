@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# Run nvim plenary tests with concise output.
+# Shows only a summary on success, full output on failure.
+# Set VERBOSE=1 for full output always.
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+main() {
+  [[ $# -ge 1 ]] || usage "Expected at least 1 argument"
+
+  local nvim_exit=0
+  local output
+  output=$(nvim "$@" 2>&1) || nvim_exit=$?
+
+  # Strip ANSI codes for parsing
+  local clean
+  clean=$(printf '%s\n' "$output" | sed $'s/\033\[[0-9;]*m//g')
+
+  local counts
+  counts=$(printf '%s\n' "$clean" | awk '
+    /^Success:/ { gsub(/[^0-9]/, ""); p += $0 }
+    /^Failed /  { gsub(/[^0-9]/, ""); f += $0 }
+    /^Errors /  { gsub(/[^0-9]/, ""); e += $0 }
+    END { print p+0, f+0, e+0 }
+  ')
+  local passed failed errors
+  read -r passed failed errors <<< "$counts"
+
+  if [[ -v VERBOSE ]] || [[ $nvim_exit -ne 0 ]] || [[ $failed -gt 0 ]] || [[ $errors -gt 0 ]]; then
+    printf '%s\n' "$output"
+  fi
+
+  echo "${passed} passed, ${failed} failed, ${errors} errors"
+  return $nvim_exit
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me
+  me=$(basename "$0")
+  cat <<-EOF
+
+  USAGE: $me [nvim args...]
+
+  Wraps nvim to run plenary tests with concise output.
+  Set VERBOSE=1 for full test output.
+
+  Examples:
+
+    $me --headless -c "PlenaryBustedDirectory tests/unit/ ..."
+    VERBOSE=1 $me --headless -c "PlenaryBustedDirectory tests/unit/ ..."
+	EOF
+  exit 1
+}
+
+main "$@"
