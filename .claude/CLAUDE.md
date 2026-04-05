@@ -33,7 +33,7 @@ This applies to writing README's, internal documentation, Git commits, etc.
 
 ### Slack Markdown
 
-Slack uses a lightweight formatting syntax called mrkdwn to style text.  Use this format whenever I ask you to produce something for me to paste into Slack: `*bold*`, `_italics_`, `~strikethrough~`, `inline code`, and ```code blocks```. You can create lists with `*` or `1.` and add links using `<url|text>`.
+Slack uses a lightweight formatting syntax called mrkdwn to style text.  Use this format whenever I ask you to produce something for me to paste into Slack: `*bold*`, `_italics_`, `~strikethrough~`, `inline code`. You can create lists with `*` or `1.` and add links using `<url|text>`.  Code blocks use triple backticks on their own line, just like standard Markdown fenced code blocks.
 
 # When doing research and investigations
 
@@ -42,6 +42,15 @@ ALWAYS cite your references. If you got information from a conversation, include
 For simple searches, the web search tool or the existing MCPs are great. But if you find yourself in a situation where you have to gather lots of data from external systems, it might be advantageous to pause the investigation and implement a CLI that can gather the data more quickly and in an easy format for you to process. If that's the case, ask me first.
 
 If in the course of investigating you find other areas that you think might be useful to investigate, don't bother asking me. Just go ahead and do it.
+
+# Packing for Trips
+
+Todoist project "Upcoming Trip" (id: `6QmVpWghRMHRCHQH`) is used as a
+packing list. Items are organized as parent tasks (categories or trip
+names like "HumanX") with subtasks for individual items. Completed items
+from past trips stay in the list - before each trip, relevant ones get
+unchecked. When adding packing items, don't prefix with "Pack" - just
+the item name (e.g. "Black pants", not "Pack black pants").
 
 # Dotfiles
 

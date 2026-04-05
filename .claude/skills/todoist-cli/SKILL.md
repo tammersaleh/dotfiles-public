@@ -1,11 +1,11 @@
 ---
 name: todoist-cli
-description: Manage Todoist tasks, projects, labels, comments, and more via the td CLI
+description: "Manage Todoist tasks, projects, labels, comments, and more via the td CLI\nTRIGGER when: about to run any `td` command, user mentions Todoist, tasks, packing list, or references the Upcoming Trip / Work project.\nALWAYS load this skill before running `td` - do not guess at flags or subcommands."
 ---
 
 # Todoist CLI (td)
 
-Use this skill when the user wants to interact with their Todoist tasks.
+**Load this skill before running any `td` command.** Do not guess at flags or subcommands.
 
 ## Quick Reference
 
