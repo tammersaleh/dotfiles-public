@@ -8,6 +8,7 @@ tap 'superfly/tap'                   # for mods
 tap 'gabrie30/utils'
 tap 'danielfoehrkn/switch'
 tap 'hashicorp/tap'
+tap 'ankitpokhrel/jira-cli'
 tap 'peak/tap'
 
 cask '1password-cli'
@@ -94,6 +95,7 @@ brew 'htop'
 brew 'hub'
 brew 'id3v2'                         # For lesspipe
 brew 'imagemagick'
+brew 'jira-cli'                       # Jira CLI for JQL queries and issue management
 brew 'jq'
 brew 'jsonlint'
 brew 'jsonnet'
