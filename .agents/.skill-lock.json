@@ -1,0 +1,51 @@
+{
+  "version": 3,
+  "skills": {
+    "glean-cli": {
+      "source": "gleanwork/glean-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/gleanwork/glean-cli.git",
+      "skillPath": "skills/glean-cli/SKILL.md",
+      "skillFolderHash": "f5278ca276849bfcceeadb04c1deb1210646e744",
+      "installedAt": "2026-04-14T18:54:38.673Z",
+      "updatedAt": "2026-04-14T18:54:38.673Z"
+    },
+    "glean-cli-chat": {
+      "source": "gleanwork/glean-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/gleanwork/glean-cli.git",
+      "skillPath": "skills/glean-cli-chat/SKILL.md",
+      "skillFolderHash": "9a70133240f0d06cb02b0b9cd8d60819d80f3561",
+      "installedAt": "2026-04-14T18:54:39.078Z",
+      "updatedAt": "2026-04-14T18:54:39.078Z"
+    },
+    "glean-cli-documents": {
+      "source": "gleanwork/glean-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/gleanwork/glean-cli.git",
+      "skillPath": "skills/glean-cli-documents/SKILL.md",
+      "skillFolderHash": "dcdf2a2f32ea8ab7c4fc9562d36386cbe07504bd",
+      "installedAt": "2026-04-14T18:54:39.438Z",
+      "updatedAt": "2026-04-14T18:54:39.438Z"
+    },
+    "glean-cli-entities": {
+      "source": "gleanwork/glean-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/gleanwork/glean-cli.git",
+      "skillPath": "skills/glean-cli-entities/SKILL.md",
+      "skillFolderHash": "c581bc8b6dd29065d5beec587097f8af22fe2e71",
+      "installedAt": "2026-04-14T18:54:39.836Z",
+      "updatedAt": "2026-04-14T18:54:39.836Z"
+    },
+    "glean-cli-search": {
+      "source": "gleanwork/glean-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/gleanwork/glean-cli.git",
+      "skillPath": "skills/glean-cli-search/SKILL.md",
+      "skillFolderHash": "19ddf8fb16707befb9bbe8eccbd64a8e0a5e612e",
+      "installedAt": "2026-04-14T18:54:40.220Z",
+      "updatedAt": "2026-04-14T18:54:40.220Z"
+    }
+  },
+  "dismissed": {}
+}
