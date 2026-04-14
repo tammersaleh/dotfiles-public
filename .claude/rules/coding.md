@@ -10,6 +10,10 @@ For any non-trivial code change, always present me with a plan before proceeding
 
 For any non-trivial plan, always store that plan in a Markdown file locally so we can pick up where we left off.  That Markdown file should not only include the steps to be taken, but the context and any other details you need as an agent to continue the work if restarted from scratch.
 
+## IMPORTANT: verify all bugs before fixing.
+
+Don't just trust the output I give you from a bug report. Whenever possible, run the command yourself to observe the failure.  If what you ran succeeded or if the failure doesn't match the failure I showed you, then investigate that before proceeding to a fix. 
+
 ## IMPORTANT: Red, Green, Refactor:
 
 If the repo has tests, ALWAYS write new tests to show the expected behavior, and watch those tests fail, BEFORE implementing the feature.  
@@ -29,6 +33,8 @@ For any change, ask yourself if there's an update to the local CLAUDE.md file th
 ## Shell scripts
 
 Follow the template in `~/dotfiles/public/.config/nvim/templates/sh` for all new bash scripts. It includes strict mode, error trapping, debug support, and `cd "$(dirname "$0")"` so scripts work from any directory.
+
+Always use long flags (`--global`, `--yes`) instead of short flags (`-g`, `-y`) in scripts for self-documentation.
 
 ## Preferred tooling
 
