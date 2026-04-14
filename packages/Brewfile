@@ -1,28 +1,16 @@
 # frozen_string_literal: true
 
-tap 'charmbracelet/tap'
-tap 'derailed/k9s'
-tap 'dopplerhq/cli'
-tap 'github/gh'
-tap 'superfly/tap'                   # for mods
-tap 'gabrie30/utils'
-tap 'danielfoehrkn/switch'
-tap 'hashicorp/tap'
-tap 'ankitpokhrel/jira-cli'
-tap 'peak/tap'
-
+cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask '1password-cli'
+cask 'codex'
 cask 'font-codicon'                  # VSCode font icons
 cask 'font-fira-code-nerd-font'
 cask 'font-hack-nerd-font'
 cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
-cask 'codex'
 cask 'ghostty'
-cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
-cask 'orbstack', greedy: true
 cask 'iterm2'
-# cask 'mactex-no-gui'                # download link broken 2026-03-28
+cask 'orbstack', greedy: true
 
 ### LSPs and formatters
 
@@ -63,6 +51,8 @@ brew 'cilium-cli'
 brew 'cmake'
 brew 'coreutils'                     # GNU File, Shell, and Text utilities
 brew 'ctags'                         # Reimplementation of ctags(1)
+brew 'danielfoehrkn/switch/switch'   # kubeswitch
+brew 'danielfoehrkn/switch/switcher' # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
 brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
@@ -81,6 +71,7 @@ brew 'git'                           # Distributed revision control system
 brew 'git-crypt'                     # Enable transparent encryption/decryption of files in a git repo
 brew 'git-delta'
 brew 'git-lfs'                       # Git extension for versioning large files
+brew 'gleanwork/tap/glean-cli'       # Glean CLI
 brew 'gnu-sed'
 brew 'gnu-tar'                       # GNU version of the tar archiving utility
 brew 'gnupg'                         # GNU Pretty Good Privacy (PGP) package
@@ -126,6 +117,7 @@ brew 'openssl@1.1'                   # Cryptography and SSL/TLS Toolkit
 brew 'pandoc'                        # Swiss-army knife of markup format conversion
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
+brew 'peak/tap/s5cmd'
 brew 'pinentry-mac'
 brew 'pre-commit'                    # git pre-commit hook runner
 brew 'pstree'                        # Show ps output as a tree
@@ -137,7 +129,6 @@ brew 'rsync'
 brew 'ruby-build'                    # Install various Ruby versions and implementations
 brew 'ruff'                          # Python linting
 brew 's3cmd'                         # Command-line tool for the Amazon S3 service
-brew 's5cmd'
 brew 'sassc'                         # Wrapper around libsass that helps to create command-line apps
 brew 'sf'                            # Salesforce CLI
 brew 'sipcalc'                       # Advanced console-based IP subnet calculator
@@ -146,9 +137,7 @@ brew 'speedtest-cli'                 # Command-line interface for https://speedt
 brew 'sqlite'                        # Command-line interface for SQLite
 brew 'stern'
 brew 'stow'                          # Used by ~/dotfiles
-brew 'switch'                        # kubeswitch
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
-brew 'switcher'                      # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'tanka'
 brew 'tflint'                        # Terraform linter
 brew 'the_silver_searcher'           # Code-search similar to ack
