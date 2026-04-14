@@ -135,11 +135,13 @@
       "Task",
       "WebFetch",
       "WebSearch",
-      "mcp__glean_default__search",
-      "mcp__glean_default__read_document",
-      "mcp__glean_default__chat",
-      "mcp__glean_default__code_search",
-      "mcp__glean_default__employee_search",
+      "Bash(glean search *)",
+      "Bash(glean chat *)",
+      "Bash(glean entities *)",
+      "Bash(glean documents *)",
+      "Bash(glean agents *)",
+      "Bash(glean schema *)",
+      "Bash(glean auth status *)",
       "mcp__atlassian__atlassianUserInfo",
       "mcp__atlassian__fetch",
       "mcp__atlassian__getAccessibleAtlassianResources",
@@ -193,7 +195,7 @@
     ],
     "defaultMode": "default"
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.py",
@@ -218,5 +220,8 @@
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
   "autoMemoryEnabled": false,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "sandbox": {
+    "enabled": false
+  }
 }
