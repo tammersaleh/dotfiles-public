@@ -41,3 +41,7 @@ for pkg in $(jq -r '.dependencies | keys[]' package.json); do
 done
 
 echo "Linked into ~/.bun/bin: ${linked[*]}"
+
+# --- Claude Code Skills ---
+
+npx skills update --global --yes
