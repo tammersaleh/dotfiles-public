@@ -35,6 +35,12 @@ This applies to writing README's, internal documentation, Git commits, etc.
 
 Slack uses a lightweight formatting syntax called mrkdwn to style text.  Use this format whenever I ask you to produce something for me to paste into Slack: `*bold*`, `_italics_`, `~strikethrough~`, `inline code`. You can create lists with `*` or `1.` and add links using `<url|text>`.  Code blocks use triple backticks on their own line, just like standard Markdown fenced code blocks.
 
+The `<url|text>` link syntax only works when posting via the Slack API. When pasting text into Slack manually, use bare URLs instead - Slack will auto-unfurl them.
+
+Always put blank lines between paragraphs when formatting for Slack - Slack collapses consecutive lines into one paragraph without them.
+
+When writing Slack mrkdwn to a file, use the `.smd` extension. Neovim has syntax highlighting and editor support for `.smd` and `.slack` files via the `slack` filetype.
+
 # When doing research and investigations
 
 ALWAYS cite your references. If you got information from a conversation, include a link to the Slack thread. If you got it from a document, include a link there. Never provide information without links to the original sources.  This will help you double check the accuracy of your information as well.
@@ -55,6 +61,11 @@ the item name (e.g. "Black pants", not "Pack black pants").
 # Dotfiles
 
 When editing dotfiles or config files in `$HOME`, invoke the `/dotfiles` skill first.
+
+# Claude Code Configuration
+
+- User-level MCP server configs live in `~/.claude.json` under `mcpServers`.
+- Sandbox is disabled globally (Netskope proxy breaks TLS in sandboxed processes).
 
 # Installing Software
 

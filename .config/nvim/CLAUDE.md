@@ -8,7 +8,7 @@ This directory lives in the dotfiles repo at `~/dotfiles/public/.config/nvim/` a
 
 ## Testing
 
-Run tests with `mise run test` (runs both suites). `mise run test:unit` and `mise run test:e2e` run individually.
+Run tests with `mise run test` (runs both suites). `mise run test:unit` and `mise run test:e2e` run individually. Never launch nvim directly for testing - always use `mise run test`.
 
 - Unit tests (`tests/unit/`) load a minimal init with no plugins. Fast. Use for testing keymaps, options, autocmds.
 - E2E tests (`tests/e2e/`) load the full `init.lua` with lazy.nvim and all plugins. Use for testing behavior that involves plugin interaction (e.g. cmp + Tab).

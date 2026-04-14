@@ -42,4 +42,12 @@ describe("filetypes", function()
   it("detects .aws/credentials as confini", function()
     assert.equals('confini', detect('/home/user/.aws/credentials'))
   end)
+
+  it("detects .smd as slack", function()
+    assert.equals('slack', detect('message.smd'))
+  end)
+
+  it("detects .slack as slack", function()
+    assert.equals('slack', detect('message.slack'))
+  end)
 end)
