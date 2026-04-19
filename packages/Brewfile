@@ -11,6 +11,7 @@ cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
 cask 'iterm2'
 cask 'orbstack', greedy: true
+cask 'tammersaleh/tap/slack-cli'     # Read-only Slack CLI for agents and automation
 
 ### LSPs and formatters
 
