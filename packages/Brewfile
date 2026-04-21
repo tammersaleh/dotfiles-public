@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+tap 'tammersaleh/tap'
+
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask '1password-cli'
 cask 'codex'
