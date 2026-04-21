@@ -44,4 +44,4 @@ echo "Linked into ~/.bun/bin: ${linked[*]}"
 
 # --- Claude Code Skills ---
 
-npx skills update --global --yes
+bunx skills update --global --yes
