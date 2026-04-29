@@ -70,3 +70,7 @@ When editing dotfiles or config files in `$HOME`, invoke the `/dotfiles` skill f
 # Installing Software
 
 Prefer adding packages to `~/dotfiles/public/packages/`. Homebrew formulae go in `Brewfile`, Node/Bun packages go in `package.json`. Run `~/packages/go` to install everything. Never use `npm`.
+
+# Google Workspace CLI
+
+Read the `gws-tips` skill before running any `gws` command. The auto-generated `gws-*` skills are regenerated frequently and don't capture hand-curated gotchas; `gws-tips` does.
