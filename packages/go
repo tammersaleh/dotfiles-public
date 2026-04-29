@@ -14,10 +14,16 @@ export HOMEBREW_BUNDLE_NO_LOCK=true
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_DOWNLOAD_CONCURRENCY=auto # https://brew.sh/2025/08/05/homebrew-4.6.0/
 
+# Homebrew bug (open as of 2026-04-28): the JSON cask API encodes shell names
+# as strings, but Cask::Artifact::GeneratedCompletion checks against symbols, so
+# every shell shows up as "unsupported". 1password-cli is the cask that trips
+# it for us. Fix is in https://github.com/Homebrew/brew/pull/22106 - drop this
+# skip once that merges and `brew update` ships it.
+export HOMEBREW_BUNDLE_CASK_SKIP="1password-cli"
+
 brew update
-brew bundle install --upgrade | grep -Ev '^Using '
+brew bundle install | grep -Ev '^Using '   # install missing + upgrade outdated (default)
 brew bundle cleanup --force
-brew bundle upgrade
 
 # --- Bun ---
 
