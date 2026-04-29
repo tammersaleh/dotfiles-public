@@ -62,6 +62,10 @@ the item name (e.g. "Black pants", not "Pack black pants").
 
 When editing dotfiles or config files in `$HOME`, invoke the `/dotfiles` skill first.
 
+# Chrome Browser Integration
+
+NEVER use `mcp__claude-in-chrome__*` tools unless the user has explicitly granted permission in the current session. These tools open a real browser window and disrupt the user's workflow. If a task would benefit from browser automation, ask permission first and wait for a clear "yes" before proceeding.
+
 # Claude Code Configuration
 
 - User-level MCP server configs live in `~/.claude.json` under `mcpServers`.
