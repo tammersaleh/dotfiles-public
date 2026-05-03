@@ -1,5 +1,7 @@
 export XDG_DATA_HOME=$HOME/.local/share
 
+export LOCALIAS_CONFIGFILE=$HOME/.config/localias.yaml
+
 export CLICOLOR=1
 export LS_COLORS
 # shellcheck disable=SC2046
