@@ -71,10 +71,6 @@ NEVER use `mcp__claude-in-chrome__*` tools unless the user has explicitly grante
 - User-level MCP server configs live in `~/.claude.json` under `mcpServers`.
 - Sandbox is disabled globally (Netskope proxy breaks TLS in sandboxed processes).
 
-# Sudo
-
-`sudo` on this laptop prompts for fingerprint on every invocation - no password caching, no five-minute window. Treat each sudo call as an interruption. Batch sudo work into a single command, prefer non-sudo paths, and skip cosmetic cleanup that requires sudo. When multiple sudo steps are unavoidable, plan them up front so I tap once and the rest runs unattended.
-
 # Installing Software
 
 Prefer adding packages to `~/dotfiles/public/packages/`. Homebrew formulae go in `Brewfile`, Node/Bun packages go in `package.json`. Run `~/packages/go` to install everything. Never use `npm`.
