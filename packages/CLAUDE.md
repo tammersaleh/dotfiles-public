@@ -1,2 +1,1 @@
 - Read the @README.md
-- When editing the brew file, keep each section sorted alphabetically and try to add comments describing what each utility is.

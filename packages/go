@@ -48,6 +48,10 @@ done
 
 echo "Linked into ~/.bun/bin: ${linked[*]}"
 
+# --- Go ---
+
+go install tool
+
 # --- Claude Code Skills ---
 
 bunx skills update --global --yes
