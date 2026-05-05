@@ -1,2 +1,2 @@
 export GOPATH=$HOME
-export GOBIN="$GOPATH/bin/$(uname -s)"
+export GOBIN=$HOME/.local/bin
