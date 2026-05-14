@@ -32,6 +32,8 @@ end)
 
 `h.feed()` processes mappings synchronously. Use `h.ensure_normal()` after insert-mode sequences.
 
+In visual-mode tests where the buffer triggers `foldexpr` (e.g., `## Heading` lines for markdown), feed the visual-entry motion and the trigger key in separate `h.feed()` calls. Combined typeahead like `Vj<S-Tab>` can drop the trigger key when `foldmethod=expr` recomputes folds mid-sequence. Splitting into `h.feed("Vj")` then `h.feed("<S-Tab>")` avoids it. Doesn't affect interactive use.
+
 ### Before committing
 
 Always run `mise run test` and confirm all tests pass.

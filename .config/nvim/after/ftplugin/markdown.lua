@@ -58,6 +58,11 @@ vim.opt_local.foldmethod = 'expr'
 -- S-Tab on a top-level bullet removes it.
 -------------------------------------------------------------------------------
 
+local function heading_level(line)
+  local hashes = line:match('^(#+)%s')
+  return hashes and #hashes or nil
+end
+
 local function is_bullet(line)
   return line:match('^%s*[%-*+]%s') or line:match('^%s*%d+%.%s')
 end
@@ -103,26 +108,87 @@ local function detect_bullet_style(lnum)
   return best .. ' '
 end
 
-local function md_tab()
-  local lnum = vim.fn.line('.')
+local function indent_unit()
+  return vim.bo.expandtab and string.rep(' ', vim.bo.shiftwidth) or '\t'
+end
+
+local function indent_line_text(lnum)
+  vim.fn.setline(lnum, indent_unit() .. vim.fn.getline(lnum))
+end
+
+local function dedent_line_text(lnum)
   local line = vim.fn.getline(lnum)
-  if is_bullet(line) or has_leading_whitespace(line) then
-    vim.cmd('normal! >>')
+  local stripped = (line:gsub('^' .. indent_unit(), '', 1))
+  if stripped == line then stripped = (line:gsub('^%s+', '', 1)) end
+  vim.fn.setline(lnum, stripped)
+end
+
+local function remove_bullet_prefix(lnum)
+  local line = vim.fn.getline(lnum)
+  local stripped = (line:gsub('^(%s*)[%-*+]%s', '%1', 1))
+  stripped = (stripped:gsub('^(%s*)%d+%.%s', '%1', 1))
+  vim.fn.setline(lnum, stripped)
+end
+
+local function tab_line(lnum)
+  local line = vim.fn.getline(lnum)
+  local level = heading_level(line)
+  if level then
+    if level < 6 then vim.fn.setline(lnum, '#' .. line) end
+  elseif is_bullet(line) or has_leading_whitespace(line) then
+    indent_line_text(lnum)
   else
     local prefix = detect_bullet_style(lnum)
     vim.fn.setline(lnum, prefix .. line)
   end
 end
 
-local function md_stab()
-  local line = vim.fn.getline('.')
-  if is_top_level_bullet(line) then
-    vim.cmd([[silent! s/^\s*\zs[-*+] //]])
-    vim.cmd([[silent! s/^\s*\zs\d\+\. //]])
+local function stab_line(lnum)
+  local line = vim.fn.getline(lnum)
+  local level = heading_level(line)
+  if level then
+    if level > 1 then vim.fn.setline(lnum, line:sub(2)) end
+  elseif is_top_level_bullet(line) then
+    remove_bullet_prefix(lnum)
   elseif is_bullet(line) or has_leading_whitespace(line) then
-    vim.cmd('normal! <<')
+    dedent_line_text(lnum)
   end
 end
+
+local function md_tab()
+  tab_line(vim.fn.line('.'))
+end
+
+local function md_stab()
+  stab_line(vim.fn.line('.'))
+end
+
+local function for_visual_range(fn, saturated_at)
+  local s, e = vim.fn.line('v'), vim.fn.line('.')
+  if s > e then s, e = e, s end
+  vim.cmd('normal! \27')
+
+  local levels, has_heading, saturated = {}, false, false
+  for lnum = s, e do
+    local level = heading_level(vim.fn.getline(lnum))
+    levels[lnum] = level
+    if level then
+      has_heading = true
+      if level == saturated_at then saturated = true end
+    end
+  end
+
+  if not (has_heading and saturated) then
+    for lnum = s, e do
+      if not has_heading or levels[lnum] then fn(lnum) end
+    end
+  end
+
+  vim.cmd('normal! gv')
+end
+
+local function md_tab_visual() for_visual_range(tab_line, 6) end
+local function md_stab_visual() for_visual_range(stab_line, 1) end
 
 local function with_cmp(cmp_action, fallback)
   return function()
@@ -137,6 +203,8 @@ end
 
 vim.keymap.set('n', '<Tab>', md_tab, { buffer = true, silent = true, desc = "Bullet cycle forward" })
 vim.keymap.set('n', '<S-Tab>', md_stab, { buffer = true, silent = true, desc = "Bullet cycle backward" })
+vim.keymap.set('x', '<Tab>', md_tab_visual, { buffer = true, silent = true, desc = "Bullet cycle forward" })
+vim.keymap.set('x', '<S-Tab>', md_stab_visual, { buffer = true, silent = true, desc = "Bullet cycle backward" })
 vim.keymap.set('i', '<Tab>', with_cmp(function(cmp) cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert }) end, md_tab), { buffer = true, silent = true, desc = "Bullet cycle forward" })
 vim.keymap.set('i', '<S-Tab>', with_cmp(function(cmp) cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert }) end, md_stab), { buffer = true, silent = true, desc = "Bullet cycle backward" })
 
