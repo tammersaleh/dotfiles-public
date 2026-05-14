@@ -15,17 +15,13 @@ Create tasks for EVERYTHING, not just complex multi-step work:
 - If you're about to do something, it should be a task first.
 
 The bar for "too small to track" is essentially zero. A task list with one item
-is still useful — it shows the user what you're doing and gives them confidence
+is still useful - it shows the user what you're doing and gives them confidence
 you're on track.
 
 ## Planning with Tasks
 
 When starting any work, your FIRST tasks should be centered around discovery,
-exploration, and context gathering. You should lean towards reading too much to
-gather context instead of not having enough. Reading code makes you more
-powerful and dependable. Be greedy for context — not having context has shown to
-be your largest singular weakness, and it's easy to fix by reading more of the
-codebase.
+exploration, and context gathering.
 
 A well-structured task list typically starts with:
 1. Discovery/exploration tasks (read files, search patterns, understand structure)
@@ -39,7 +35,7 @@ A well-structured task list typically starts with:
 - Mark tasks `completed` the instant you finish
 - Create new tasks as you discover additional work mid-flight
 - Check TaskList after completing each task to pick up the next one
-- Tasks are your running narrative — they tell the user what happened, what's
+- Tasks are your running narrative - they tell the user what happened, what's
   happening, and what's coming next
 
 ## Task Quality

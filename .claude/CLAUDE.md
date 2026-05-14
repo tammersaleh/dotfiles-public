@@ -6,9 +6,9 @@
 - No corporate speak or overly polite language
 - Treat me like a colleague, not a customer
 
-# When writing prose (documents, documentation, code comments)
+# Prose
 
-This applies to writing README's, internal documentation, Git commits, etc.
+This applies to writing README's, internal documentation, Git commits, code comments, etc.
 
 - Use fewer words when possible.  Do not repeat yourself.  Be like Hemingway.
 - Assume your audience is highly technical and already understands the overall system.  Don't hold their hand.
@@ -29,56 +29,31 @@ This applies to writing README's, internal documentation, Git commits, etc.
 - ALWAYS include a completely blank line between paragraphs/headings and bulleted lists.  Just like how it's done in this doc.
 - Add appropriate language tags to all code blocks.
 - When I ask to render the markdown, I want you to use the `mark` CLI to show it to me (`mark path/to/file.md`).
-- When generating PDF from Markdown, use `md-to-pdf` (installed via bun at `~/.bun/bin/md-to-pdf`). Requires `PUPPETEER_EXECUTABLE_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"` to be set.
 
-### Slack Markdown
-
-Slack uses a lightweight formatting syntax called mrkdwn to style text.  Use this format whenever I ask you to produce something for me to paste into Slack: `*bold*`, `_italics_`, `~strikethrough~`, `inline code`. You can create lists with `*` or `1.` and add links using `<url|text>`.  Code blocks use triple backticks on their own line, just like standard Markdown fenced code blocks.
-
-The `<url|text>` link syntax only works when posting via the Slack API. When pasting text into Slack manually, use bare URLs instead - Slack will auto-unfurl them.
-
-Always put blank lines between paragraphs when formatting for Slack - Slack collapses consecutive lines into one paragraph without them.
-
-When writing Slack mrkdwn to a file, use the `.smd` extension. Neovim has syntax highlighting and editor support for `.smd` and `.slack` files via the `slack` filetype.
-
-# When doing research and investigations
-
-ALWAYS cite your references. If you got information from a conversation, include a link to the Slack thread. If you got it from a document, include a link there. Never provide information without links to the original sources.  This will help you double check the accuracy of your information as well.
+# Research & Investigations
 
 For simple searches, the web search tool or the existing MCPs are great. But if you find yourself in a situation where you have to gather lots of data from external systems, it might be advantageous to pause the investigation and implement a CLI that can gather the data more quickly and in an easy format for you to process. If that's the case, ask me first.
 
 If in the course of investigating you find other areas that you think might be useful to investigate, don't bother asking me. Just go ahead and do it.
 
-# Packing for Trips
+## ALWAYS CITE YOUR REFERENCES. 
 
-Todoist project "Upcoming Trip" (id: `6QmVpWghRMHRCHQH`) is used as a
-packing list. Items are organized as parent tasks (categories or trip
-names like "HumanX") with subtasks for individual items. Completed items
-from past trips stay in the list - before each trip, relevant ones get
-unchecked. When adding packing items, don't prefix with "Pack" - just
-the item name (e.g. "Black pants", not "Pack black pants").
-
-# Dotfiles
-
-When editing dotfiles or config files in `$HOME`, invoke the `/dotfiles` skill first.
+- Slack thread links, document URLs, zoom transcript urls, etc. 
+- NEVER provide information without links to the original sources.  
+- Double confirm your own information and that the cited url is real by re-reading the cited source before presenting to me.
 
 # Chrome Browser Integration
 
-NEVER use `mcp__claude-in-chrome__*` tools unless the user has explicitly granted permission in the current session. These tools open a real browser window and disrupt the user's workflow. If a task would benefit from browser automation, ask permission first and wait for a clear "yes" before proceeding.
+NEVER use `mcp__claude-in-chrome__*` tools unless I've explicitly granted permission in the current session. These tools open a real browser window and disrupt the user's workflow.
 
 # Claude Code Configuration
 
 - User-level MCP server configs live in `~/.claude.json` under `mcpServers`.
-- Sandbox is disabled globally (Netskope proxy breaks TLS in sandboxed processes).
 
 # Sudo
 
-`sudo` on this laptop prompts for fingerprint on every invocation - no password caching, no five-minute window. Treat each sudo call as an interruption. Batch sudo work into a single command, prefer non-sudo paths, and skip cosmetic cleanup that requires sudo. When multiple sudo steps are unavoidable, plan them up front so I tap once and the rest runs unattended.
+`sudo` prompts for fingerprint every time - no password caching, no five-minute window. Treat each sudo call as an interruption and batch sudo work into a single command.
 
 # Installing Software
 
-Prefer adding packages to `~/dotfiles/public/packages/`. Homebrew formulae go in `Brewfile`, Node/Bun packages go in `package.json`. Run `~/packages/go` to install everything. Never use `npm`.
-
-# Google Workspace CLI
-
-Read the `gws-tips` skill before running any `gws` command. The auto-generated `gws-*` skills are regenerated frequently and don't capture hand-curated gotchas; `gws-tips` does.
+Install global tools/packages using `~/dotfiles/public/packages/`

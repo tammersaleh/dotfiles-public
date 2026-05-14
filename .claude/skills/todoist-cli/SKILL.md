@@ -394,3 +394,12 @@ td task complete "Review PR"
 td task complete id:123456789
 td task uncomplete id:123456789                # Reopen if needed
 ```
+
+## Upcoming Trip packing list
+
+Project "Upcoming Trip" (id: `6QmVpWghRMHRCHQH`) holds the packing list.
+
+- Parent tasks are categories or trip names (e.g. "HumanX")
+- Subtasks are individual items
+- Completed items from past trips stay in the list. Before each trip, uncheck the relevant ones rather than recreating them.
+- Item names omit the "Pack" prefix - "Black pants", not "Pack black pants".
