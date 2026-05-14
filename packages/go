@@ -27,7 +27,7 @@ brew bundle cleanup --force
 
 # --- Bun ---
 
-bun install
+bun update --latest
 
 # Symlink only binaries from explicitly declared dependencies
 linked=()
@@ -50,6 +50,12 @@ echo "Linked into ~/.bun/bin: ${linked[*]}"
 
 # --- Go ---
 
+# `-u` would upgrade transitive deps past what each tool pins, breaking the
+# build. Upgrade each tool by name and let MVS pick its deps.
+go mod edit -json | jq -r '.Tool[]?.Path // empty' | while read -r tool; do
+  go get -tool "${tool}@latest"
+done
+go mod tidy
 go install tool
 
 # --- Claude Code Skills ---
