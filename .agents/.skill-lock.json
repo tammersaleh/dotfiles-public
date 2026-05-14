@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/gleanwork/glean-cli.git",
       "skillPath": "skills/glean-cli/SKILL.md",
-      "skillFolderHash": "f5278ca276849bfcceeadb04c1deb1210646e744",
+      "skillFolderHash": "8cefb17eaf169454ef26d338568de7ea38e9bb07",
       "installedAt": "2026-04-14T18:54:38.673Z",
-      "updatedAt": "2026-04-14T18:54:38.673Z"
+      "updatedAt": "2026-05-11T23:04:31.061Z"
     },
     "glean-cli-chat": {
       "source": "gleanwork/glean-cli",
