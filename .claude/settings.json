@@ -61,5 +61,7 @@
   "theme": "dark-ansi",
   "editorMode": "vim",
   "preferredNotifChannel": "iterm2",
-  "terminalProgressBarEnabled": true
+  "terminalProgressBarEnabled": true,
+  "verbose": true,
+  "autoCompactEnabled": false
 }
