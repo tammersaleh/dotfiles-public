@@ -1,19 +1,16 @@
 This is where I manage package installations across multiple machines. Run `./go` to install or update everything.
 
-## Homebrew
+Everything is in `Brewfile`. `brew bundle` natively manages formulae, casks, Go tools, npm packages, and more. `brew bundle cleanup --force` removes anything not listed, including stale Go binaries from `$GOBIN`.
 
-Add formulae and casks to `Brewfile`. Keep sections sorted alphabetically with a one-line comment describing what each entry is.
+Keep sections sorted alphabetically with a one-line comment describing what each entry is.
 
-## Bun
-
-Add to `dependencies` in `package.json`. Binaries are symlinked into `~/.bun/bin/`.
-
-## Go
-
-Add tools with:
+To add a package:
 
 ```bash
-go get -tool github.com/foo/bar@latest
+brew bundle add NAME --install                       # formula
+brew bundle add --cask NAME --install                # cask
+brew bundle add --go  github.com/foo/bar --install   # go tool
+brew bundle add --npm NAME --install                 # npm package
 ```
 
-Tracked as `tool` directives in `go.mod`. Binaries land in `$GOBIN` (`~/.local/bin`).
+Or just edit `Brewfile` directly and run `./go`.

@@ -7,57 +7,13 @@ trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
 
 cd "$(dirname "$0")"
 
-# --- Homebrew ---
-
 # https://github.com/Homebrew/homebrew-bundle/pull/552
 export HOMEBREW_BUNDLE_NO_LOCK=true
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_DOWNLOAD_CONCURRENCY=auto # https://brew.sh/2025/08/05/homebrew-4.6.0/
 
-# Homebrew bug (open as of 2026-04-28): the JSON cask API encodes shell names
-# as strings, but Cask::Artifact::GeneratedCompletion checks against symbols, so
-# every shell shows up as "unsupported". 1password-cli is the cask that trips
-# it for us. Fix is in https://github.com/Homebrew/brew/pull/22106 - drop this
-# skip once that merges and `brew update` ships it.
-export HOMEBREW_BUNDLE_CASK_SKIP="1password-cli"
-
 brew update
-brew bundle install | grep -Ev '^Using '   # install missing + upgrade outdated (default)
+brew bundle install
 brew bundle cleanup --force
 
-# --- Bun ---
-
-bun update --latest
-
-# Symlink only binaries from explicitly declared dependencies
-linked=()
-for pkg in $(jq -r '.dependencies | keys[]' package.json); do
-  pkg_json="node_modules/$pkg/package.json"
-  [[ -f "$pkg_json" ]] || continue
-  for name in $(jq -r '
-    if .bin | type == "string" then .name | split("/") | last
-    elif .bin | type == "object" then .bin | keys[]
-    else empty end
-  ' "$pkg_json"); do
-    src="node_modules/.bin/$name"
-    [[ -e "$src" ]] || continue
-    ln -sf "$(realpath "$src")" "$HOME/.bun/bin/$name"
-    linked+=("$name")
-  done
-done
-
-echo "Linked into ~/.bun/bin: ${linked[*]}"
-
-# --- Go ---
-
-# `-u` would upgrade transitive deps past what each tool pins, breaking the
-# build. Upgrade each tool by name and let MVS pick its deps.
-go mod edit -json | jq -r '.Tool[]?.Path // empty' | while read -r tool; do
-  go get -tool "${tool}@latest"
-done
-go mod tidy
-go install tool
-
-# --- Claude Code Skills ---
-
-bunx skills update --global --yes
+skills update --global --yes

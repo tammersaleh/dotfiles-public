@@ -162,4 +162,11 @@ brew 'zlib'                          # General-purpose lossless data-compression
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
 
+### NPM packages
+
+npm '@doist/todoist-cli'             # td CLI
+npm 'md-to-pdf'                      # Markdown to PDF
+npm 'puppeteer'                      # Headless browser automation
+npm 'skills'                         # Claude skills manager
+
 # vim: ft=ruby
