@@ -23,6 +23,3 @@ __git_add_and_commit_if_changed() {
 curl -sSLo ~/.zsh/completions/_claude https://raw.githubusercontent.com/wbingli/zsh-claudecode-completion/refs/heads/main/_claude
 __git_add_and_commit_if_changed .zsh/completions/_claude "Updated claude completions"
 
-go install github.com/BRO3886/ical/cmd/ical@latest
-__git_add_and_commit_if_changed bin/Darwin/ical "Updated ical cli"
-
