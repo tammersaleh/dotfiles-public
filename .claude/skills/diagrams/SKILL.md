@@ -7,6 +7,17 @@ description: Generate polished architecture and flow diagrams from text using D2
 
 Default to D2 over Mermaid. ELK layout, source in `.d2` files, render to SVG (canonical) and PNG (review).
 
+## Colorblindness
+
+Tammer is colorblind, primarily red-green but with weakness in other colors too. When choosing palettes:
+
+- **Use icons or emoji on shapes whenever possible.** Redundant encoding (icon + color) makes diagrams readable for everyone and removes the dependency on hue entirely. Terrastruct icons (`https://icons.terrastruct.com/`) or a leading emoji in the node label both work well.
+- Don't rely on red vs green to convey meaning (yes/no edges, success/failure states). Pair color with shape, label, line style, or position.
+- Prefer colorblind-safe palettes: blue/orange, blue/yellow, or sequential single-hue ramps over red/green diverging schemes.
+- If a diagram's meaning depends on color, run it past Tammer before committing - he'll tell you what reads and what doesn't.
+
+Confirmed palette swatches and what Tammer can/can't distinguish live in `palette-notes.md` next to this file. Read it before picking colors, and update it whenever a new color reading is established.
+
 ## Prereqs
 
 `d2` 0.7+ installed (`brew install d2` on macOS). First PNG render downloads bundled Chromium (~1 MiB, ~1 min) - subsequent are fast.
