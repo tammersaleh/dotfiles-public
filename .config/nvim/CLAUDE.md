@@ -45,3 +45,11 @@ Markdown uses shiftwidth=4 (set in `after/ftplugin/markdown.lua`). Unit tests th
 ## LSP warnings
 
 The `undefined global 'vim'` warnings in lua files are expected - the LSP doesn't know these run inside Neovim. Ignore them.
+
+## Treesitter
+
+`nvim-treesitter/nvim-treesitter` and `nvim-treesitter/nvim-treesitter-textobjects` are pinned to `branch = "main"` (the master branch is archived and broken on Neovim 0.12+). The plugin is just a parser/query installer - feature wiring (highlight, indent, incremental selection, folds) goes through core `vim.treesitter.*` APIs in `lua/plugins/treesitter.lua`.
+
+Parsers install via the `build` hook to `~/.local/share/nvim/site/parser/`. To add a language, edit the `parsers` table in `lua/plugins/treesitter.lua` and run `:Lazy build nvim-treesitter`.
+
+If you ever switch branches on the plugin again, clean stale parser artifacts: `rm -f ~/.local/share/nvim/lazy/nvim-treesitter/parser/*.so ~/.local/share/nvim/lazy/nvim-treesitter/parser-info/*.revision`. They shadow bundled parsers via runtimepath order.

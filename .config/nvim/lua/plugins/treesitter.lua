@@ -1,21 +1,76 @@
+local ts_filetypes = {
+  'bash',
+  'c',
+  'cpp',
+  'css',
+  'go',
+  'html',
+  'javascript',
+  'javascriptreact',
+  'json',
+  'python',
+  'ruby',
+  'sh',
+  'toml',
+  'tsx',
+  'typescript',
+  'typescriptreact',
+  'yaml',
+}
+
+local indent_filetypes = {
+  'bash',
+  'c',
+  'cpp',
+  'go',
+  'javascript',
+  'javascriptreact',
+  'lua',
+  'python',
+  'sh',
+  'tsx',
+  'typescript',
+  'typescriptreact',
+}
+
+local parsers = {
+  'bash',
+  'cpp',
+  'css',
+  'go',
+  'html',
+  'javascript',
+  'json',
+  'python',
+  'ruby',
+  'toml',
+  'tsx',
+  'typescript',
+  'yaml',
+}
+
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'RRethy/nvim-treesitter-endwise',
-      'folke/which-key.nvim',
-      {
-        -- auto-close html tags
-        'windwp/nvim-ts-autotag',
-        lazy = false,
-        config = function()
-          require('nvim-ts-autotag').setup()
-        end,
-      },
-    },
-    build = ':TSUpdate',
+    branch = 'main',
+    lazy = false,
+    build = function()
+      require('nvim-treesitter').install(parsers):wait(300000)
+    end,
     config = function()
+      vim.treesitter.language.register('tsx', 'typescriptreact')
+      vim.treesitter.language.register('javascript', 'javascriptreact')
+
+      vim.treesitter.query.add_predicate('is-mise?', function(_, _, bufnr, _)
+        local filepath = vim.api.nvim_buf_get_name(tonumber(bufnr) or 0)
+        local filename = vim.fn.fnamemodify(filepath, ':t')
+        return string.match(filename, '.*mise.*%.toml$') ~= nil
+      end, { force = true, all = false })
+
+      vim.opt.foldmethod = 'expr'
+      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.opt.foldnestmax = 2
+
       local function MoveAndFoldLeft()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 
@@ -36,100 +91,83 @@ return {
         end
       end
 
-      require('vim.treesitter.query').add_predicate('is-mise?', function(_, _, bufnr, _)
-        local filepath = vim.api.nvim_buf_get_name(tonumber(bufnr) or 0)
-        local filename = vim.fn.fnamemodify(filepath, ':t')
-        return string.match(filename, '.*mise.*%.toml$') ~= nil
-      end, { force = true, all = false })
-
-      require('nvim-treesitter.configs').setup {
-        -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'markdown', 'markdown_inline' },
-
-        -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-        auto_install = true,
-
-        highlight = { enable = true },
-        indent = { enable = true },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            scope_incremental = '<c-s>',
-            -- tried binding <c-shift-space> to this escape code in iTerm2,
-            -- but vim doesn't pick it up.
-            -- node_decremental = '<Esc>[27;6;32~',
-          },
-        },
-        textobjects = {
-          select = {
-            enable = true,
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['aa'] = '@parameter.outer',
-              ['ia'] = '@parameter.inner',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              [']m'] = '@function.outer',
-              [']]'] = '@class.outer',
-            },
-            goto_next_end = {
-              [']M'] = '@function.outer',
-              [']['] = '@class.outer',
-            },
-            goto_previous_start = {
-              ['[m'] = '@function.outer',
-              ['[['] = '@class.outer',
-            },
-            goto_previous_end = {
-              ['[M'] = '@function.outer',
-              ['[]'] = '@class.outer',
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ['<leader>a'] = '@parameter.inner',
-            },
-            swap_previous = {
-              ['<leader>A'] = '@parameter.inner',
-            },
-          },
-        },
-        endwise = {
-          enable = true,
-        },
-      }
-      vim.opt.foldmethod = 'expr'
-      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      -- This doesn't work.  Prints:
-      -- 0................
-      -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
-      vim.opt.foldnestmax = 2
-
       vim.keymap.set('n', '<Left>', MoveAndFoldLeft, { desc = 'Move left, possibly closing folds.' })
       vim.keymap.set('n', 'h', MoveAndFoldLeft, { desc = 'Move left, possibly closing folds.' })
       vim.keymap.set('n', '<Right>', MoveAndFoldRight, { desc = 'Move right, possibly opening folds.' })
       vim.keymap.set('n', 'l', MoveAndFoldRight, { desc = 'Move right, possibly opening folds.' })
 
-      -- Treesitter for Ruby for some reason re-indents incorrectly every time you type '.'
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = ts_filetypes,
+        callback = function(ev)
+          pcall(vim.treesitter.start, ev.buf)
+        end,
+        desc = 'Enable treesitter highlighting',
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = indent_filetypes,
+        callback = function(ev)
+          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+        desc = 'Enable treesitter indent',
+      })
+
+      -- Treesitter Ruby re-indents incorrectly every time you type '.'
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'ruby',
         callback = function()
           vim.opt_local.indentkeys:remove '.'
         end,
       })
+
+      vim.keymap.set('n', '<C-Space>', 'van', { remap = true, desc = 'TS: select node' })
+      vim.keymap.set('x', '<C-Space>', 'an', { remap = true, desc = 'TS: expand to parent node' })
+      vim.keymap.set('x', '<C-s>', 'an', { remap = true, desc = 'TS: expand to parent (scope alias)' })
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('nvim-treesitter-textobjects').setup {
+        select = { lookahead = true },
+        move = { set_jumps = true },
+      }
+
+      local select = require('nvim-treesitter-textobjects.select')
+      local select_keymaps = {
+        aa = '@parameter.outer',
+        ia = '@parameter.inner',
+        af = '@function.outer',
+        ['if'] = '@function.inner',
+        ac = '@class.outer',
+        ic = '@class.inner',
+      }
+      for lhs, query in pairs(select_keymaps) do
+        vim.keymap.set({ 'x', 'o' }, lhs, function()
+          select.select_textobject(query, 'textobjects')
+        end, { desc = 'TS select ' .. query })
+      end
+
+      local move = require('nvim-treesitter-textobjects.move')
+      local move_groups = {
+        { fn = move.goto_next_start,     maps = { [']m'] = '@function.outer', [']]'] = '@class.outer' } },
+        { fn = move.goto_next_end,       maps = { [']M'] = '@function.outer', [']['] = '@class.outer' } },
+        { fn = move.goto_previous_start, maps = { ['[m'] = '@function.outer', ['[['] = '@class.outer' } },
+        { fn = move.goto_previous_end,   maps = { ['[M'] = '@function.outer', ['[]'] = '@class.outer' } },
+      }
+      for _, group in ipairs(move_groups) do
+        for lhs, query in pairs(group.maps) do
+          vim.keymap.set({ 'n', 'x', 'o' }, lhs, function()
+            group.fn(query, 'textobjects')
+          end, { desc = 'TS move ' .. query })
+        end
+      end
+
+      local swap = require('nvim-treesitter-textobjects.swap')
+      vim.keymap.set('n', '<leader>a', function() swap.swap_next('@parameter.inner') end, { desc = 'TS swap parameter next' })
+      vim.keymap.set('n', '<leader>A', function() swap.swap_previous('@parameter.inner') end, { desc = 'TS swap parameter previous' })
     end,
   },
 }
