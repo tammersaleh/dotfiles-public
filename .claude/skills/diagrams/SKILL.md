@@ -1,9 +1,9 @@
 ---
-name: d2-diagram
+name: diagrams
 description: Generate polished architecture and flow diagrams from text using D2. Use when creating architecture diagrams, flowcharts, decision trees, sequence flows, ERDs, or any text-to-diagram work where Mermaid's auto-routing produces amateur output. Triggers on "make a diagram", "diagram this", "draw the architecture", "flowchart", or any d2/diagram request.
 ---
 
-# D2 Diagrams
+# Diagrams
 
 Default to D2 over Mermaid. ELK layout, source in `.d2` files, render to SVG (canonical) and PNG (review).
 
