@@ -130,8 +130,28 @@ local function remove_bullet_prefix(lnum)
   vim.fn.setline(lnum, stripped)
 end
 
+-- When a line is rewritten (bullet added, indented, dedented, etc.) the
+-- cursor stays at its old byte column, which puts it in the wrong place
+-- relative to the text. Capture the cursor before the rewrite (setline
+-- auto-clamps to the new line length, losing info) and shift by the delta.
+local function capture_cursor(lnum)
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  return cursor[1] == lnum and cursor[2] or nil
+end
+
+local function adjust_cursor(lnum, original_col, delta)
+  if original_col == nil or delta == 0 then return end
+  local line_len = #vim.fn.getline(lnum)
+  local mode = vim.api.nvim_get_mode().mode
+  local max_col = vim.startswith(mode, 'i') and line_len or math.max(0, line_len - 1)
+  local new_col = math.max(0, math.min(original_col + delta, max_col))
+  vim.api.nvim_win_set_cursor(0, { lnum, new_col })
+end
+
 local function tab_line(lnum)
   local line = vim.fn.getline(lnum)
+  local old_len = #line
+  local original_col = capture_cursor(lnum)
   local level = heading_level(line)
   if level then
     if level < 6 then vim.fn.setline(lnum, '#' .. line) end
@@ -141,10 +161,13 @@ local function tab_line(lnum)
     local prefix = detect_bullet_style(lnum)
     vim.fn.setline(lnum, prefix .. line)
   end
+  adjust_cursor(lnum, original_col, #vim.fn.getline(lnum) - old_len)
 end
 
 local function stab_line(lnum)
   local line = vim.fn.getline(lnum)
+  local old_len = #line
+  local original_col = capture_cursor(lnum)
   local level = heading_level(line)
   if level then
     if level > 1 then vim.fn.setline(lnum, line:sub(2)) end
@@ -153,6 +176,7 @@ local function stab_line(lnum)
   elseif is_bullet(line) or has_leading_whitespace(line) then
     dedent_line_text(lnum)
   end
+  adjust_cursor(lnum, original_col, #vim.fn.getline(lnum) - old_len)
 end
 
 local function md_tab()

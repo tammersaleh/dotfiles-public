@@ -361,6 +361,53 @@ describe("ftplugin/markdown", function()
         assert.are.same({ "- ", "other" }, h.get_buf())
       end)
 
+      it("Tab on an empty line moves cursor past the bullet prefix", function()
+        h.set_buf({ "", "other" })
+        h.set_cursor(1, 0)
+        h.feed("i<Tab>")
+        -- After <Esc>, cursor is one column left of where it was in insert mode.
+        -- We want insert-mode cursor at col 2 (end of "- "), which becomes col 1 after Esc.
+        h.ensure_normal()
+        local pos = h.get_cursor()
+        assert.equals(1, pos[2], "expected cursor at col 1 after Esc (col 2 in insert mode)")
+      end)
+
+      it("Tab in the middle of text keeps relative cursor position", function()
+        h.set_buf({ "hello", "other" })
+        h.set_cursor(1, 2)  -- between 'he' and 'llo'
+        h.feed("i<Tab>")
+        h.ensure_normal()
+        assert.are.same({ "- hello", "other" }, h.get_buf())
+        -- Insert-mode cursor was at col 2 (between 'he' and 'llo' in "hello").
+        -- After tab adds "- " prefix, cursor should still be between 'he' and 'llo'
+        -- which is now col 4 in "- hello". After Esc, col 3.
+        local pos = h.get_cursor()
+        assert.equals(3, pos[2], "expected cursor to maintain relative position after prefix added")
+      end)
+
+      it("Tab on a bullet line keeps relative cursor position after indent", function()
+        h.set_buf({ "- item", "other" })
+        h.set_cursor(1, 3)  -- on 'i' of 'item'
+        h.feed("i<Tab>")
+        h.ensure_normal()
+        assert.are.same({ "    - item", "other" }, h.get_buf())
+        -- Cursor was on 'i' at col 3. After 4 spaces added, 'i' is at col 7.
+        -- After Esc from insert mode at col 7, cursor at col 6.
+        local pos = h.get_cursor()
+        assert.equals(6, pos[2], "expected cursor to follow the 'i' character")
+      end)
+
+      it("S-Tab on indented bullet keeps relative cursor position", function()
+        h.set_buf({ "    - item", "other" })
+        h.set_cursor(1, 7)  -- on 'i' of 'item'
+        h.feed("i<S-Tab>")
+        h.ensure_normal()
+        assert.are.same({ "- item", "other" }, h.get_buf())
+        -- 'i' moved from col 7 to col 3. After Esc, col 2.
+        local pos = h.get_cursor()
+        assert.equals(2, pos[2], "expected cursor to follow the 'i' character")
+      end)
+
       it("Tab on a bullet indents it", function()
         h.set_buf({ "- item", "other" })
         h.set_cursor(1, 5)
