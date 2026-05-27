@@ -9,7 +9,7 @@ Default to D2 over Mermaid. ELK layout, source in `.d2` files, render to SVG (ca
 
 ## Prereqs
 
-`d2` 0.7+ installed (`brew 'd2'` in `~/dotfiles/public/packages/Brewfile`). First PNG render downloads bundled Chromium (~1 MiB, ~1 min) - subsequent are fast.
+`d2` 0.7+ installed (`brew install d2` on macOS). First PNG render downloads bundled Chromium (~1 MiB, ~1 min) - subsequent are fast.
 
 Do not install TALA. Evaluation mode renders a giant "UNLICENSED COPY" watermark. Licensed TALA wasn't clearly better than ELK on architecture-shaped diagrams during testing.
 
@@ -31,11 +31,11 @@ vars: {
 }
 ```
 
-Layout choice rationale: dagre breaks on container-heavy diagrams (titles overlap). ELK respects `direction:` directives and produces clean orthogonal routing. See `~/brain/cw/projects/diagramming-tools/` for the comparison.
+Layout choice rationale: dagre breaks on container-heavy diagrams (container titles overlap each other). ELK respects `direction:` directives and produces clean orthogonal routing.
 
 ## Output paths
 
-For brain-repo work, put sources and renders under the project:
+Put sources and renders under the project that uses them:
 
 ```
 projects/<name>/src/01-<diagram>.d2
@@ -43,12 +43,12 @@ projects/<name>/out/01-<diagram>.svg
 projects/<name>/out/01-<diagram>.png
 ```
 
-PNGs are gitignored globally (`.gitignore` line 9). Commit SVGs; PNGs are local-only.
+Commit the `.d2` source and `.svg` output (text-diffable). PNG is for inline preview; gitignore it.
 
 ## Gotchas
 
 - An in-canvas `title: { shape: text }` shape gets clipped by surrounding containers. Either omit the title (the document title metadata is enough) or place the title node outside the main container at the top level.
-- Container nesting + sibling external nodes (e.g., SortingHat sitting outside a US-WEST-09B zone) renders best in ELK.
+- Container nesting + sibling external nodes (e.g., a control-plane node sitting outside the cluster container) renders best in ELK.
 - Use `direction: right` for left-to-right pipelines. ELK respects it; dagre+TALA may not.
 - Edge labels overlap when too many edges converge on one shape. Spread the labels by positioning text (`{position: 0.3, side: top}`) or by routing through an intermediate hub node.
 
@@ -72,16 +72,16 @@ node1: {shape: cylinder}   # rectangle (default), cylinder, oval, diamond,
 ### Containers (nesting)
 
 ```d2
-zone: US-WEST-09B {
-  cks: CKS Control Plane
-  nodes: GPU Nodes {
-    n1: Node 1
-    n2: Node 2
+cluster: Cluster {
+  control: Control Plane
+  workers: Workers {
+    w1: Worker 1
+    w2: Worker 2
   }
-  cks -> nodes
+  control -> workers
 }
 
-customer -> zone.cks
+client -> cluster.control
 ```
 
 ### Classes (reusable styles - use for consistency)
@@ -102,9 +102,9 @@ classes: {
   }
 }
 
-customer: Customer {class: external}
-vast: VAST Storage {class: storage}
-check: Allocatable? {class: decision}
+client: Client {class: external}
+store: Object Store {class: storage}
+check: Valid? {class: decision}
 ```
 
 ### Icons
@@ -207,15 +207,15 @@ classes: {
 }
 
 start: Start {class: terminal}
-check: Capacity OK? {class: decision}
-approve: Approve POC {class: action}
+check: Valid request? {class: decision}
+accept: Process {class: action}
 reject: Reject {class: action}
 done: Done {class: terminal}
 
 start -> check
-check -> approve: Yes {style.stroke: "#2e7d32"}
+check -> accept: Yes {style.stroke: "#2e7d32"}
 check -> reject: No  {style.stroke: "#c62828"}
-approve -> done
+accept -> done
 reject -> done
 ```
 
