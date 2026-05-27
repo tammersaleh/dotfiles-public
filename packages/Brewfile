@@ -145,11 +145,13 @@ brew 'stow'                          # Used by ~/dotfiles
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'tanka'
 brew 'tflint'                        # Terraform linter
-brew 'the_silver_searcher'           # Code-search similar to ack
+brew 'the_silver_searcher'           # ag
+brew 'ripgrep'                       # rg
 brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/
 brew 'tmux'                          # Terminal multiplexer
 brew 'tomasz-tomczyk/tap/crit'       # Inline-comment review tool for AI-generated plans/code (https://crit.md)
 brew 'tree'                          # Display directories as trees (with optional color/HTML output)
+brew 'tree-sitter-cli'               # Required by nvim-treesitter main branch to compile parsers
 brew 'uv'                            # Python package and project manager
 brew 'vim'                           # Vi 'workalike' with many additional features
 brew 'watch'                         # Executes a program periodically, showing output fullscreen
