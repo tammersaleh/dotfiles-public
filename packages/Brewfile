@@ -55,6 +55,7 @@ brew 'cilium-cli'
 brew 'cmake'
 brew 'coreutils'                     # GNU File, Shell, and Text utilities
 brew 'ctags'                         # Reimplementation of ctags(1)
+brew 'd2'                            # Text-to-diagram tool (d2lang.com)
 brew 'danielfoehrkn/switch/switch'   # kubeswitch
 brew 'danielfoehrkn/switch/switcher' # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
 brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
