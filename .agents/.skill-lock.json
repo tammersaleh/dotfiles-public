@@ -333,6 +333,15 @@
       "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
       "installedAt": "2026-04-27T13:40:02.722Z",
       "updatedAt": "2026-04-27T13:40:02.722Z"
+    },
+    "slack-cli": {
+      "source": "tammersaleh/slack-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tammersaleh/slack-cli.git",
+      "skillPath": "skills/slack-cli/SKILL.md",
+      "skillFolderHash": "cd87d4447c8a744335ca92176a5f33e961a15d96",
+      "installedAt": "2026-05-26T21:47:59.562Z",
+      "updatedAt": "2026-05-28T23:54:51.786Z"
     }
   },
   "dismissed": {
