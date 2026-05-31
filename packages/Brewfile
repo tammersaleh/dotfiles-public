@@ -12,6 +12,7 @@ cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
 cask 'ghostty'
 cask 'iterm2'
+cask 'openscad@snapshot'             # parametric 3D CAD (enclosure rendering)
 cask 'orbstack', greedy: true
 cask 'tammersaleh/tap/slack-cli'     # Read-only Slack CLI for agents and automation
 cask 'tammersaleh/tap/calendar-sync'  # Google Calendar event mirroring daemon
