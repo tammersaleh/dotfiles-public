@@ -144,6 +144,7 @@ includes `channel` (object with `id`/`name`), `user`, `ts`,
 slack channel list [--limit N] [--type all|public|private|mpim|im] [--query STR] [--include-non-member]
 slack channel info <channel>...
 slack channel members <channel> [--limit N]
+slack channel managers <channel>                       # "Managed by" users (session token)
 ```
 
 Defaults to channels you're a member of, all types. Add `--include-non-member`
@@ -162,16 +163,34 @@ slack channel info https://acme.slack.com/archives/C01ABC --fields id,name,topic
 
 ```
 slack user list [--limit N] [--query STR] [--presence]
-slack user info <user>...
+slack user info [--full] <user>...
+slack user manager-chain [--manager-field LABEL] <user>...
 ```
 
 User arguments accept IDs (`U...`), emails, or `@name` (display
 name, username, or real name). On Enterprise Grid with a session
 token, email lookup may fail - prefer `@name` there.
 
+Use `--full` whenever you need to know anything about a person beyond
+their name. Plain `slack user info` returns `profile.fields: []` - it does
+NOT include title, manager, department, or any org data. `--full` fetches
+the custom profile fields and adds a top-level `custom_fields` object
+(keyed by snake_case label: `manager`, `title`, `division`, `department`,
+`employee_id`, etc.). The Manager field is a user ID, resolved to a name in
+`value_name`. For "who is X / what's their role / who do they report to",
+reach for `--full` first.
+
+`manager-chain` walks the reporting line upward (one row per level, to the
+top). Traversal is upward-only - Slack exposes no reliable direct-reports
+data. `--full` and `manager-chain` need the `users.profile:read` scope;
+desktop auth has it, older OAuth tokens must re-auth.
+
 Examples:
 
 ```
+slack user info --full @jmancuso                      # title, manager, dept, etc.
+slack user info --full @jmancuso | jq '.custom_fields.manager.value_name'
+slack user manager-chain @jmancuso                    # full reporting line up
 slack user info https://acme.slack.com/team/U01ABC    # by profile link
 slack user list --query tamm                          # find by partial name
 slack user info @alice U09T3DUS6P9 alice@example.com   # or name / ID / email (incl. bulk)
@@ -220,23 +239,27 @@ slack section create <name>
 ### Drafts (requires session token)
 
 Stage unsent messages. The CLI never sends - the human sends from the
-Slack app. Block Kit JSON is always piped on stdin; there is no
-plain-text shortcut.
+Slack app. Block Kit JSON is piped on stdin; there is no plain-text
+shortcut.
 
 ```
 slack draft list [--active] [--include-sent] [--include-deleted] [--limit N]
-slack draft create <channel> [--thread TS [--broadcast]] [--at RFC3339] < blocks.json
-slack draft update <draft-id> [--at RFC3339] [--clear-schedule] [< blocks.json]
+slack draft create <channel> [--thread TS [--broadcast]] [--at RFC3339] [--table FILE] < payload.json
+slack draft update <draft-id> [--at RFC3339] [--clear-schedule] [--table FILE] [< payload.json]
 slack draft delete <draft-id>...
 ```
 
 #### Block Kit for drafts
 
-Drafts must contain only `rich_text` top-level blocks, and at
-least one must have non-empty `elements`. The CLI rejects
-non-rich_text blocks up front with `invalid_blocks`. Express
-anything that would normally be a `section` or `header` (bold
-headings, mrkdwn prose) inside a rich_text block instead.
+stdin is either a bare array of top-level blocks (prose), or an object
+`{"blocks":[...],"attachments":[...]}`. Top-level blocks must be
+`rich_text` - Slack's draft compose editor strips every other top-level
+block type when the user opens the draft, so express `section`/`header`
+headings as bold `rich_text` instead. A draft needs renderable content:
+at least one `rich_text` block with non-empty `elements`, **or** a table
+attachment - one with neither is tombstoned. **Tables go in attachments,
+not top-level blocks** (see Tabular data). The CLI rejects bad shapes up
+front with `invalid_blocks`.
 
 ##### Block types that look right but break
 
@@ -250,6 +273,18 @@ the rejection less surprising and discourages bypassing the CLI:
   recommends for LLM output): `drafts.create` returns
   `internal_error` - the drafts API doesn't support it,
   regardless of content.
+- **`table` as a *top-level* block**: `drafts.create` returns ok and
+  stores it, so it looks supported - but Slack's compose editor strips
+  the table when the user opens the draft (and a table-only top-level
+  draft, having no `rich_text` body, is tombstoned within seconds).
+  Tables are not broken in drafts - they just belong in an
+  **attachment**: put the `table` block in `attachments[].blocks[]`,
+  where it survives and renders as a Table card. See Tabular data below.
+- **`data_table` block** (the interactive variant - pagination,
+  sorting, Work Object flexpanes): not draftable anywhere. It is
+  stripped from the compose editor and a data_table-only draft is
+  tombstoned, even inside an attachment (verified). It is an app-only
+  block for posted messages; use a plain `table` for drafts.
 - **`section` + `mrkdwn`**: `drafts.create` returns ok,
   but Slack Desktop's Drafts-panel reconciliation tombstones the
   draft (sets `is_deleted=true` on the server) within seconds.
@@ -471,6 +506,57 @@ literal `•` characters. Tradeoff: the `•` markers
 are plain text, so the recipient can't indent or reorder them like a
 native list - but you avoid the section terminator rule entirely.
 
+##### Tabular data
+
+Tables ARE draftable - the `table` block goes in an **attachment**, not
+in top-level `blocks` (where the compose editor strips it). Use a plain
+`table`, not `data_table` (the interactive variant is app-only and not
+draftable - stripped and tombstoned). Three ways, easiest first:
+
+**1. `--table FILE`** - build a table from a CSV/TSV file. The first
+row becomes a bold header (`--no-header` to disable); the delimiter is
+auto-detected. The CLI wraps it in an attachment for you:
+
+```
+slack draft create '#general' --table report.tsv
+```
+
+**2. Attachment passthrough** - for per-cell control (bold, links,
+column alignment), pipe an object with the `table` block under
+`attachments[].blocks[]`. Cells are `raw_text` (plain) or `rich_text`
+(styled); optional `column_settings` set per-column `align` /
+`is_wrapped`:
+
+```json
+{"blocks":[{"type":"rich_text","elements":[{"type":"rich_text_section","elements":[{"type":"text","text":"Cluster status:"}]}]}],
+ "attachments":[{"blocks":[{"type":"table","column_settings":[{},{"align":"right"}],"rows":[
+   [{"type":"rich_text","elements":[{"type":"rich_text_section","elements":[{"type":"text","text":"Region","style":{"bold":true}}]}]},
+    {"type":"rich_text","elements":[{"type":"rich_text_section","elements":[{"type":"text","text":"Status","style":{"bold":true}}]}]}],
+   [{"type":"raw_text","text":"us-east"},{"type":"raw_text","text":"green"}],
+   [{"type":"raw_text","text":"us-west"},{"type":"raw_text","text":"degraded"}]
+ ]}]}]}
+```
+
+A table-only draft is fine - the `blocks` array may be empty; the table
+attachment alone survives reconciliation. The table renders in the draft
+compose editor as a Table card the human edits and sends.
+
+**3. Inline monospace fallback** - to keep columns inline in the prose
+with no attachment, put a monospace ASCII table in a
+`rich_text_preformatted` element. It is plain text (not an editable
+table) but needs no attachment:
+
+```json
+[{"type":"rich_text","elements":[
+  {"type":"rich_text_section","elements":[{"type":"text","text":"Cluster status:\n"}]},
+  {"type":"rich_text_preformatted","elements":[{"type":"text","text":"Region    Status\n--------  --------\nus-east   green\nus-west   degraded"}]}
+]}]
+```
+
+Pad the columns with spaces yourself. The heading section ends with
+`\n` so the preformatted block doesn't absorb it (the section
+terminator rule above).
+
 
 ##### Validation
 
@@ -481,10 +567,11 @@ directly preceding `rich_text_list`, `rich_text_preformatted`,
 or `rich_text_quote` must terminate with a text inline whose
 `text` ends with `\n` (trailing empty text inlines
 are ignored). All failures emit `invalid_blocks` locally so
-Slack never sees the bad shape. Semantic errors inside blocks
-(missing required subfields, unknown inline types, malformed style
-objects) surface as `invalid_blocks` from Slack's API, not
-locally.
+Slack never sees the bad shape. Semantic errors inside otherwise-valid
+blocks (missing required subfields, unknown inline types, malformed
+style objects, a `table` nested in a `rich_text` element) aren't
+validated locally - Slack rejects them upstream (the error code
+varies, e.g. `invalid_blocks` or `invalid_message`).
 
 ### User State
 
