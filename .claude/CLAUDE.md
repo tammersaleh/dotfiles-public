@@ -61,17 +61,6 @@ NEVER run `crit share` (or `crit share --qr`). Reviews stay local; do not publis
 
 # Installing Software
 
-Global tools/packages are managed in `~/dotfiles/public/packages/Brewfile`. `brew bundle` handles formulae, casks, Go tools, and npm packages from that one file.
-
-To install or update something:
-
-1. Add the entry to `Brewfile` (keep each section sorted alphabetically with a one-line comment). Prefer `brew '...'` from homebrew-core; check `brew info NAME` first.
-2. Run `~/packages/go` (works from any directory). It runs `brew bundle install`, then `brew bundle cleanup --force`, then `skills update`.
-
-Never run `brew install` or `brew bundle install` directly - that skips cleanup and the skills sync, and leaves the Brewfile out of sync with what's installed. The Brewfile is the source of truth.
-
-`~/packages/go` uses `set -Eeuo pipefail`, so any error (e.g. an untrusted tap) aborts the whole run before later packages install. If it dies on "untrusted tap", run `brew trust <tap>` for each flagged tap, then re-run.
-
-After a package change, commit and push (see Dotfiles Maintenance) - stage only the Brewfile and files your change touched.
+Global tools/packages live in `~/dotfiles/public/packages/`. Before installing or updating anything, read `~/dotfiles/public/packages/README.md` and follow it - do not run `brew install`/`brew bundle` yourself or improvise.
 
 @RTK.md
