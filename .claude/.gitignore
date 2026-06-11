@@ -1,6 +1,7 @@
 *
 !.gitignore
 !CLAUDE.md
+!RTK.md
 !settings.json
 !statusline.py
 !rules/

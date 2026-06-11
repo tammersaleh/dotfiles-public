@@ -132,6 +132,7 @@ brew 'rclone'
 brew 'readline'                      # Library for command-line editing
 brew 'ripgrep'                       # Needed by vim treesitter
 brew 'rsync'
+brew 'rtk'                           # CLI proxy that compresses command output to cut LLM token use
 brew 'ruby-build'                    # Install various Ruby versions and implementations
 brew 'ruff'                          # Python linting
 brew 's3cmd'                         # Command-line tool for the Amazon S3 service
@@ -150,7 +151,7 @@ brew 'the_silver_searcher'           # ag
 brew 'ripgrep'                       # rg
 brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/
 brew 'tmux'                          # Terminal multiplexer
-brew 'tomasz-tomczyk/tap/crit'       # Inline-comment review tool for AI-generated plans/code (https://crit.md)
+brew 'crit'                          # Inline-comment review tool for AI-generated plans/code (https://crit.md)
 brew 'tree'                          # Display directories as trees (with optional color/HTML output)
 brew 'tree-sitter-cli'               # Required by nvim-treesitter main branch to compile parsers
 brew 'uv'                            # Python package and project manager
