@@ -9,3 +9,7 @@ Files matching patterns in `.stow-local-ignore` are excluded from stowing. Add e
 ## settings.local.json
 
 Claude Code auto-generates `.claude/settings.local.json` in whatever directory you're working in. If one appears in this repo, delete it - it'll conflict with the real one in `$HOME` during `dotfiles install`.
+
+## Pushing
+
+Personal repo - always `git push` after committing. Don't ask.
