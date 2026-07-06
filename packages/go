@@ -12,6 +12,40 @@ export HOMEBREW_BUNDLE_NO_LOCK=true
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_DOWNLOAD_CONCURRENCY=auto # https://brew.sh/2025/08/05/homebrew-4.6.0/
 
+lock="$HOME/.agents/.skill-lock.json"
+
+# Targeted upgrade: ./go NAME...
+# A brew package (formula or cask) upgrades the package plus every installed
+# skill whose source repo matches its name. Any other name updates installed
+# skills matching it as a prefix. No bundle/cleanup, no full skills sweep.
+if [[ $# -gt 0 ]]; then
+  brew update
+  for name in "$@"; do
+    if brew list "$name" &>/dev/null; then
+      brew upgrade "$name"
+      mapfile -t sk < <(jq -r --arg n "$name" '
+        .skills | to_entries[]
+        | (.value.source | split("/")) as $p
+        | select($p[-1] == $n or ($p[0] + "-" + $p[-1]) == $n)
+        | .key' "$lock")
+      if [[ ${#sk[@]} -gt 0 ]]; then
+        skills update --global --yes "${sk[@]}"
+      fi
+    else
+      mapfile -t sk < <(jq -r --arg n "$name" '
+        .skills | keys[]
+        | select(. == $n or startswith($n + "-"))' "$lock")
+      if [[ ${#sk[@]} -gt 0 ]]; then
+        skills update --global --yes "${sk[@]}"
+      else
+        echo "$0: '$name' is not a brew package and matches no installed skills" >&2
+        exit 1
+      fi
+    fi
+  done
+  exit 0
+fi
+
 brew update
 brew bundle install
 brew bundle cleanup --force
