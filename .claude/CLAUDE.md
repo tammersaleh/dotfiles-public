@@ -58,12 +58,22 @@ NEVER run `crit share` (or `crit share --qr`). Reviews stay local; do not publis
 
 # Birthdays
 
-Whenever I give you someone's birthday, add it to my Google calendar named
-"Birthday Notifications" without asking. Make it yearly-recurring and all-day,
-title `<Name>'s Birthday`, and don't set any per-event reminder overrides -
-let it inherit the calendar's default (the day-of email). Resolve the calendar
-by name via the `gws` CLI. Full mechanics (calendar ID, reminder-delivery
-details) live in the brain-cw repo's CLAUDE.md.
+Whenever I give you someone's birthday, update it in BOTH my Google calendar
+named "Birthday Notifications" AND that person's macOS Contacts card, without
+asking. Treat every birthday as a possible correction: search both places
+first and fix the existing entry if found; only create when it's absent.
+
+Calendar event: yearly-recurring, all-day, title `<Name>'s Birthday`, no
+per-event reminder overrides (let it inherit the calendar default - the
+day-of email). Resolve the calendar by name via the `gws` CLI.
+
+Contacts: write via AppleScript only (never touch the AddressBook SQLite file
+directly); year-less birthdays use Apple's 1604 no-year sentinel. If the
+person has no contact card, don't create one - ask first. Writes sync to
+iCloud across my devices.
+
+Full mechanics (calendar ID, DB paths, reminder-delivery details) live in the
+brain-cw repo's CLAUDE.md.
 
 # Sudo
 
