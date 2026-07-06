@@ -1,5 +1,7 @@
 This is where I manage package installations across multiple machines. Run `~/packages/go` (from any directory) to install or update everything.
 
+To upgrade only some things, pass names: `~/packages/go ruby python3`. This skips the full bundle sync and cleanup. Each name that's an installed brew package (formula or cask) is upgraded along with every installed skill from its source repo (matched via `~/.agents/.skill-lock.json`). Any other name updates installed skills matching it as a prefix, so `~/packages/go gws` updates all `gws-*` skills.
+
 Everything is in `Brewfile`. `brew bundle` natively manages formulae, casks, Go tools, npm packages, and more. `brew bundle cleanup --force` removes anything not listed, including stale Go binaries from `$GOBIN`.
 
 Keep sections sorted alphabetically with a one-line comment describing what each entry is.
