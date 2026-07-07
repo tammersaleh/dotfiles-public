@@ -342,6 +342,15 @@
       "skillFolderHash": "0c188b15f9094263ca884746d82bc5ddd5c9f285",
       "installedAt": "2026-05-26T21:47:59.562Z",
       "updatedAt": "2026-06-11T13:49:34.796Z"
+    },
+    "confluence-cli": {
+      "source": "tammersaleh/confluence-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tammersaleh/confluence-cli.git",
+      "skillPath": "skills/confluence-cli/SKILL.md",
+      "skillFolderHash": "82fa8b8a6902784544d7e6cb5b5ddb9b7b5e6ec6",
+      "installedAt": "2026-07-07T14:53:34.885Z",
+      "updatedAt": "2026-07-07T14:53:34.885Z"
     }
   },
   "dismissed": {
