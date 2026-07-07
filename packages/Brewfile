@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
-tap 'tammersaleh/tap'
+tap 'tammersaleh/tap', trusted: true
+
+# Trusted third-party taps (load without prompting for tap trust)
+tap 'danielfoehrkn/switch', trusted: true  # kubeswitch
+tap 'dopplerhq/doppler', trusted: true     # doppler
+tap 'gleanwork/tap', trusted: true         # glean-cli
+tap 'hashicorp/tap', trusted: true         # terraform
+tap 'peak/tap', trusted: true              # s5cmd
 
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask '1password-cli'
@@ -16,6 +23,7 @@ cask 'openscad@snapshot'             # parametric 3D CAD (enclosure rendering)
 cask 'orbstack', greedy: true
 cask 'tammersaleh/tap/slack-cli'     # Read-only Slack CLI for agents and automation
 cask 'tammersaleh/tap/calendar-sync'  # Google Calendar event mirroring daemon
+cask 'tammersaleh/tap/confluence-cli' # Agent-first Confluence CLI
 
 ### LSPs and formatters
 
@@ -62,7 +70,7 @@ brew 'danielfoehrkn/switch/switcher' # Used by kubeswitch.  `brew cleanup` gets 
 brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
 brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
-brew 'dopplerhq/cli/doppler'         # doppler.com
+brew 'dopplerhq/doppler/doppler'     # doppler.com
 brew 'entr'                          # Run arbitrary commands when files change
 brew 'exiftool'                      # Perl lib for reading and writing EXIF metadata
 brew 'fd'                            # Used by nvim treesitter
