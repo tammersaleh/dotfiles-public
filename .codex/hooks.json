@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/tammersaleh/.local/bin/plannotator",
+            "timeout": 345600
+          }
+        ]
+      }
+    ]
+  }
+}
