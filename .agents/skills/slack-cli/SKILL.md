@@ -244,9 +244,20 @@ shortcut.
 
 ```
 slack draft list [--active] [--include-sent] [--include-deleted] [--limit N]
-slack draft create <channel> [--thread TS [--broadcast]] [--at RFC3339] [--table FILE] < payload.json
+slack draft create <recipient>... [--thread TS [--broadcast]] [--at RFC3339] [--table FILE] < payload.json
 slack draft update <draft-id> [--at RFC3339] [--clear-schedule] [--table FILE] [< payload.json]
 slack draft delete <draft-id>...
+```
+
+`create` takes either one channel (`#name`, bare name, `Cxxx`/`Dxxx`) or
+one-or-more users (`@name`, email, `Uxxx`) for a DM/MPDM that need not exist
+yet - the conversation opens on send, so you can draft to people you've never
+messaged. Bare names are channels; use `@name` for a person. Don't mix the two.
+`--thread`/`--broadcast` are channel-only.
+
+```
+slack draft create @alice < payload.json            # new 1:1 DM
+slack draft create @alice @bob U07XYZ < payload.json # new MPDM (<=8 people)
 ```
 
 #### Block Kit for drafts
