@@ -330,18 +330,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "eb6a23305aea6e340d14b9de3766e721f9f4861b",
+      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
       "installedAt": "2026-04-27T13:40:02.722Z",
-      "updatedAt": "2026-07-04T00:21:17.971Z"
+      "updatedAt": "2026-07-10T22:24:09.570Z"
     },
     "slack-cli": {
       "source": "tammersaleh/slack-cli",
       "sourceType": "github",
       "sourceUrl": "https://github.com/tammersaleh/slack-cli.git",
       "skillPath": "skills/slack-cli/SKILL.md",
-      "skillFolderHash": "786972cbbf655a4eb9b924955e7af5661ce6703c",
+      "skillFolderHash": "68786c6e0de24ae976306ca403a2bb8480dedf6d",
       "installedAt": "2026-05-26T21:47:59.562Z",
-      "updatedAt": "2026-07-04T00:21:19.862Z"
+      "updatedAt": "2026-07-10T22:24:11.196Z"
     },
     "confluence-cli": {
       "source": "tammersaleh/confluence-cli",

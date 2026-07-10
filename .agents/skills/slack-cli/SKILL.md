@@ -1,6 +1,6 @@
 ---
 name: slack-cli
-description: "Read and manage Slack workspaces: messages, channels, users, files, saved items, sidebar sections"
+description: "Read and manage Slack: messages, threads, channels, users, files, search, saved items, drafts, sidebar sections. Load this BEFORE running any `slack` command - the CLI has its own grammar (`slack thread list`, `slack message get`, `slack channel list --query`), NOT Slack Web-API method names (no `conversations.replies`, `channel find`, `message read`)."
 argument-hint: ""
 allowed-tools:
   - Bash(slack *)
@@ -17,6 +17,22 @@ Requires the `slack` binary on PATH. If `command not found`, install it:
 
 Auth is pre-configured. If you get `not_authed`, tell the user to run
 `slack auth login`.
+
+## Grammar
+
+This is a purpose-built CLI, **not** the Slack Web API. Don't reach for
+Slack method names from memory - they hit a bare `Usage:`. The recurring
+wrong guesses and their real forms:
+
+| Instead of | Use |
+|---|---|
+| `slack conversations replies <channel> <ts>` | `slack thread list <channel> <ts>` |
+| `slack channel find <name>` | `slack channel list --query <name>` |
+| `slack message read <channel> <ts>` | `slack message get <channel> <ts>` |
+| `slack message list <channel> --thread <ts>` | `slack thread list <channel> <ts>` |
+
+When unsure of a command's shape, run `slack --help` or
+`slack <group> --help` rather than guessing.
 
 ## Output
 
