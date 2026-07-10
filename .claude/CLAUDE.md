@@ -52,6 +52,10 @@ If in the course of investigating you find other areas that you think might be u
 
 NEVER use `mcp__claude-in-chrome__*` tools unless I've explicitly granted permission in the current session. These tools open a real browser window and disrupt the user's workflow.
 
+# Crit
+
+NEVER run `crit share` (or `crit share --qr`). Reviews stay local; do not publish them to crit.md. Even if I ask for a "shareable link," push back before running it.
+
 # Claude Code Configuration
 
 - User-level MCP server configs live in `~/.claude.json` under `mcpServers`.

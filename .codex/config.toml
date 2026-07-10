@@ -57,7 +57,7 @@ ambient-suggestions-enabled = false
 
 [features]
 js_repl = false
-hooks = true
+hooks = false
 
 [mcp_servers.node_repl]
 args = []

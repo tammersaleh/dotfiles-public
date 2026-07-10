@@ -159,6 +159,7 @@ brew 'the_silver_searcher'           # ag
 brew 'ripgrep'                       # rg
 brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/
 brew 'tmux'                          # Terminal multiplexer
+brew 'crit'                          # Inline-comment review tool for AI-generated plans/code (https://crit.md)
 brew 'tree'                          # Display directories as trees (with optional color/HTML output)
 brew 'tree-sitter-cli'               # Required by nvim-treesitter main branch to compile parsers
 brew 'uv'                            # Python package and project manager
