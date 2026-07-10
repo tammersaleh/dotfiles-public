@@ -13,6 +13,7 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -26,7 +27,6 @@
       }
     ]
   },
-  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.py",
@@ -64,8 +64,8 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
   "editorMode": "vim",
-  "preferredNotifChannel": "iterm2",
-  "terminalProgressBarEnabled": true,
   "verbose": true,
-  "autoCompactEnabled": false
+  "preferredNotifChannel": "iterm2",
+  "autoCompactEnabled": false,
+  "terminalProgressBarEnabled": true
 }
