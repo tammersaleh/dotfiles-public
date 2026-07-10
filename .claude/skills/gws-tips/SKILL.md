@@ -1,6 +1,6 @@
 ---
 name: gws-tips
-description: "Tips, gotchas, and recipes for the gws CLI (googleworkspace/cli). Read before running any gws command - covers required `fields` parameter behavior, retrieving Google Doc comment anchored text, stray download files, and other API quirks not obvious from `--help`. Triggers on any use of `gws drive`, `gws docs`, `gws sheets`, `gws gmail`, `gws calendar`, or related Google Workspace CLI invocations."
+description: "Tips, gotchas, and recipes for the gws CLI (googleworkspace/cli). Read before running any gws command. Grammar is `gws <service> <resource> <method> --params '{JSON}'`; every API argument (fileId, documentId, spreadsheetId, calendarId, range, fields, q) goes inside `--params`, NOT as a flag like `--fileId`. Discover params with `gws schema <service.resource.method>`, not `--help`. Also covers Doc comment anchored text, stray download files, and other API quirks. Triggers on any use of `gws drive`, `gws docs`, `gws sheets`, `gws gmail`, `gws calendar`, or related Google Workspace CLI invocations."
 ---
 
 # gws CLI Tips and Gotchas
@@ -8,6 +8,42 @@ description: "Tips, gotchas, and recipes for the gws CLI (googleworkspace/cli). 
 The auto-generated `gws-shared`, `gws-drive`, `gws-docs`, etc. skills are
 overwritten by `gws generate-skills`. This skill is the durable place
 for hand-curated knowledge.
+
+## Argument model: everything goes in `--params`
+
+The grammar is `gws <service> <resource> [sub-resource] <method> [flags]`.
+There are no per-item named flags. `--fileId`, `--documentId`,
+`--spreadsheetId`, `--calendarId`, `--range`, `--fields`, `--query`/`--q` do
+not exist as flags - every API argument goes inside a single `--params '{JSON}'`
+object. Request bodies for writes go in `--json '{JSON}'`. `--params` takes one
+object and cannot be repeated.
+
+This is the most common mistake: reaching for `gws drive files export --fileId X`
+(Web-API/flag habit) instead of `--params '{"fileId":"X"}'`. The CLI rejects the
+flag with `unexpected argument '--X' found`.
+
+Discover a method's parameters with `gws schema <service.resource.method>` - not
+`<cmd> --help`, which doesn't exist per-command.
+
+```bash
+gws schema drive.files.export        # shows fileId, mimeType, etc.
+```
+
+Correct forms for the commands that trip up most often:
+
+```bash
+gws drive files export --params '{"fileId":"<ID>","mimeType":"text/markdown"}' --output out.md
+gws drive files list   --params '{"q":"name contains \"foo\"","fields":"files(id,name)"}'
+gws calendar events list --params '{"calendarId":"primary","timeMin":"2026-07-01T00:00:00Z"}'
+gws sheets spreadsheets get --params '{"spreadsheetId":"<ID>"}'
+gws sheets spreadsheets values get --params '{"spreadsheetId":"<ID>","range":"A1:Z100"}'
+gws docs documents get --params '{"documentId":"<ID>"}'
+```
+
+Note `sheets spreadsheets values get`, not `sheets values get` - the latter
+errors with `unrecognized subcommand 'values'`. `--output` paths must resolve
+inside the working directory; an absolute `/tmp/...` path is rejected as outside
+the allowed root.
 
 ## Drive comments: getting the anchored text
 
