@@ -1,0 +1,93 @@
+@page {
+    size: A4;
+    margin: 14mm 16mm;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.32;
+    color: #222;
+}
+
+h1 {
+    font-size: 16pt;
+    margin: 0 0 0.3em 0;
+    color: #1a1a1a;
+    border-bottom: 1.2pt solid #cfcfcf;
+    padding-bottom: 0.18em;
+    page-break-after: avoid;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 11pt;
+    color: #1a1a1a;
+    margin: 0.8em 0 0.3em 0;
+    font-weight: 600;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 10pt;
+    color: #1a1a1a;
+    margin: 0.6em 0 0.2em 0;
+    font-weight: 600;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 0.25em 0 0.4em 0;
+}
+
+a {
+    color: #0a58a8;
+    text-decoration: none;
+}
+
+code {
+    font-family: 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+    font-size: 8.4pt;
+    background: #f3f3f3;
+    padding: 0 0.3em;
+    border-radius: 2px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0.4em 0 0.6em 0;
+    font-size: 9pt;
+    width: auto;
+}
+
+th, td {
+    border: 1px solid #d8d8d8;
+    padding: 0.25em 0.6em;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #f4f4f4;
+    font-weight: 600;
+}
+
+ol, ul {
+    margin: 0.3em 0 0.4em 0;
+    padding-left: 1.5em;
+}
+
+ol li, ul li {
+    margin: 0.32em 0;
+    page-break-inside: avoid;
+}
+
+strong {
+    font-weight: 600;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 0.6em 0;
+}
