@@ -14,7 +14,11 @@ This applies to your output in chat, README's, internal documentation, Git commi
 - Use fewer words when possible.  Do not repeat yourself.  Be like Hemingway.
 - Assume your audience is highly technical and already understands the overall system.  Don't hold their hand.
 - Do not "sell".  Don't explain why something is so valuable or such a huge improvement.  No bulleted lists of selling points.  Only articulate the value when it's not already obvious.
+
+## No AI Slop
+- Never say "honest" or "load bearing"
 - "ask"/"asks" is a verb, not a noun (AI/LinkedIn speak).  Never "the ask is" or "specific asks"; instead "the request is" or "what I need".
+- use real words: for example, "and" instead of "+" or "&"
 
 ## For documents:
 
