@@ -37,15 +37,23 @@ vim.api.nvim_create_autocmd('TermOpen', {
   group = vim_term
 })
 
+-- Close the terminal as soon as its shell exits, regardless of exit code.
+-- Neovim otherwise leaves the buffer showing "[Process exited N]" until a key
+-- is pressed. If the terminal is the whole editor, quit; otherwise just close
+-- it (dropping a split, returning to the alternate file).
 vim.api.nvim_create_autocmd('TermClose', {
-  callback = function()
-    local buffers = vim.fn.getbufinfo({buflisted = 1, bufloaded = 1})
-    if buffers and #buffers == 1 then
-      local buffer = buffers[1]
-      if buffer.name == "" and buffer.linecount == 1 and buffer.changed == 0 then
-        vim.cmd.qall()
+  callback = function(args)
+    local buf = args.buf
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(buf) then
+        return
       end
-    end
+      if #vim.api.nvim_list_tabpages() == 1 and #vim.api.nvim_list_wins() == 1 then
+        vim.cmd.quitall()
+      else
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end
+    end)
   end,
   group = vim_term
 })
