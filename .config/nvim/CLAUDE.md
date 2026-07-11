@@ -19,6 +19,16 @@ Run tests with `mise run test` (runs both suites). `mise run test:unit` and `mis
 
 Never make a behavioral change without first writing a test that fails. Watch it fail. Then implement the fix. Then look for simplification. This applies even to "obvious" fixes.
 
+### Verifying interactive behavior
+
+Headless nvim (and `h.feed`) processes keys synchronously, so it can't reproduce
+timing-dependent interactive behavior: `<C-v>` may not enter blockwise-visual
+without a UI, and async autocmds (render-markdown, cmp) never interleave between
+keystrokes. To truly verify interactive behavior, drive real nvim in a PTY:
+`tmux new-session -d -s x -x 120 -y 40`, `tmux send-keys`, `sleep` between keys,
+then read the saved buffer. The unit/e2e suites still cover keymap logic; tmux is
+for confirming the real-terminal experience.
+
 ### Test pattern
 
 ```lua
@@ -37,6 +47,13 @@ In visual-mode tests where the buffer triggers `foldexpr` (e.g., `## Heading` li
 ### Before committing
 
 Always run `mise run test` and confirm all tests pass.
+
+## Keymaps
+
+`lua/config/keymaps.lua` overrides `I` and `A` in linewise visual mode (`V`) to
+act like a block insert/append: `I` prepends at column 0 on every selected line,
+`A` appends at each line's ragged end. This is intentional, not stock behavior -
+don't "fix" it. Charwise (`v`) and blockwise (`<C-v>`) keep built-in semantics.
 
 ## Markdown shiftwidth
 
