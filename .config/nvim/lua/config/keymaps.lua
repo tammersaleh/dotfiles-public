@@ -43,3 +43,14 @@ vim.keymap.set('n', ';', ':', {silent = true, desc = "Command (replaces :)"})
 
 -- Select last pasted text
 vim.keymap.set('n', 'gp', '`[v`]', { noremap = true, silent = true, desc = 'Select last pasted text' })
+
+-- In linewise visual mode, make I/A behave like a block insert/append across
+-- every selected line: I prepends at column 0, A appends at each line's end.
+-- Charwise and blockwise selections keep the built-in behavior.
+vim.keymap.set('x', 'I', function()
+  return vim.fn.mode() == 'V' and '<C-v>0I' or 'I'
+end, { expr = true, silent = true, desc = "Block insert at column 0 (linewise)" })
+
+vim.keymap.set('x', 'A', function()
+  return vim.fn.mode() == 'V' and '<C-v>$A' or 'A'
+end, { expr = true, silent = true, desc = "Block append at line end (linewise)" })

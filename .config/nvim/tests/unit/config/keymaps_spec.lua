@@ -77,6 +77,37 @@ describe("keymaps", function()
     end)
   end)
 
+  -- Linewise visual block insert / append -------------------------------------
+
+  describe("linewise visual I/A", function()
+    it("I prepends inserted text to every selected line", function()
+      h.set_buf({ "one", "two", "three" })
+      h.set_cursor(1)
+      h.feed("Vj")
+      h.feed("I> ")
+      h.ensure_normal()
+      assert.are.same({ "> one", "> two", "three" }, h.get_buf())
+    end)
+
+    it("I inserts at column 0 even when selection starts mid-line", function()
+      h.set_buf({ "aaaa", "bbbb", "cccc" })
+      h.set_cursor(1, 2)
+      h.feed("Vjj")
+      h.feed("I> ")
+      h.ensure_normal()
+      assert.are.same({ "> aaaa", "> bbbb", "> cccc" }, h.get_buf())
+    end)
+
+    it("A appends text at the ragged end of every selected line", function()
+      h.set_buf({ "a", "bbbb", "cc" })
+      h.set_cursor(1)
+      h.feed("Vjj")
+      h.feed("A!")
+      h.ensure_normal()
+      assert.are.same({ "a!", "bbbb!", "cc!" }, h.get_buf())
+    end)
+  end)
+
   -- Move line up / down -------------------------------------------------------
 
   describe("move line", function()
