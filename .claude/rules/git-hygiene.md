@@ -18,3 +18,10 @@ changes you didn't make:
   stash on his behalf.
 
 The goal: your changes never disturb his uncommitted edits.
+
+## In dotfiles, commit and push your own files even when the tree is dirty
+
+When working in `~/dotfiles/public`, an unrelated modified file in the tree is
+never a reason to skip committing. Stage only the files your change touched
+(explicit pathspecs), commit, and push. Leave everything else unstaged. Don't
+ask - do it.
