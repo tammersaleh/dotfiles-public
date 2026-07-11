@@ -21,13 +21,14 @@ Never make a behavioral change without first writing a test that fails. Watch it
 
 ### Verifying interactive behavior
 
-Headless nvim (and `h.feed`) processes keys synchronously, so it can't reproduce
-timing-dependent interactive behavior: `<C-v>` may not enter blockwise-visual
-without a UI, and async autocmds (render-markdown, cmp) never interleave between
-keystrokes. To truly verify interactive behavior, drive real nvim in a PTY:
+Headless nvim (and `h.feed`, which feeds keys synchronously) is the right tool
+for deterministic keymap logic - the unit/e2e suites cover it, including blockwise
+insert. What it can't reproduce is timing-dependent interactive behavior: async
+autocmds (render-markdown, cmp) never interleave between keystrokes, and feeding
+keys asynchronously to mimic real typing is unreliable (`<C-v>` may not even enter
+blockwise-visual). To confirm the real-terminal experience, drive nvim in a PTY:
 `tmux new-session -d -s x -x 120 -y 40`, `tmux send-keys`, `sleep` between keys,
-then read the saved buffer. The unit/e2e suites still cover keymap logic; tmux is
-for confirming the real-terminal experience.
+then read the saved buffer.
 
 ### Test pattern
 
