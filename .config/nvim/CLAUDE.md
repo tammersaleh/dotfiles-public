@@ -48,13 +48,6 @@ In visual-mode tests where the buffer triggers `foldexpr` (e.g., `## Heading` li
 
 Always run `mise run test` and confirm all tests pass.
 
-## Keymaps
-
-`lua/config/keymaps.lua` overrides `I` and `A` in linewise visual mode (`V`) to
-act like a block insert/append: `I` prepends at column 0 on every selected line,
-`A` appends at each line's ragged end. This is intentional, not stock behavior -
-don't "fix" it. Charwise (`v`) and blockwise (`<C-v>`) keep built-in semantics.
-
 ## Markdown shiftwidth
 
 Markdown uses shiftwidth=4 (set in `after/ftplugin/markdown.lua`). Unit tests that operate on markdown buffers must set this explicitly in `before_each`.
