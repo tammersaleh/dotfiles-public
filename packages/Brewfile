@@ -7,6 +7,7 @@ tap 'danielfoehrkn/switch', trusted: true  # kubeswitch
 tap 'dopplerhq/doppler', trusted: true     # doppler
 tap 'gleanwork/tap', trusted: true         # glean-cli
 tap 'hashicorp/tap', trusted: true         # terraform
+tap 'can1357/tap', trusted: true           # omp (oh-my-pi)
 tap 'peak/tap', trusted: true              # s5cmd
 
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
@@ -60,6 +61,7 @@ brew 'bat'                           # Clone of cat(1) with syntax highlighting 
 brew 'bat-extras'
 brew 'bfg'
 brew 'bzip2'                         # Freely available high-quality data compressor
+brew 'can1357/tap/omp'               # oh-my-pi: Pi fork with MCP, subagents, LSP/DAP (omp.sh)
 brew 'cilium-cli'
 brew 'cmake'
 brew 'coreutils'                     # GNU File, Shell, and Text utilities
@@ -133,7 +135,6 @@ brew 'pandoc'                        # Swiss-army knife of markup format convers
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
 brew 'peak/tap/s5cmd'
-brew 'pi-coding-agent'               # Pi minimal AI agent harness (pi.dev)
 brew 'pinentry-mac'
 brew 'pre-commit'                    # git pre-commit hook runner
 brew 'pstree'                        # Show ps output as a tree
