@@ -126,12 +126,14 @@ brew 'mtr'                           # Ping and traceroute in love
 brew 'neovim', args: ['HEAD']
 brew 'neovim-remote'
 brew 'node'                          # Platform built on V8 to build network applications
+brew 'opencode'                      # AI coding agent for the terminal (opencode.ai)
 brew 'openssl'                       # SSL/TLS cryptography library
 brew 'openssl@1.1'                   # Cryptography and SSL/TLS Toolkit
 brew 'pandoc'                        # Swiss-army knife of markup format conversion
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
 brew 'peak/tap/s5cmd'
+brew 'pi-coding-agent'               # Pi minimal AI agent harness (pi.dev)
 brew 'pinentry-mac'
 brew 'pre-commit'                    # git pre-commit hook runner
 brew 'pstree'                        # Show ps output as a tree
