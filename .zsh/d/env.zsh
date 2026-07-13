@@ -23,5 +23,3 @@ __prependpath "$HOME/.local/bin"
 
 __prependpath "$HOME/bin/$(uname)"
 __prependpath "$HOME/bin"
-
-__source_if_exists "$HOME/.secret_vars_and_aliases"
