@@ -20,7 +20,7 @@ vim.o.timeoutlen = 300
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.highlight.on_yank({timeout = 600})
+    vim.hl.hl_op({timeout = 600})
   end,
   group = highlight_group,
   pattern = '*',
