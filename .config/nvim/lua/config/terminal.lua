@@ -1,5 +1,18 @@
 -- Terminal configuration
 
+-- Let the outer terminal (iTerm2) tab title track whatever a terminal child
+-- process sets. Claude Code, and its /rename command, emit an OSC title
+-- sequence; Neovim captures it into b:term_title. We mirror that into the
+-- global titlestring so the tab follows Claude no matter which buffer is
+-- focused. titlestring is global (one per Neovim instance), so pinning it to a
+-- literal string makes the title focus-independent.
+vim.o.title = true
+
+-- Escape '%' so titlestring does not interpret it as a statusline item.
+local function title_to_string(title)
+  return (title:gsub('%%', '%%%%'))
+end
+
 -- Function to save the last mode (used by splits.lua too, but defined locally here for terminal windows)
 local function save_last_mode()
   vim.b._last_mode = vim.api.nvim_get_mode().mode
@@ -37,6 +50,32 @@ vim.api.nvim_create_autocmd('TermOpen', {
   group = vim_term
 })
 
+-- Pin the tab title to whatever the terminal child sets via an OSC title
+-- sequence (OSC 0 = icon+title, 1 = icon, 2 = title). Parsing straight from
+-- the sequence avoids depending on when Neovim updates b:term_title.
+vim.api.nvim_create_autocmd('TermRequest', {
+  callback = function(ev)
+    local seq = ev.data and ev.data.sequence or ''
+    local title = seq:match('^\27%][012];(.*)$')
+    if title and title ~= '' then
+      vim.o.titlestring = title_to_string(title)
+    end
+  end,
+  group = vim_term
+})
+
+-- When the last terminal exits, drop back to Neovim's default title.
+local function any_terminal_left(exclude_buf)
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= exclude_buf
+      and vim.api.nvim_buf_is_loaded(buf)
+      and vim.bo[buf].buftype == 'terminal' then
+      return true
+    end
+  end
+  return false
+end
+
 -- Close the terminal as soon as its shell exits, regardless of exit code.
 -- Neovim otherwise leaves the buffer showing "[Process exited N]" until a key
 -- is pressed. If the terminal is the whole editor, quit; otherwise just close
@@ -44,6 +83,9 @@ vim.api.nvim_create_autocmd('TermOpen', {
 vim.api.nvim_create_autocmd('TermClose', {
   callback = function(args)
     local buf = args.buf
+    if not any_terminal_left(buf) then
+      vim.o.titlestring = ''
+    end
     vim.schedule(function()
       if not vim.api.nvim_buf_is_valid(buf) then
         return
