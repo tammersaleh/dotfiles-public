@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# Guarded wrapper around `v` for use by Claude Code.
+#
+# `v` opens the given files as splits in the parent nvim ONLY when run inside an
+# nvim :terminal (it branches on $NVIM and calls `nvr -o`). Outside nvim, `v`
+# launches a brand-new blocking `nvim`, which hangs a non-interactive agent
+# shell. This wrapper refuses to run unless $NVIM is set, so the agent can never
+# spawn that blocking editor by accident.
+
+set -euo pipefail
+
+if [[ ! -v NVIM ]]; then
+  echo "Not inside an nvim :terminal (\$NVIM is unset)." >&2
+  echo "Refusing to run 'v' - outside nvim it launches a blocking editor." >&2
+  echo "Open the file with a normal editor tool instead." >&2
+  exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: v-open <file> [file...]" >&2
+  exit 1
+fi
+
+exec v "$@"
