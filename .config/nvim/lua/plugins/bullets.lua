@@ -58,9 +58,20 @@ end
 return {
   'dkarter/bullets.vim',
   init = function()
-    -- <C-]> expands a pending abbreviation first, as bullets.vim's own <cr>
-    -- mapping does.
-    vim.g.bullets_custom_mappings = { { 'imap', '<cr>', '<C-]><Plug>(config-bullets-split-newline)' } }
+    -- Declare the mappings by hand. The defaults also take >>, <<, > and <
+    -- for promote/demote, which shadows the indent operators and duplicates
+    -- the Tab/S-Tab cycling in after/ftplugin/markdown.lua.
+    vim.g.bullets_set_mappings = 0
+    vim.g.bullets_custom_mappings = {
+      -- <C-]> expands a pending abbreviation first, as the default <cr>
+      -- mapping does.
+      { 'imap', '<cr>', '<C-]><Plug>(config-bullets-split-newline)' },
+      { 'inoremap', '<C-cr>', '<cr>' }, -- newline without a bullet
+      { 'nmap', 'o', '<Plug>(bullets-newline)' },
+      { 'nmap', 'gN', '<Plug>(bullets-renumber)' },
+      { 'vmap', 'gN', '<Plug>(bullets-renumber)' },
+      { 'nmap', '<leader>x', '<Plug>(bullets-toggle-checkbox)' },
+    }
   end,
   config = function()
     vim.keymap.set('i', '<Plug>(config-bullets-split-newline)', insert_new_bullet,

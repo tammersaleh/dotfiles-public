@@ -61,7 +61,9 @@ The `undefined global 'vim'` warnings in lua files are expected - the LSP doesn'
 
 `<cr>` in markdown belongs to bullets.vim, wrapped in `lua/plugins/bullets.lua` so a mid-item Enter also continues the list (the plugin only continues at end of line).
 
-Do not map `<CR>` for markdown in `after/ftplugin/`. bullets.vim installs its buffer-local maps from a FileType autocmd that runs after the ftplugin and overwrites them. Use `g:bullets_custom_mappings`, which the plugin applies after its own defaults.
+Do not map `<CR>` for markdown in `after/ftplugin/`. bullets.vim installs its buffer-local maps from a FileType autocmd that runs after the ftplugin and overwrites them. Declare them in `g:bullets_custom_mappings` instead, which the plugin applies last.
+
+Its default mappings are off (`g:bullets_set_mappings = 0`) because they also claim `>>`, `<<`, `>`, `<`, `<C-t>`, and `<C-d>` for promote/demote, shadowing the indent operators and duplicating the Tab/S-Tab cycling. We declare `<cr>`, `<C-cr>`, `o`, `gN`, and `<leader>x`.
 
 The wrapper splits the line before calling `InsertNewBullet`. bullets.vim reads the current line to pick the next number, the checkbox state, and whether a trailing colon nests the item, so it has to see the post-split text.
 

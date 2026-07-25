@@ -1,0 +1,49 @@
+local h = require('helpers')
+
+-- bullets.vim's default promote/demote maps shadow the indent operators and
+-- duplicate the Tab/S-Tab cycling in after/ftplugin/markdown.lua.
+describe("bullets.vim mappings in markdown (with plugins)", function()
+  before_each(function()
+    h.reset()
+    vim.bo.filetype = 'markdown'
+  end)
+
+  it("leaves the indent operators alone", function()
+    assert.equals('', vim.fn.maparg('>>', 'n'))
+    assert.equals('', vim.fn.maparg('<<', 'n'))
+    assert.equals('', vim.fn.maparg('>', 'x'))
+    assert.equals('', vim.fn.maparg('<', 'x'))
+    assert.equals('', vim.fn.maparg('<C-t>', 'i'))
+    assert.equals('', vim.fn.maparg('<C-d>', 'i'))
+  end)
+
+  it("keeps the list mappings we use", function()
+    h.assert_buf_keymap('i', '<CR>')
+    h.assert_buf_keymap('n', 'o')
+    h.assert_buf_keymap('n', 'gN')
+    h.assert_buf_keymap('x', 'gN')
+    h.assert_buf_keymap('n', ' x')
+  end)
+
+  it("still toggles a checkbox with <leader>x", function()
+    h.set_buf({ "- [ ] task" })
+    h.set_cursor(1)
+    h.feed("<leader>x")
+    assert.are.same({ "- [X] task" }, h.get_buf()) -- g:bullets_checkbox_markers
+  end)
+
+  it("still renumbers a list with gN", function()
+    h.set_buf({ "5. one", "8. two" })
+    h.set_cursor(1)
+    h.feed("gN")
+    assert.are.same({ "1. one", "2. two" }, h.get_buf())
+  end)
+
+  it("still continues the list with o", function()
+    h.set_buf({ "- one" })
+    h.set_cursor(1)
+    h.feed("otwo")
+    h.ensure_normal()
+    assert.are.same({ "- one", "- two" }, h.get_buf())
+  end)
+end)
