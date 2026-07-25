@@ -62,6 +62,8 @@ return {
     -- for promote/demote, which shadows the indent operators and duplicates
     -- the Tab/S-Tab cycling in after/ftplugin/markdown.lua.
     vim.g.bullets_set_mappings = 0
+    -- On and off only. The default ' .oOX' adds partial-completion states.
+    vim.g.bullets_checkbox_markers = ' x'
     vim.g.bullets_custom_mappings = {
       -- <C-]> expands a pending abbreviation first, as the default <cr>
       -- mapping does.

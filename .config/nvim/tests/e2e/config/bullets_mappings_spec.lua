@@ -29,7 +29,14 @@ describe("bullets.vim mappings in markdown (with plugins)", function()
     h.set_buf({ "- [ ] task" })
     h.set_cursor(1)
     h.feed("<leader>x")
-    assert.are.same({ "- [X] task" }, h.get_buf()) -- g:bullets_checkbox_markers
+    assert.are.same({ "- [x] task" }, h.get_buf())
+  end)
+
+  it("has no partial checkbox states", function()
+    h.set_buf({ "- [x] task" })
+    h.set_cursor(1)
+    h.feed("<leader>x")
+    assert.are.same({ "- [ ] task" }, h.get_buf())
   end)
 
   it("still renumbers a list with gN", function()
