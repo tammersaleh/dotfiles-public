@@ -27,7 +27,6 @@ return {
     },
   },
   { 'zhimsel/vim-stay' },
-  { 'dkarter/bullets.vim' },
   { 'echasnovski/mini.splitjoin', version = '*', opts = {} },
   { 'folke/which-key.nvim',
     opts = {

@@ -57,6 +57,14 @@ Markdown uses shiftwidth=4 (set in `after/ftplugin/markdown.lua`). Unit tests th
 
 The `undefined global 'vim'` warnings in lua files are expected - the LSP doesn't know these run inside Neovim. Ignore them.
 
+## bullets.vim
+
+`<cr>` in markdown belongs to bullets.vim, wrapped in `lua/plugins/bullets.lua` so a mid-item Enter also continues the list (the plugin only continues at end of line).
+
+Do not map `<CR>` for markdown in `after/ftplugin/`. bullets.vim installs its buffer-local maps from a FileType autocmd that runs after the ftplugin and overwrites them. Use `g:bullets_custom_mappings`, which the plugin applies after its own defaults.
+
+The wrapper splits the line before calling `InsertNewBullet`. bullets.vim reads the current line to pick the next number, the checkbox state, and whether a trailing colon nests the item, so it has to see the post-split text.
+
 ## Treesitter
 
 `nvim-treesitter/nvim-treesitter` and `nvim-treesitter/nvim-treesitter-textobjects` are pinned to `branch = "main"` (the master branch is archived and broken on Neovim 0.12+). The plugin is just a parser/query installer - feature wiring (highlight, indent, incremental selection, folds) goes through core `vim.treesitter.*` APIs in `lua/plugins/treesitter.lua`.
