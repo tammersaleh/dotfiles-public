@@ -58,6 +58,24 @@ NEVER use `mcp__claude-in-chrome__*` tools unless I've explicitly granted permis
 
 NEVER run `crit share` (or `crit share --qr`). Reviews stay local; do not publish them to crit.md. Even if I ask for a "shareable link," push back before running it.
 
+# My CLIs: file issues the moment you find them
+
+When you hit a bug or a rough edge in one of my CLIs, file a work order
+immediately - in the same session, before finishing the task that surfaced it.
+Don't wait to be asked and don't just mention it in chat.
+
+- `slack` -> `~/src/github.com/tammersaleh/slack-cli/todo/`
+- `confluence` -> `~/src/github.com/tammersaleh/confluence-cli/todo/`
+
+Use a subagent for the write-up so it stays off the main transcript. Read that
+directory's `README.md` first and match the house style: one concern per file,
+written for a session starting cold - what was measured and how, the proposed
+approach, and what to verify rather than assume. Include verbatim commands and
+output. Don't commit; the directory is untracked by design.
+
+This covers silent-wrong-answer behavior too, not just crashes - a command that
+exits 0 with subtly wrong data is the most valuable kind to write down.
+
 # Claude Code Configuration
 
 - User-level MCP server configs live in `~/.claude.json` under `mcpServers`.
