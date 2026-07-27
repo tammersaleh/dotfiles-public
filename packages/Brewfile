@@ -86,6 +86,7 @@ brew 'ghorg'                         # quickly clone all of an orgs, or users re
 brew 'git'                           # Distributed revision control system
 brew 'git-crypt'                     # Enable transparent encryption/decryption of files in a git repo
 brew 'git-delta'
+brew 'git-filter-repo'               # Rewrite git history (scrub secrets, split repos)
 brew 'git-lfs'                       # Git extension for versioning large files
 brew 'gleanwork/tap/glean-cli'       # Glean CLI
 brew 'gnu-sed'
