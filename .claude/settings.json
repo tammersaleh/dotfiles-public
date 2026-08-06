@@ -13,7 +13,7 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "opus-4-8[1m]",
+  "model": "claude-opus-4-8[1m]",
   "hooks": {
     "PreToolUse": [
       {
