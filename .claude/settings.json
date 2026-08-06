@@ -13,7 +13,7 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "opus",
+  "model": "opus-4-8[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -73,7 +73,7 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
   "editorMode": "vim",
-  "verbose": true,
+  "verbose": false,
   "preferredNotifChannel": "iterm2",
   "autoCompactEnabled": false,
   "terminalProgressBarEnabled": true
