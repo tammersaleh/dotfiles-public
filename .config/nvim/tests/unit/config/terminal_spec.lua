@@ -117,4 +117,63 @@ describe("terminal", function()
       assert.equals('', vim.o.titlestring)
     end)
   end)
+
+  describe("desktop-notification passthrough", function()
+    -- The handler re-emits notification OSC sequences to the host terminal via
+    -- nvim_ui_send. Headless tests have no UI, so stub nvim_ui_send and record
+    -- what it was asked to send. \033/\007 are the OSC introducer/terminator.
+    local sent, orig
+
+    local function kill_terminals()
+      for _, b in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_valid(b) and vim.bo[b].buftype == 'terminal' then
+          vim.api.nvim_buf_delete(b, { force = true })
+        end
+      end
+    end
+
+    local function run_term(cmd)
+      vim.cmd('enew')
+      vim.cmd('split')
+      vim.cmd("terminal sh -c '" .. cmd .. "; sleep 10'")
+      return vim.api.nvim_get_current_buf()
+    end
+
+    local function forwarded(needle)
+      for _, s in ipairs(sent) do
+        if s:find(needle, 1, true) then return true end
+      end
+      return false
+    end
+
+    before_each(function()
+      vim.cmd('silent! only')
+      kill_terminals()
+      sent = {}
+      orig = vim.api.nvim_ui_send
+      vim.api.nvim_ui_send = function(data) sent[#sent + 1] = data end
+    end)
+    after_each(function()
+      vim.api.nvim_ui_send = orig
+      kill_terminals()
+    end)
+
+    it("forwards an OSC 9 notification to the host terminal", function()
+      run_term('printf \"\\033]9;ping\\007\"')
+      vim.wait(4000, function() return forwarded(']9;ping') end)
+      assert.is_true(forwarded(']9;ping'))
+    end)
+
+    it("forwards OSC 1337 RequestAttention", function()
+      run_term('printf \"\\033]1337;RequestAttention=once\\007\"')
+      vim.wait(4000, function() return forwarded(']1337;RequestAttention') end)
+      assert.is_true(forwarded(']1337;RequestAttention'))
+    end)
+
+    it("does not forward OSC 9;4 progress", function()
+      run_term('printf \"\\033]9;4;1;50\\007\"')
+      vim.wait(1500)
+      assert.is_false(forwarded(']9;4;'))
+    end)
+  end)
 end)

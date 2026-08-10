@@ -79,6 +79,24 @@ vim.api.nvim_create_autocmd('TermRequest', {
   group = vim_term
 })
 
+-- Forward a terminal child's desktop-notification OSC to the host terminal
+-- (iTerm2). Neovim's vterm consumes these itself, so without this they never
+-- reach iTerm2 and no notification fires. OSC 9 = post notification, OSC 1337
+-- RequestAttention = dock/tab attention. Skip OSC 9;4 (progress). The
+-- terminator (BEL or ST) arrives separately in ev.data.terminator. Not gated to
+-- Claude terminals: notification passthrough is useful for any child, and the
+-- gate would silently drop them.
+vim.api.nvim_create_autocmd('TermRequest', {
+  callback = function(ev)
+    local seq = ev.data and ev.data.sequence or ''
+    if (seq:match('^\27%]9;') and not seq:match('^\27%]9;4;'))
+      or seq:match('^\27%]1337;RequestAttention') then
+      pcall(vim.api.nvim_ui_send, seq .. (ev.data.terminator or '\7'))
+    end
+  end,
+  group = vim_term
+})
+
 -- True if a Claude terminal other than exclude_buf is still open.
 local function any_claude_terminal_left(exclude_buf)
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
