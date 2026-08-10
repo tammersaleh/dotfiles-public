@@ -9,7 +9,8 @@ allowed-tools:
 # Slack CLI
 
 CLI for Slack. JSONL output (one JSON object per line). All commands end with
-a `_meta` trailer: `{"_meta":{"has_more":false}}`.
+a `_meta` trailer: `{"_meta":{"has_more":false}}`. A trailer carrying an
+`error` field means the output above it is incomplete - see Pagination.
 
 Requires the `slack` binary on PATH. If `command not found`, install it:
 `brew install tammersaleh/tap/slack-cli` (macOS) or
@@ -54,14 +55,19 @@ Common errors and their recovery:
 | `error` | What to run next |
 |---|---|
 | `not_authed` | `slack auth login --desktop` (or `slack auth login` for OAuth) |
-| `channel_not_found` | `slack channel list --query <partial>`; add `--include-non-member` for channels you haven't joined |
-| `user_not_found` | `slack user list --query <partial>` or `slack user info <id-or-email>` |
+| `channel_not_found` | `slack channel list --query <partial>` (searches every page you're in); add `--include-non-member` for channels you haven't joined, then check `filter_exhaustive` |
+| `user_not_found` | `slack user list --all --query <partial>` (needs `--all`; check `filter_exhaustive`) or `slack user info <id-or-email>` |
 | `draft_not_found` | `slack draft list` (add `--include-sent` / `--include-deleted` for hidden ones) |
 | `section_not_found` | `slack section list` |
 | `thread_not_found` | `slack message list <channel> --has-replies` to find threads |
 | `invalid_timestamp` | RFC 3339, `YYYY-MM-DD`, or raw Slack ts (`1713300000.123456`). Match the `hint`. |
 | `invalid_blocks` / `missing_blocks` | Block Kit JSON on stdin; drafts require only `rich_text` top-level blocks. See draft docs below. |
-| `rate_limited` | Retry after the delay Slack provided |
+| `rate_limited` | Pages are retried automatically; if it still fails, resume from `_meta.next_cursor` after a wait |
+| `invalid_cursor` | The cursor is void. Rerun without `--cursor`; a cursor only works for the same command, flags, and workspace that produced it |
+| `timeout` | The `--timeout` budget expired. Raise it, drop it, or resume from `_meta.next_cursor` |
+| `http_error` | Slack answered with a non-200. Read `detail` for the status; usually transient, so wait and resume |
+| `parse_error` | The response was not JSON. Check for a proxy or captive portal intercepting `slack.com` |
+| `unknown_error` | The CLI did not recognize the failure. Read `detail` on stderr |
 
 Per-item errors in bulk commands (e.g. `slack channel info X Y Z`)
 go to stdout inline as `{"input":..., "error":..., "detail":..., "hint":...}`
@@ -163,15 +169,40 @@ slack channel members <channel> [--limit N]
 slack channel managers <channel>                       # "Managed by" users (session token)
 ```
 
-Defaults to channels you're a member of, all types. Add `--include-non-member`
-to expand to channels you haven't joined; narrow with `--type`.
+Defaults to conversations you're in, all types (including group DMs and DMs).
+Add `--include-non-member` to expand to channels you haven't joined; narrow
+with `--type`.
+
+`--include-non-member` reads the whole workspace and is much slower - hundreds
+of rate-limited requests and minutes of wall clock on a large org, against a few
+seconds for the default. Use it only when the channel you want is one you
+haven't joined. Pass `--limit 200` with it: Slack drops archived channels after
+picking the page, so a page comes back around a quarter the size you asked for,
+and the default 100 doubles the number of requests.
+
+Two fields behave differently on the default path: `is_member` is always `true`
+(that's what makes a conversation yours) except on `im` rows, where Slack reports
+no membership at all, and `num_members` is absent - use `channel info` for a
+member count. Both are reported verbatim under `--include-non-member`.
+
+`--has-unread` reads unread state from the internal `client.counts` endpoint, so
+it needs a session token (and `SLACK_WORKSPACE_ORG` on Enterprise Grid); with a
+bot token it fails `session_token_required`. Matching rows carry `has_unreads`,
+`mention_count`, and `last_read`.
+
+`--query` and `--has-unread` are client-side filters. On the default path they
+search every page, so a match is never missed. Under `--include-non-member` or
+`--cursor` they filter only one page. The trailer's `filter_exhaustive` says which
+happened - **an empty result with `filter_exhaustive:false` does not mean nothing
+matches**, it means the filtering was partial. `user list --query` never widens on
+its own; pass `--all` there.
 
 Examples:
 
 ```
 slack channel list --query ext-                        # find customer channels
-slack channel list --type private --has-unread         # private + unread
-slack channel list --include-non-member --all          # workspace-wide
+slack channel list --type private                      # private channels only
+slack channel list --include-non-member --query ext-   # slow; channels you haven't joined
 slack channel info https://acme.slack.com/archives/C01ABC --fields id,name,topic
 ```
 
@@ -204,12 +235,12 @@ desktop auth has it, older OAuth tokens must re-auth.
 Examples:
 
 ```
-slack user info --full @jmancuso                      # title, manager, dept, etc.
-slack user info --full @jmancuso | jq '.custom_fields.manager.value_name'
-slack user manager-chain @jmancuso                    # full reporting line up
+slack user info --full @alice                         # title, manager, dept, etc.
+slack user info --full @alice | jq '.custom_fields.manager.value_name'
+slack user manager-chain @alice                       # full reporting line up
 slack user info https://acme.slack.com/team/U01ABC    # by profile link
-slack user list --query tamm                          # find by partial name
-slack user info @alice U09T3DUS6P9 alice@example.com   # or name / ID / email (incl. bulk)
+slack user list --all --query alic                    # find by partial name (--all searches every page)
+slack user info @alice U01XYZ alice@example.com   # or name / ID / email (incl. bulk)
 ```
 
 ### Files
@@ -686,6 +717,26 @@ resolved `user_name` too (no need to list both).
 
 Most list commands return one page by default. Use `--all` to fetch
 everything, or use the `next_cursor` from `_meta` with `--cursor`.
+
+### Always check the trailer before trusting a list
+
+A list is complete only when the last stdout line is a `_meta` object with no
+`error` field. Rate-limited pages are retried automatically, but a run can
+still end early, and the rows already printed stay on stdout:
+
+```
+{"id":"C01"}
+{"_meta":{"has_more":true,"next_cursor":"dGVhbTpD","error":"rate_limited"}}
+```
+
+That is a partial result, not a short list. When `_meta.error` is set, resume
+with `--cursor <next_cursor>`, or rerun the command if no cursor is given.
+`_meta.error` is always a snake_case code you can switch on - see the table
+above - and `has_more:false` there means the outcome is terminal, so there is
+nothing to resume.
+Treating a truncated `--all` run as the full set is the classic way to reach a
+wrong conclusion - for example "I'm only in 285 channels" when the run stopped
+a third of the way through.
 
 ## Channel and User Resolution
 
