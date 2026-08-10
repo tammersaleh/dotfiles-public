@@ -2,7 +2,7 @@
 
 # Zsh completion script for Claude Code CLI
 # https://github.com/anthropics/claude-code
-# Auto-generated for Claude v2.1.143
+# Auto-generated for Claude v2.1.218
 
 _claude_session_ids() {
   # Claude stores each project under ~/.claude/projects/ with a mangled
@@ -315,19 +315,21 @@ typeset -A opt_args
 local -a commands
 commands=(
   'agents:Open agent view (manage background sessions)'
-  'attach:Attach to a background session in this terminal'
+  'attach:Open a background session in this terminal'
   'auth:Manage authentication'
   'auto-mode:Inspect auto mode classifier configuration'
-  'doctor:Check the health of your Claude Code auto-updater'
+  'daemon:Manage the background session supervisor'
+  'doctor:Check the health of your Claude Code installation'
+  'gateway:Run the enterprise auth/telemetry gateway'
   'install:Install Claude Code native build. Use [target] to specify version (stable, latest, or specific version)'
   'kill:Stop a background session (alias for stop)'
-  'logs:Print a background session'\''s recent output'
+  'logs:Print a background session'\''s recent terminal output'
   'mcp:Configure and manage MCP servers'
   'plugin:Manage Claude Code plugins'
   'plugins:Manage Claude Code plugins'
   'project:Manage Claude Code project state'
-  'respawn:Restart a stopped background session with its conversation intact'
-  'rm:Remove a background session from the list'
+  'respawn:Restart a background session (or all of them) so it picks up the current Claude binary'
+  'rm:Delete a background session and its worktree (works on already-exited sessions)'
   'setup-token:Set up a long-lived authentication token (requires Claude subscription)'
   'remote-control:Connect your local environment to claude.ai/code'
   'stop:Stop a background session'
@@ -352,6 +354,8 @@ mcp_commands=(
   'get:Get details about an MCP server'
   'help:Display help for command'
   'list:List configured MCP servers'
+  'login:Authenticate with an MCP server (HTTP, SSE, or claude.ai connector)'
+  'logout:Clear stored OAuth credentials for an MCP server'
   'remove:Remove an MCP server'
   'reset-project-choices:Reset all approved and rejected project-scoped (.mcp.json) servers within this project'
   'serve:Start the Claude Code MCP server'
@@ -362,7 +366,10 @@ plugin_commands=(
   'details:Show a plugin'\''s component inventory and projected token cost'
   'disable:Disable an enabled plugin'
   'enable:Enable a disabled plugin'
+  'eval:Run eval cases against a plugin and report scored results'
   'help:Display help for command'
+  'init:Scaffold a new plugin at ~/.claude/skills/<name>/'
+  'new:Scaffold a new plugin at ~/.claude/skills/<name>/'
   'install:Install a plugin from available marketplaces (use plugin@marketplace for specific marketplace)'
   'i:Install a plugin from available marketplaces (use plugin@marketplace for specific marketplace)'
   'list:List installed plugins'
@@ -371,7 +378,7 @@ plugin_commands=(
   'autoremove:Remove auto-installed dependencies that are no longer needed'
   'uninstall:Uninstall an installed plugin'
   'remove:Uninstall an installed plugin'
-  'tag:Create a {name}--v{version} git tag for a plugin release'
+  'tag:Create a {name}--v{version} git tag for a plugin release, validating that plugin.json and any enclosing marketplace entry agree'
   'update:Update a plugin to the latest version (restart required to apply)'
   'validate:Validate a plugin or marketplace manifest'
 )
@@ -390,7 +397,7 @@ marketplace_commands=(
 # This handles cases where flags appear before the subcommand (e.g., alias claude='claude --flag').
 local subcmd_pos=0
 local subcmd=""
-local -a known_commands=(agents attach auth auto-mode doctor install kill logs mcp plugin plugins project remote-control respawn rm setup-token stop ultrareview update upgrade)
+local -a known_commands=(agents attach auth auto-mode daemon doctor gateway install kill logs mcp plugin plugins project remote-control respawn rm setup-token stop ultrareview update upgrade)
 local i
 for (( i=2; i <= ${#words}; i++ )); do
   # Skip flags and their values
@@ -410,16 +417,24 @@ local sub1=$(( subcmd_pos + 1 ))
 
 case $subcmd in
   agents)
+    # `_arguments` here is invoked as `claude`'s completer and counts
+    # positionals from $words[2], so the leading ':cmd:' placeholder is
+    # required to absorb the `agents` subcommand word — without it, the
+    # flag specs never engage and `claude agents <TAB>` produces nothing.
     _arguments -s \
+      ':cmd:' \
       '*--add-dir[Additional directory to allow tool access to in dispatched sessions (repeatable)]:directory:_files -/' \
+      '--agent[Default agent for sessions dispatched from agent view. Overrides the agent setting]:agent:' \
+      '--all[With --json: also include completed background sessions]' \
       '--allow-dangerously-skip-permissions[Make bypass-permissions mode available to dispatched sessions without defaulting to it]' \
       '--cwd[Show only background sessions started under path]:path:_files -/' \
       '--dangerously-skip-permissions[Alias for --permission-mode bypassPermissions]' \
       '--effort[Default effort level for sessions dispatched from agent view]:level:(low medium high xhigh max)' \
       '(-h --help)'{-h,--help}'[Display help for command]' \
+      '--json[Print active sessions (interactive and background) as a JSON array and exit (for scripting; does not require a TTY)]' \
       '*--mcp-config[MCP server configuration to apply to dispatched sessions (repeatable)]:config:_files' \
       '--model[Default model for sessions dispatched from agent view]:model:' \
-      '--permission-mode[Default permission mode for sessions dispatched from agent view]:mode:(acceptEdits bypassPermissions default dontAsk plan auto)' \
+      '--permission-mode[Default permission mode for sessions dispatched from agent view]:mode:(acceptEdits auto bypassPermissions manual dontAsk plan)' \
       '*--plugin-dir[Load plugins from specified directory for the agent view and dispatched sessions (repeatable)]:path:_files -/' \
       '--setting-sources[Comma-separated list of setting sources to load (user, project, local)]:sources:' \
       '--settings[Settings file or JSON string to apply to the agent view and dispatched sessions]:file-or-json:_files' \
@@ -528,6 +543,17 @@ case $subcmd in
           _arguments \
             '(-h --help)'{-h,--help}'[Display help]'
           ;;
+        login)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '--no-browser[Print the authorization URL instead of opening a browser (for SSH/headless sessions - paste the redirect URL back when prompted)]' \
+            ':name:'
+          ;;
+        logout)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            ':name:'
+          ;;
         *)
           _message 'no more arguments'
           ;;
@@ -558,7 +584,47 @@ case $subcmd in
         validate)
           _arguments \
             '(-h --help)'{-h,--help}'[Display help]' \
+            '--strict[Treat warnings as errors (exit 1). Use in CI to fail on unrecognized fields, missing metadata, and other issues that the runtime tolerates]' \
             ':path:_files'
+          ;;
+        eval)
+          local sub2=$(( subcmd_pos + 2 ))
+          if (( CURRENT == sub2 )); then
+            _arguments -s \
+              '--ablation[Run a no-plugin baseline arm and report the score delta (none or with-without; default: with-without when targeting a plugin by name, none for a path)]:mode:(none with-without)' \
+              '*--allow-tools[Operator grant for gated tools (Bash, Write, Edit, WebFetch, mcp__*). Supports Tool(pattern:*) syntax]:tools:' \
+              '--case[Filter cases by name glob]:glob:' \
+              '(-h --help)'{-h,--help}'[Display help]' \
+              '--json[Print the full run result (prompts, graders, per-run scores) as JSON to stdout, or write it to a .json file]::path:_files' \
+              '--judge-model[Override LLM-grader model (default: haiku)]:model:' \
+              '--keep-temp[Preserve scaffold dirs for debugging]' \
+              '--max-cost-usd[Optional hard cost ceiling; abort and report partial results if hit (exit 2)]:usd:' \
+              '--model[Override model for all cases]:model:' \
+              '--no-scaffold[Explicitly skip scaffold_script]' \
+              '--output-dir[Directory for aggregate-result.json (default: ./evals/results/<timestamp>/)]:dir:_files -/' \
+              '--publish-report[Publish the HTML report privately to claude.ai and print its link]' \
+              '--report[Write a self-contained HTML report (scores, prompts, grader verdicts) to path]:path:_files' \
+              '--runs[Override per-case runs (default: case.runs ?? 3)]:n:' \
+              '--scaffold[Run each case'\''s scaffold_script (runs author-supplied bash as you; off by default — only use on case files you authored)]' \
+              '*--tag[Filter cases by tag (repeatable)]:tag:' \
+              '--threshold[Exit 1 if any case score is below this threshold (default: 1.0)]:threshold:' \
+              '--verbose[Stream the trace as it runs]' \
+              ':command-or-target:(init)'
+          else
+            case $words[$sub2] in
+              init)
+                _arguments \
+                  '--bare[Write a blank template (prompt.md + graders/criteria.md) instead of running the interview]' \
+                  '(-h --help)'{-h,--help}'[Display help]' \
+                  '::name:'
+                ;;
+              *)
+                _arguments \
+                  '(-h --help)'{-h,--help}'[Display help]' \
+                  '::target:_files'
+                ;;
+            esac
+          fi
           ;;
         marketplace)
           local sub2=$(( subcmd_pos + 2 ))
@@ -570,12 +636,13 @@ case $subcmd in
                 _arguments \
                   '(-h --help)'{-h,--help}'[Display help]' \
                   '--scope[Where to declare the marketplace: user (default), project, or local]:scope:(user project local)' \
-                  '*--sparse[Limit checkout to specific directories via git sparse-checkout (for monorepos)]:path:_files -/' \
+                  '*--sparse[Limit checkout to specific directories via git sparse-checkout (for monorepos), e.g. --sparse .claude-plugin plugins]:path:_files -/' \
                   ':source:_files'
                 ;;
               remove|rm)
                 _arguments \
                   '(-h --help)'{-h,--help}'[Display help]' \
+                  '--scope[Remove the marketplace declaration from a specific settings scope: user, project, or local. Omit to remove it from every scope]:scope:(user project local)' \
                   ':name:'
                 ;;
               update)
@@ -594,8 +661,19 @@ case $subcmd in
             esac
           fi
           ;;
+        init|new)
+          _arguments \
+            '--author[Author name (default: git config user.name)]:name:' \
+            '--author-email[Author email (default: git config user.email)]:email:' \
+            '--description[Manifest description]:text:' \
+            '(-f --force)'{-f,--force}'[Overwrite an existing .claude-plugin/ at the target]' \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '*--with[Also scaffold additional components]:component:(skills agents hooks mcp lsp output-style channel)' \
+            ':name:'
+          ;;
         install|i)
           _arguments \
+            '*--config[Set a userConfig option declared in the plugin'\''s manifest (repeatable)]:key=value:' \
             '(-h --help)'{-h,--help}'[Display help]' \
             '(-s --scope)'{-s,--scope}'[Installation scope: user, project, or local (default: user)]:scope:(user project local)' \
             ':plugin:'
@@ -605,7 +683,7 @@ case $subcmd in
             '--dry-run[List what would be removed without removing]' \
             '(-h --help)'{-h,--help}'[Display help]' \
             '(-s --scope)'{-s,--scope}'[Prune at scope: user, project, or local (default: user)]:scope:(user project local)' \
-            '(-y --yes)'{-y,--yes}'[Skip the confirmation prompt (required when stdin is not a TTY)]'
+            '(-y --yes)'{-y,--yes}'[Skip the confirmation prompt (required when stdin or stdout is not a TTY)]'
           ;;
         uninstall|remove)
           _arguments \
@@ -613,7 +691,7 @@ case $subcmd in
             '--keep-data[Preserve the plugin'\''s persistent data directory (~/.claude/plugins/data/{id}/)]' \
             '--prune[Also remove auto-installed dependencies that are no longer needed (requires -y in non-interactive contexts)]' \
             '(-s --scope)'{-s,--scope}'[Uninstall from scope: user, project, or local (default: user)]:scope:(user project local)' \
-            '(-y --yes)'{-y,--yes}'[Skip the --prune confirmation prompt (required when stdin is not a TTY)]' \
+            '(-y --yes)'{-y,--yes}'[Skip the --prune confirmation prompt (required when stdin or stdout is not a TTY)]' \
             ':plugin:'
           ;;
         enable)
@@ -660,12 +738,53 @@ case $subcmd in
       case $words[$sub1] in
         purge)
           _arguments \
-            '--all[Purge state for every project (mutually exclusive with path)]' \
+            '--all[Purge state for every project (mutually exclusive with [path])]' \
             '--dry-run[List what would be deleted without deleting anything]' \
             '(-h --help)'{-h,--help}'[Display help]' \
             '(-i --interactive)'{-i,--interactive}'[Prompt for each item before deleting]' \
             '(-y --yes)'{-y,--yes}'[Skip confirmation prompt]' \
             '::path:_files -/'
+          ;;
+        *)
+          _message 'no more arguments'
+          ;;
+      esac
+    fi
+    return
+    ;;
+  daemon)
+    if (( CURRENT == sub1 )); then
+      local -a daemon_commands
+      daemon_commands=(
+        'run:Run the supervisor in the foreground (default when piped)'
+        'status:Show daemon pid, version, uptime'
+        'logs:Tail the daemon log (Ctrl-C to stop)'
+        'uninstall:Remove the background service (launchctl/systemd)'
+        'stop:Shut down the supervisor and terminate background sessions'
+      )
+      _describe 'daemon command' daemon_commands
+    else
+      case $words[$sub1] in
+        run)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '--json-path[Config file (default: ~/.claude/daemon.json)]:path:_files' \
+            '--log-file[Log file (default: ~/.claude/daemon.log)]:path:_files' \
+            '::json-path:_files'
+          ;;
+        stop)
+          _arguments \
+            '--any[Also stop a transient (non-service) daemon]' \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '--json-path[Config file (default: ~/.claude/daemon.json)]:path:_files' \
+            '--keep-workers[Leave detached sessions running]' \
+            '--log-file[Log file (default: ~/.claude/daemon.log)]:path:_files'
+          ;;
+        status|logs|uninstall)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '--json-path[Config file (default: ~/.claude/daemon.json)]:path:_files' \
+            '--log-file[Log file (default: ~/.claude/daemon.log)]:path:_files'
           ;;
         *)
           _message 'no more arguments'
@@ -682,6 +801,7 @@ case $subcmd in
         'critique:Get AI feedback on your custom auto mode rules'
         'defaults:Print the default auto mode environment, allow, soft_deny, and hard_deny rules as JSON'
         'help:Display help for command'
+        'reset:Reset auto mode configuration to the shipped defaults by removing the autoMode section from your user settings file'
       )
       _describe 'auto-mode command' auto_mode_commands
     else
@@ -691,9 +811,19 @@ case $subcmd in
             '(-h --help)'{-h,--help}'[Display help]' \
             '--model[Override which model is used]:model:'
           ;;
-        config|defaults)
+        reset)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '(-y --yes)'{-y,--yes}'[Skip the confirmation prompt]'
+          ;;
+        config)
           _arguments \
             '(-h --help)'{-h,--help}'[Display help]'
+          ;;
+        defaults)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '--label[Show only rules whose label starts with this prefix (case-insensitive)]:prefix:'
           ;;
         *)
           _message 'no more arguments'
@@ -706,15 +836,34 @@ case $subcmd in
     _arguments \
       '--force[Force installation even if already installed]' \
       '(-h --help)'{-h,--help}'[Display help]' \
+      ':cmd:' \
       ':target:(stable latest)'
     return
     ;;
   remote-control)
     _arguments \
+      '--capacity[Max concurrent sessions in worktree or same-dir mode (default: 32)]:n:' \
+      '(-c --continue --session-id)'{-c,--continue}'[Resume the last Remote Control session in this directory]' \
+      '--create-session-in-dir[Pre-create a session in the current directory when the server starts (default: on)]' \
+      '--no-create-session-in-dir[Skip pre-creating a session in the current directory]' \
+      '--debug-file[Write debug logs to a specific file path]:path:_files' \
       '(-h --help)'{-h,--help}'[Display help]' \
-      '--sandbox[Enable sandboxing for filesystem and network isolation]' \
+      '--name[Name for the session (shown in claude.ai/code)]:name:' \
       '--no-sandbox[Disable sandboxing]' \
-      '--verbose[Show detailed connection and session logs]'
+      '--permission-mode[Permission mode for spawned sessions]:mode:(acceptEdits auto bypassPermissions manual dontAsk plan)' \
+      '--remote-control-session-name-prefix[Prefix for auto-generated session names (default: hostname)]:prefix:' \
+      '--sandbox[Enable sandboxing for filesystem and network isolation]' \
+      '(--session-id -c --continue)--session-id[Resume a specific Remote Control session by ID (cannot be used with spawn flags or --continue)]:id:' \
+      '--spawn[Spawn mode for on-demand sessions (default: same-dir)]:mode:(same-dir worktree session)' \
+      '(-v --verbose)'{-v,--verbose}'[Show detailed connection and session logs]' \
+      ':cmd:'
+    return
+    ;;
+  gateway)
+    _arguments \
+      '--config[Path to gateway YAML config]:path:_files' \
+      '(-h --help)'{-h,--help}'[Display help]' \
+      ':cmd:'
     return
     ;;
   ultrareview)
@@ -722,12 +871,14 @@ case $subcmd in
       '(-h --help)'{-h,--help}'[Display help]' \
       '--json[Print the raw bugs.json payload instead of formatted findings]' \
       '--timeout[Maximum minutes to wait for the review to finish (default: 30)]:minutes:' \
+      ':cmd:' \
       '::target:'
     return
     ;;
   setup-token|doctor|update|upgrade)
     _arguments \
-      '(-h --help)'{-h,--help}'[Display help]'
+      '(-h --help)'{-h,--help}'[Display help]' \
+      ':cmd:'
     return
     ;;
 esac
@@ -736,6 +887,7 @@ fi # end: if [[ -n "$subcmd" ]]
 # Only show global flags and commands if no subcommand matched
 _arguments -s \
   '*--add-dir[Additional directories to allow tool access to]:directory:_files -/' \
+  '--advisor[Enable a server-side advisor tool using the specified model]:model:' \
   '--agent[Agent for the current session. Overrides the agent setting]:agent:' \
   '--agents[JSON object defining custom agents]:json:' \
   '--allow-dangerously-skip-permissions[Enable bypassing all permission checks as an option, without it being enabled by default. Recommended only for sandboxes with no internet access]' \
@@ -743,11 +895,16 @@ _arguments -s \
   '*--allowed-tools[Comma or space-separated list of tool names to allow (e.g. "Bash(git:*) Edit")]:tools:' \
   '--append-system-prompt[Append a system prompt to the default system prompt]:prompt:' \
   '--append-system-prompt-file[Append a system prompt from a file to the default system prompt]:file:_files' \
+  '--ax-screen-reader[Render screen-reader friendly output (flat text, no decorative borders or animations)]' \
   '--bare[Minimal mode: skip hooks, LSP, plugin sync, attribution, auto-memory, background prefetches, keychain reads, and CLAUDE.md auto-discovery. Sets CLAUDE_CODE_SIMPLE=1]' \
+  '(--bg --background)'{--bg,--background}'[Start the session as a background agent and return immediately (manage with `claude agents`)]' \
   '*--betas[Beta headers to include in API requests (API key users only)]:betas:' \
   '--brief[Enable SendUserMessage tool for agent-to-user communication]' \
+  '*--channels[MCP servers to listen for channel notifications (e.g. plugin:<name>@<marketplace> or server:<name>)]:server:' \
   '--chrome[Enable Claude in Chrome integration]' \
+  '(--cloud --remote)'{--cloud,--remote}'[Create a cloud session on claude.ai for the current repository (--remote is a deprecated alias)]' \
   '(-c --continue)'{-c,--continue}'[Continue the most recent conversation in the current directory]' \
+  '*--dangerously-load-development-channels[Bypass the channel plugin allowlist for local testing]:server:' \
   '--dangerously-skip-permissions[Bypass all permission checks. Recommended only for sandboxes with no internet access]' \
   '(-d --debug)'{-d,--debug}'[Enable debug mode with optional category filtering (e.g., "api,hooks" or "!1p,!file")]:filter:' \
   '--debug-file[Write debug logs to a specific file path (implicitly enables debug mode)]:path:_files' \
@@ -756,42 +913,50 @@ _arguments -s \
   '*--disallowed-tools[Comma or space-separated list of tool names to deny (e.g. "Bash(git:*) Edit")]:tools:' \
   '--effort[Effort level for the current session (low, medium, high, xhigh, max)]:level:(low medium high xhigh max)' \
   '--exclude-dynamic-system-prompt-sections[Move per-machine sections (cwd, env info, memory paths, git status) from the system prompt into the first user message. Improves cross-user prompt-cache reuse. Only applies with the default system prompt (ignored with --system-prompt)]' \
-  '--fallback-model[Enable automatic fallback to specified model when default model is overloaded (only works with --print)]:model:' \
+  '--fallback-model[Enable automatic fallback to specified model(s) when default model is overloaded or not available. Accepts a comma-separated list to try each in order. Re-tries the primary at the start of each user turn (only works with --print)]:model:' \
   '*--file[File resources to download at startup. Format: file_id:relative_path (e.g., --file file_abc:doc.txt file_def:img.png)]:file:' \
   '--fork-session[When resuming, create a new session ID instead of reusing the original (use with --resume or --continue)]' \
+  '--forward-subagent-text[Forward subagent text and thinking blocks as assistant/user messages with parent_tool_use_id set (only works with --print and --output-format=stream-json)]' \
   '--from-pr[Resume a session linked to a PR by PR number/URL, or open interactive picker with optional search term]:value:' \
   '(-h --help)'{-h,--help}'[Display help for command]' \
   '--ide[Automatically connect to IDE on startup if exactly one valid IDE is available]' \
   '--include-hook-events[Include all hook lifecycle events in the output stream (only works with --output-format=stream-json)]' \
   '--include-partial-messages[Include partial message chunks as they arrive (only works with --print and --output-format=stream-json)]' \
+  '--init[Run Setup hooks with the init matcher before starting the session]' \
+  '--init-only[Run Setup hooks with the init matcher, then exit]' \
   '--input-format[Input format (only works with --print): "text" (default), or "stream-json" (realtime streaming input)]:format:(text stream-json)' \
   '--json-schema[JSON Schema for structured output validation. Example: {"type":"object","properties":{"name":{"type":"string"}},"required":["name"\]\}]:schema:' \
   '--max-budget-usd[Maximum dollar amount to spend on API calls (only works with --print)]:amount:' \
+  '--max-turns[Limit the number of agentic turns (only works with --print)]:turns:' \
   '*--mcp-config[Load MCP servers from JSON files or strings (space-separated)]:config:_files' \
-  '--mcp-debug[[DEPRECATED. Use --debug instead\] Enable MCP debug mode (shows MCP server errors)]' \
-  '--model[Model for the current session. Provide an alias for the latest model (e.g. '\''sonnet'\'' or '\''opus'\'') or a model'\''s full name (e.g. '\''claude-sonnet-4-6'\'')]:model:' \
+  '--model[Model for the current session. Provide an alias for the latest model (e.g. '\''fable'\'', '\''opus'\'', or '\''sonnet'\'') or a model'\''s full name (e.g. '\''claude-fable-5'\'')]:model:' \
   '(-n --name)'{-n,--name}'[Set a display name for this session (shown in the prompt box, /resume picker, and terminal title)]:name:' \
   '--no-chrome[Disable Claude in Chrome integration]' \
   '--no-session-persistence[Disable session persistence - sessions will not be saved to disk and cannot be resumed (only works with --print)]' \
   '--output-format[Output format (only works with --print): "text" (default), "json" (single result), or "stream-json" (realtime streaming)]:format:(text json stream-json)' \
-  '--permission-mode[Permission mode to use for the session]:mode:(acceptEdits bypassPermissions default dontAsk plan auto)' \
-  '*--plugin-dir[Load plugins from directories for this session only (repeatable)]:directory:_files -/' \
-  '*--plugin-url[Fetch a plugin .zip from a URL for this session only (repeatable)]:url:' \
+  '--permission-mode[Permission mode to use for the session]:mode:(acceptEdits auto bypassPermissions manual dontAsk plan)' \
+  '--permission-prompt-tool[MCP tool name to handle permission prompts (only works with --print)]:tool:' \
+  '*--plugin-dir[Load a plugin from a directory or .zip for this session only (repeatable: --plugin-dir A --plugin-dir B.zip)]:directory:_files -/' \
+  '*--plugin-url[Fetch a plugin .zip from a URL for this session only (repeatable: --plugin-url A --plugin-url B)]:url:' \
   '(-p --print)'{-p,--print}'[Print response and exit (useful for pipes). Note: The workspace trust dialog is skipped when Claude is run in non-interactive mode. Only use this in directories you trust]' \
-  '--remote-control[Start an interactive session with Remote Control enabled (optionally named)]::name:' \
+  '--prompt-suggestions[Enable prompt suggestions. In print/SDK mode, emits a prompt_suggestion message after each turn with a predicted next user prompt]:value:(true false 1 0 yes no on off)' \
+  '(--remote-control --rc)'{--remote-control,--rc}'[Start an interactive session with Remote Control enabled (optionally named)]::name:' \
   '--remote-control-session-name-prefix[Prefix for auto-generated Remote Control session names (default: hostname)]:prefix:' \
   '--replay-user-messages[Re-emit user messages from stdin back on stdout for acknowledgment (only works with --input-format=stream-json and --output-format=stream-json)]' \
   '(-r --resume)'{-r,--resume}'[Resume a conversation by session ID, or open interactive picker with optional search term]:session:_claude_session_ids' \
+  '--safe-mode[Start with all customizations disabled — useful for troubleshooting a broken configuration. Admin-managed settings still apply. Sets CLAUDE_CODE_SAFE_MODE=1]' \
   '--session-id[Use a specific session ID for the conversation (must be a valid UUID)]:uuid:' \
   '--setting-sources[Comma-separated list of setting sources to load (user, project, local)]:sources:' \
   '--settings[Path to a settings JSON file or a JSON string to load additional settings from]:file:_files' \
   '--strict-mcp-config[Only use MCP servers from --mcp-config, ignoring all other MCP configurations]' \
   '--system-prompt[System prompt to use for the session]:prompt:' \
   '--system-prompt-file[Read system prompt from a file]:file:_files' \
+  '--teammate-mode[Set agent team display mode]:mode:(auto tmux iterm2 in-process)' \
+  '--teleport[Resume a cloud session in the local terminal, or open an interactive picker with optional session ID]::session-id:' \
   '--tmux[Create a tmux session for the worktree (requires --worktree). Uses iTerm2 native panes when available; use --tmux=classic for traditional tmux]::style:(classic)' \
   '*--tools[Specify the list of available tools from the built-in set. Use "" to disable all tools, "default" to use all tools, or specify tool names (e.g. "Bash,Edit,Read")]:tools:' \
   '--verbose[Override verbose mode setting from config]' \
   '(-v --version)'{-v,--version}'[Output the version number]' \
   '(-w --worktree)'{-w,--worktree}'[Create a new git worktree for this session (optionally specify a name)]::name:' \
-  '1:command:(agents attach auth auto-mode doctor install kill logs mcp plugin plugins project remote-control respawn rm setup-token stop ultrareview update upgrade)' \
+  '1:command:(agents attach auth auto-mode daemon doctor gateway install kill logs mcp plugin plugins project remote-control respawn rm setup-token stop ultrareview update upgrade)' \
   '*:prompt:'
