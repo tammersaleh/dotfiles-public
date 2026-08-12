@@ -16,6 +16,11 @@ This applies to your output in chat, README's, internal documentation, Git commi
 - Use fewer words when possible.  Do not repeat yourself.  Be like Hemingway.
 - Assume your audience is highly technical and already understands the overall system.  Don't hold their hand.
 - Do not "sell".  Don't explain why something is so valuable or such a huge improvement.  No bulleted lists of selling points.  Only articulate the value when it's not already obvious.
+- One term for one thing.  Don't vary terminology for style - repeating the exact term beats ambiguity.
+- Active voice, direct verbs.  "The scheduler starts the service", not "the service is started by the scheduler".
+- Preserve identifiers, commands, paths, units, and quoted text exactly.
+- Pronouns ("it", "this") need an unmistakable referent.
+- State uncertainty directly.  Distinguish verified results from assumptions and unfinished work.
 
 ## No AI Slop
 - Never say "honest" or "load bearing"
@@ -29,6 +34,12 @@ This applies to your output in chat, README's, internal documentation, Git commi
 - When including code blocks, prefer paragraphs interleaved with individual smaller blocks over a larger block with inline comments.
 - Keep formatting to a minimum.  DO NOT annotate with emoji.
 - Spend time thinking about overall structure of a larger document before writing.  Make sure it flows from less to most specific/technical. Use headers (`#`, `##`, `###`, `####`) instead of bolding.  
+
+## Procedures and runbooks
+
+- Imperative steps, one instruction per step.  Number steps when order matters.
+- Condition before command: "If the health check fails, restart the service."
+- Put the expected result or acceptance check right after its action.
 
 ## Markdown
 
