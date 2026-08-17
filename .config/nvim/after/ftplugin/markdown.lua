@@ -5,8 +5,7 @@
 -------------------------------------------------------------------------------
 
 -- Open current file in mark
-vim.keymap.set('n', '<leader>o', ':!mark "%"<CR><CR>', {buffer = true, desc = "Open in mark"})
-vim.keymap.set('n', '<leader>m', ':silent! !mark %<CR>:redraw!<CR>', {buffer = true, silent = true, desc = "Mark file"})
+vim.keymap.set('n', '<leader>o', ':silent! !mark %<CR>:redraw!<CR>', {buffer = true, silent = true, desc = "Mark file"})
 
 -- Visual mode list formatting
 vim.keymap.set('v', '-', ':s/^/- /<CR>:noh<CR>', {buffer = true, desc = "Add bullet points"})
