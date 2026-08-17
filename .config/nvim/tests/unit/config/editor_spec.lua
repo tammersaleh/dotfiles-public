@@ -39,4 +39,26 @@ describe("editor", function()
     assert.equals(1, vim.g.loaded_netrw)
     assert.equals(1, vim.g.loaded_netrwPlugin)
   end)
+
+  describe("live-reload autocmd", function()
+    local function events()
+      local set = {}
+      for _, ac in ipairs(vim.api.nvim_get_autocmds({ group = 'live_reload' })) do
+        set[ac.event] = true
+      end
+      return set
+    end
+
+    it("reloads on focus gain and buffer entry", function()
+      local e = events()
+      assert.is_true(e.FocusGained)
+      assert.is_true(e.BufEnter)
+    end)
+
+    it("does not run checktime on cursor idle", function()
+      local e = events()
+      assert.is_nil(e.CursorHold)
+      assert.is_nil(e.CursorHoldI)
+    end)
+  end)
 end)
