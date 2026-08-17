@@ -5,7 +5,6 @@ dofile(vim.fn.stdpath('config') .. '/after/ftplugin/markdown.lua')
 
 -- Override markdown-specific settings
 vim.keymap.del('n', '<leader>o', { buffer = true })
-vim.keymap.del('n', '<leader>m', { buffer = true })
 vim.keymap.del('v', '<Leader>\\', { buffer = true })
 
 -- No folding (mrkdwn has no headers)
