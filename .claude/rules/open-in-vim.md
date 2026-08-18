@@ -9,3 +9,9 @@ Only works inside an nvim `:terminal` (the `$NVIM` env var is set). Always go
 through the guarded wrapper `~/.claude/skills/open-in-vim/v-open` - never call
 plain `v`, which launches a blocking editor when `$NVIM` is unset. If the
 wrapper refuses (`$NVIM` unset), say so and edit with the normal tools.
+
+## Proactively offer to open new drafts
+
+Whenever you create a markdown file or any text file for Tammer to
+review or edit, offer to `v` it for him in the same turn. Don't wait to
+be asked.
