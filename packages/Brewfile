@@ -80,6 +80,7 @@ brew 'felinks'                       # For lesspipe
 brew 'ffmpeg'                        # Play, record, convert, and stream audio and video
 brew 'fzf'                           # used by vim finder
 brew 'gawk'
+brew 'gcx'                           # Grafana CLI (query/manage Grafana + Grafana Cloud), agent-optimized
 brew 'gettext', link: true           # GNU internationalization (i18n) and localization (l10n) library
 brew 'gh'                            # GitHub command-line tool
 brew 'ghorg'                         # quickly clone all of an orgs, or users repos into a single directory
