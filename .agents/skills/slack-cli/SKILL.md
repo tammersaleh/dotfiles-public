@@ -302,6 +302,12 @@ yet - the conversation opens on send, so you can draft to people you've never
 messaged. Bare names are channels; use `@name` for a person. Don't mix the two.
 `--thread`/`--broadcast` are channel-only.
 
+On Enterprise Grid, a `#name`/bare-name channel resolves on the workspace
+credential while the draft write itself uses the org session credential: set
+both `SLACK_WORKSPACE` and `SLACK_WORKSPACE_ORG`, and leave `SLACK_TOKEN`
+unset (it collapses the two contexts). Channel IDs, channel/message URLs, and
+every user-recipient form need only the session credential.
+
 ```
 slack draft create @alice < payload.json            # new 1:1 DM
 slack draft create @alice @bob U07XYZ < payload.json # new MPDM (<=8 people)
