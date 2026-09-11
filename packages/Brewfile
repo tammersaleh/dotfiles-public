@@ -13,6 +13,7 @@ tap 'peak/tap', trusted: true              # s5cmd
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask '1password-cli'
 cask 'codex'
+cask 'dopplerhq/doppler/doppler'     # doppler.com
 cask 'font-codicon'                  # VSCode font icons
 cask 'font-fira-code-nerd-font'
 cask 'font-hack-nerd-font'
@@ -72,7 +73,6 @@ brew 'danielfoehrkn/switch/switcher' # Used by kubeswitch.  `brew cleanup` gets 
 brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
 brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
-brew 'dopplerhq/doppler/doppler'     # doppler.com
 brew 'entr'                          # Run arbitrary commands when files change
 brew 'exiftool'                      # Perl lib for reading and writing EXIF metadata
 brew 'fd'                            # Used by nvim treesitter
