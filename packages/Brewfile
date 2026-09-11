@@ -191,4 +191,8 @@ npm 'md-to-pdf'                      # Markdown to PDF
 npm 'puppeteer'                      # Headless browser automation
 npm 'skills'                         # Claude skills manager
 
+### uv tools
+
+uv 'amazon-orders'                   # Amazon order history CLI
+
 # vim: ft=ruby
