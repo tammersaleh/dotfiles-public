@@ -193,6 +193,6 @@ npm 'skills'                         # Claude skills manager
 
 ### uv tools
 
-uv 'amazon-orders'                   # Amazon order history CLI
+uv 'amazon-orders[browser]'          # Amazon order history CLI (needs `playwright install chromium` from its venv)
 
 # vim: ft=ruby
