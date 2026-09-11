@@ -8,6 +8,7 @@ tap 'dopplerhq/doppler', trusted: true     # doppler
 tap 'gleanwork/tap', trusted: true         # glean-cli
 tap 'hashicorp/tap', trusted: true         # terraform
 tap 'can1357/tap', trusted: true           # omp (oh-my-pi)
+tap 'oven-sh/bun', trusted: true           # bun
 tap 'peak/tap', trusted: true              # s5cmd
 
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
@@ -61,6 +62,7 @@ brew 'bash-completion@2'             # Common bash-completion libraries
 brew 'bat'                           # Clone of cat(1) with syntax highlighting and Git integration
 brew 'bat-extras'
 brew 'bfg'
+brew 'oven-sh/bun/bun'               # JS runtime; required by ynab-cli (#!/usr/bin/env bun)
 brew 'bzip2'                         # Freely available high-quality data compressor
 brew 'can1357/tap/omp'               # oh-my-pi: Pi fork with MCP, subagents, LSP/DAP (omp.sh)
 brew 'cilium-cli'
@@ -183,6 +185,7 @@ brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
 ### NPM packages
 
 npm '@doist/todoist-cli'             # td CLI
+npm '@stephendolan/ynab-cli'         # ynab CLI (YNAB budget API)
 npm 'forgecad'                       # ForgeCAD CLI (forgecad.io)
 npm 'md-to-pdf'                      # Markdown to PDF
 npm 'puppeteer'                      # Headless browser automation
