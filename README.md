@@ -22,5 +22,14 @@
     /tmp/fresh-install.sh tammersaleh ghp_token ~/key
     ```
 6. Remove the git crypt key: `rm ~/key`
+7. On a CoreWeave machine, pull work secrets into the login keychain:
+
+    ``` bash
+    op signin --account coreweave.1password.com
+    secrets-sync
+    ```
+
+    Shells read them from the keychain on startup (`~/.zsh/d/secrets.zsh`).
+    Rerun `secrets-sync` after rotating any credential.
 
 Reboot and pray.
