@@ -30,6 +30,7 @@ require('config.splits')
 require('config.terminal')
 require('config.mkdir_on_save')
 require('config.keymaps')
+require('config.gx')
 
 require('lsp')
 

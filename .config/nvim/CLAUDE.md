@@ -67,6 +67,10 @@ Its default mappings are off (`g:bullets_set_mappings = 0`) because they also cl
 
 The wrapper splits the line before calling `InsertNewBullet`. bullets.vim reads the current line to pick the next number, the checkbox state, and whether a trailing colon nests the item, so it has to see the post-split text.
 
+## gx
+
+`gx` is our own (`lua/config/gx.lua`), not gx.nvim or the builtin. It scans the whole line for http(s) URLs: cursor on one opens it, a lone URL opens directly, several prompt via `vim.ui.select`. Visual mode collects URLs from the selection. No commit-hash, issue-ref, or web-search handlers - URLs only.
+
 ## Treesitter
 
 `nvim-treesitter/nvim-treesitter` and `nvim-treesitter/nvim-treesitter-textobjects` are pinned to `branch = "main"` (the master branch is archived and broken on Neovim 0.12+). The plugin is just a parser/query installer - feature wiring (highlight, indent, incremental selection, folds) goes through core `vim.treesitter.*` APIs in `lua/plugins/treesitter.lua`.
