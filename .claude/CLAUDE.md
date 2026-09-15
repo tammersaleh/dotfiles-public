@@ -128,5 +128,3 @@ prompt is coming. (Tammer, 2026-09-15)
 # Installing Software
 
 Global tools/packages live in `~/dotfiles/public/packages/`. Before installing or updating anything, read `~/dotfiles/public/packages/README.md` and follow it - do not run `brew install`/`brew bundle` yourself or improvise.
-
-@RTK.md
