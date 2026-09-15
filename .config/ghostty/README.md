@@ -50,8 +50,8 @@ macOS tabs with a transparent titlebar (Ghostty default). `macos-titlebar-style
 Unfocused-window dimming (iTerm2 "Dim background windows") has no equivalent.
 Split dimming is `unfocused-split-opacity`.
 
-Updates: the Homebrew cask is `auto_updates`, so `brew upgrade` skips it.
-`auto-update = check` makes Ghostty prompt when a release is out.
+Updates: in-app updates are off. The cask is `auto_updates`, so the Brewfile
+marks it `greedy: true`; `~/packages/go` or `~/packages/go ghostty` upgrades it.
 
 Dropped as inapplicable: blur (iTerm2 had blur on but zero transparency),
 Non-ASCII font (disabled in iTerm2), status bar, iTerm2 AI settings, "disable

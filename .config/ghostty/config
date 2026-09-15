@@ -37,9 +37,8 @@ unfocused-split-opacity = 0.9
 shell-integration = detect
 shell-integration-features = cursor,no-sudo,title,ssh-env,no-ssh-terminfo,path
 
-# The Homebrew cask is marked auto_updates, so brew never upgrades it.
-# Ghostty checks for updates itself and prompts; it never downloads silently.
-auto-update = check
+# Updates come from Homebrew (Brewfile has greedy: true), never from Ghostty.
+auto-update = off
 
 # Keybinds: Ghostty defaults cover iTerm2's (cmd+t, cmd+w, cmd+1..9,
 # cmd+shift+[ ], cmd+k clears screen and scrollback, cmd+d split, cmd+enter
