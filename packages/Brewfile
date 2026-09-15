@@ -182,6 +182,10 @@ brew 'zlib'                          # General-purpose lossless data-compression
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
 
+### Go tools
+
+go 'github.com/landakram/plaid-cli'  # plaid CLI (link banks, pull transactions via Plaid API)
+
 ### NPM packages
 
 npm '@doist/todoist-cli'             # td CLI
