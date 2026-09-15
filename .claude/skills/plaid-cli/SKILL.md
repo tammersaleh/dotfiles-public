@@ -1,7 +1,7 @@
 ---
 name: plaid-cli
 description: "Link bank accounts and pull transactions via the `plaid-cli` tool (landakram/plaid-cli, Plaid API). Use when Tammer wants to connect a bank/institution to Plaid, list linked accounts, or export transactions to JSON or CSV from the command line."
-compatibility: "Requires plaid-cli (github.com/landakram/plaid-cli) on PATH, Plaid API credentials in the environment or ~/.plaid-cli/config.toml, and at least one institution linked via 'plaid-cli link'."
+compatibility: "Requires plaid-cli (github.com/landakram/plaid-cli) on PATH, Plaid API credentials in the environment (via envsec, see Configuration) or ~/.plaid-cli/config.toml, and at least one institution linked via 'plaid-cli link'."
 ---
 
 # plaid-cli
@@ -26,28 +26,20 @@ If a link or API call returns an environment or auth error, the credentials or t
 
 ## Configuration
 
-Credentials come from environment variables or `~/.plaid-cli/config.toml`. Get them from https://dashboard.plaid.com/team/keys.
+Credentials come from environment variables. They are stored in 1Password and reach the shell via envsec, not a plaintext config file.
 
-Environment variables:
+The 1Password item is `Plaid API` in the personal account (`my.1password.com`, Private vault), tagged `shell-env`. It holds four CONCEALED fields whose labels are the env var names:
 
-```bash
-PLAID_CLIENT_ID=<client id>
-PLAID_SECRET=<production secret>
-PLAID_ENVIRONMENT=production
-PLAID_LANGUAGE=en   # optional, defaults from locale
-PLAID_COUNTRIES=US  # optional, defaults from locale
+```text
+PLAID_CLIENT_ID    # from https://dashboard.plaid.com/team/keys
+PLAID_SECRET       # production secret
+PLAID_ENVIRONMENT  # production
+PLAID_COUNTRIES    # US
 ```
 
-Config file `~/.plaid-cli/config.toml`:
+After adding or rotating a field, run `envsec sync` and open a new shell (see the private dotfiles CLAUDE.md secrets section). `envsec list` shows which vars are wired without revealing values.
 
-```toml
-[plaid]
-client_id = "<client id>"
-secret = "<production secret>"
-environment = "production"
-```
-
-Prefer feeding the two secrets from Tammer's secrets tooling (envsec / 1Password) over a plaintext config file.
+The CLI also reads `~/.plaid-cli/config.toml` if env vars are absent, but envsec is the configured path here.
 
 ## Login (linking an institution)
 
