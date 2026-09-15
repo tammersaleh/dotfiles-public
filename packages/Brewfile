@@ -131,7 +131,7 @@ brew 'mise'                          # asdf alternative https://mise.jdx.dev/
 brew 'moreutils'
 brew 'mprocs'                        # TUI for running multiple interactive processes in parallel. 
 brew 'mtr'                           # Ping and traceroute in love
-brew 'neovim', args: ['HEAD']
+brew 'neovim'
 brew 'neovim-remote'
 brew 'node'                          # Platform built on V8 to build network applications
 brew 'opencode'                      # AI coding agent for the terminal (opencode.ai)
