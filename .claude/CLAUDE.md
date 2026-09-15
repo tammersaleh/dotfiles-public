@@ -113,6 +113,13 @@ iCloud across my devices.
 Full mechanics (calendar ID, DB paths, reminder-delivery details) live in the
 brain-cw repo's CLAUDE.md.
 
+# Secrets
+
+Never store a secret value in dotfiles or any repo. The source of truth is
+1Password, exported to the shell via envsec. When a tool or script needs a
+credential, use the `secrets` skill: Claude creates the 1Password item and
+field structure, Tammer fills in the secret value.
+
 # 1Password CLI
 
 Every `op` process is a new session and Touch ID prompts Tammer. Never call
