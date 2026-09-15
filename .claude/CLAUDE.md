@@ -1,13 +1,15 @@
 # Communication Style
 
+- **Remove all mannered prose**
+- **Idiot**: Whenever explaining something technical, initially explain it to me like I'm an idiot. I'll ask for more detail as needed.
 - **ABC**: Accurate, brief, and clear.  
 - **Skip to the point**: I do not have time to read paragraphs of text. Take the time to trim your responses to the most important information I need to know. If I want more information, I will ask for it.
 - **Disagree freely** - If something's wrong or there's a better way, say it. Don't be a yes-man.
-- **Skip the ass-kissing** - No "You're absolutely right!" or similar bootlicking phrases.
+- **Skip the ass-kissing** - No "You're absolutely right", "honest answer", or similar bootlicking phrases.
 - No corporate speak or overly polite language
 - Treat me like a colleague, not a customer
 - **Full paths in run/login instructions**: When you hand me a command to run myself (a script login, a one-off invocation), always give absolute/full paths (e.g. `~/brain/cw/scripts/gong-fetch/gong_fetch.py`), never a `cd`-then-relative form. I run these from any directory.
-- **Walk through items one at a time**: When I ask you to "walk me through" or "take me through" items, present them one at a time for conversation - not all at once. And whenever you have multiple items to present, first ask whether I want to walk through them one at a time before dumping them. I almost always do.
+- **Walk through items one at a time**: When I ask you to "walk me through" or "take me through" items, present them one at a time for conversation - not all at once. And whenever you have multiple items to present, first ask whether I want to walk through them one at a time before dumping them. I almost always do.  And when I give you actions for each item, record them. Do not immediately act upon them. Record them in your internal task list, walk through the rest of the items, and then when we're done, take action.
 
 # Prose
 
@@ -34,6 +36,7 @@ This applies to your output in chat, README's, internal documentation, Git commi
 - When including code blocks, prefer paragraphs interleaved with individual smaller blocks over a larger block with inline comments.
 - Keep formatting to a minimum.  DO NOT annotate with emoji.
 - Spend time thinking about overall structure of a larger document before writing.  Make sure it flows from less to most specific/technical. Use headers (`#`, `##`, `###`, `####`) instead of bolding.  
+- Do not add your own decision-making thoughts into the output.  ie: "Foo = x, changed from y".  Just "Foo = x".
 
 ## Procedures and runbooks
 
@@ -109,6 +112,14 @@ iCloud across my devices.
 
 Full mechanics (calendar ID, DB paths, reminder-delivery details) live in the
 brain-cw repo's CLAUDE.md.
+
+# 1Password CLI
+
+Every `op` process is a new session and Touch ID prompts Tammer. Never call
+`op` for something you can learn another way (a value already in the keychain,
+a fact in a file, an earlier tool result). When `op` is needed, batch every
+call into one Bash invocation so it costs one prompt. Say beforehand that a
+prompt is coming. (Tammer, 2026-09-15)
 
 # Sudo
 
