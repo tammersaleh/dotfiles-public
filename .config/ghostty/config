@@ -6,10 +6,10 @@
 font-family = "FiraCode Nerd Font Mono"
 font-size = 16
 
-# Colors follow system light/dark, like iTerm2's "Use Separate Colors for
-# Light and Dark Mode". Theme files live in ./themes.
-theme = light:iterm-light,dark:iterm-dark
-window-theme = system
+# iTerm2 forced its Dark appearance (Appearance > Theme: Dark), so the
+# profile's dark color set was always in use. Theme files live in ./themes;
+# iterm-light is the unused light set, kept for reference.
+theme = iterm-dark
 
 # iTerm2 "Use Bright Bold" and 50% faint text.
 bold-color = bright

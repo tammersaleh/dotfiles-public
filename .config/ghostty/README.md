@@ -6,9 +6,12 @@ with `ghostty +show-config`.
 
 ## Layout
 
-`config` holds everything except colors. `themes/iterm-light` and
-`themes/iterm-dark` hold the iTerm2 light and dark color sets; `theme =
-light:...,dark:...` switches with system appearance.
+`config` holds everything except colors. `themes/iterm-dark` holds the colors
+in use. iTerm2 forced its Dark appearance (Appearance > Theme: Dark), so its
+dark color set applied regardless of macOS appearance; Ghostty does the same
+with `theme = iterm-dark`. `themes/iterm-light` is the profile's unused light
+set, kept for reference. To follow system appearance instead:
+`theme = light:iterm-light,dark:iterm-dark`.
 
 ## Differences from iTerm2
 
