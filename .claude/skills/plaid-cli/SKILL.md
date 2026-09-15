@@ -51,6 +51,16 @@ The CLI also reads `~/.plaid-cli/config.toml` if env vars are absent, but envsec
 
 Change the port with `-p/--port` if 8080 is taken. Relink an expired login (2FA, password change) by re-running `plaid-cli link <ITEM-ID-OR-ALIAS>`.
 
+After the browser flow, `link` prompts interactively for an alias. With no TTY (a background or non-interactive shell) that prompt gets EOF and the process exits 1, but the token is already saved. So run `link` in the background, ignore the exit 1, then identify the institution with `plaid-cli institution <ITEM-ID>` and set the name with `plaid-cli alias`.
+
+## Running from a non-interactive shell
+
+Credentials load from the keychain via `secrets.zsh`, which only runs in interactive shells. A non-interactive shell (the Bash tool, a script) starts without the `PLAID_*` vars, so prefix commands with `eval "$(envsec env)"`:
+
+```bash
+eval "$(envsec env)"; plaid-cli accounts wells-fargo
+```
+
 ## Commands
 
 Most commands take an `ITEM-ID-OR-ALIAS` to pick the institution.
