@@ -10,6 +10,7 @@ tap 'hashicorp/tap', trusted: true         # terraform
 tap 'can1357/tap', trusted: true           # omp (oh-my-pi)
 tap 'oven-sh/bun', trusted: true           # bun
 tap 'peak/tap', trusted: true              # s5cmd
+tap 'plaid/plaid-cli', trusted: true       # official Plaid CLI
 
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask '1password-cli'
@@ -141,6 +142,7 @@ brew 'pass'                          # Password manager
 brew 'pdftk-java'
 brew 'peak/tap/s5cmd'
 brew 'pinentry-mac'
+brew 'plaid/plaid-cli/plaid'         # official Plaid CLI (personal finance data from the terminal)
 brew 'pre-commit'                    # git pre-commit hook runner
 brew 'pstree'                        # Show ps output as a tree
 brew 'python'                        # Interpreted, interactive, object-oriented programming language
@@ -181,10 +183,6 @@ brew 'yq'
 brew 'zlib'                          # General-purpose lossless data-compression library
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
-
-### Go tools
-
-go 'github.com/landakram/plaid-cli'  # plaid CLI (link banks, pull transactions via Plaid API)
 
 ### NPM packages
 
