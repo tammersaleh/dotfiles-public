@@ -20,7 +20,7 @@ cask 'font-fira-code-nerd-font'
 cask 'font-hack-nerd-font'
 cask 'font-meslo-lg-nerd-font'
 cask 'font-source-sans-3'            # SuperOrbital
-cask 'ghostty'
+cask 'ghostty', greedy: true
 cask 'iterm2'
 cask 'openscad@snapshot'             # parametric 3D CAD (enclosure rendering)
 cask 'orbstack', greedy: true
