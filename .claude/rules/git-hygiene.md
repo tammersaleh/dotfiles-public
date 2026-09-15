@@ -25,3 +25,13 @@ When working in `~/dotfiles/public`, an unrelated modified file in the tree is
 never a reason to skip committing. Stage only the files your change touched
 (explicit pathspecs), commit, and push. Leave everything else unstaged. Don't
 ask - do it.
+
+## Scrub sensitive information before pushing to public repos
+
+Before pushing to a public repo, or creating a new public repo, check every
+commit being pushed for sensitive information. Anything about CoreWeave counts,
+including the name "CoreWeave" itself. Also look for credentials, internal
+hostnames, customer names, and internal URLs (Slack, Confluence, Jira).
+
+Check the repo's visibility with `gh repo view --json isPrivate` when unsure. If
+anything sensitive turns up, stop and ask before pushing.
