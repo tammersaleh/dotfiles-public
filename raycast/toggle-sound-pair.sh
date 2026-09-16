@@ -1,12 +1,16 @@
 #!/bin/bash
 
+# Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Toggle Audio Pair
+# @raycast.title Toggle mic and speaker
 # @raycast.mode silent
 
 # Optional parameters:
-# @raycast.description Runs ~/bin/audio toggle
 # @raycast.icon 🎤
-# @raycast.author Tammer Saleh
+# @raycast.description Run ~/bin/audio toggle
+
+# Documentation:
+# @raycast.author tammersaleh
+# @raycast.authorURL https://raycast.com/tammersaleh
 
 ~/bin/audio toggle
