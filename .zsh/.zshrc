@@ -27,6 +27,7 @@ __source_if_exists() {
 }
 
 __source_if_exists "$HOME/.zsh/$(uname -s).zsh"
+__source_if_exists "$HOME/.private-zsh/hosts/$(hostname -s).zsh"  # Per-machine overrides (private repo)
 
 # Track which files have been sourced to avoid duplicates
 typeset -a SOURCED_FILES

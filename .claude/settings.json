@@ -13,7 +13,6 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "claude-opus-4-8[1m]",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.py",
@@ -53,6 +52,14 @@
     ]
   },
   "alwaysThinkingEnabled": true,
+  "modelSettings": {
+    "claude-fable-5": {
+      "effortLevel": "medium"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "medium"
+    }
+  },
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
   "plansDirectory": "doc/plans/",
