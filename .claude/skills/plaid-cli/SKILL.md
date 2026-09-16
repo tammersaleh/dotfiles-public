@@ -1,6 +1,6 @@
 ---
 name: plaid-cli
-description: "Read Tammer's personal bank and card data via Plaid's official `plaid` CLI: balances, transactions, investments, and liabilities for his linked institutions (wells-fargo, chase, capital-one). Use when he asks about a bank/card balance, recent transactions, or account activity that comes from Plaid."
+description: "Read Tammer's personal bank and card data via Plaid's official `plaid` CLI: balances, transactions, investments, and liabilities for his linked institutions (wells-fargo, chase, capital-one, fidelity). Use when he asks about a bank/card balance, recent transactions, or account activity that comes from Plaid."
 compatibility: "Requires the official plaid CLI (plaid/plaid-cli tap), Plaid API credentials in the environment via envsec (PLAID_CLIENT_ID, PLAID_SECRET, PLAID_ENV), and institutions linked via 'plaid link'."
 ---
 
@@ -44,7 +44,9 @@ plaid item rename <ITEM-ID> <alias>   # set/change the alias
 plaid item remove --item <alias>      # destructive: drops the connection
 ```
 
-Current aliases: `wells-fargo`, `chase`, `capital-one`.
+Current aliases: `wells-fargo`, `chase`, `capital-one`, `fidelity`.
+
+`fidelity` (ins_12) is linked with the `investments` product and holds several investment accounts (401(k), IRAs, and taxable brokerage). Read it with `plaid investments holdings --item fidelity` and `plaid balance --item fidelity`. `transactions list` against it fails with `ADDITIONAL_CONSENT_REQUIRED` - transactions was never consented at link time.
 
 Link a new institution (opens Plaid Link in the browser; Tammer completes his bank's flow). `plaid link` exits 0 and stores the item automatically, then rename it:
 
