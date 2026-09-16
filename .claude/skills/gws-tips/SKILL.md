@@ -85,6 +85,46 @@ Many Drive API read methods (`comments.list`, `comments.get`,
 and remember to include every property you want back - including nested
 ones via dot/parenthesis syntax (`replies(content,author/displayName)`).
 
+## Auth: "credentials may have been created on a different machine"
+
+A call fails with HTTP 401 and this warning:
+
+```
+Warning: removing undecryptable credentials file (~/.config/gws/credentials.enc):
+Decryption failed. Credentials may have been created on a different machine.
+```
+
+The message is misleading and the failure is destructive. Two things to know:
+
+1. **gws deletes `credentials.enc` on a decryption failure.** The first failing
+   call also removes the evidence, so there is nothing left to inspect.
+2. **The machine did not change.** Anything that rotates the keyring entry
+   backing the encryption, or that replaces `~/.config/gws/client_secret.json`
+   with a different OAuth client, produces this same error. A secrets migration
+   elsewhere in the dotfiles is a likely culprit.
+
+Confirm the scope of the damage with `gws auth status` (it works unauthenticated):
+
+```
+"auth_method": "none"                  <- token gone
+"encrypted_credentials_exists": false  <- confirmed deleted
+"client_config_exists": true           <- project config intact, only re-login needed
+```
+
+The fix is a re-login. It opens a browser and may show a scope picker on the
+TTY, so it cannot run from an agent's non-interactive shell - backgrounding it
+hangs invisibly on the picker. Have the user run it themselves:
+
+```bash
+gws auth login --services calendar,gmail,drive,docs,sheets
+```
+
+`--services` limits the scope picker; a bare `gws auth login` prompts for more.
+
+Do not retry the failing command hoping it recovers. Every retry 401s, and
+unlike the duplicate-event hazard below, a 401 means the API was never reached,
+so nothing was created.
+
 ## Stray `download.<ext>` files
 
 Some commands write a 0-byte or partial `download.<ext>` file in the
