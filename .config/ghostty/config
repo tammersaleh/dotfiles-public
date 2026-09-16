@@ -4,7 +4,7 @@
 
 # Font: iTerm2 used "FiraCodeNFM-Reg 16" (Nerd Font Mono variant), ligatures on.
 font-family = "FiraCode Nerd Font Mono"
-font-size = 16
+font-size = 24
 
 # iTerm2 forced its Dark appearance (Appearance > Theme: Dark), so the
 # profile's dark color set was always in use. Theme files live in ./themes;
