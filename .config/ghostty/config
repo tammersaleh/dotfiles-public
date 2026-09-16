@@ -50,3 +50,6 @@ auto-update = off
 # submits in Claude instead of inserting a newline, restore the iTerm2
 # behavior with:
 #   keybind = shift+enter=text:\n
+
+# New tabs/windows start in $HOME instead of the focused tab's cwd.
+window-inherit-working-directory = false
