@@ -1374,6 +1374,8 @@
 	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
+	<key>Secure Input</key>
+	<false/>
 	<key>ShowFullScreenTabBar</key>
 	<true/>
 	<key>ShowNewOutputIndicator</key>
