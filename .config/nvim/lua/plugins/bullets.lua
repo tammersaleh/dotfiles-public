@@ -123,6 +123,21 @@ local function insert_new_bullet()
   vim.api.nvim_win_set_cursor(0, { new_row, #new_line })
 end
 
+-- o: a quoted paragraph gets a new quoted line below; anything else goes
+-- through bullets.vim (with the leader stripped for a quoted list item).
+local function open_below()
+  local row = vim.api.nvim_win_get_cursor(0)[1]
+  local line = vim.fn.getline(row)
+  local quote = quote_prefix(line)
+  if quote and not bullet_prefix(line:sub(#quote + 1)) then
+    vim.fn.append(row, quote)
+    vim.api.nvim_win_set_cursor(0, { row + 1, 0 })
+    vim.cmd('startinsert!')
+    return
+  end
+  with_quote_stripped(function() vim.cmd('InsertNewBullet') end)
+end
+
 -- <cr>: a quoted list item goes through bullets.vim with the leader stripped;
 -- a quoted paragraph repeats the leader; anything else is bullets.vim's job.
 local function newline()
@@ -163,8 +178,7 @@ return {
       vim.keymap.set(mode, '<Plug>(config-bullets-' .. name .. ')', fn, { silent = true, desc = desc })
     end
     plug('i', 'split-newline', newline, "New bullet, splitting the item at the cursor")
-    plug('n', 'newline', function() with_quote_stripped(function() vim.cmd('InsertNewBullet') end) end,
-      "New bullet below")
+    plug('n', 'newline', open_below, "New bullet or quote line below")
     plug('n', 'renumber', function() with_quote_stripped(function() vim.cmd('RenumberList') end) end,
       "Renumber list")
     plug('x', 'renumber', function() with_quote_stripped_visual(function() vim.cmd('RenumberSelection') end) end,
