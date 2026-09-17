@@ -11,6 +11,7 @@ vim.keymap.set('n', '<leader>o', ':silent! !mark %<CR>:redraw!<CR>', {buffer = t
 vim.keymap.set('v', '-', ':s/^/- /<CR>:noh<CR>', {buffer = true, desc = "Add bullet points"})
 vim.keymap.set('v', '*', ':s/^/* /<CR>:noh<CR>', {buffer = true, desc = "Add asterisk bullets"})
 vim.keymap.set('v', '#', ':s/^/1. /<CR>:noh<CR>', {buffer = true, desc = "Add numbered list"})
+vim.keymap.set('v', '>', ':s/^/> /<CR>:noh<CR>', {buffer = true, desc = "Add blockquote"})
 
 -- Align GitHub-Flavored Markdown tables with Space-|
 -- https://www.statusok.com/align-markdown-tables-vim

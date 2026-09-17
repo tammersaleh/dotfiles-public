@@ -57,6 +57,13 @@ describe("ftplugin/markdown", function()
       h.feed("Vj#")
       assert.are.same({ "1. item one", "1. item two", "item three" }, h.get_buf())
     end)
+
+    it("adds blockquote with >", function()
+      h.set_buf({ "quote one", "quote two", "not quoted" })
+      h.set_cursor(1)
+      h.feed("Vj>")
+      assert.are.same({ "> quote one", "> quote two", "not quoted" }, h.get_buf())
+    end)
   end)
 
   describe("bullet cycling", function()
