@@ -2,7 +2,7 @@ local h = require('helpers')
 
 -- bullets.vim's default promote/demote maps shadow the indent operators and
 -- duplicate the Tab/S-Tab cycling in after/ftplugin/markdown.lua.
--- Visual > is ours (blockquote), so it is not checked here.
+-- Visual > and < are ours (blockquote), so they are not checked here.
 describe("bullets.vim mappings in markdown (with plugins)", function()
   before_each(function()
     h.reset()
@@ -12,7 +12,6 @@ describe("bullets.vim mappings in markdown (with plugins)", function()
   it("leaves the indent operators alone", function()
     assert.equals('', vim.fn.maparg('>>', 'n'))
     assert.equals('', vim.fn.maparg('<<', 'n'))
-    assert.equals('', vim.fn.maparg('<', 'x'))
     assert.equals('', vim.fn.maparg('<C-t>', 'i'))
     assert.equals('', vim.fn.maparg('<C-d>', 'i'))
   end)

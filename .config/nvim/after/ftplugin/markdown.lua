@@ -13,6 +13,25 @@ vim.keymap.set('v', '*', ':s/^/* /<CR>:noh<CR>', {buffer = true, desc = "Add ast
 vim.keymap.set('v', '#', ':s/^/1. /<CR>:noh<CR>', {buffer = true, desc = "Add numbered list"})
 vim.keymap.set('v', '>', ':s/^/> /<CR>:noh<CR>', {buffer = true, desc = "Add blockquote"})
 
+-- Strip one blockquote level if any selected line has one; otherwise dedent.
+local function unquote_visual()
+  local s, e = vim.fn.line('v'), vim.fn.line('.')
+  if s > e then s, e = e, s end
+  local quoted = false
+  for lnum = s, e do
+    if vim.fn.getline(lnum):match('^>') then quoted = true break end
+  end
+  vim.cmd('normal! \27')
+  if quoted then
+    for lnum = s, e do
+      vim.fn.setline(lnum, (vim.fn.getline(lnum):gsub('^> ?', '', 1)))
+    end
+  else
+    vim.cmd(s .. ',' .. e .. '<')
+  end
+end
+vim.keymap.set('x', '<', unquote_visual, {buffer = true, desc = "Remove blockquote"})
+
 -- Align GitHub-Flavored Markdown tables with Space-|
 -- https://www.statusok.com/align-markdown-tables-vim
 vim.keymap.set('v', '<Leader>\\', ':EasyAlign*<Bar><CR>', {buffer = true, desc = "Align markdown table"})
