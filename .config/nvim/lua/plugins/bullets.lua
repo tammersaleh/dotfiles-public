@@ -2,7 +2,13 @@
 -- the line. Breaking a long item into two (Enter mid-sentence) left the tail
 -- of the item without a bullet. This wraps its <cr> mapping so a mid-item
 -- split continues the list too, and so Enter inside a blockquote repeats the
--- `> ` leader (bullets.vim knows nothing about quotes).
+-- `> ` leader.
+--
+-- bullets.vim knows nothing about blockquotes: every regex it has starts at
+-- `^\s*`. Rather than teach it, each of its commands runs with the quote
+-- leader stripped from the surrounding block of same-depth quote lines, then
+-- the leader goes back on (see with_quote_stripped). That keeps its own
+-- numbering, renumbering, and checkbox nesting intact inside a quote.
 --
 -- The wrapper goes through g:bullets_custom_mappings because bullets.vim
 -- installs its buffer-local <cr> map from a FileType autocmd that runs after
@@ -18,9 +24,47 @@ local function bullet_prefix(line)
   return checkbox and prefix .. checkbox or prefix
 end
 
--- Indent plus every `>` level: "> ", "> > ", ">> ".
-local function quote_prefix(line)
-  return line:match('^%s*>[>%s]*')
+local quote_prefix = require('config.blockquote').prefix
+
+-- Run fn with the quote leader removed from the block of lines around the
+-- cursor that share the cursor line's exact leader (or from first..last when
+-- given), then put the leader back. Lines fn adds take the cursor line's
+-- leader; a depth change ends the block. Without a leader, fn runs as is.
+local function with_quote_stripped(fn, first, last)
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local prefix = quote_prefix(vim.fn.getline(row))
+  if not prefix then return fn() end
+
+  local line_count = vim.api.nvim_buf_line_count(0)
+  local s, e = first or row, last or row
+  if not first then
+    while s > 1 and quote_prefix(vim.fn.getline(s - 1)) == prefix do s = s - 1 end
+    while e < line_count and quote_prefix(vim.fn.getline(e + 1)) == prefix do e = e + 1 end
+  end
+
+  -- setline, not nvim_buf_set_lines: replacing a range moves the '< and '>
+  -- marks that RenumberSelection reads.
+  for lnum = s, e do
+    vim.fn.setline(lnum, vim.fn.getline(lnum):sub(#prefix + 1))
+  end
+  vim.api.nvim_win_set_cursor(0, { row, math.max(0, col - #prefix) })
+
+  fn()
+
+  e = e + vim.api.nvim_buf_line_count(0) - line_count
+  for lnum = s, e do
+    vim.fn.setline(lnum, prefix .. vim.fn.getline(lnum))
+  end
+  local new_row, new_col = unpack(vim.api.nvim_win_get_cursor(0))
+  vim.api.nvim_win_set_cursor(0, { new_row, new_col + #prefix })
+end
+
+-- Visual variant: the block is the selection itself.
+local function with_quote_stripped_visual(fn)
+  local s, e = vim.fn.line('v'), vim.fn.line('.')
+  if s > e then s, e = e, s end
+  vim.cmd('normal! \27')
+  with_quote_stripped(fn, s, e)
 end
 
 -- Repeat the quote leader on a new line, moving the text after the cursor
@@ -48,11 +92,6 @@ end
 local function insert_new_bullet()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   local line = vim.api.nvim_get_current_line()
-  local quote = quote_prefix(line)
-  if quote and col >= #quote then
-    split_quote(quote, line, row, col)
-    return
-  end
   local prefix = bullet_prefix(line)
   -- Drop the whitespace around the split point. It was word spacing inside a
   -- sentence, not indentation.
@@ -84,6 +123,21 @@ local function insert_new_bullet()
   vim.api.nvim_win_set_cursor(0, { new_row, #new_line })
 end
 
+-- <cr>: a quoted list item goes through bullets.vim with the leader stripped;
+-- a quoted paragraph repeats the leader; anything else is bullets.vim's job.
+local function newline()
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local line = vim.api.nvim_get_current_line()
+  local quote = quote_prefix(line)
+  if not quote or col < #quote then
+    insert_new_bullet()
+  elseif bullet_prefix(line:sub(#quote + 1)) then
+    with_quote_stripped(insert_new_bullet)
+  else
+    split_quote(quote, line, row, col)
+  end
+end
+
 return {
   'dkarter/bullets.vim',
   init = function()
@@ -98,14 +152,24 @@ return {
       -- mapping does.
       { 'imap', '<cr>', '<C-]><Plug>(config-bullets-split-newline)' },
       { 'inoremap', '<C-cr>', '<cr>' }, -- newline without a bullet
-      { 'nmap', 'o', '<Plug>(bullets-newline)' },
-      { 'nmap', 'gN', '<Plug>(bullets-renumber)' },
-      { 'vmap', 'gN', '<Plug>(bullets-renumber)' },
-      { 'nmap', '<leader>x', '<Plug>(bullets-toggle-checkbox)' },
+      { 'nmap', 'o', '<Plug>(config-bullets-newline)' },
+      { 'nmap', 'gN', '<Plug>(config-bullets-renumber)' },
+      { 'xmap', 'gN', '<Plug>(config-bullets-renumber)' },
+      { 'nmap', '<leader>x', '<Plug>(config-bullets-toggle-checkbox)' },
     }
   end,
   config = function()
-    vim.keymap.set('i', '<Plug>(config-bullets-split-newline)', insert_new_bullet,
-      { silent = true, desc = "New bullet, splitting the item at the cursor" })
+    local function plug(mode, name, fn, desc)
+      vim.keymap.set(mode, '<Plug>(config-bullets-' .. name .. ')', fn, { silent = true, desc = desc })
+    end
+    plug('i', 'split-newline', newline, "New bullet, splitting the item at the cursor")
+    plug('n', 'newline', function() with_quote_stripped(function() vim.cmd('InsertNewBullet') end) end,
+      "New bullet below")
+    plug('n', 'renumber', function() with_quote_stripped(function() vim.cmd('RenumberList') end) end,
+      "Renumber list")
+    plug('x', 'renumber', function() with_quote_stripped_visual(function() vim.cmd('RenumberSelection') end) end,
+      "Renumber selected lines")
+    plug('n', 'toggle-checkbox', function() with_quote_stripped(function() vim.cmd('ToggleCheckbox') end) end,
+      "Toggle checkbox")
   end,
 }

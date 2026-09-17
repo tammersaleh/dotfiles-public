@@ -7,10 +7,11 @@
 -- Open current file in mark
 vim.keymap.set('n', '<leader>o', ':silent! !mark %<CR>:redraw!<CR>', {buffer = true, silent = true, desc = "Mark file"})
 
--- Visual mode list formatting
-vim.keymap.set('v', '-', ':s/^/- /<CR>:noh<CR>', {buffer = true, desc = "Add bullet points"})
-vim.keymap.set('v', '*', ':s/^/* /<CR>:noh<CR>', {buffer = true, desc = "Add asterisk bullets"})
-vim.keymap.set('v', '#', ':s/^/1. /<CR>:noh<CR>', {buffer = true, desc = "Add numbered list"})
+-- Visual mode list formatting. The marker goes after any blockquote leader.
+local after_quote = [[:s/^\(\s*>[> \t]*\)\?/\1]]
+vim.keymap.set('v', '-', after_quote .. '- /<CR>:noh<CR>', {buffer = true, desc = "Add bullet points"})
+vim.keymap.set('v', '*', after_quote .. '* /<CR>:noh<CR>', {buffer = true, desc = "Add asterisk bullets"})
+vim.keymap.set('v', '#', after_quote .. '1. /<CR>:noh<CR>', {buffer = true, desc = "Add numbered list"})
 vim.keymap.set('v', '>', ':s/^/> /<CR>:noh<CR>', {buffer = true, desc = "Add blockquote"})
 
 -- Strip one blockquote level if any selected line has one; otherwise dedent.
@@ -75,7 +76,22 @@ vim.opt_local.foldmethod = 'expr'
 -- Tab on a bullet or indented line indents.
 -- S-Tab on an indented bullet/line dedents.
 -- S-Tab on a top-level bullet removes it.
+--
+-- A blockquote leader ("> ", "> > ", ">") is invisible to all of it: the
+-- helpers work on the body after the leader and write the leader back.
 -------------------------------------------------------------------------------
+
+local split_quote = require('config.blockquote').split
+
+local function get_body(lnum)
+  local _, body = split_quote(vim.fn.getline(lnum))
+  return body
+end
+
+local function set_body(lnum, body)
+  local prefix = split_quote(vim.fn.getline(lnum))
+  vim.fn.setline(lnum, prefix .. body)
+end
 
 local function heading_level(line)
   local hashes = line:match('^(#+)%s')
@@ -98,6 +114,10 @@ end
 -- Falls back to the most common style in the buffer, or "- ".
 local function detect_bullet_style(lnum)
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  for i, l in ipairs(lines) do
+    local _, body = split_quote(l)
+    lines[i] = body
+  end
 
   for i = lnum - 1, 1, -1 do
     local num = lines[i]:match('^(%d+)%.%s')
@@ -132,21 +152,21 @@ local function indent_unit()
 end
 
 local function indent_line_text(lnum)
-  vim.fn.setline(lnum, indent_unit() .. vim.fn.getline(lnum))
+  set_body(lnum, indent_unit() .. get_body(lnum))
 end
 
 local function dedent_line_text(lnum)
-  local line = vim.fn.getline(lnum)
-  local stripped = (line:gsub('^' .. indent_unit(), '', 1))
-  if stripped == line then stripped = (line:gsub('^%s+', '', 1)) end
-  vim.fn.setline(lnum, stripped)
+  local body = get_body(lnum)
+  local stripped = (body:gsub('^' .. indent_unit(), '', 1))
+  if stripped == body then stripped = (body:gsub('^%s+', '', 1)) end
+  set_body(lnum, stripped)
 end
 
 local function remove_bullet_prefix(lnum)
-  local line = vim.fn.getline(lnum)
-  local stripped = (line:gsub('^(%s*)[%-*+]%s', '%1', 1))
+  local body = get_body(lnum)
+  local stripped = (body:gsub('^(%s*)[%-*+]%s', '%1', 1))
   stripped = (stripped:gsub('^(%s*)%d+%.%s', '%1', 1))
-  vim.fn.setline(lnum, stripped)
+  set_body(lnum, stripped)
 end
 
 -- When a line is rewritten (bullet added, indented, dedented, etc.) the
@@ -168,31 +188,30 @@ local function adjust_cursor(lnum, original_col, delta)
 end
 
 local function tab_line(lnum)
-  local line = vim.fn.getline(lnum)
-  local old_len = #line
+  local old_len = #vim.fn.getline(lnum)
   local original_col = capture_cursor(lnum)
-  local level = heading_level(line)
+  local body = get_body(lnum)
+  local level = heading_level(body)
   if level then
-    if level < 6 then vim.fn.setline(lnum, '#' .. line) end
-  elseif is_bullet(line) or has_leading_whitespace(line) then
+    if level < 6 then set_body(lnum, '#' .. body) end
+  elseif is_bullet(body) or has_leading_whitespace(body) then
     indent_line_text(lnum)
   else
-    local prefix = detect_bullet_style(lnum)
-    vim.fn.setline(lnum, prefix .. line)
+    set_body(lnum, detect_bullet_style(lnum) .. body)
   end
   adjust_cursor(lnum, original_col, #vim.fn.getline(lnum) - old_len)
 end
 
 local function stab_line(lnum)
-  local line = vim.fn.getline(lnum)
-  local old_len = #line
+  local old_len = #vim.fn.getline(lnum)
   local original_col = capture_cursor(lnum)
-  local level = heading_level(line)
+  local body = get_body(lnum)
+  local level = heading_level(body)
   if level then
-    if level > 1 then vim.fn.setline(lnum, line:sub(2)) end
-  elseif is_top_level_bullet(line) then
+    if level > 1 then set_body(lnum, body:sub(2)) end
+  elseif is_top_level_bullet(body) then
     remove_bullet_prefix(lnum)
-  elseif is_bullet(line) or has_leading_whitespace(line) then
+  elseif is_bullet(body) or has_leading_whitespace(body) then
     dedent_line_text(lnum)
   end
   adjust_cursor(lnum, original_col, #vim.fn.getline(lnum) - old_len)
@@ -213,7 +232,7 @@ local function for_visual_range(fn, saturated_at)
 
   local levels, has_heading, saturated = {}, false, false
   for lnum = s, e do
-    local level = heading_level(vim.fn.getline(lnum))
+    local level = heading_level(get_body(lnum))
     levels[lnum] = level
     if level then
       has_heading = true

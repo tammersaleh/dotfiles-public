@@ -67,6 +67,8 @@ Its default mappings are off (`g:bullets_set_mappings = 0`) because they also cl
 
 The wrapper splits the line before calling `InsertNewBullet`. bullets.vim reads the current line to pick the next number, the checkbox state, and whether a trailing colon nests the item, so it has to see the post-split text.
 
+Every list behavior works inside a blockquote (`> - item`, `> > 1. item`). bullets.vim anchors its regexes at `^\s*`, so instead of teaching it, `with_quote_stripped` in `lua/plugins/bullets.lua` strips the leader from the surrounding block of same-leader lines, runs the bullets.vim command, and puts the leader back. It uses `setline` per line because `nvim_buf_set_lines` over a range moves the `'<`/`'>` marks that `RenumberSelection` reads. Our own Tab/S-Tab and visual `-` `*` `#` in the ftplugin work on the body after the leader. The leader pattern lives in `lua/config/blockquote.lua`: whitespace, one or more `>`, at most one trailing space, so list indentation after `>` stays in the body.
+
 ## gx
 
 `gx` is our own (`lua/config/gx.lua`), not gx.nvim or the builtin. It scans the whole line for http(s) URLs: cursor on one opens it, a lone URL opens directly, several prompt via `vim.ui.select`. Visual mode collects URLs from the selection. No commit-hash, issue-ref, or web-search handlers - URLs only.
