@@ -1,7 +1,8 @@
 -- bullets.vim continues a list on <cr> only when the cursor is at the end of
 -- the line. Breaking a long item into two (Enter mid-sentence) left the tail
 -- of the item without a bullet. This wraps its <cr> mapping so a mid-item
--- split continues the list too.
+-- split continues the list too, and so Enter inside a blockquote repeats the
+-- `> ` leader (bullets.vim knows nothing about quotes).
 --
 -- The wrapper goes through g:bullets_custom_mappings because bullets.vim
 -- installs its buffer-local <cr> map from a FileType autocmd that runs after
@@ -17,6 +18,29 @@ local function bullet_prefix(line)
   return checkbox and prefix .. checkbox or prefix
 end
 
+-- Indent plus every `>` level: "> ", "> > ", ">> ".
+local function quote_prefix(line)
+  return line:match('^%s*>[>%s]*')
+end
+
+-- Repeat the quote leader on a new line, moving the text after the cursor
+-- onto it. An empty quote line loses its leader instead, the same way
+-- bullets.vim drops an unused bullet. Vim's own 'formatoptions' `r` flag
+-- would do the repeat, but its `fb:-` entry then indents plain splits after
+-- a list marker, and bullets.vim queues its fallback <cr> through feedkeys,
+-- which lands after any keys typed behind it.
+local function split_quote(prefix, line, row, col)
+  local head = (line:sub(1, col):gsub('%s+$', ''))
+  local tail = (line:sub(col + 1):gsub('^%s+', ''))
+  if head == prefix:gsub('%s+$', '') and tail == '' then
+    vim.api.nvim_buf_set_lines(0, row - 1, row, false, { '' })
+    vim.api.nvim_win_set_cursor(0, { row, 0 })
+    return
+  end
+  vim.api.nvim_buf_set_lines(0, row - 1, row, false, { head, prefix .. tail })
+  vim.api.nvim_win_set_cursor(0, { row + 1, #prefix })
+end
+
 -- bullets.vim decides what the next bullet looks like: numbering, checkbox
 -- state, and whether a trailing colon nests it. It reads the current line to
 -- do that, so split the line first, then move the text after the cursor down
@@ -24,6 +48,11 @@ end
 local function insert_new_bullet()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   local line = vim.api.nvim_get_current_line()
+  local quote = quote_prefix(line)
+  if quote and col >= #quote then
+    split_quote(quote, line, row, col)
+    return
+  end
   local prefix = bullet_prefix(line)
   -- Drop the whitespace around the split point. It was word spacing inside a
   -- sentence, not indentation.

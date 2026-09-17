@@ -59,7 +59,7 @@ The `undefined global 'vim'` warnings in lua files are expected - the LSP doesn'
 
 ## bullets.vim
 
-`<cr>` in markdown belongs to bullets.vim, wrapped in `lua/plugins/bullets.lua` so a mid-item Enter also continues the list (the plugin only continues at end of line).
+`<cr>` in markdown belongs to bullets.vim, wrapped in `lua/plugins/bullets.lua` so a mid-item Enter also continues the list (the plugin only continues at end of line). The wrapper also repeats a blockquote leader (`> `, `> > `) on Enter and drops the leader from an empty quote line. Don't reach for `formatoptions+=r` for this: the runtime's `fb:-` comment entry then indents plain splits after a list marker, and bullets.vim's fallback `<cr>` goes through `feedkeys`, so the leader lands after any keys typed behind it.
 
 Do not map `<CR>` for markdown in `after/ftplugin/`. bullets.vim installs its buffer-local maps from a FileType autocmd that runs after the ftplugin and overwrites them. Declare them in `g:bullets_custom_mappings` instead, which the plugin applies last.
 
