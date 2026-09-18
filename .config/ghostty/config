@@ -53,3 +53,8 @@ auto-update = off
 
 # New tabs/windows start in $HOME instead of the focused tab's cwd.
 window-inherit-working-directory = false
+
+# Apps (nvim, mouse=a) never get mouse events, so cmd+click opens links
+# without shift. Costs mouse support inside nvim: click-to-focus, wheel
+# scroll of buffers, drag-resize. Wheel scroll still arrives as arrow keys.
+mouse-reporting = false
