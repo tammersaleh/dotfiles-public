@@ -417,8 +417,9 @@ shallow (it will not catch these):
 - A nested `taskList` is a SIBLING of its parent `taskItem`, not inside
   `taskItem.content`.
 
-A no-body `page update` (title-only, or `page move`) preserves the existing body
-by re-sending its exact ADF, so it does not flatten these. A `page update` that
+A no-body `page update` (title-only, or a same-space `page move`) preserves the
+existing body by re-sending its exact ADF, so it does not flatten these. A
+cross-space `page move` never sends the body at all. A `page update` that
 pipes a new storage/markdown body replaces the whole body and can.
 
 ### Creating a page
@@ -525,9 +526,10 @@ refuses to write when the page has any inline comment that is not `resolved` -
 `resolution_status`, `original_selection`, `inline_marker_ref`, `web_url`) in the
 error's `data` object, writes nothing, and does not bump the version.
 
-A title-only `page update` and `page move` re-send the page's exact ADF, which
-preserves inline-comment anchors (verified against a live page), so they are not
-guarded. Only a piped replacement body triggers the guard.
+A title-only `page update` and a same-space `page move` re-send the page's exact
+ADF, which preserves inline-comment anchors (verified against a live page), and a
+cross-space `page move` does not touch the body, so they are not guarded. Only a
+piped replacement body triggers the guard.
 
 Inspect first with `comment list <page> --inline`; resolve or re-anchor the
 comments in Confluence, then retry. `--allow-unresolved-inline-comments`
@@ -540,27 +542,37 @@ other check. If the comment inspection itself fails, the write is refused
 {"error":"unresolved_inline_comments","detail":"refusing to replace the page body: 1 inline comment(s) are not resolved and this write may destroy their anchors","hint":"Resolve or re-anchor the comments in Confluence (see the web URLs), then retry. Pass --allow-unresolved-inline-comments to override.","input":"123456","data":{"page_id":"123456","blocking_comment_count":1,"blocking_comments":[{"id":"c9","resolution_status":"open","original_selection":"the retry budget","inline_marker_ref":"m1","web_url":"https://acme.atlassian.net/wiki/spaces/ENG/pages/123456?focusedCommentId=c9"}]}}
 ```
 
-### Moving a page (reparent within a space)
+### Moving a page (same space or across spaces)
 
-`page move <page-ref> --parent <dest-ref> --if-version <n>` reparents a page
-under a different parent in the SAME space, preserving the page ID, history,
-comments, and attachments. Page IDs are stable across renames and moves; titles
-are not, so cite pages by ID.
+`page move <page-ref> --parent <dest-ref> --if-version <n>` moves a page under
+a different parent, in the same space or in another space, preserving the page
+ID, history, comments, and attachments. Page IDs are stable across renames and
+moves; titles are not, so cite pages by ID. This is the personal-draft to
+team-space publication step: create and edit the draft in your personal space,
+then move it under the team page.
 
-The Confluence v2 API cannot move a page across spaces (the personal-draft to
-team-space publication step). A cross-space destination is refused with
-`cross_space_move_unsupported`; do that move in the Confluence UI. `page move`
-also refuses self-parenting and cycles (`invalid_move`), and enforces
+`page move` refuses self-parenting and cycles (`invalid_move`) and enforces
 `--if-version`. If the page is already under the destination, it returns
-`moved:false` with no write. It re-sends the exact ADF, so it does not touch
-inline-comment anchors and is not subject to the inline-comment guard.
+`moved:false` with no write.
+
+A same-space move re-sends the exact ADF and bumps the version. A cross-space
+move uses the v1 move endpoint: the body is untouched and the version does NOT
+change (`version` equals `previous_version`), so `--if-version` is checked by the
+preflight read only. Neither path touches inline-comment anchors. Whether page
+restrictions survive a cross-space move is unverified; check in Confluence if
+they matter. The row's `web_url` for a cross-space move is the pre-move URL;
+`page get` returns the new one.
+
+`page get` and `page ancestors` on the moved page can lag the move by a few
+minutes server-side (empty ancestors, missing `parent_id`). `page children` on
+the destination parent reflects it immediately; use that to confirm.
 
 ```bash
 confluence page move 123456 --parent 200000 --if-version "$version"
 ```
 
 ```jsonl
-{"id":"123456","title":"X","space_id":"98765","previous_parent_id":"100000","parent_id":"200000","previous_version":5,"version":6,"moved":true,"web_url":"https://acme.atlassian.net/wiki/spaces/ENG/pages/123456"}
+{"id":"123456","title":"X","previous_space_id":"98765","space_id":"98765","previous_parent_id":"100000","parent_id":"200000","previous_version":5,"version":6,"moved":true,"web_url":"https://acme.atlassian.net/wiki/spaces/ENG/pages/123456"}
 {"_meta":{"has_more":false}}
 ```
 
