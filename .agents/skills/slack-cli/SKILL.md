@@ -150,6 +150,10 @@ Query supports Slack's search modifiers. Combine freely:
 - `in:#channel` - only this channel (also works with names, `in:@user` for DMs)
 - `from:@user` - messages posted by this user
 - `to:@user` - DMs to this user
+- `@user` above may be a handle, display name, real name, email, or ID; the
+  CLI resolves it and sends Slack `<@Uxxx>`. Multi-word names work unquoted
+  (`from:@Alice Adams`) or quoted (`from:"Alice Adams"`). An unknown name
+  fails with `user_not_found` rather than an empty result.
 - `after:YYYY-MM-DD` / `before:YYYY-MM-DD` / `on:YYYY-MM-DD` / `during:month`
 - `has:link` / `has:pin` / `has:reaction` / `has:file` / `has:image`
 - `is:thread` - messages in threads; `is:saved` / `is:dm` / `is:mpdm`
