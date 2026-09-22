@@ -9,8 +9,8 @@ Neo-tree cannot stack two sources in one window (upstream issues 360 and
 395, won't-fix). Sources are separate views switched via the selector tabs.
 Neo-tree loads external sources by `require(name)` when
 `neo-tree.sources.<name>` doesn't exist (`lua/neo-tree/setup/init.lua:494`).
-So a module at `lua/neo-tree/sources/recent/init.lua` in our config works
-as a source named `recent`. Reference implementation: the built-in
+A module at `lua/neotree_recent/init.lua` with `name = "recent"` works
+as a source named `recent` without shadowing the plugin's namespace. Reference implementation: the built-in
 `buffers` source.
 
 `vim.v.oldfiles` is only read from shada at startup and refreshed on
@@ -31,7 +31,7 @@ MRU list of absolute paths. Public API:
   opened from `/tmp` and elsewhere belong in the list.
 - `remove(path)` - drop one entry (used by `d` in the tree).
 
-### `lua/neo-tree/sources/recent/init.lua` (source module)
+### `lua/neotree_recent/init.lua` (source module)
 
 - `name = "recent"`, `display_name = " 󰋚 Recent "`.
 - `navigate(state, path, path_to_reveal, callback)` - `state.path` is cwd
@@ -41,10 +41,11 @@ MRU list of absolute paths. Public API:
   the common `open*` commands work. Item name is the basename only. The
   node id is the absolute path, so duplicates by name stay distinct.
 - `setup(config, global_config)` - subscribe to `VIM_BUFFER_ENTER` to
-  refresh the tree when it is visible (debounced, as buffers does), and
-  `VIM_DIR_CHANGED` for `bind_to_cwd`. Also calls `recent_files.setup()`.
+  refresh the tree when it is visible (debounced, as buffers does).
+  Neo-tree only calls this on first use of the source, so
+  `recent_files.setup()` is called from `lua/plugins/neo-tree.lua`.
 
-### `lua/neo-tree/sources/recent/commands.lua`
+### `lua/neotree_recent/commands.lua`
 
 Extends common commands. Adds `remove_from_recent` (drop the entry and
 refresh). Everything else (`open`, `open_split`, `open_vsplit`,
@@ -53,7 +54,7 @@ comes from `neo-tree.sources.common.commands`.
 
 ### `lua/plugins/neo-tree.lua` wiring
 
-- Add `"recent"` to `sources` and to `source_selector.sources` as the
+- Add `"neotree_recent"` to `sources` and to `source_selector.sources` as the
   fourth tab.
 - Add `['4'] = function() vim.cmd.Neotree('recent') end`.
 - Add `"recent"` to the `neotree_is_visible()` source list.
@@ -73,18 +74,25 @@ comes from `neo-tree.sources.common.commands`.
 
 Red, green, refactor for each behavioral step.
 
-1. [ ] `tests/unit/config/recent_files_spec.lua`: touch ordering, dedupe,
+1. [x] `tests/unit/config/recent_files_spec.lua`: touch ordering, dedupe,
        missing-file pruning, limit, remove.
-2. [ ] Implement `lua/config/recent_files.lua`.
-3. [ ] `tests/e2e/config/neotree_recent_spec.lua`: `:Neotree recent` opens
+2. [x] Implement `lua/config/recent_files.lua`.
+3. [x] `tests/e2e/config/neotree_recent_spec.lua`: `:Neotree recent` opens
        a window whose buffer has `neo_tree_source == "recent"`; after
        editing two temp files, the tree lists both by basename, newest first;
        `4` from the filesystem tree switches to it.
-4. [ ] Implement the source module and commands.
-5. [ ] Wire into `lua/plugins/neo-tree.lua`.
-6. [ ] `mise run test`, then manual check in a PTY (see CLAUDE.md).
-7. [ ] Update `.config/nvim/CLAUDE.md` with a short "Recent source" section.
-8. [ ] Commit in small pieces, push.
+4. [x] Implement the source module and commands.
+5. [x] Wire into `lua/plugins/neo-tree.lua`.
+6. [x] `mise run test`, then manual check in a PTY (see CLAUDE.md).
+7. [x] Update `.config/nvim/CLAUDE.md` with a short "Recent source" section.
+8. [x] Commit in small pieces, push.
+
+## Discoveries
+
+- `hidden` is off in this config, so a modified nameless buffer blocks `:b`
+  in the target window. The e2e open test clears `modified` first.
+- With four tabs at width 35 the selector truncates labels (`Fil…`, `Sym…`,
+  `Rec…`).
 
 ## Open questions
 

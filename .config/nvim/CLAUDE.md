@@ -80,3 +80,14 @@ Every list behavior works inside a blockquote (`> - item`, `> > 1. item`), and `
 Parsers install via the `build` hook to `~/.local/share/nvim/site/parser/`. To add a language, edit the `parsers` table in `lua/plugins/treesitter.lua` and run `:Lazy build nvim-treesitter`.
 
 If you ever switch branches on the plugin again, clean stale parser artifacts: `rm -f ~/.local/share/nvim/lazy/nvim-treesitter/parser/*.so ~/.local/share/nvim/lazy/nvim-treesitter/parser-info/*.revision`. They shadow bundled parsers via runtimepath order.
+
+## Neo-tree Recent tab
+
+`lua/neotree_recent/` is a custom Neo-tree source named `recent` (loaded via
+`sources = { "neotree_recent" }`). It renders `config.recent_files`, an MRU
+list seeded from `v:oldfiles` and updated on `BufEnter`, as a flat list of
+basenames, newest first, not scoped to cwd. Neo-tree only calls a source's
+`setup` on first use, so `lua/plugins/neo-tree.lua` starts the tracker
+itself. Items are plain tables, not `file_items.create_item`, which would
+build parent directories into a tree. `4` jumps to the tab, `d` drops an
+entry. Neo-tree cannot stack two sources in one window (upstream 360, 395).
