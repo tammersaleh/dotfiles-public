@@ -153,6 +153,15 @@
       "skillFolderHash": "8b1936bb9fb0e710de60c2cb9da697e326751911",
       "installedAt": "2026-07-07T14:53:34.885Z",
       "updatedAt": "2026-09-18T23:33:20.226Z"
+    },
+    "lattice-cli": {
+      "source": "tammersaleh/lattice-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tammersaleh/lattice-cli.git",
+      "skillPath": "skills/lattice-cli/SKILL.md",
+      "skillFolderHash": "e941cc278987e4b992dd0211799fea6c88e1d14dc121f31cd5c52bcc13297317",
+      "installedAt": "2026-09-22T23:04:01.947Z",
+      "updatedAt": "2026-09-22T23:04:01.947Z"
     }
   },
   "dismissed": {
