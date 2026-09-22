@@ -17,7 +17,7 @@ return {
       local renderer = require("neo-tree.ui.renderer")
 
       local function neotree_is_visible()
-        return vim.iter({"filesystem", "buffers", "git_status", "document_symbols"})
+        return vim.iter({"filesystem", "buffers", "git_status", "document_symbols", "recent"})
           :any(function(s) return renderer.window_exists(manager.get_state(s)) end)
       end
 
@@ -89,6 +89,9 @@ return {
       vim.keymap.set({'n', 't'}, '<C-Right>', open_terminal_split(true),  {silent = true, desc = "Open terminal in a split to the right"})
       vim.keymap.set({'n', 't'}, '<C-Down>',  open_terminal_split(false), {silent = true, desc = "Open terminal in a split below"})
 
+      -- Start MRU tracking now; neo-tree only sets up a source on first use.
+      require("config.recent_files").setup()
+
       require("neo-tree").setup({
         -- log_level = "trace", -- For debuging
         -- log_to_file = true,  -- For debuging
@@ -130,6 +133,7 @@ return {
           "buffers",
           "git_status",
           "document_symbols",
+          "neotree_recent", -- lua/neotree_recent/, source name "recent"
         },
         close_if_last_window = true,
         source_selector = {
@@ -147,6 +151,10 @@ return {
             {
               source = "document_symbols",
               display_name = " 󰈚 Syms "
+            },
+            {
+              source = "recent",
+              display_name = " 󰋚 Recent "
             },
           },
         },
@@ -190,6 +198,7 @@ return {
             ['1'] = function() vim.cmd.Neotree('filesystem') end,
             ['2'] = function() vim.cmd.Neotree('git_status') end,
             ['3'] = function() vim.cmd.Neotree('document_symbols') end,
+            ['4'] = function() vim.cmd.Neotree('recent') end,
 
             ["r"] = function() vim.cmd.Neotree('filesystem', 'show', 'reveal') end,
             ["dd"] = "delete",
@@ -215,6 +224,13 @@ return {
             mappings = {
               ["u"] = "git_unstage_file",
               ["a"] = "git_add_file",
+            },
+          },
+        },
+        recent = {
+          window = {
+            mappings = {
+              ["d"] = "remove_from_recent",
             },
           },
         },
