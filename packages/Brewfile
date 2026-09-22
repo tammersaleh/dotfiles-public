@@ -184,6 +184,10 @@ brew 'zlib'                          # General-purpose lossless data-compression
 brew 'zsh'
 brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
 
+### Go tools
+
+go 'github.com/tammersaleh/lattice-cli/cmd/lattice'  # lattice CLI (private repo; needs GOPRIVATE=github.com/tammersaleh/lattice-cli via `go env -w`)
+
 ### NPM packages
 
 npm '@doist/todoist-cli'             # td CLI
