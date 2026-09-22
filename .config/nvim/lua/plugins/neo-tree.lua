@@ -21,7 +21,15 @@ return {
           :any(function(s) return renderer.window_exists(manager.get_state(s)) end)
       end
 
-      vim.keymap.set("n", "-", function() vim.cmd.Neotree("toggle", "reveal") end)
+      local function toggle_neotree()
+        vim.cmd.Neotree("toggle", "reveal")
+      end
+      vim.keymap.set("n", "-", toggle_neotree, { desc = "Toggle Neo-tree" })
+      -- ctrl-dash from insert or terminal mode. Kitty-protocol terminals
+      -- (Ghostty) send <C-->; legacy terminals send 0x1F, which nvim calls <C-_>.
+      for _, key in ipairs({ "<C-->", "<C-_>" }) do
+        vim.keymap.set({ "n", "i", "t" }, key, toggle_neotree, { desc = "Toggle Neo-tree" })
+      end
 
       -- Replace CTRL-W K, etc, with mappings that hide and restore Neotree
       for _, direction in ipairs({
