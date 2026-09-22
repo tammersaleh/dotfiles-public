@@ -129,6 +129,12 @@ a fact in a file, an earlier tool result). When `op` is needed, batch every
 call into one Bash invocation so it costs one prompt. Say beforehand that a
 prompt is coming. (Tammer, 2026-09-15)
 
+Two accounts are signed in, so every `op item get`/`op item list` needs
+`--account <url>`; unscoped calls return nothing on stdout and no useful error.
+Never pipe an `op` value straight into a consumer like `gh secret set` - it
+accepts empty stdin silently. Capture the value, check its length, then pipe.
+(2026-09-22)
+
 # Sudo
 
 `sudo` prompts for fingerprint every time - no password caching, no five-minute window. Treat each sudo call as an interruption and batch sudo work into a single command.
