@@ -21,8 +21,25 @@ return {
           :any(function(s) return renderer.window_exists(manager.get_state(s)) end)
       end
 
+      -- Toggle remembers the mode and buffer it was opened from so closing it
+      -- from insert or terminal mode drops you back into that mode.
+      local opened_from = nil
       local function toggle_neotree()
-        vim.cmd.Neotree("toggle", "reveal")
+        if neotree_is_visible() then
+          vim.cmd.Neotree("close")
+          if opened_from
+            and opened_from.buf == vim.api.nvim_get_current_buf()
+            and (opened_from.mode == "i" or opened_from.mode == "t") then
+            vim.cmd.startinsert()
+          end
+          opened_from = nil
+        else
+          opened_from = {
+            buf = vim.api.nvim_get_current_buf(),
+            mode = vim.api.nvim_get_mode().mode:sub(1, 1),
+          }
+          vim.cmd.Neotree("reveal")
+        end
       end
       vim.keymap.set("n", "-", toggle_neotree, { desc = "Toggle Neo-tree" })
       -- ctrl-dash from insert or terminal mode. Kitty-protocol terminals
