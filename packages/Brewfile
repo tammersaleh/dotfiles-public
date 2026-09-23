@@ -28,6 +28,7 @@ cask 'orbstack', greedy: true
 cask 'tammersaleh/tap/slack-cli'     # Read-only Slack CLI for agents and automation
 cask 'tammersaleh/tap/calendar-sync'  # Google Calendar event mirroring daemon
 cask 'tammersaleh/tap/confluence-cli' # Agent-first Confluence CLI
+cask 'tammersaleh/tap/dotfiles-manager' # dfm: stow and the dotfiles script in one binary
 cask 'tammersaleh/tap/envsec'         # 1Password secrets to env vars via login keychain
 
 ### LSPs and formatters
