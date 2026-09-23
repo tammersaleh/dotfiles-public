@@ -81,6 +81,7 @@ Don't wait to be asked and don't just mention it in chat.
 - `slack` -> `~/src/github.com/tammersaleh/slack-cli/todo/`
 - `confluence` -> `~/src/github.com/tammersaleh/confluence-cli/todo/`
 - `lattice` -> `~/src/github.com/tammersaleh/lattice-cli/todo/`
+- `dfm` -> `~/src/github.com/tammersaleh/dotfiles-manager/todo/`
 
 Use a subagent for the write-up so it stays off the main transcript. Read that
 directory's `README.md` first and match the house style: one concern per file,
