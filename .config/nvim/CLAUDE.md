@@ -89,5 +89,5 @@ list seeded from `v:oldfiles` and updated on `BufEnter`, as a flat list of
 basenames, newest first, not scoped to cwd. Neo-tree only calls a source's
 `setup` on first use, so `lua/plugins/neo-tree.lua` starts the tracker
 itself. Items are plain tables, not `file_items.create_item`, which would
-build parent directories into a tree. `4` jumps to the tab, `d` drops an
-entry. Neo-tree cannot stack two sources in one window (upstream 360, 395).
+build parent directories into a tree. It is the second tab; `2` jumps to it,
+`d` drops an entry. Neo-tree cannot stack two sources in one window (upstream 360, 395).

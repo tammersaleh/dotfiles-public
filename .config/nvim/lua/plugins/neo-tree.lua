@@ -145,16 +145,16 @@ return {
               display_name = " 󰉓 Files "
             },
             {
+              source = "recent",
+              display_name = " 󰋚 Recent "
+            },
+            {
               source = "git_status",
               display_name = " 󰊢 Git "
             },
             {
               source = "document_symbols",
               display_name = " 󰈚 Syms "
-            },
-            {
-              source = "recent",
-              display_name = " 󰋚 Recent "
             },
           },
         },
@@ -198,9 +198,9 @@ return {
             ['<Right>'] = 'next_source',
 
             ['1'] = function() vim.cmd.Neotree('filesystem') end,
-            ['2'] = function() vim.cmd.Neotree('git_status') end,
-            ['3'] = function() vim.cmd.Neotree('document_symbols') end,
-            ['4'] = function() vim.cmd.Neotree('recent') end,
+            ['2'] = function() vim.cmd.Neotree('recent') end,
+            ['3'] = function() vim.cmd.Neotree('git_status') end,
+            ['4'] = function() vim.cmd.Neotree('document_symbols') end,
 
             ["r"] = function() vim.cmd.Neotree('filesystem', 'show', 'reveal') end,
             ["dd"] = "delete",
