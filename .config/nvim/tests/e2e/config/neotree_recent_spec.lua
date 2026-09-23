@@ -11,6 +11,12 @@ local function neotree_win(source)
   return nil
 end
 
+-- The filesystem source renders after an async directory scan.
+local function wait_for_win(source)
+  vim.wait(1000, function() return neotree_win(source) ~= nil end)
+  return neotree_win(source)
+end
+
 local function tree_lines(source)
   local win = neotree_win(source)
   assert.is_not_nil(win, 'no neo-tree window for source ' .. source)
@@ -61,9 +67,19 @@ describe("Neo-tree recent source (with plugins)", function()
     end
   end)
 
+  it("moves between source tabs with the arrow keys", function()
+    vim.cmd.Neotree('filesystem')
+    vim.api.nvim_set_current_win(wait_for_win('filesystem'))
+    h.feed('<Left>') -- wraps from the first tab to the last
+    assert.is_not_nil(neotree_win('recent'))
+    vim.api.nvim_set_current_win(neotree_win('recent'))
+    h.feed('<Right>')
+    assert.is_not_nil(wait_for_win('filesystem'))
+  end)
+
   it("switches to the recent tab with 4", function()
     vim.cmd.Neotree('filesystem')
-    vim.api.nvim_set_current_win(neotree_win('filesystem'))
+    vim.api.nvim_set_current_win(wait_for_win('filesystem'))
     h.feed('4')
     assert.is_not_nil(neotree_win('recent'))
   end)

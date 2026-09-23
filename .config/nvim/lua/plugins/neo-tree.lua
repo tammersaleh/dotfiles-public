@@ -194,6 +194,8 @@ return {
 
             ['<S-Tab>'] = 'prev_source',
             ['<Tab>'] = 'next_source',
+            ['<Left>'] = 'prev_source',
+            ['<Right>'] = 'next_source',
 
             ['1'] = function() vim.cmd.Neotree('filesystem') end,
             ['2'] = function() vim.cmd.Neotree('git_status') end,
