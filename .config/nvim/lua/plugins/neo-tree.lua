@@ -229,6 +229,16 @@ return {
             },
           },
         },
+        document_symbols = {
+          window = {
+            mappings = {
+              -- No clipboard, add, or delete here; silence the defaults.
+              ["<C-r>"] = "noop",
+              ["a"] = "noop",
+              ["dd"] = "noop",
+            },
+          },
+        },
         recent = {
           window = {
             mappings = {
