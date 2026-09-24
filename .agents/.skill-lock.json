@@ -162,6 +162,15 @@
       "skillFolderHash": "b0ea1282633ddd6d050614b8c176c810c8cb8427e40c6adc7de6a68b2dc8612b",
       "installedAt": "2026-09-22T23:04:01.947Z",
       "updatedAt": "2026-09-23T23:43:36.790Z"
+    },
+    "dotfiles-manager": {
+      "source": "tammersaleh/dotfiles-manager",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tammersaleh/dotfiles-manager.git",
+      "skillPath": "skills/dotfiles-manager/SKILL.md",
+      "skillFolderHash": "7968866ff591e53b89d0c73830e155ef4b1ffdce",
+      "installedAt": "2026-09-24T14:51:10.198Z",
+      "updatedAt": "2026-09-24T14:51:10.198Z"
     }
   },
   "dismissed": {
