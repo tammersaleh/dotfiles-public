@@ -53,3 +53,4 @@ auto-update = off
 
 # New tabs/windows start in $HOME instead of the focused tab's cwd.
 window-inherit-working-directory = false
+tab-inherit-working-directory = false
