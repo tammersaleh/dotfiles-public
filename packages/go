@@ -50,4 +50,12 @@ brew update
 brew bundle install
 brew bundle cleanup --force
 
+# Skills are not tracked in dotfiles; only ~/.agents/.skill-lock.json is.
+# Reinstall any skill the lock names whose directory is missing (fresh
+# machine, or a skill removed by hand), then update the rest.
+jq -r '.skills | to_entries[] | "\(.key)\t\(.value.source)"' "$lock" |
+  while IFS=$'\t' read -r name source; do
+    [[ -d "$HOME/.agents/skills/$name" ]] ||
+      skills add "$source" --global --yes --skill "$name" --agent claude-code --agent universal </dev/null
+  done
 skills update --global --yes
