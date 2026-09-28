@@ -1,6 +1,4 @@
 [include]
-    path = ~/.gitconfig-private
-[include]
     path = ~/.gitconfig-local
 [column]
 	ui = auto
