@@ -15,7 +15,7 @@ cd "$(dirname "$0")"
 __git_add_and_commit_if_changed() {
   file=$1
   message=$2
-  if git diff --quiet -- "$file"; then
+  if ! git diff --quiet -- "$file"; then
     git add "$file" && git commit -m "$message"
   fi
 }
