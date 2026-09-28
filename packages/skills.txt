@@ -1,0 +1,17 @@
+# Agent skills installed by ~/packages/go. One per line: name source-repo.
+# Sorted. Add with: skills add OWNER/REPO -g -y -s NAME -a claude-code -a universal, then add the line here.
+confluence-cli tammersaleh/confluence-cli
+dotfiles-manager tammersaleh/dotfiles-manager
+find-skills vercel-labs/skills
+glean-cli gleanwork/glean-cli
+gws-calendar googleworkspace/cli
+gws-docs googleworkspace/cli
+gws-drive googleworkspace/cli
+gws-forms googleworkspace/cli
+gws-gmail googleworkspace/cli
+gws-people googleworkspace/cli
+gws-shared googleworkspace/cli
+gws-sheets googleworkspace/cli
+gws-slides googleworkspace/cli
+lattice-cli tammersaleh/lattice-cli
+slack-cli tammersaleh/slack-cli

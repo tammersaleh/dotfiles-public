@@ -50,12 +50,19 @@ brew update
 brew bundle install
 brew bundle cleanup --force
 
-# Skills are not tracked in dotfiles; only ~/.agents/.skill-lock.json is.
-# Reinstall any skill the lock names whose directory is missing (fresh
-# machine, or a skill removed by hand), then update the rest.
-jq -r '.skills | to_entries[] | "\(.key)\t\(.value.source)"' "$lock" |
-  while IFS=$'\t' read -r name source; do
-    [[ -d "$HOME/.agents/skills/$name" ]] ||
-      skills add "$source" --global --yes --skill "$name" --agent claude-code --agent universal </dev/null
-  done
+# Skills live in ~/.agents/skills as plain directories, listed in skills.txt.
+# The skills CLI deletes and recreates a skill dir on every install and
+# update, so nothing under ~/.agents may be a dotfiles symlink.
+for p in "$HOME/.agents" "$HOME/.agents/skills"; do
+  if [[ -L "$p" ]]; then
+    echo "$0: $p is a symlink (-> $(readlink "$p")); skills must not live in dotfiles. Remove it and rerun." >&2
+    exit 1
+  fi
+done
+mkdir -p "$HOME/.agents/skills"
+grep -v '^#' skills.txt | while read -r name source; do
+  [[ -n "$name" ]] || continue
+  [[ -d "$HOME/.agents/skills/$name" ]] ||
+    skills add "$source" --global --yes --skill "$name" --agent claude-code --agent universal </dev/null
+done
 skills update --global --yes
