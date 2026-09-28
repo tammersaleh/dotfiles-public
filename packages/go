@@ -47,8 +47,8 @@ if [[ $# -gt 0 ]]; then
 fi
 
 brew update
-brew bundle install
-brew bundle cleanup --force
+brew bundle install --quiet
+brew bundle cleanup --force --quiet
 
 # Skills live in ~/.agents/skills as plain directories, listed in skills.txt.
 # The skills CLI deletes and recreates a skill dir on every install and
@@ -62,7 +62,13 @@ done
 mkdir -p "$HOME/.agents/skills"
 grep -v '^#' skills.txt | while read -r name source; do
   [[ -n "$name" ]] || continue
-  [[ -d "$HOME/.agents/skills/$name" ]] ||
-    skills add "$source" --global --yes --skill "$name" --agent claude-code --agent universal </dev/null
+  [[ -d "$HOME/.agents/skills/$name" ]] && continue
+  # skills add has no quiet flag and prints ~40 lines of UI per skill, all
+  # on stdout (errors included). Show it only on failure.
+  echo "Installing skill $name from $source"
+  if ! out=$(skills add "$source" --global --yes --skill "$name" --agent claude-code --agent universal </dev/null 2>&1); then
+    echo "$out" >&2
+    exit 1
+  fi
 done
 skills update --global --yes
