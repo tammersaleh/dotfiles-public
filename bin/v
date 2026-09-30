@@ -29,7 +29,9 @@ main() {
       echo "You're already in a terminal in vim.  Whadaywant?"
       exit 1
     fi
-    nvr -o "${files[@]}"
+    for f in "${files[@]}"; do
+      nvr -c "SplitOrFocus $(realpath "$f")"
+    done
 
   else
     tmpdir=$(mktemp -d)

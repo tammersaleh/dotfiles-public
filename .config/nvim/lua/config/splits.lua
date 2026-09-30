@@ -30,3 +30,14 @@ vim.keymap.set({'n', 't'}, '<C-h>', fn_to_save_mode_and_move("h"), {desc = "Move
 vim.keymap.set({'n', 't'}, '<C-j>', fn_to_save_mode_and_move("j"), {desc = "Move to window below."})
 vim.keymap.set({'n', 't'}, '<C-k>', fn_to_save_mode_and_move("k"), {desc = "Move to window above."})
 vim.keymap.set({'n', 't'}, '<C-l>', fn_to_save_mode_and_move("l"), {desc = "Move to window to the right."})
+
+-- Split to a file, or focus its window if one already shows it. Used by ~/bin/v.
+vim.api.nvim_create_user_command('SplitOrFocus', function(opts)
+  local path = vim.fn.fnamemodify(opts.args, ':p')
+  local win = vim.fn.bufwinid(vim.fn.bufnr(path))
+  if win ~= -1 then
+    vim.api.nvim_set_current_win(win)
+  else
+    vim.cmd.split(vim.fn.fnameescape(path))
+  end
+end, { nargs = 1, desc = "Split to a file, or focus its existing window." })

@@ -24,6 +24,31 @@ describe("splits", function()
     it("maps C-l to move right", function() h.assert_keymap('n', '<C-L>') end)
   end)
 
+  describe(":SplitOrFocus", function()
+    local file = vim.fn.resolve(vim.fn.tempname()) .. ' with space.txt'
+
+    before_each(function()
+      vim.cmd('enew | silent! only')
+    end)
+
+    it("splits when the file isn't in a window", function()
+      local start = vim.api.nvim_get_current_win()
+      vim.cmd.SplitOrFocus(file)
+      assert.equals(2, #vim.api.nvim_list_wins())
+      assert.are_not.equal(start, vim.api.nvim_get_current_win())
+      assert.equals(file, vim.api.nvim_buf_get_name(0))
+    end)
+
+    it("focuses the existing window instead of splitting again", function()
+      vim.cmd.SplitOrFocus(file)
+      local target = vim.api.nvim_get_current_win()
+      vim.cmd.wincmd('p')
+      vim.cmd.SplitOrFocus(file)
+      assert.equals(2, #vim.api.nvim_list_wins())
+      assert.equals(target, vim.api.nvim_get_current_win())
+    end)
+  end)
+
   describe("VimResized autocmd", function()
     it("registers the autocmd", function()
       local autocmds = vim.api.nvim_get_autocmds({ group = 'vim_resized' })
