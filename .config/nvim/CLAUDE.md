@@ -91,3 +91,15 @@ basenames, newest first, not scoped to cwd. Neo-tree only calls a source's
 itself. Items are plain tables, not `file_items.create_item`, which would
 build parent directories into a tree. It is the second tab; `2` jumps to it,
 `d` drops an entry. Neo-tree cannot stack two sources in one window (upstream 360, 395).
+
+## External Neo-tree sources
+
+Neo-tree options live in `lua/config/neotree.lua`, not the plugin spec. A directory outside this config adds its own source from an exrc `.nvim.lua` (`exrc` is on; nvim sources trusted `.nvim.lua` files from the cwd and its parents after `init.lua`):
+
+```lua
+vim.opt.rtp:prepend(vim.fs.dirname(debug.getinfo(1, "S").source:sub(2)) .. "/.nvim")
+local ok, neotree = pcall(require, "config.neotree")
+if ok then neotree.add_source("my_source", { display_name = " Mine " }) end
+```
+
+`add_source` appends to `sources` and the selector, then re-runs `require("neo-tree").setup()`, which is safe to call again. The window's `1`-`9` keys follow selector order, so added sources get the next number. `source_names()` feeds the visibility check behind `-` and the `<C-w>` moves; never hardcode source names. The 35-column window truncates labels once there are five tabs.
