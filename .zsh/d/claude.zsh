@@ -1,7 +1,7 @@
 # https://code.claude.com/docs/en/agent-teams
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 export CLAUDE_CODE_HIDE_ACCOUNT_INFO=1
-alias cw="cd ~/brain/cw && cl"
+alias cb="cd ~/brain/* && cl"
 cl() {
   if [[ -v NVIM ]]; then
     # Already in a neovim terminal, just run claude directly
