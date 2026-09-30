@@ -60,7 +60,7 @@ If you run out of ideas, think harder:
 - Try more radical changes — if incremental tweaks are stalling, make a bigger move.
 - Look at the `results.md` for patterns — what kinds of changes helped vs hurt?
 - Simplify: remove complexity and see if results hold or improve.
-- **Ask Codex for help.** If you have genuinely exhausted your own ideas, start a Codex thread (`mcp__codex__codex`) with a summary of the task, what you have tried so far, and what worked vs failed. Ask it for the next set of ideas or a different angle of attack. Use threaded replies (`mcp__codex__codex-reply`) to refine its suggestions before trying them. This is your brainstorming partner — use it before giving up.
+- **Ask Codex for help.** If you have genuinely exhausted your own ideas, start a Codex thread (`codex exec`, per the `codex-planning` skill) with a summary of the task, what you have tried so far, and what worked vs failed. Ask it for the next set of ideas or a different angle of attack. Use threaded replies (`codex exec resume`) to refine its suggestions before trying them. This is your brainstorming partner — use it before giving up.
 
 ## Handling Failures
 

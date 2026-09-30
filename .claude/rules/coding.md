@@ -10,7 +10,7 @@ Always keep the plan up to date. Record decisions as they're made, mark steps co
 
 ## Use Codex for planning and reviews
 
-For any significant planning AND for code reviews, engage Codex via the `codex-planning` skill (`mcp__codex__codex`). This is mandatory, not optional - load the skill and start a thread before committing to an approach or delivering a review.
+For any significant planning AND for code reviews, engage Codex via the `codex-planning` skill (`codex exec`). This is mandatory, not optional - load the skill and start a thread before committing to an approach or delivering a review.
 
 ## IMPORTANT: verify all bugs before fixing
 
