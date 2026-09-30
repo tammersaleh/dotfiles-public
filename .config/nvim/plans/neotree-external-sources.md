@@ -52,7 +52,7 @@ The `pcall` keeps other nvim configs working. The source lives at `<repo>/.nvim/
 2. [x] Extract `lua/config/neotree.lua`; implement `add_source`, `source_names`, generated number keymaps. Tests green.
 3. [x] Enable `exrc`.
 4. [x] Update `.config/nvim/CLAUDE.md` (section on external sources).
-5. [ ] Caller side: tracked in the external repo, not here.
+5. [x] Caller side: tracked in the external repo, not here.
 
 ## Discoveries
 
