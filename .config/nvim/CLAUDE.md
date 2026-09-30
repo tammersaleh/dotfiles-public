@@ -102,4 +102,4 @@ local ok, neotree = pcall(require, "config.neotree")
 if ok then neotree.add_source("my_source", { display_name = " Mine " }) end
 ```
 
-`add_source` appends to `sources` and the selector, then re-runs `require("neo-tree").setup()`, which is safe to call again. The window's `1`-`9` keys follow selector order, so added sources get the next number. `source_names()` feeds the visibility check behind `-` and the `<C-w>` moves; never hardcode source names. The 35-column window truncates labels once there are five tabs.
+`add_source` takes an optional `config`, stored as the source's own opts (e.g. `{ window = { mappings = { l = "noop" } } }`); per-source mappings are the only way to override the global `window.mappings`. It appends to `sources` and the selector, then re-runs `require("neo-tree").setup()`, which is safe to call again. The window's `1`-`9` keys follow selector order, so added sources get the next number. `source_names()` feeds the visibility check behind `-` and the `<C-w>` moves; never hardcode source names. The 35-column window truncates labels once there are five tabs.

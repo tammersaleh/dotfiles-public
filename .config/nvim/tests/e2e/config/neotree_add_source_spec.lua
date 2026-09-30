@@ -22,7 +22,11 @@ describe("Neo-tree add_source (with plugins)", function()
   local neotree = require('config.neotree')
 
   before_each(function()
-    neotree.add_source('neotree_fixture', { display_name = ' Fixture ' })
+    neotree.add_source('neotree_fixture', {
+      display_name = ' Fixture ',
+      config = { window = { mappings = { z = function() vim.g.fixture_z = true end } } },
+    })
+    vim.g.fixture_z = nil
     h.reset()
     vim.cmd.Neotree('close')
   end)
@@ -63,6 +67,13 @@ describe("Neo-tree add_source (with plugins)", function()
     vim.cmd.wincmd('p')
     h.feed('-')
     assert.is_nil(neotree_win())
+  end)
+
+  it("applies the source-specific config", function()
+    vim.cmd.Neotree('fixture')
+    vim.api.nvim_set_current_win(wait_for_win('fixture'))
+    h.feed('z')
+    assert.is_true(vim.g.fixture_z)
   end)
 
   it("ignores a second add of the same module", function()

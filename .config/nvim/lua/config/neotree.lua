@@ -203,13 +203,16 @@ function M.source_names()
 end
 
 ---@param module string Lua module implementing a Neo-tree source
----@param spec { display_name: string }
+---@param spec { display_name: string, config?: table } config becomes opts[<source name>]
 function M.add_source(module, spec)
   if vim.tbl_contains(opts.sources, module) then return end
   local name = require(module).name
   table.insert(opts.sources, module)
   table.insert(opts.source_selector.sources, { source = name, display_name = spec.display_name })
   table.insert(names, name)
+  if spec.config then
+    opts[name] = spec.config
+  end
   M.setup()
 end
 
