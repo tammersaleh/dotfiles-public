@@ -3,6 +3,9 @@
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+-- Source trusted .nvim.lua files from the cwd and its parents (:trust)
+vim.o.exrc = true
+
 -- Sync clipboard between OS and Neovim.
 vim.o.clipboard = 'unnamedplus'
 

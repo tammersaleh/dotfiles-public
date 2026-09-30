@@ -7,6 +7,10 @@ describe("editor", function()
     assert.equals('a', vim.o.mouse)
   end)
 
+  it("loads trusted project-local .nvim.lua files", function()
+    assert.is_true(vim.o.exrc)
+  end)
+
   it("syncs clipboard with OS", function()
     assert.equals('unnamedplus', vim.o.clipboard)
   end)
