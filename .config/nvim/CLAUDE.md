@@ -106,4 +106,4 @@ if ok then neotree.add_source("my_source", { display_name = " Mine " }) end
 
 ## Telescope
 
-Every picker lives under `<C-f>` (`<C-f>f` files, `<C-f>g` grep, and so on) in normal, insert, visual, and terminal mode, so a picker opens while typing into a terminal program. The cost is Vim's page-down and the program's own `<C-f>`. Command-line and operator-pending modes are left alone. Project-local pickers join the prefix from their `.nvim.lua`.
+Every picker lives under `<C-f>` (`<C-f>f` files, `<C-f>g` grep, and so on) in normal, insert, visual, and terminal mode, so a picker opens while typing into a terminal program. The cost is Vim's page-down and the program's own `<C-f>`. Command-line and operator-pending modes are left alone. which-key auto-triggers only `nxso`, so `lua/plugins/init.lua` adds a manual `<C-f>` trigger for `i` and `t`; without it the prefix times out after `timeoutlen` (300ms) and `<C-f>` leaks to the buffer or program. Headless specs run before `VimEnter`, when which-key loads, so `telescope_keymaps_spec` fires `VimEnter` itself. Project-local pickers join the prefix from their `.nvim.lua`.

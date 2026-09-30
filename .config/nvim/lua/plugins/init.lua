@@ -19,6 +19,12 @@ return {
   { 'echasnovski/mini.splitjoin', version = '*', opts = {} },
   { 'folke/which-key.nvim',
     opts = {
+      triggers = {
+        { "<auto>", mode = "nxso" },
+        -- Auto triggers skip insert and terminal mode, where the telescope
+        -- prefix would otherwise time out after 'timeoutlen'.
+        { "<C-f>", mode = { "i", "t" } },
+      },
       plugins = {
         presets = {
           operators = true, -- adds help for operators like d, y, ...
