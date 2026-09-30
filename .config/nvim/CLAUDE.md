@@ -103,3 +103,7 @@ if ok then neotree.add_source("my_source", { display_name = " Mine " }) end
 ```
 
 `add_source` takes an optional `config`, stored as the source's own opts (e.g. `{ window = { mappings = { l = "noop" } } }`); per-source mappings are the only way to override the global `window.mappings`. It appends to `sources` and the selector, then re-runs `require("neo-tree").setup()`, which is safe to call again. The window's `1`-`9` keys follow selector order, so added sources get the next number. `source_names()` feeds the visibility check behind `-` and the `<C-w>` moves; never hardcode source names. The 35-column window truncates labels once there are five tabs.
+
+## Telescope
+
+Every picker lives under `<C-f>` (`<C-f>f` files, `<C-f>g` grep, and so on) in normal, insert, visual, and terminal mode, so a picker opens while typing into a terminal program. The cost is Vim's page-down and the program's own `<C-f>`. Command-line and operator-pending modes are left alone. Project-local pickers join the prefix from their `.nvim.lua`.

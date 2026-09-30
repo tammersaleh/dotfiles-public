@@ -49,9 +49,10 @@ return {
       return git_root
     end
 
-    -- All of the telescope bindings start with space-f
+    -- All of the telescope bindings start with ctrl-f, in every mode that can
+    -- open a picker. This shadows page-down, and ctrl-f in terminal programs.
     local function map(key, func, desc)
-      vim.keymap.set('n', '<leader>f' .. key, func, { desc = '[F]ind ' .. desc })
+      vim.keymap.set({ 'n', 'i', 'x', 't' }, '<C-f>' .. key, func, { desc = '[F]ind ' .. desc })
     end
 
     local function find_in_current_buffer_fn()
