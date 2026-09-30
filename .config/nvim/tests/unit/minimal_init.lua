@@ -15,6 +15,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.o.swapfile = false
+-- Keep the real v:oldfiles out of tests
+vim.o.shadafile = 'NONE'
 
 vim.cmd('filetype plugin indent on')
 
