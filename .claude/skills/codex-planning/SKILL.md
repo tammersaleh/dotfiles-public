@@ -27,12 +27,12 @@ Before committing to an approach, writing a non-trivial chunk of code, or delive
 Pick a thread directory under the scratchpad (one per thread), then start the thread. The prompt goes on stdin (`-`), so it can be long and needs no quoting.
 
 ```bash
-T=<scratchpad>/codex/<topic>; mkdir -p "$T"
+T=<scratchpad>/codex/<topic>; mkdir -p "$T"; rm -f "$T/reply.md"
 codex --profile planner exec --json --skip-git-repo-check -C "$PWD" \
   -o "$T/reply.md" - > "$T/events.jsonl" <<'EOF'
 Help me plan...
 EOF
-jq -r 'select(.type=="thread.started").thread_id' "$T/events.jsonl" > "$T/thread_id"
+jq -er 'select(.type=="thread.started").thread_id' "$T/events.jsonl" > "$T/thread_id"
 cat "$T/reply.md"
 ```
 
@@ -41,12 +41,15 @@ The `planner` profile (`~/.codex/planner.config.toml`) carries the co-planner in
 ## Continuing a Thread
 
 ```bash
+rm -f "$T/reply.md"
 codex --profile planner exec resume --json --skip-git-repo-check -o "$T/reply.md" \
   "$(cat "$T/thread_id")" - > "$T/events.jsonl" <<'EOF'
 What about X vs Y?
 EOF
 cat "$T/reply.md"
 ```
+
+Each turn deletes `reply.md` first, so a failed turn shows up as a missing file instead of the previous answer.
 
 ## Blocking vs Background
 
