@@ -65,3 +65,13 @@ A Codex turn takes seconds to several minutes.
 - Point Codex at files by path instead of pasting them; it can read the repo.
 - Use multiple exchanges to refine ideas before committing to an approach.
 - For code reviews, share the diff (or the base branch) and initial findings, then ask Codex to challenge them.
+
+## Weighing Codex's Output
+
+Codex is a second opinion, not an authority. It over-engineers: extra abstraction layers, defensive checks for cases that cannot happen, configuration nobody asked for, and "robustness" that adds code without fixing a real failure.
+
+- Verify each claim against the code before acting on it. Codex can be confidently wrong about what a file does.
+- Accept a finding only if you can name the concrete input or state that breaks. Drop speculative risks.
+- Prefer the smallest change that solves the stated problem. When Codex proposes more, take the core fix and leave the rest.
+- Push back in the thread when a suggestion is overbuilt; ask for the minimal version.
+- When reporting to Tammer, say which Codex suggestions you rejected and why, in one line each.
