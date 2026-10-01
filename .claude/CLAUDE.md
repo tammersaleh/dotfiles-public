@@ -48,6 +48,7 @@ This applies to your output in chat, README's, internal documentation, Git commi
 
 - Favor actual headings over bolded text.  ie `### Important` instead of `**important**`
 - Never use the emdash (`—`).  Always use regular dash (`-`) instead.
+- Never hard-wrap prose.  One paragraph or list item per line; my editor soft-wraps.
 - ALWAYS include a completely blank line between paragraphs/headings and bulleted lists.  Just like how it's done in this doc.
 - Add appropriate language tags to all code blocks.
 - When I ask to render the markdown, I want you to use the `mark` CLI to show it to me (`mark path/to/file.md`).
