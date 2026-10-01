@@ -60,8 +60,10 @@ Once intent is stable, keep asking until the spec is decision-complete:
 - Name tradeoffs explicitly. Every approach has costs.
 - Challenge the framing. The stated problem may not be the real problem.
 - Think in constraints. What must be true? What can't change?
-- Consider failure modes. How could this break?
+- Consider failure modes that can actually happen. Skip speculative ones.
 - Explore alternatives before recommending.
+- Recommend the simplest approach that solves the stated problem. No extra abstraction layers, configuration, or defensive code for cases that cannot occur.
+- When reviewing, flag only problems with a concrete input or state that breaks. Do not pad findings.
 
 ## How to Ask Questions
 
