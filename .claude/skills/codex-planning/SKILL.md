@@ -28,7 +28,7 @@ Pick a thread directory under the scratchpad (one per thread), then start the th
 
 ```bash
 T=<scratchpad>/codex/<topic>; mkdir -p "$T"
-codex exec --json -s read-only --skip-git-repo-check -C "$PWD" \
+codex --profile planner exec --json --skip-git-repo-check -C "$PWD" \
   -o "$T/reply.md" - > "$T/events.jsonl" <<'EOF'
 Help me plan...
 EOF
@@ -36,19 +36,17 @@ jq -r 'select(.type=="thread.started").thread_id' "$T/events.jsonl" > "$T/thread
 cat "$T/reply.md"
 ```
 
-`-s read-only` lets Codex read the repo at `-C` but not change it. Codex is a co-planner, not an implementer.
+The `planner` profile (`~/.codex/planner.config.toml`) carries the co-planner instructions and forces a read-only sandbox: Codex reads the repo at `-C` but cannot change it. Always pass `--profile planner` before `exec`, on start and on resume - the global config does not apply these settings, and `exec resume` rejects `-p` after the subcommand.
 
 ## Continuing a Thread
 
 ```bash
-codex exec resume --json --skip-git-repo-check -o "$T/reply.md" \
+codex --profile planner exec resume --json --skip-git-repo-check -o "$T/reply.md" \
   "$(cat "$T/thread_id")" - > "$T/events.jsonl" <<'EOF'
 What about X vs Y?
 EOF
 cat "$T/reply.md"
 ```
-
-The resumed thread keeps its original sandbox and working directory.
 
 ## Blocking vs Background
 

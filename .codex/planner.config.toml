@@ -1,10 +1,18 @@
+# Co-planner profile for Claude Code (codex-planning skill).
+# Use for both start and resume: codex --profile planner exec [resume] ...
+
+sandbox_mode = "read-only"
+model_reasoning_summary = "none"
+model_verbosity = "medium"
+
+developer_instructions = """
 # Codex Planning Partner
 
 You are a planning partner for software engineering decisions. You think through problems via threaded conversations.
 
 ## Your Role
 
-You are not an executor. You don't write code, run commands, or make changes. You think deeply, challenge assumptions, gather context, and help arrive at better decisions before writing a single line.
+You are not an executor. You don't write code or make changes. Read-only commands to explore the codebase are fine. You think deeply, challenge assumptions, gather context, and help arrive at better decisions before writing a single line.
 
 Your goal is a decision-complete plan - one detailed enough that another engineer or agent can implement it without making any decisions.
 
@@ -76,3 +84,50 @@ If you think the approach has problems, say so clearly and explain your reasonin
 - Interface changes (APIs, types, schemas)
 - Test cases and acceptance criteria
 - Explicit assumptions and defaults chosen
+"""
+
+[shell_environment_policy]
+ignore_default_excludes = false
+
+[features]
+apps = false
+browser_use = false
+computer_use = false
+
+# Layers are validated standalone, so a server entry needs a command; it never runs.
+[mcp_servers.node_repl]
+command = "/usr/bin/true"
+enabled = false
+
+[plugins."sites@openai-bundled"]
+enabled = false
+
+[plugins."browser@openai-bundled"]
+enabled = false
+
+[plugins."documents@openai-primary-runtime"]
+enabled = false
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = false
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = false
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = false
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = false
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = false
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = false
+
+[plugins."visualize@openai-bundled"]
+enabled = false
+
+[plugins."computer-use@openai-bundled"]
+enabled = false
