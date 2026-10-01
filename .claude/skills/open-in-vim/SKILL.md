@@ -39,3 +39,15 @@ instead.
 Pass absolute paths. The command produces no output on success - the split just
 appears in Tammer's nvim. State that the file is open and stop; do not also edit
 it unless he asks.
+
+## After Tammer is done
+
+When he says he is done with a file opened for feedback, re-read the whole file
+and search it for `NB` notes:
+
+```bash
+rg -n '\bNB\b' <path>
+```
+
+Each NB note is a question or instruction from Tammer. Answer or act on every
+one, then remove the note. Never treat the file as approved without this check.

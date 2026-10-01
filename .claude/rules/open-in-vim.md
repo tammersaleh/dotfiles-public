@@ -15,3 +15,10 @@ wrapper refuses (`$NVIM` unset), say so and edit with the normal tools.
 Whenever you create a markdown file or any text file for Tammer to
 review or edit, offer to `v` it for him in the same turn. Don't wait to
 be asked.
+
+## Check for NB notes after review
+
+When Tammer finishes with a file you opened for feedback, re-read the whole
+file and search it for `NB` notes (`rg -n '\bNB\b' <path>`). Each NB note is a
+question or instruction from Tammer. Answer or act on every one, then remove
+the note. Never treat the file as approved without this check.
