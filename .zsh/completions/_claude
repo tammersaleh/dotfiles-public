@@ -6,11 +6,14 @@
 
 _claude_session_ids() {
   # Claude stores each project under ~/.claude/projects/ with a mangled
-  # folder name: both `/` and `.` are replaced with `-`. The prior version
-  # only handled `/`, so any hidden-directory path (e.g. `/Users/x/.fabro/y`)
-  # silently returned no completions.
-  local mangled="${PWD//\//-}"
-  mangled="${mangled//./-}"
+  # folder name, Claude Code's `path.replace(/[^a-zA-Z0-9]/g, "-")`. That
+  # regex runs per UTF-16 code unit, so a character beyond U+FFFF such as
+  # `💩` becomes `--` while `ü`, ` `, `_`, `/` and `.` each become `-`. Zsh
+  # substitutes per character, hence the separate first pass for the astral
+  # range. Under a non-UTF-8 locale both passes yield extra hyphens, no
+  # folder matches, and the originalPath fallback below applies.
+  local mangled="${PWD//[$'\U00010000'-$'\U0010FFFF']/--}"
+  mangled="${mangled//[^a-zA-Z0-9]/-}"
   local project_dir="$HOME/.claude/projects/$mangled"
 
   # Fallback: if the mangled folder isn't found (e.g. unknown future naming
@@ -364,6 +367,7 @@ mcp_commands=(
 
 local -a plugin_commands
 plugin_commands=(
+  'configure:Show a plugin'\''s options and which are unset, or save values from stdin with --values-stdin'
   'details:Show a plugin'\''s component inventory and projected token cost'
   'disable:Disable an enabled plugin'
   'enable:Enable a disabled plugin'
@@ -577,6 +581,13 @@ case $subcmd in
       _describe 'plugin command' plugin_commands
     else
       case $words[$sub1] in
+        configure)
+          _arguments \
+            '(-h --help)'{-h,--help}'[Display help]' \
+            '--json[Output as JSON]' \
+            '--values-stdin[Read option values from stdin as a JSON object of single-line strings; options left out keep their values]' \
+            ':plugin:'
+          ;;
         details)
           _arguments \
             '(-h --help)'{-h,--help}'[Display help]' \
@@ -747,6 +758,7 @@ case $subcmd in
         list)
           _arguments \
             '--available[Include available plugins from marketplaces (requires --json)]' \
+            '--data-size[Measure each installed plugin'\''s saved data directory, or only the named plugin'\''s (requires --json)]::plugin:' \
             '(-h --help)'{-h,--help}'[Display help]' \
             '--json[Output as JSON]'
           ;;
@@ -952,6 +964,7 @@ _arguments -s \
   '--dangerously-skip-permissions[Bypass all permission checks. Recommended only for sandboxes with no internet access]' \
   '(-d --debug)'{-d,--debug}'[Enable debug mode with optional category filtering (e.g., "api,hooks" or "!1p,!file")]:filter:' \
   '--debug-file[Write debug logs to a specific file path (implicitly enables debug mode)]:path:_files' \
+  '--desktop[Open in the Claude Desktop app instead of the terminal (with --continue or --resume <id> to pick the session)]' \
   '--disable-slash-commands[Disable all skills]' \
   '*--disallowedTools[Comma or space-separated list of tool names to deny (e.g. "Bash(git:*) Edit")]:tools:' \
   '*--disallowed-tools[Comma or space-separated list of tool names to deny (e.g. "Bash(git:*) Edit")]:tools:' \
