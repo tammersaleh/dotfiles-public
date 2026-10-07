@@ -11,6 +11,14 @@ return {
       mode = {'o','x'},
     },
     {
+      'il', '<cmd>lua require("various-textobjs").lineCharacterwise("inner")<CR>',
+      mode = {'o','x'},
+    },
+    {
+      'al', '<cmd>lua require("various-textobjs").lineCharacterwise("outer")<CR>',
+      mode = {'o','x'},
+    },
+    {
       's', '<cmd>lua require("various-textobjs").subword()<CR>',
       mode = {'o','x'},
     },
