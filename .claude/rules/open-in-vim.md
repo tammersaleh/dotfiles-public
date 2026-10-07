@@ -22,3 +22,11 @@ When Tammer finishes with a file you opened for feedback, re-read the whole
 file and search it for `NB` notes (`rg -n '\bNB\b' <path>`). Each NB note is a
 question or instruction from Tammer. Answer or act on every one, then remove
 the note. Never treat the file as approved without this check.
+
+## Re-read before every write
+
+Once a file has been opened for Tammer, he may be editing it. Before any write
+to it (Edit, Write, sed, a script), re-read the file from disk and diff it
+against what you last wrote. Build on his version; never overwrite his
+changes. If his edits conflict with yours, show the conflict and ask.
+(Tammer, 2026-10-06)
