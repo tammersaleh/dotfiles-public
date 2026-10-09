@@ -186,6 +186,7 @@ brew 'zsh-fast-syntax-highlighting'  # Colorized command line prompt
 
 ### Go tools
 
+go 'github.com/tammersaleh/greenhouse-cli/cmd/greenhouse'  # greenhouse CLI (private repo; needs GOPRIVATE=github.com/tammersaleh/greenhouse-cli via `go env -w`)
 go 'github.com/tammersaleh/lattice-cli/cmd/lattice'  # lattice CLI (private repo; needs GOPRIVATE=github.com/tammersaleh/lattice-cli via `go env -w`)
 
 ### NPM packages
