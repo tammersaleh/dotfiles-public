@@ -49,6 +49,25 @@ Claude creates the item and its field structure but never sees or types the secr
 
 Update the field value in 1Password, run `envsec sync`, open a new shell. To rename or drop a var, edit the item (`op item edit <id> 'NEW[password]=v' 'OLD[delete]'`) and re-sync.
 
+## Copying a 1Password value into a GitHub repo secret
+
+For a secret a repo's Actions need (a release PAT, a deploy token), the value already exists in 1Password and Claude copies it straight into the repo with `gh secret set`. It never goes through envsec, a file, or the chat.
+
+Rules, learned the hard way:
+
+- `op item get` must carry `--account <url>` (two accounts are signed in; an unscoped call prints nothing on stdout and no useful error).
+- Never pipe `op` straight into `gh secret set`: it accepts empty stdin silently and the workflow later fails with `Input required and not supplied: token`. Capture the value, check its length, then pipe.
+- Say beforehand that a Touch ID prompt is coming, and do it all in one Bash call so it costs one prompt.
+
+```bash
+V=$(op item get "<Item Title>" --account my.1password.com --fields label=<field> --reveal)
+echo "length=${#V}"                      # must be the expected size, never 0
+[ "${#V}" -ge 20 ] && printf '%s' "$V" | gh secret set <NAME> -R <owner>/<repo>
+gh secret list -R <owner>/<repo>          # confirm the timestamp
+```
+
+Known items: "Github Release Automation Token" (personal account, field `token`, 40 chars) is the user-attributed `repo`-scope PAT shared by the `*-cli` repos' `RELEASE_PAT` secret.
+
 ## Commands
 
 ```bash
