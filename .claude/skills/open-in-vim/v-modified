@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+# Report which of the given files have unsaved changes in the parent nvim.
+#
+# Exit codes:
+#   0  no listed file has unsaved changes (or $NVIM is unset)
+#   1  at least one listed file has unsaved changes; each is printed
+#   2  nvim could not be queried
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: v-modified <file> [file...]" >&2
+  exit 2
+fi
+
+if [[ ! -v NVIM ]]; then
+  echo "\$NVIM is unset; no nvim to check." >&2
+  exit 0
+fi
+
+# Full paths of modified buffers, symlinks resolved. Skips terminal and
+# unnamed buffers. The OK line distinguishes a result from an error message,
+# since nvr exits 0 when the expression fails.
+expr='join(["OK"] + map(filter(getbufinfo({"bufmodified": 1}), {_, b -> b.name != "" && b.name !~# "^term://"}), {_, b -> resolve(b.name)}), "\n")'
+
+if ! out=$(timeout 3 nvr -s --nostart --servername "$NVIM" --remote-expr "$expr" 2>&1) ||
+  [[ $(head -n1 <<<"$out") != OK ]]; then
+  echo "Could not query nvim at $NVIM:" >&2
+  echo "$out" >&2
+  exit 2
+fi
+
+modified=$(tail -n +2 <<<"$out")
+status=0
+for f in "$@"; do
+  path=$(realpath "$f" 2>/dev/null || echo "$f")
+  if grep -Fxq -- "$path" <<<"$modified"; then
+    echo "$path"
+    status=1
+  fi
+done
+exit $status

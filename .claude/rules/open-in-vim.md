@@ -30,3 +30,18 @@ to it (Edit, Write, sed, a script), re-read the file from disk and diff it
 against what you last wrote. Build on his version; never overwrite his
 changes. If his edits conflict with yours, show the conflict and ask.
 (Tammer, 2026-10-06)
+
+## Check for unsaved changes before every write
+
+A disk read misses edits Tammer hasn't saved. Before any write to a file opened
+for him, run:
+
+```bash
+~/.claude/skills/open-in-vim/v-modified <path> [path...]
+```
+
+- Exit 0: no unsaved changes. Proceed.
+- Exit 1: it prints each file with unsaved changes. Don't write. Ask Tammer to
+  save, then re-read before writing.
+- Exit 2: nvim couldn't be queried. Don't write. Tell Tammer.
+

@@ -40,6 +40,19 @@ Pass absolute paths. The command produces no output on success - the split just
 appears in Tammer's nvim. State that the file is open and stop; do not also edit
 it unless he asks.
 
+## Before writing to an opened file
+
+Check that Tammer has no unsaved changes in nvim:
+
+```bash
+~/.claude/skills/open-in-vim/v-modified <path> [path...]
+```
+
+It asks the parent nvim (via `nvr --nostart`, 3s timeout) which buffers are
+modified, resolving symlinks on both sides. Exit 0 means clean or `$NVIM`
+unset, 1 means it printed files with unsaved changes, 2 means nvim couldn't be
+queried. Write only on 0.
+
 ## After Tammer is done
 
 When he says he is done with a file opened for feedback, re-read the whole file
