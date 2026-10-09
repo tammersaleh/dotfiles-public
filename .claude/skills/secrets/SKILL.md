@@ -66,8 +66,6 @@ echo "length=${#V}"                      # must be the expected size, never 0
 gh secret list -R <owner>/<repo>          # confirm the timestamp
 ```
 
-Known items: "Github Release Automation Token" (personal account, field `token`, 40 chars) is the user-attributed `repo`-scope PAT shared by the `*-cli` repos' `RELEASE_PAT` secret.
-
 ## Commands
 
 ```bash
