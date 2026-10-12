@@ -140,6 +140,27 @@ Do not retry the failing command hoping it recovers. Every retry 401s, and
 unlike the duplicate-event hazard below, a 401 means the API was never reached,
 so nothing was created.
 
+## Auth: `invalid_grant: reauth related error (invalid_rapt)`
+
+Google revoked the refresh token server-side. Nothing local changed, and
+`credentials.enc` is intact. The cause is the Workspace policy "Google Cloud
+session control", which forces periodic reauthentication on any app whose token
+carries the `cloud-platform` scope. A bare or `--full` `gws auth login` requests
+that scope.
+
+The Admin console has two settings that stop it:
+
+1. Security > API controls > App access control: the gws OAuth client is
+   marked Trusted.
+2. Security > Access and data control > Google Cloud session control: "Exempt
+   Trusted apps" is ticked.
+
+Both were set on 2026-10-12. If `invalid_rapt` returns, check those two
+settings first, then have the user re-login. A token without `cloud-platform`
+is not subject to the policy at all.
+
+Reference: https://knowledge.workspace.google.com/admin/security/set-session-length-for-google-cloud-services
+
 ## Stray `download.<ext>` files
 
 Some commands write a 0-byte or partial `download.<ext>` file in the
