@@ -64,19 +64,34 @@ gws drive comments list --params '{
 `quotedFileContent.value` is HTML-encoded (`doesn&#39;t`). Decode entities
 before display.
 
-UI-created comment `anchor` values are opaque `kix.<id>` strings. They
-do not appear anywhere in `docs.documents.get` output, so there's no
-way to resolve them to a body position. Rely on `quotedFileContent`
-for the text content.
+Comment `anchor` values on Docs are opaque `kix.<id>` strings. To resolve
+them, call `documents.get` with `commentsViewMode` (it requires both
+companion params):
 
-API-created comments support a documented offset format:
+```bash
+gws docs documents get --params '{"documentId":"<DOC_ID>","includeTabsContent":true,"suggestionsViewMode":"SUGGESTIONS_INLINE","commentsViewMode":"COMMENTS_VIEW_MODE_INCLUDED"}'
+```
+
+Each `tabs[].documentTab.commentAnchors` maps a live `kix.<id>` to its
+`ranges` (`startIndex`/`endIndex`). The top-level `comments[]` lists each
+thread's `anchorId`, `status` (`OPEN`/`RESOLVED`), and `plainTextQuote`.
+
+A comment whose text was deleted is orphaned: its anchor is missing from
+every tab's `commentAnchors` (union child tabs too). Drive `comments.list`
+can't tell; `anchor`, `quotedFileContent`, `resolved`, and `deleted` stay
+unchanged. Don't match `quotedFileContent` against the body: short quotes
+match elsewhere, and re-typed identical text doesn't restore the anchor.
+
+Create anchored comments with Docs `batchUpdate` `insertComment`. A Drive
+`comments.create` with the `{"r":"head",...}` offset anchor below never
+appears in `commentAnchors`, so Docs doesn't treat it as anchored:
 
 ```json
 {"r":"head","a":[{"txt":{"o":<offset>,"l":<length>,"ml":<max>}}]}
 ```
 
-`o` is 0-based from the start of the doc body. The Docs API uses
-1-based indexing for the same content, so `body_index = anchor_offset + 1`.
+Exports (HTML, DOCX, ODT, RTF), via the API or `exportLinks`, contain no
+comments.
 
 ## `fields` parameter is required on most read methods
 
