@@ -271,10 +271,34 @@ vim.keymap.set('i', '<Tab>', with_cmp(function(cmp) cmp.select_next_item({ behav
 vim.keymap.set('i', '<S-Tab>', with_cmp(function(cmp) cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert }) end, md_stab), { buffer = true, silent = true, desc = "Bullet cycle backward" })
 
 -------------------------------------------------------------------------------
+-- Enter: list and blockquote continuation (lua/config/lists.lua)
+--
+-- The <Plug> is an expr mapping that returns keys, so the split dot-repeats.
+-- <C-]> expands a pending abbreviation first, as Vim's own <CR> would. `o`
+-- skips it: native `o` does not expand the word at the end of the line.
+-- bullets.vim does not map <CR> or o (see lua/plugins/bullets.lua), so these
+-- buffer-local maps survive its FileType autocmd.
+-------------------------------------------------------------------------------
+
+local lists = require('config.lists')
+
+vim.keymap.set('i', '<Plug>(config-lists-newline)', function()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local sts = vim.bo.softtabstop
+  if sts < 0 then sts = vim.bo.shiftwidth end
+  return lists.newline_keys(vim.api.nvim_get_current_line(), col,
+    { indent_unit = indent_unit(), softtabstop = sts, tabstop = vim.bo.tabstop })
+end, { expr = true, replace_keycodes = true, desc = "Continue list or quote" })
+vim.keymap.set('i', '<CR>', '<C-]><Plug>(config-lists-newline)', { buffer = true, remap = true, desc = "Continue list or quote" })
+vim.keymap.set('i', '<C-CR>', '<CR>', { buffer = true, desc = "Newline without a bullet" })
+vim.keymap.set('n', 'o', 'A<Plug>(config-lists-newline)', { buffer = true, remap = true, desc = "New list item or quote line below" })
+
+-------------------------------------------------------------------------------
 -- Options
 -------------------------------------------------------------------------------
 
 vim.opt_local.conceallevel = 0
+vim.opt_local.autoindent = true -- the <CR> key strings depend on it
 vim.opt_local.tabstop = 4
 vim.opt_local.shiftwidth = 4
 vim.opt_local.linebreak = true
