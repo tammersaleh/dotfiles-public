@@ -30,6 +30,10 @@ blockwise-visual). To confirm the real-terminal experience, drive nvim in a PTY:
 `tmux new-session -d -s x -x 120 -y 40`, `tmux send-keys`, `sleep` between keys,
 then read the saved buffer.
 
+`mise run test:pty` runs `tests/pty/newline-dot-repeat`, which does this for the markdown `<CR>` dot-repeat and abbreviation cases. It needs tmux and is not part of `mise run test`; run it by hand before committing a change to `lua/config/lists.lua` or the markdown `<CR>` mappings.
+
+Two harness limits found while writing those tests: `nvim_feedkeys` with `x!` (stay in insert mode) hangs the plenary subprocess, and an abbreviation typed right before `<CR>` in one feedkeys batch makes insert mode read ahead, so an `expr` mapping sees the line before the word is inserted. Neither happens with real typing.
+
 ### Test pattern
 
 ```lua
@@ -57,17 +61,15 @@ Markdown uses shiftwidth=4 (set in `after/ftplugin/markdown.lua`). Unit tests th
 
 The `undefined global 'vim'` warnings in lua files are expected - the LSP doesn't know these run inside Neovim. Ignore them.
 
-## bullets.vim
+## Markdown Enter and bullets.vim
 
-`<cr>` in markdown belongs to bullets.vim, wrapped in `lua/plugins/bullets.lua` so a mid-item Enter also continues the list (the plugin only continues at end of line). The wrapper also repeats a blockquote leader (`> `, `> > `) on Enter and drops the leader from an empty quote line. Don't reach for `formatoptions+=r` for this: the runtime's `fb:-` comment entry then indents plain splits after a list marker, and bullets.vim's fallback `<cr>` goes through `feedkeys`, so the leader lands after any keys typed behind it.
+Insert-mode `<CR>` and normal-mode `o` in markdown are ours: `after/ftplugin/markdown.lua` maps them to `<Plug>(config-lists-newline)`, an `expr` mapping whose keys come from `lua/config/lists.lua`. It returns typed keys (`<BS>`, `<CR>`, the leader, the next marker) instead of editing the buffer, so `cw<CR>` on a list item or quote line dot-repeats. bullets.vim added its bullet with `append()`, which `.` cannot replay. Two things still run as buffer edits from a `<Cmd>` at the end of the key string, so they happen once and are not replayed: renumbering an ordered list and clearing an unused item.
 
-Do not map `<CR>` for markdown in `after/ftplugin/`. bullets.vim installs its buffer-local maps from a FileType autocmd that runs after the ftplugin and overwrites them. Declare them in `g:bullets_custom_mappings` instead, which the plugin applies last.
+The key strings assume `autoindent` (the ftplugin sets it): `<CR>` copies a line-leading indent and drops leading whitespace from the moved tail. Inside a blockquote the indent follows the leader, so it is typed. `<BS>` counts simulate Vim's `softtabstop` rule, since one `<BS>` over pre-existing spaces deletes back to the previous stop. Whitespace at the split point is removed only when text moves down; trailing spaces at end of line are a hard break and stay. Nesting after a trailing colon keeps the parent's marker, the same as Tab indenting. Alphabetic and Roman lists are not recognized.
 
-Its default mappings are off (`g:bullets_set_mappings = 0`) because they also claim `>>`, `<<`, `>`, `<`, `<C-t>`, and `<C-d>` for promote/demote, shadowing the indent operators and duplicating the Tab/S-Tab cycling. We declare `<cr>`, `<C-cr>`, `o`, `gN`, and `<leader>x`.
+bullets.vim remains for `gN` (renumber) and `<leader>x` (toggle checkbox), declared in `g:bullets_custom_mappings` in `lua/plugins/bullets.lua`. Its default mappings are off (`g:bullets_set_mappings = 0`) because they also claim `>>`, `<<`, `>`, `<`, `<C-t>`, and `<C-d>` for promote/demote. bullets.vim installs its buffer-local maps from a FileType autocmd that runs after the ftplugin, so any key it maps overwrites the ftplugin's map; it must not map `<cr>` or `o`.
 
-The wrapper splits the line before calling `InsertNewBullet`. bullets.vim reads the current line to pick the next number, the checkbox state, and whether a trailing colon nests the item, so it has to see the post-split text.
-
-Every list behavior works inside a blockquote (`> - item`, `> > 1. item`), and `o` on a quoted paragraph opens a new quoted line. bullets.vim anchors its regexes at `^\s*`, so instead of teaching it, `with_quote_stripped` in `lua/plugins/bullets.lua` strips the leader from the surrounding block of same-leader lines, runs the bullets.vim command, and puts the leader back. It uses `setline` per line because `nvim_buf_set_lines` over a range moves the `'<`/`'>` marks that `RenumberSelection` reads. Our own Tab/S-Tab and visual `-` `*` `#` in the ftplugin work on the body after the leader. The leader pattern lives in `lua/config/blockquote.lua`: whitespace, one or more `>`, at most one trailing space, so list indentation after `>` stays in the body.
+Every list behavior works inside a blockquote (`> - item`, `> > 1. item`). bullets.vim anchors its regexes at `^\s*`, so instead of teaching it, `with_quote_stripped` in `lua/plugins/bullets.lua` strips the leader from the surrounding block of same-leader lines, runs the bullets.vim command, and puts the leader back. It uses `setline` per line because `nvim_buf_set_lines` over a range moves the `'<`/`'>` marks that `RenumberSelection` reads. Our own Tab/S-Tab and visual `-` `*` `#` in the ftplugin work on the body after the leader. The leader pattern lives in `lua/config/blockquote.lua`: whitespace, one or more `>`, at most one trailing space, so list indentation after `>` stays in the body.
 
 ## gx
 
