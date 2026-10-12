@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+# Drive nvim in a tmux PTY to check what headless feedkeys cannot: that a
+# markdown <CR> split dot-repeats with `.`, and that an abbreviation typed
+# before <CR> expands. Each case writes a file and compares it to the
+# expected text. Needs tmux. Run by hand: `mise run test:pty`.
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+trap 'echo "$0 failed at line $LINENO: $BASH_COMMAND"' ERR
+[[ -v DEBUG ]] && set -x
+
+cd "$(dirname "$0")/../.."
+
+SESSION="nvim-pty-test-$$"
+WORK=$(mktemp -d)
+trap 'tmux kill-session -t "$SESSION" 2>/dev/null || true; rm -rf "$WORK"' EXIT
+
+failures=0
+
+main() {
+  [[ $# -eq 0 ]] || usage "No arguments expected"
+  command -v tmux >/dev/null || usage "tmux is required"
+
+  # name, initial text, expected text, keys...
+  run_case "list last word" \
+    $'- aaa bbb\n- ccc ddd\n' \
+    $'- aaa \n- \n- ccc \n- \n' \
+    'ww' 'cw' Enter Escape 'j$b' '.'
+
+  run_case "list middle word" \
+    $'- aaa bbb ccc\n- ddd eee fff\n' \
+    $'- aaa\n- ccc\n- ddd\n- fff\n' \
+    'ww' 'cw' Enter Escape 'jjww' '.'
+
+  run_case "blockquote" \
+    $'> aaa bbb ccc\n> ddd eee fff\n' \
+    $'> aaa\n> ccc\n> ddd\n> fff\n' \
+    'ww' 'cw' Enter Escape 'jjww' '.'
+
+  run_case "abbreviation before Enter" \
+    $'- \n' \
+    $'- the\n- two\n' \
+    ':iabbrev teh the' Enter 'A' 'teh' Enter 'two'
+
+  if [[ $failures -gt 0 ]]; then
+    echo "$failures case(s) failed"
+    exit 1
+  fi
+  echo "all PTY cases passed"
+}
+
+run_case() {
+  local name=$1 initial=$2 expected=$3
+  shift 3
+  local file="$WORK/case.md"
+  printf '%s' "$initial" > "$file"
+
+  tmux kill-session -t "$SESSION" 2>/dev/null || true
+  tmux new-session -d -s "$SESSION" -x 120 -y 40 "nvim -u init.lua '$file'"
+  sleep 2.5
+  local key
+  for key in "$@"; do
+    tmux send-keys -t "$SESSION" "$key"
+    sleep 0.25
+  done
+  sleep 0.5
+  tmux send-keys -t "$SESSION" Escape ':w' Enter
+  sleep 0.4
+  tmux send-keys -t "$SESSION" ':qa!' Enter
+  sleep 0.4
+
+  local actual
+  actual=$(cat "$file"; echo x)
+  actual=${actual%x}
+  if [[ "$actual" == "$expected" ]]; then
+    echo "ok   $name"
+  else
+    echo "FAIL $name"
+    echo "  expected: $(printf '%q' "$expected")"
+    echo "  actual:   $(printf '%q' "$actual")"
+    failures=$((failures + 1))
+  fi
+}
+
+usage() {
+  [[ $# -gt 0 ]] && echo "  ERROR: $*"
+  local me
+  me=$(basename "$0")
+  cat <<-EOF
+
+	USAGE: $me
+
+	Runs the markdown <CR> dot-repeat cases in a tmux PTY.
+	EOF
+  exit 1
+}
+
+main "$@"
