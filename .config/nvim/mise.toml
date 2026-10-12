@@ -8,3 +8,7 @@ run = "tests/run-tests --headless -c \"PlenaryBustedDirectory tests/unit/ {minim
 [tasks."test:e2e"]
 description = "Run e2e tests (full config with plugins)"
 run = "tests/run-tests --headless -c \"PlenaryBustedDirectory tests/e2e/ {init = 'init.lua'}\""
+
+[tasks."test:pty"]
+description = "Drive nvim in a tmux PTY for dot-repeat cases headless feedkeys cannot cover"
+run = "tests/pty/newline-dot-repeat"
