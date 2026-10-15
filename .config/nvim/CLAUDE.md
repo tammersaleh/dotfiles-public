@@ -73,7 +73,9 @@ Every list behavior works inside a blockquote (`> - item`, `> > 1. item`). bulle
 
 ## gx
 
-`gx` is our own (`lua/config/gx.lua`), not gx.nvim or the builtin. It scans the whole line for http(s) URLs: cursor on one opens it, a lone URL opens directly, several prompt via `vim.ui.select`. Visual mode collects URLs from the selection. No commit-hash, issue-ref, or web-search handlers - URLs only.
+`gx` is our own (`lua/config/gx.lua`), not gx.nvim or the builtin. It scans the whole line for http(s) URLs and existing file paths: cursor on one opens it, a lone target opens directly, several prompt via `vim.ui.select`. Visual mode collects targets from the selection. Everything goes through `vim.ui.open`, so paths open with `open`. No commit-hash, issue-ref, or web-search handlers.
+
+A path candidate is a token delimited by whitespace, brackets, parens, quotes, or backticks, so `[x](./foo.md)` yields `./foo.md` and paths containing parens are not supported. A token followed by `](` is a markdown label and is skipped. It must look like a path (contain `/`, start with `~`, or end in an extension) and exist on disk, so prose like "the docs directory" never opens Finder. Relative paths resolve against the buffer's directory, then cwd. A trailing `:LINE[:COL]` is dropped from the path but stays in the span the cursor can land on. Tests build a temp dir and `cd` into it; they resolve it with `fs_realpath` because `/var` is a symlink on macOS.
 
 ## Treesitter
 
