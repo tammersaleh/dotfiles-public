@@ -330,4 +330,89 @@ describe("config.lists", function()
       assert.is_nil(row_for({ "> - [ ] task", "> >     - sub" }, 2))
     end)
   end)
+
+  describe("toggle_checkbox", function()
+    local function toggled(lines, row)
+      vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+      vim.api.nvim_win_set_cursor(0, { row, 0 })
+      L.toggle_checkbox(row)
+      return vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    end
+
+    it("checks and unchecks the line", function()
+      assert.are.same({ "- [x] a" }, toggled({ "- [ ] a" }, 1))
+      assert.are.same({ "- [ ] a" }, toggled({ "- [x] a" }, 1))
+      assert.are.same({ "- [ ] a" }, toggled({ "- [X] a" }, 1))
+    end)
+
+    it("handles every marker", function()
+      assert.are.same({ "* [x] a" }, toggled({ "* [ ] a" }, 1))
+      assert.are.same({ "+ [x] a" }, toggled({ "+ [ ] a" }, 1))
+      assert.are.same({ "1. [x] a" }, toggled({ "1. [ ] a" }, 1))
+      assert.are.same({ "2) [x] a" }, toggled({ "2) [ ] a" }, 1))
+    end)
+
+    it("toggles the parent from a plain child", function()
+      assert.are.same({ "- [x] a", "    - b" }, toggled({ "- [ ] a", "    - b" }, 2))
+    end)
+
+    it("does nothing without a target", function()
+      assert.are.same({ "- a", "    - b" }, toggled({ "- a", "    - b" }, 2))
+      assert.are.same({ "para" }, toggled({ "para" }, 1))
+    end)
+
+    it("sets checkbox descendants and leaves the others alone", function()
+      local lines = { "- [ ] a", "    - [ ] b", "    - [Link](http://x)", "        - [ ] c", "    - d", "        - [ ] e", "- [ ] f" }
+      assert.are.same(
+        { "- [x] a", "    - [x] b", "    - [Link](http://x)", "        - [x] c", "    - d", "        - [x] e", "- [ ] f" },
+        toggled(lines, 1))
+    end)
+
+    it("descendants end at a blank line or non-list text", function()
+      assert.are.same({ "- [x] a", "", "    - [ ] b" }, toggled({ "- [ ] a", "", "    - [ ] b" }, 1))
+      assert.are.same({ "- [x] a", "  note", "    - [ ] b" }, toggled({ "- [ ] a", "  note", "    - [ ] b" }, 1))
+    end)
+
+    it("checks the parent when every checkbox child is checked", function()
+      assert.are.same({ "- [x] a", "    - [x] b", "    - [x] c", "    - d" },
+        toggled({ "- [ ] a", "    - [x] b", "    - [ ] c", "    - d" }, 3))
+    end)
+
+    it("leaves the parent unchecked while a child is unchecked", function()
+      assert.are.same({ "- [ ] a", "    - [x] b", "    - [ ] c" },
+        toggled({ "- [ ] a", "    - [ ] b", "    - [ ] c" }, 2))
+    end)
+
+    it("unchecks the parent when a child is unchecked", function()
+      assert.are.same({ "- [ ] a", "    - [ ] b", "    - [x] c" },
+        toggled({ "- [x] a", "    - [x] b", "    - [x] c" }, 2))
+    end)
+
+    it("propagates up through every checkbox ancestor", function()
+      assert.are.same({ "- [x] a", "    - [x] b", "        - [x] c" },
+        toggled({ "- [ ] a", "    - [ ] b", "        - [ ] c" }, 3))
+    end)
+
+    it("stops propagating at a plain ancestor", function()
+      assert.are.same({ "- [ ] a", "    - b", "        - [x] c" },
+        toggled({ "- [ ] a", "    - b", "        - [ ] c" }, 3))
+    end)
+
+    it("ignores the cursor item's plain siblings when judging the parent", function()
+      assert.are.same({ "- [x] a", "    - b", "    - [x] c" },
+        toggled({ "- [ ] a", "    - b", "    - [ ] c" }, 3))
+    end)
+
+    it("works inside a blockquote and stays within it", function()
+      assert.are.same({ "> - [x] a", ">     - [x] b", "    - [ ] c" },
+        toggled({ "> - [ ] a", ">     - [ ] b", "    - [ ] c" }, 1))
+    end)
+
+    it("keeps the cursor in place", function()
+      vim.api.nvim_buf_set_lines(0, 0, -1, false, { "- [ ] a", "    - bee" })
+      vim.api.nvim_win_set_cursor(0, { 2, 7 })
+      L.toggle_checkbox(2)
+      assert.are.same({ 2, 7 }, vim.api.nvim_win_get_cursor(0))
+    end)
+  end)
 end)

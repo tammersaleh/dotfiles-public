@@ -276,8 +276,6 @@ vim.keymap.set('i', '<S-Tab>', with_cmp(function(cmp) cmp.select_prev_item({ beh
 -- The <Plug> is an expr mapping that returns keys, so the split dot-repeats.
 -- <C-]> expands a pending abbreviation first, as Vim's own <CR> would. `o`
 -- skips it: native `o` does not expand the word at the end of the line.
--- bullets.vim does not map <CR> or o (see lua/plugins/bullets.lua), so these
--- buffer-local maps survive its FileType autocmd.
 -------------------------------------------------------------------------------
 
 local lists = require('config.lists')
@@ -292,6 +290,16 @@ end, { expr = true, replace_keycodes = true, desc = "Continue list or quote" })
 vim.keymap.set('i', '<CR>', '<C-]><Plug>(config-lists-newline)', { buffer = true, remap = true, desc = "Continue list or quote" })
 vim.keymap.set('i', '<C-CR>', '<CR>', { buffer = true, desc = "Newline without a bullet" })
 vim.keymap.set('n', 'o', 'A<Plug>(config-lists-newline)', { buffer = true, remap = true, desc = "New list item or quote line below" })
+
+-- Toggle the checkbox of this item or its parent (lua/config/lists.lua).
+-- g@ with 'operatorfunc' makes the toggle repeat with `.`. Without a target
+-- the mapping is a no-op, so the previous `.` command survives.
+vim.keymap.set('n', '<Plug>(config-lists-toggle-checkbox)', function()
+  if not lists.checkbox_row(vim.fn.line('.')) then return '' end
+  vim.go.operatorfunc = "v:lua.require'config.lists'.toggle_checkbox_operator"
+  return 'g@l'
+end, { expr = true, desc = "Toggle checkbox" })
+vim.keymap.set('n', '<leader>x', '<Plug>(config-lists-toggle-checkbox)', { buffer = true, remap = true, desc = "Toggle checkbox" })
 
 -------------------------------------------------------------------------------
 -- Options

@@ -148,28 +148,102 @@ local function kind(item)
   return item.delim or 'unordered'
 end
 
--- The row whose checkbox <leader>x should toggle for line `row`: the row
--- itself when its body is a checkbox item, else its parent item when that
--- is one. The walk up crosses only sibling items and their descendants,
--- within the row's quote leader. The first shallower item is the parent:
--- its row with a checkbox, nil without. A blank line, non-list text, or a
--- change of leader is nil too, so nothing outside the item is toggled.
-function M.checkbox_row(row)
-  local leader, body = blockquote.split(vim.fn.getline(row))
+-- Leader and parsed item of a line, plus its body's depth.
+local function line_item(lnum)
+  local leader, body = blockquote.split(vim.fn.getline(lnum))
   local item = M.parse(body)
-  if item and item.checkbox then return row end
-  local current = depth(item and item.indent or body:match('^%s*'))
+  return leader, body, item
+end
 
+-- The parent item of `row`: the first shallower item above it, reached
+-- only through sibling items and their descendants within the row's quote
+-- leader. A blank line, non-list text, or a change of leader means there is
+-- no parent. Returns the row and its item.
+local function parent_row(row)
+  local leader, body, item = line_item(row)
+  local current = depth(item and item.indent or body:match('^%s*'))
   for lnum = row - 1, 1, -1 do
-    local l, b = blockquote.split(vim.fn.getline(lnum))
-    if l ~= leader then return nil end
-    local it = M.parse(b)
-    if not it then return nil end
-    if depth(it.indent) < current then
-      return it.checkbox and lnum or nil
-    end
+    local l, _, it = line_item(lnum)
+    if l ~= leader or not it then return nil end
+    if depth(it.indent) < current then return lnum, it end
   end
   return nil
+end
+
+-- The row whose checkbox <leader>x should toggle for line `row`: the row
+-- itself when its body is a checkbox item, else its parent when that is
+-- one. Nil otherwise, so nothing outside the item is toggled.
+function M.checkbox_row(row)
+  local _, _, item = line_item(row)
+  if item and item.checkbox then return row end
+  local prow, pitem = parent_row(row)
+  if prow and pitem.checkbox then return prow end
+  return nil
+end
+
+-- The descendant items of `row`: following lines with the same leader whose
+-- body is an item deeper than the row's. Blank lines, non-list text, and an
+-- item at the row's depth or shallower end them. Each entry is
+-- { row, item, direct } where direct means no shallower descendant sits
+-- between it and the parent.
+local function descendants(row)
+  local leader, _, item = line_item(row)
+  local parent_depth = depth(item.indent)
+  local result, shallowest = {}, math.huge
+  for lnum = row + 1, vim.api.nvim_buf_line_count(0) do
+    local l, _, it = line_item(lnum)
+    if l ~= leader or not it then break end
+    local d = depth(it.indent)
+    if d <= parent_depth then break end
+    shallowest = math.min(shallowest, d)
+    result[#result + 1] = { row = lnum, item = it, direct = d <= shallowest }
+  end
+  return result
+end
+
+local function set_checkbox(lnum, checked)
+  local leader, body, item = line_item(lnum)
+  if not (item and item.checkbox) then return end
+  local start = body:find('%[[ xX]%]', #item.indent + #item.marker + 1)
+  local new_body = body:sub(1, start) .. (checked and 'x' or ' ') .. body:sub(start + 2)
+  vim.fn.setline(lnum, leader .. new_body)
+end
+
+local function checked(item)
+  return item.checkbox ~= '[ ]'
+end
+
+-- Toggle the checkbox for `row` (see checkbox_row). Checkbox descendants
+-- take the new state. Each checkbox ancestor is then checked when all of
+-- its direct checkbox children are checked, unchecked otherwise. The cursor
+-- does not move.
+function M.toggle_checkbox(row)
+  local target = M.checkbox_row(row)
+  if not target then return end
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local _, _, item = line_item(target)
+  local state = not checked(item)
+
+  set_checkbox(target, state)
+  for _, d in ipairs(descendants(target)) do
+    set_checkbox(d.row, state)
+  end
+
+  local prow, pitem = parent_row(target)
+  while prow and pitem.checkbox do
+    local all = true
+    for _, d in ipairs(descendants(prow)) do
+      if d.direct and d.item.checkbox and not checked(d.item) then all = false end
+    end
+    set_checkbox(prow, all)
+    prow, pitem = parent_row(prow)
+  end
+  vim.api.nvim_win_set_cursor(0, cursor)
+end
+
+-- 'operatorfunc' target for the <leader>x mapping.
+function M.toggle_checkbox_operator()
+  M.toggle_checkbox(vim.api.nvim_win_get_cursor(0)[1])
 end
 
 -- Renumber the ordered list block around the cursor line. The block is the

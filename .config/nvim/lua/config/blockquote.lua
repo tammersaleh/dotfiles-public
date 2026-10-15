@@ -1,6 +1,6 @@
 -- Markdown blockquote leaders: "> ", "> > ", ">". Shared by the markdown
--- ftplugin and the bullets.vim wrapper so both agree on where a quote ends
--- and the list body begins.
+-- ftplugin and config.lists so both agree on where a quote ends and the
+-- list body begins.
 local M = {}
 
 -- The leader: leading whitespace, one or more ">" (each optionally preceded

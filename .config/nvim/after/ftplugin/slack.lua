@@ -6,6 +6,7 @@ dofile(vim.fn.stdpath('config') .. '/after/ftplugin/markdown.lua')
 -- Override markdown-specific settings
 vim.keymap.del('n', '<leader>o', { buffer = true })
 vim.keymap.del('v', '<Leader>\\', { buffer = true })
+vim.keymap.del('n', '<leader>x', { buffer = true }) -- no checkboxes in Slack; keep Trouble's
 
 -- No folding (mrkdwn has no headers)
 vim.opt_local.foldmethod = 'manual'
