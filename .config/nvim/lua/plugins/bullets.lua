@@ -16,6 +16,7 @@
 -- after/ftplugin/markdown.lua. A mapping set in the ftplugin is overwritten.
 
 local quote_prefix = require('config.blockquote').prefix
+local quote_split = require('config.blockquote').split
 
 -- Run fn with the quote leader removed from the block of lines around the
 -- cursor that share the cursor line's exact leader (or from first..last when
@@ -84,12 +85,26 @@ return {
     -- On a line without a checkbox, toggle the nearest ancestor's instead.
     -- The cursor moves there first so with_quote_stripped strips the right
     -- block, then comes back.
+    --
+    -- bullets.vim's nested toggle sets every child item by replacing the
+    -- character after "- [", whether or not the child is a checkbox, so
+    -- "- [Link](url)" becomes "- [xink](url)". Lines that were not checkbox
+    -- items before the toggle are restored afterwards.
     plug('n', 'toggle-checkbox', function()
+      local lists = require('config.lists')
       local cursor = vim.api.nvim_win_get_cursor(0)
-      local row = require('config.lists').checkbox_row(cursor[1])
+      local row = lists.checkbox_row(cursor[1])
       if not row then return end
+      local before = vim.api.nvim_buf_get_lines(0, 0, -1, false)
       vim.api.nvim_win_set_cursor(0, { row, 0 })
       with_quote_stripped(function() vim.cmd('ToggleCheckbox') end)
+      for lnum, old in ipairs(before) do
+        if vim.fn.getline(lnum) ~= old then
+          local _, body = quote_split(old)
+          local item = lists.parse(body)
+          if not (item and item.checkbox) then vim.fn.setline(lnum, old) end
+        end
+      end
       vim.api.nvim_win_set_cursor(0, cursor)
     end, "Toggle checkbox")
   end,

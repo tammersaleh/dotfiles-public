@@ -58,6 +58,26 @@ describe("bullets.vim mappings in markdown (with plugins)", function()
     assert.are.same({ "- [ ] task" }, h.get_buf())
   end)
 
+  describe("<leader>x with link items under the checkbox", function()
+    -- bullets.vim's nested toggle rewrites the character after "- [" on
+    -- every child, which clobbers "- [Link](url)".
+    local lines = { "- [ ] task", "    - [Link](http://x)", "    - [ ] sub" }
+
+    it("leaves link items alone when toggling the parent", function()
+      h.set_buf(lines)
+      h.set_cursor(1)
+      h.feed("<leader>x")
+      assert.are.same({ "- [x] task", "    - [Link](http://x)", "    - [x] sub" }, h.get_buf())
+    end)
+
+    it("leaves link items alone when toggling from a child", function()
+      h.set_buf(lines)
+      h.set_cursor(2)
+      h.feed("<leader>x")
+      assert.are.same({ "- [x] task", "    - [Link](http://x)", "    - [x] sub" }, h.get_buf())
+    end)
+  end)
+
   describe("<leader>x on a line without a checkbox", function()
     it("toggles the nearest parent checkbox and keeps the cursor", function()
       h.set_buf({ "- [ ] task", "    - sub" })
