@@ -5,6 +5,11 @@ return {
   opts = {
     move_cursor = false,
     surrounds = {
+      -- Openers pad by default ("( bar )"). Make them match their closers.
+      ["("] = { add = { "(", ")" } },
+      ["["] = { add = { "[", "]" } },
+      ["{"] = { add = { "{", "}" } },
+      ["<"] = { add = { "<", ">" } },
       ["~"] = { -- Markdown fenced code blocks
         add = function()
           local config = require("nvim-surround.config")
