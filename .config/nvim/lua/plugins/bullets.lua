@@ -1,4 +1,6 @@
--- bullets.vim provides gN (renumber) and <leader>x (toggle checkbox).
+-- bullets.vim provides gN (renumber) and <leader>x (toggle checkbox). On a
+-- line without a checkbox, <leader>x toggles the nearest ancestor item that
+-- has one (config.lists.checkbox_row).
 -- Insert-mode <cr> and normal-mode o are ours, in after/ftplugin/markdown.lua
 -- via lua/config/lists.lua, so that a split dot-repeats; bullets.vim adds its
 -- new bullet with append(), which `.` cannot replay.
@@ -79,7 +81,16 @@ return {
       "Renumber list")
     plug('x', 'renumber', function() with_quote_stripped_visual(function() vim.cmd('RenumberSelection') end) end,
       "Renumber selected lines")
-    plug('n', 'toggle-checkbox', function() with_quote_stripped(function() vim.cmd('ToggleCheckbox') end) end,
-      "Toggle checkbox")
+    -- On a line without a checkbox, toggle the nearest ancestor's instead.
+    -- The cursor moves there first so with_quote_stripped strips the right
+    -- block, then comes back.
+    plug('n', 'toggle-checkbox', function()
+      local cursor = vim.api.nvim_win_get_cursor(0)
+      local row = require('config.lists').checkbox_row(cursor[1])
+      if not row then return end
+      vim.api.nvim_win_set_cursor(0, { row, 0 })
+      with_quote_stripped(function() vim.cmd('ToggleCheckbox') end)
+      vim.api.nvim_win_set_cursor(0, cursor)
+    end, "Toggle checkbox")
   end,
 }

@@ -148,6 +148,37 @@ local function kind(item)
   return item.delim or 'unordered'
 end
 
+-- The row whose checkbox <leader>x should toggle for line `row`: the row
+-- itself when its body is a checkbox item, else the nearest ancestor item
+-- that is one. The walk goes up through lines sharing the row's quote
+-- leader, skipping blank lines, siblings, deeper items, and continuation
+-- text, and descends through plain ancestors. A shallower non-list line or
+-- a change of leader ends the list, and the result is nil.
+function M.checkbox_row(row)
+  local leader, body = blockquote.split(vim.fn.getline(row))
+  local item = M.parse(body)
+  if item and item.checkbox then return row end
+  local current = depth(item and item.indent or body:match('^%s*'))
+
+  for lnum = row - 1, 1, -1 do
+    local l, b = blockquote.split(vim.fn.getline(lnum))
+    if l ~= leader then return nil end
+    if not b:match('^%s*$') then
+      local it = M.parse(b)
+      if it then
+        local d = depth(it.indent)
+        if d < current then
+          if it.checkbox then return lnum end
+          current = d
+        end
+      elseif depth(b:match('^%s*')) < current then
+        return nil
+      end
+    end
+  end
+  return nil
+end
+
 -- Renumber the ordered list block around the cursor line. The block is the
 -- run of lines sharing the cursor line's quote leader whose body is a list
 -- item or is indented deeper than the cursor item (continuation text). It
