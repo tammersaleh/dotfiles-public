@@ -149,11 +149,11 @@ local function kind(item)
 end
 
 -- The row whose checkbox <leader>x should toggle for line `row`: the row
--- itself when its body is a checkbox item, else the nearest ancestor item
--- that is one. The walk goes up through lines sharing the row's quote
--- leader, skipping blank lines, siblings, deeper items, and continuation
--- text, and descends through plain ancestors. A shallower non-list line or
--- a change of leader ends the list, and the result is nil.
+-- itself when its body is a checkbox item, else its parent item when that
+-- is one. The walk up crosses only sibling items and their descendants,
+-- within the row's quote leader. The first shallower item is the parent:
+-- its row with a checkbox, nil without. A blank line, non-list text, or a
+-- change of leader is nil too, so nothing outside the item is toggled.
 function M.checkbox_row(row)
   local leader, body = blockquote.split(vim.fn.getline(row))
   local item = M.parse(body)
@@ -163,17 +163,10 @@ function M.checkbox_row(row)
   for lnum = row - 1, 1, -1 do
     local l, b = blockquote.split(vim.fn.getline(lnum))
     if l ~= leader then return nil end
-    if not b:match('^%s*$') then
-      local it = M.parse(b)
-      if it then
-        local d = depth(it.indent)
-        if d < current then
-          if it.checkbox then return lnum end
-          current = d
-        end
-      elseif depth(b:match('^%s*')) < current then
-        return nil
-      end
+    local it = M.parse(b)
+    if not it then return nil end
+    if depth(it.indent) < current then
+      return it.checkbox and lnum or nil
     end
   end
   return nil

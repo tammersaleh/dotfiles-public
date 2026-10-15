@@ -284,15 +284,11 @@ describe("config.lists", function()
       assert.equals(1, row_for({ "- [ ] task", "    - sub" }, 2))
     end)
 
-    it("skips a plain parent to reach the nearest checkbox ancestor", function()
-      assert.equals(1, row_for({ "- [ ] task", "    - mid", "        - leaf" }, 3))
-    end)
-
     it("is the nearest checkbox ancestor, not the outermost", function()
       assert.equals(2, row_for({ "- [ ] outer", "    - [ ] inner", "        - leaf" }, 3))
     end)
 
-    it("skips checkbox siblings and deeper items above", function()
+    it("crosses siblings and their children", function()
       assert.equals(1, row_for({ "- [ ] task", "    - [ ] a", "        - deep", "    - b" }, 4))
     end)
 
@@ -300,12 +296,17 @@ describe("config.lists", function()
       assert.equals(1, row_for({ "- [ ] task", "  more about it" }, 2))
     end)
 
-    it("crosses a blank line inside a loose item", function()
-      assert.equals(1, row_for({ "- [ ] task", "", "    - sub" }, 3))
+    it("gives up at a plain parent", function()
+      assert.is_nil(row_for({ "- [ ] task", "    - mid", "        - leaf" }, 3))
+      assert.is_nil(row_for({ "- task", "    - sub" }, 2))
     end)
 
-    it("is nil when no ancestor is a checkbox", function()
-      assert.is_nil(row_for({ "- task", "    - sub" }, 2))
+    it("gives up at a blank line", function()
+      assert.is_nil(row_for({ "- [ ] task", "", "    - sub" }, 3))
+    end)
+
+    it("gives up at continuation text above", function()
+      assert.is_nil(row_for({ "- [ ] task", "    - a", "      note", "    - b" }, 4))
     end)
 
     it("is nil on a top-level plain item", function()
@@ -313,10 +314,10 @@ describe("config.lists", function()
     end)
 
     it("is nil on a paragraph", function()
-      assert.is_nil(row_for({ "- [ ] task", "", "para" }, 3))
+      assert.is_nil(row_for({ "- [ ] task", "para" }, 2))
     end)
 
-    it("stops at a shallower non-list line", function()
+    it("gives up at a heading", function()
       assert.is_nil(row_for({ "- [ ] task", "# heading", "    - orphan" }, 3))
     end)
 
@@ -324,7 +325,7 @@ describe("config.lists", function()
       assert.equals(1, row_for({ "> - [ ] task", ">     - sub" }, 2))
     end)
 
-    it("stops where the quote leader changes", function()
+    it("gives up where the quote leader changes", function()
       assert.is_nil(row_for({ "- [ ] task", ">     - sub" }, 2))
       assert.is_nil(row_for({ "> - [ ] task", "> >     - sub" }, 2))
     end)
