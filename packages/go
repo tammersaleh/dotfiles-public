@@ -46,6 +46,10 @@ if [[ $# -gt 0 ]]; then
   exit 0
 fi
 
+# brew scrubs the environment before running `go install`, so GOPRIVATE must
+# live in Go's own env file (under $HOME), not the shell.
+go env -w GOPRIVATE=github.com/tammersaleh/lattice-cli,github.com/tammersaleh/greenhouse-cli
+
 brew update
 brew bundle install --quiet
 brew bundle cleanup --force --quiet
