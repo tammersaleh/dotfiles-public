@@ -72,6 +72,8 @@ If in the course of investigating you find other areas that you think might be u
 
 NEVER use `mcp__claude-in-chrome__*` tools unless I've explicitly granted permission in the current session. These tools open a real browser window and disrupt the user's workflow.
 
+Invoking a skill whose SKILL.md says it drives Chrome (for example `linkedin-sourcing`) is that grant, for that run only.
+
 # Crit
 
 NEVER run `crit share` (or `crit share --qr`). Reviews stay local; do not publish them to crit.md. Even if I ask for a "shareable link," push back before running it.
