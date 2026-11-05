@@ -75,6 +75,7 @@ brew 'ctags'                         # Reimplementation of ctags(1)
 brew 'd2'                            # Text-to-diagram tool (d2lang.com)
 brew 'danielfoehrkn/switch/switch'   # kubeswitch
 brew 'danielfoehrkn/switch/switcher' # Used by kubeswitch.  `brew cleanup` gets angry if I don't listen this explicitly.
+brew 'dekit'                         # Process manager TUI, formerly mprocs
 brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
 brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
@@ -130,7 +131,6 @@ brew 'man-db'                        # Avoid "This manpage is not compatible wit
 brew 'mediainfo'                     # For lesspipe
 brew 'mise'                          # asdf alternative https://mise.jdx.dev/
 brew 'moreutils'
-brew 'mprocs'                        # TUI for running multiple interactive processes in parallel. 
 brew 'mtr'                           # Ping and traceroute in love
 brew 'neovim'
 brew 'neovim-remote'
