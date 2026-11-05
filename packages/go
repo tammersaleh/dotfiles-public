@@ -48,7 +48,7 @@ fi
 
 # brew scrubs the environment before running `go install`, so GOPRIVATE must
 # live in Go's own env file (under $HOME), not the shell.
-go env -w GOPRIVATE=github.com/tammersaleh/lattice-cli,github.com/tammersaleh/greenhouse-cli
+go env -w GOPRIVATE='github.com/tammersaleh/*'
 
 brew update
 brew bundle install --quiet
