@@ -102,11 +102,14 @@ function M.newline_keys(line, col, opts)
   local prefix = leader .. (item and item.prefix or '')
   local head, tail = line:sub(1, col), line:sub(col + 1)
 
-  -- An unused item or leader: remove it rather than continue it.
-  if col >= #prefix and tail:match('^%s*$') and head:sub(#prefix + 1):match('^%s*$') then
-    return CLEAR
+  -- An unused item: remove it rather than continue it. An empty quote line
+  -- is a paragraph break inside the quote, so it continues like any other.
+  local unused = col >= #prefix and tail:match('^%s*$') and head:sub(#prefix + 1):match('^%s*$')
+  if unused then
+    if item then return CLEAR end
+  elseif col <= #prefix then
+    return '<CR>'
   end
-  if col <= #prefix then return '<CR>' end
 
   local keys = ''
   -- Drop the whitespace at the split point, but only when text moves down:
