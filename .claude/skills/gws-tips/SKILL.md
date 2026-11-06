@@ -179,3 +179,18 @@ zsh treats `!` as history expansion. Single quotes alone are fine for
 the `--params`/`--json` JSON payloads, but inline shell args with `!`
 must be double-quoted. (Also documented in the auto-generated
 `gws-shared/SKILL.md`.)
+
+## Reading Google Group membership without Admin SDK scopes
+
+`gws admin` is not a known service and `people searchDirectoryPeople` lacks
+scopes, but Calendar `freebusy.query` accepts a group address as an item and
+expands a Workday distro into its member calendars:
+
+```bash
+gws calendar freebusy query --json '{"timeMin":"2026-11-10T00:00:00Z","timeMax":"2026-11-10T01:00:00Z","items":[{"id":"mgr-kkamata-fte@coreweave.com"}]}'
+```
+
+The response `groups.<address>.calendars[]` lists member emails. A `notFound`
+error means the group does not exist. `groupTooBig` means it exists but is over
+the expansion cap (`org-jonjones-fte` hits it). Read only, sends nothing.
+(2026-11-06)
