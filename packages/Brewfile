@@ -4,6 +4,7 @@ tap 'tammersaleh/tap', trusted: true
 
 # Trusted third-party taps (load without prompting for tap trust)
 tap 'danielfoehrkn/switch', trusted: true  # kubeswitch
+tap 'dnsimple/tap', trusted: true          # dnsimple
 tap 'dopplerhq/doppler', trusted: true     # doppler
 tap 'gleanwork/tap', trusted: true         # glean-cli
 tap 'hashicorp/tap', trusted: true         # terraform
@@ -79,6 +80,7 @@ brew 'dekit'                         # Process manager TUI, formerly mprocs
 brew 'diff-so-fancy'                 # Good-looking diffs with diff-highlight and more
 brew 'diffutils'
 brew 'direnv'                        # Load/unload environment variables based on $PWD
+brew 'dnsimple/tap/dnsimple'          # Official DNSimple CLI (domains, DNS records)
 brew 'entr'                          # Run arbitrary commands when files change
 brew 'exiftool'                      # Perl lib for reading and writing EXIF metadata
 brew 'fd'                            # Used by nvim treesitter
