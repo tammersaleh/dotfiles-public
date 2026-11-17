@@ -62,6 +62,10 @@ For simple searches, the web search tool or the existing MCPs are great. But if 
 
 If in the course of investigating you find other areas that you think might be useful to investigate, don't bother asking me. Just go ahead and do it.
 
+## Look up what you don't know
+
+When a task needs a fact you don't have (drive time or traffic, an address, a schedule, a price), search for it before acting. Check local files first, then the web or the relevant tool. Don't guess and report the guess afterward, and don't leave the gap for me to fill. Ask me only when the search comes up empty. (Tammer, 2026-11-17)
+
 ## ALWAYS CITE YOUR REFERENCES. 
 
 - Slack thread links, document URLs, zoom transcript urls, etc. 
