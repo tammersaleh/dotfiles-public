@@ -3,6 +3,7 @@
 tap 'tammersaleh/tap', trusted: true
 
 # Trusted third-party taps (load without prompting for tap trust)
+tap 'anomalyco/tap', trusted: true         # hex
 tap 'danielfoehrkn/switch', trusted: true  # kubeswitch
 tap 'dnsimple/tap', trusted: true          # dnsimple
 tap 'dopplerhq/doppler', trusted: true     # doppler
@@ -15,6 +16,7 @@ tap 'plaid/plaid-cli', trusted: true       # official Plaid CLI
 
 cask "gcloud-cli", postinstall: "${HOMEBREW_PREFIX}/bin/gcloud --quiet components update"
 cask '1password-cli'
+cask 'anomalyco/tap/hex'             # local voice dictation (anoma.ly/hex)
 cask 'codex'
 cask 'dopplerhq/doppler/doppler'     # doppler.com
 cask 'font-codicon'                  # VSCode font icons
