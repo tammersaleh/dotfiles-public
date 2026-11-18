@@ -180,6 +180,7 @@ brew 'vim'                           # Vi 'workalike' with many additional featu
 brew 'watch'                         # Executes a program periodically, showing output fullscreen
 brew 'watchexec'                     # Watch files and run commands on changep
 brew 'wget'                          # Internet file retriever
+brew 'xcodegen'                      # Generate Xcode projects from project.yml
 brew 'xpdf'                          # For lesspipe
 brew 'xz'                            # General-purpose data compression with high compression ratio
 brew 'yarn'
