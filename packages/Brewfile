@@ -141,7 +141,6 @@ brew 'neovim-remote'
 brew 'node'                          # Platform built on V8 to build network applications
 brew 'opencode'                      # AI coding agent for the terminal (opencode.ai)
 brew 'openssl'                       # SSL/TLS cryptography library
-brew 'openssl@1.1'                   # Cryptography and SSL/TLS Toolkit
 brew 'pandoc'                        # Swiss-army knife of markup format conversion
 brew 'pass'                          # Password manager
 brew 'pdftk-java'
@@ -167,7 +166,6 @@ brew 'sqlite'                        # Command-line interface for SQLite
 brew 'stern'
 brew 'switchaudio-osx'               # Used in ~/bin/audio to switch between mics
 brew 'tanka'
-brew 'tflint'                        # Terraform linter
 brew 'the_silver_searcher'           # ag
 brew 'ripgrep'                       # rg
 brew 'tig'                           # ncurses-based text-mode interface for git https://jonas.github.io/tig/

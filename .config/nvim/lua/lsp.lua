@@ -53,6 +53,5 @@ vim.lsp.enable {
   'marksman',
   'pyright',
   'ruff',
-  'tflint',
   'yamlls',
 }
