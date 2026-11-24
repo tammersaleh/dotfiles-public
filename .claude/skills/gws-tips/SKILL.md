@@ -195,14 +195,11 @@ error means the group does not exist. `groupTooBig` means it exists but is over
 the expansion cap (`org-jonjones-fte` hits it). Read only, sends nothing.
 (2026-11-06)
 
-## Docs writes: blank line between paragraphs
+## Docs writes: inserting a blank line
 
-When inserting prose into a Google Doc with `batchUpdate`, put an empty
-paragraph between consecutive body paragraphs, and between a paragraph and a
-list. A single newline leaves paragraphs touching and hard to read. Headings
-and tables need no extra blank line.
-
-Insert the extra `"\n"` at the end of the earlier paragraph when it is not a
-bullet, otherwise at the start of the later one. An empty paragraph inherits
-the style of the paragraph it was split from, so splitting a bullet makes an
-empty bullet. (Tammer, 2026-11-24)
+The blank-line rule lives in the global CLAUDE.md under Prose. To add the
+empty paragraph with `batchUpdate`, insert `"\n"` at `endIndex - 1` of the
+block above, then set the new empty paragraph to `NORMAL_TEXT`. It inherits
+the style of the paragraph it was split from, so splitting a heading makes
+an empty heading and splitting a bullet makes an empty bullet. After a list,
+insert at the start of the following paragraph instead.

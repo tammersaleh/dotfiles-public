@@ -24,6 +24,7 @@ This applies to your output in chat, README's, internal documentation, Git commi
 - Preserve identifiers, commands, paths, units, and quoted text exactly.
 - Pronouns ("it", "this") need an unmistakable referent.
 - State uncertainty directly.  Distinguish verified results from assumptions and unfinished work.
+- Always leave a blank line between blocks, in every medium (Google Docs, Confluence, Slack, email, markdown, anything else).  That means between two paragraphs, and before every list and every table, including one that directly follows a heading.  A single newline between paragraphs is hard to read. (Tammer, 2026-11-24)
 
 ## No AI Slop
 - Never say "honest" or "load bearing"
