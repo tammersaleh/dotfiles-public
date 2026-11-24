@@ -7,6 +7,10 @@ local config = function()
   vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'black' })
   vim.api.nvim_set_hl(0, 'Visual', { bg = '#3a3a0a' })
 
+  -- Checked markdown items dim (after/queries/markdown/highlights.scm), icon included.
+  vim.api.nvim_set_hl(0, '@markup.list.checked.item', { link = 'Grey' })
+  vim.api.nvim_set_hl(0, 'RenderMarkdownChecked', { link = 'Grey' })
+
   -- Set terminal background to black
   vim.api.nvim_set_hl(0, 'Terminal', { bg = '#000000', fg = '#d3c6aa' })
 

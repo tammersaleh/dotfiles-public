@@ -71,6 +71,10 @@ The key strings assume `autoindent` (the ftplugin sets it): `<CR>` copies a line
 
 Every list behavior works inside a blockquote (`> - item`, `> > 1. item`). Our Tab/S-Tab and visual `-` `*` `#` in the ftplugin work on the body after the leader. The leader pattern lives in `lua/config/blockquote.lua`: whitespace, one or more `>`, at most one trailing space, so list indentation after `>` stays in the body.
 
+## Checked item dimming
+
+`after/queries/markdown/highlights.scm` captures a `list_item` holding a checked marker as `@markup.list.checked.item` at priority 200, so the item and everything nested under it dim, over the inline highlights (priority 100). `lua/plugins/colorschemes.lua` links that group and `RenderMarkdownChecked` (the icon) to `Grey`. It is treesitter, not render-markdown's `scope_highlight`, which covers only the item's own paragraph. render-markdown's virtual text keeps its own colour: link icons and the bullets of nested plain items do not dim.
+
 ## gx
 
 `gx` is our own (`lua/config/gx.lua`), not gx.nvim or the builtin. It scans the whole line for http(s) URLs and existing file paths: cursor on one opens it, a lone target opens directly, several prompt via `vim.ui.select`. Visual mode collects targets from the selection. Everything goes through `vim.ui.open`, so paths open with `open`. No commit-hash, issue-ref, or web-search handlers.
