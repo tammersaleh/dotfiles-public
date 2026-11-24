@@ -195,7 +195,6 @@ go 'github.com/tammersaleh/lattice-cli/cmd/lattice'  # lattice CLI (private repo
 ### NPM packages
 
 npm '@doist/todoist-cli'             # td CLI
-npm '@opencode/browse'               # browse: MCP server and CLI driving Chrome via extension
 npm '@stephendolan/ynab-cli'         # ynab CLI (YNAB budget API)
 npm 'forgecad'                       # ForgeCAD CLI (forgecad.io)
 npm 'md-to-pdf'                      # Markdown to PDF
