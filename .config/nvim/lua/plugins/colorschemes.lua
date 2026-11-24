@@ -11,6 +11,9 @@ local config = function()
   vim.api.nvim_set_hl(0, '@markup.list.checked.item', { link = 'Grey' })
   vim.api.nvim_set_hl(0, 'RenderMarkdownChecked', { link = 'Grey' })
 
+  -- Inline code in markdown: softer than the white String that @markup.raw falls back to.
+  vim.api.nvim_set_hl(0, '@markup.raw.markdown_inline', { link = 'Blue' })
+
   -- Set terminal background to black
   vim.api.nvim_set_hl(0, 'Terminal', { bg = '#000000', fg = '#d3c6aa' })
 
