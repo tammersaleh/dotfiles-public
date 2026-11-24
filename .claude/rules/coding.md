@@ -2,7 +2,7 @@
 
 ## Plan then implement
 
-For any non-trivial code change, always present me with a plan before proceeding.
+For any non-trivial code change, write a plan before implementing. Do not wait for me to approve it. Tell me where the plan is and keep going. Stop only for a decision that is mine to make. (Tammer, 2026-11-24)
 
 For any non-trivial plan, always store that plan in a Markdown file locally so we can pick up where we left off. That Markdown file should not only include the steps to be taken, but the context and any other details you need as an agent to continue the work if restarted from scratch.
 
