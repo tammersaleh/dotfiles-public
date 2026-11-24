@@ -194,3 +194,15 @@ The response `groups.<address>.calendars[]` lists member emails. A `notFound`
 error means the group does not exist. `groupTooBig` means it exists but is over
 the expansion cap (`org-jonjones-fte` hits it). Read only, sends nothing.
 (2026-11-06)
+
+## Docs writes: blank line between paragraphs
+
+When inserting prose into a Google Doc with `batchUpdate`, put an empty
+paragraph between consecutive body paragraphs, and between a paragraph and a
+list. A single newline leaves paragraphs touching and hard to read. Headings
+and tables need no extra blank line.
+
+Insert the extra `"\n"` at the end of the earlier paragraph when it is not a
+bullet, otherwise at the start of the later one. An empty paragraph inherits
+the style of the paragraph it was split from, so splitting a bullet makes an
+empty bullet. (Tammer, 2026-11-24)
