@@ -1,6 +1,6 @@
 ---
 name: gws-tips
-description: "Tips, gotchas, and recipes for the gws CLI (googleworkspace/cli). Read before running any gws command. Grammar is `gws <service> <resource> <method> --params '{JSON}'`; every API argument (fileId, documentId, spreadsheetId, calendarId, range, fields, q) goes inside `--params`, NOT as a flag like `--fileId`. Discover params with `gws schema <service.resource.method>`, not `--help`. Also covers Doc comment anchored text, stray download files, and other API quirks. Triggers on any use of `gws drive`, `gws docs`, `gws sheets`, `gws gmail`, `gws calendar`, or related Google Workspace CLI invocations."
+description: "Tips, gotchas, and recipes for the gws CLI (googleworkspace/cli). Read before running any gws command. Grammar is `gws <service> <resource> <method> --params '{JSON}'`; every API argument (fileId, documentId, spreadsheetId, calendarId, range, fields, q) goes inside `--params`, NOT as a flag like `--fileId`. Discover params with `gws schema <service.resource.method>`, not `--help`. Also covers turning a Gmail web URL into a thread (gmail-url-thread helper), Doc comment anchored text, stray download files, and other API quirks. Triggers on any use of `gws drive`, `gws docs`, `gws sheets`, `gws gmail`, `gws calendar`, or related Google Workspace CLI invocations."
 ---
 
 # gws CLI Tips and Gotchas
@@ -44,6 +44,18 @@ Note `sheets spreadsheets values get`, not `sheets values get` - the latter
 errors with `unrecognized subcommand 'values'`. `--output` paths must resolve
 inside the working directory; an absolute `/tmp/...` path is rejected as outside
 the allowed root.
+
+## Gmail web URLs: use `gmail-url-thread`
+
+A Gmail web URL (`https://mail.google.com/mail/u/0/#inbox/FMfcgz...`) ends in an encoded token, not an API ID. No gws call accepts it. Use the helper next to this file:
+
+```bash
+~/.claude/skills/gws-tips/gmail-url-thread '<url>'                    # threads.get, format full
+~/.claude/skills/gws-tips/gmail-url-thread '<url>' --format metadata  # headers only
+~/.claude/skills/gws-tips/gmail-url-thread '<url>' --id-only          # print hex threadId
+```
+
+It decodes the token locally to the hex threadId, then calls `gws gmail users threads get`. URLs already ending in a 16-char hex ID pass through. Tokens that decode to `thread-a:r-...` (some drafts) have no API ID and the helper exits with an error.
 
 ## Drive comments: getting the anchored text
 

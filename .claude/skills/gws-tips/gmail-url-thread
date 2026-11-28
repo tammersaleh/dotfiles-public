@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Fetch the Gmail thread behind a Gmail web URL via gws.
+
+Usage:
+  gmail-url-thread <url-or-token> [--id-only] [--format full|metadata|minimal]
+
+Web URLs carry an encoded token (FMfcgz...), not an API ID. The token is a
+base-40 re-encoding of base64("thread-f:<decimal id>"). The decimal ID in hex
+is the API threadId. URLs that already end in a hex ID pass through.
+"""
+
+import argparse
+import base64
+import re
+import subprocess
+import sys
+
+SRC = "BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz"
+DST = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+
+def rebase(s, src, dst):
+    n = 0
+    for c in s:
+        n = n * len(src) + src.index(c)
+    out = ""
+    while n:
+        n, r = divmod(n, len(dst))
+        out = dst[r] + out
+    return out
+
+
+def thread_id(arg):
+    token = arg.rstrip("/").split("/")[-1].split("?")[0]
+    if re.fullmatch(r"[0-9a-f]{16}", token):
+        return token
+    if not all(c in SRC for c in token):
+        sys.exit(f"gmail-url-thread: unrecognized token {token!r}")
+    b64 = rebase(token, SRC, DST)
+    b64 += "=" * (-len(b64) % 4)
+    decoded = base64.b64decode(b64).decode("ascii", "replace")
+    m = re.search(r"f:(\d+)", decoded)
+    if not m:
+        # thread-a:r-... tokens (some drafts, sent-only threads) have no API ID.
+        sys.exit(f"gmail-url-thread: token decodes to {decoded!r}, no API thread ID")
+    return format(int(m.group(1)), "x")
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    p.add_argument("url")
+    p.add_argument("--id-only", action="store_true", help="print the hex threadId and exit")
+    p.add_argument("--format", default="full", choices=["full", "metadata", "minimal"])
+    a = p.parse_args()
+
+    tid = thread_id(a.url)
+    if a.id_only:
+        print(tid)
+        return
+    params = f'{{"userId":"me","id":"{tid}","format":"{a.format}"}}'
+    sys.exit(subprocess.call(["gws", "gmail", "users", "threads", "get", "--params", params]))
+
+
+if __name__ == "__main__":
+    main()
